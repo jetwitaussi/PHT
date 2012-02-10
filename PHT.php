@@ -7477,11 +7477,41 @@ class HTRegion extends HTCommonLeague
 }
 class HTLeague extends HTCommonLeagueLevel
 {
+	private $leagueLevelUnitId = null;
+	private $leagueLevelUnitName = null;
 	private $leagueLevel = null;
 	private $maxLevel = null;
 	private $leagueId = null;
 	private $leagueName = null;
 	private $teams = array();
+
+	/**
+	 * Return league level unit (series) name
+	 *
+	 * @return Integer
+	 */
+	public function getLeagueLevelUnitId()
+	{
+		if(!isset($this->leagueLevelUnitId) || $this->leagueLevelUnitId === null)
+		{
+			$this->leagueLevelUnitId = $this->getXml()->getElementsByTagName('LeagueLevelUnitID')->item(0)->nodeValue;
+		}
+		return $this->leagueLevelUnitId;
+	}
+
+	/**
+	 * Return league level unit (series) name
+	 *
+	 * @return String
+	 */
+	public function getLeagueLevelUnitName()
+	{
+		if(!isset($this->leagueLevelUnitName) || $this->leagueLevelUnitName === null)
+		{
+			$this->leagueLevelUnitName = $this->getXml()->getElementsByTagName('LeagueLevelUnitName')->item(0)->nodeValue;
+		}
+		return $this->leagueLevelUnitName;
+	}
 
 	/**
 	 * Return league level
@@ -8270,7 +8300,7 @@ class HTWorldDetails extends HTGlobal
 	public function getLeague($number)
 	{
 		$number = round($number);
-		if($number > 0 && $number <= $this->getTotalLeague())
+		if($number > 0 && $number <= $this->getLeagueNumber())
 		{
 			--$number;
 			if(!isset($this->leagues[$number]) || $this->leagues[$number] === null)
