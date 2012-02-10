@@ -8270,7 +8270,7 @@ class HTWorldDetails extends HTGlobal
 	public function getLeague($number)
 	{
 		$number = round($number);
-		if($number > 0 && $number <= $this->getTotalLeague())
+		if($number > 0 && $number <= $this->getLeagueNumber())
 		{
 			--$number;
 			if(!isset($this->leagues[$number]) || $this->leagues[$number] === null)
