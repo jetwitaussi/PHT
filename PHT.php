@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.11 - 2012-01-20
+ * PHT 2.12 - 2012-01-20
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.11
+ * @version 2.12
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -1538,7 +1538,7 @@ class CHPPConnection
 	{
 		if(!isset($this->matchesDetails[$matchId]) || $this->matchesDetails[$matchId] === null)
 		{
-			$params = array('file'=>'matchdetails', 'version'=>'2.0', 'matchID'=>$matchId);
+			$params = array('file'=>'matchdetails', 'version'=>'2.1', 'matchID'=>$matchId);
 			if($matchEvents === true)
 			{
 				$params['matchEvents'] = 'true';
@@ -1578,7 +1578,7 @@ class CHPPConnection
 	{
 		if(!isset($this->youthMatchesDetails[$matchId]) || $this->youthMatchesDetails[$matchId] === null)
 		{
-			$params = array('file'=>'matchdetails', 'version'=>'2.0', 'matchID'=>$matchId, 'isYouth'=>'true');
+			$params = array('file'=>'matchdetails', 'version'=>'2.1', 'matchID'=>$matchId, 'isYouth'=>'true');
 			if($matchEvents === true)
 			{
 				$params['matchEvents'] = 'true';
@@ -14572,6 +14572,7 @@ class HTLiveMatchEvent extends HTXml
 	private $subjectTeamId = null;
 	private $objectPlayerId = null;
 	private $key = null;
+	private $variation = null;
 	private $text = null;
 	private $moreInfos = null;
 
@@ -14646,12 +14647,36 @@ class HTLiveMatchEvent extends HTXml
 	 * @return String
 	 */
 	public function getKey()
+	{		
+		return $this->getKeyId().'_'.$this->getKeyVariation();
+	}
+	
+	/**
+	 * Return event key id
+	 *
+	 * @return Integer
+	 */
+	public function getKeyId()
 	{
 		if(!isset($this->key) || $this->key === null)
 		{
-			$this->key = $this->getXml()->getElementsByTagName('EventKey')->item(0)->nodeValue;
+			$this->key = $this->getXml()->getElementsByTagName('EventTypeID')->item(0)->nodeValue;
 		}
 		return $this->key;
+	}
+	
+	/**
+	 * Return event key variation
+	 *
+	 * @return Integer
+	 */
+	public function getKeyVariation()
+	{
+		if(!isset($this->variation) || $this->variation === null)
+		{
+			$this->variation = $this->getXml()->getElementsByTagName('EventVariation')->item(0)->nodeValue;
+		}
+		return $this->variation;
 	}
 
 	/**
