@@ -1,6 +1,6 @@
 <?php
 /**
- * PHT 2.12 - 2012-01-20
+ * PHT 2.12 - 2012-XX-XX
  *
  * @author Telesphore
  * @link http://pht.htloto.org
@@ -4130,15 +4130,15 @@ class HTGlobal extends HTXml
 	 */
 	public function getFetchedDate($format = null)
 	{
-		if(!isset($this->fetchedDate) || $this->fetchedDate === null)
+		if(!isset($this->fetchedDate[$format]) || $this->fetchedDate[$format] === null)
 		{
-			$this->fetchedDate = $this->getXml()->getElementsByTagName('FetchedDate')->item(0)->nodeValue;
+			$this->fetchedDate[$format] = $this->getXml()->getElementsByTagName('FetchedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->fetchedDate = HTFunction::convertDate($this->fetchedDate, $format);
+				$this->fetchedDate[$format] = HTFunction::convertDate($this->fetchedDate[$format], $format);
 			}
 		}
-		return $this->fetchedDate;
+		return $this->fetchedDate[$format];
 	}
 
 	/**
@@ -4316,15 +4316,15 @@ class HTCheckToken extends HTGlobal
 	 */
 	public function getCreationDate($format = null)
 	{
-		if(!isset($this->created) || $this->created === null)
+		if(!isset($this->created[$format]) || $this->created[$format] === null)
 		{
-			$this->created = $this->getXml()->getElementsByTagName('Created')->item(0)->nodeValue;
+			$this->created[$format] = $this->getXml()->getElementsByTagName('Created')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->created = HTFunction::convertDate($this->created, $format);
+				$this->created[$format] = HTFunction::convertDate($this->created[$format], $format);
 			}
 		}
-		return $this->created;
+		return $this->created[$format];
 	}
 
 	/**
@@ -4349,15 +4349,15 @@ class HTCheckToken extends HTGlobal
 	 */
 	public function getExpirationDate($format = null)
 	{
-		if(!isset($this->expires) || $this->expires === null)
+		if(!isset($this->expires[$format]) || $this->expires[$format] === null)
 		{
-			$this->expires = $this->getXml()->getElementsByTagName('Expires')->item(0)->nodeValue;
+			$this->expires[$format] = $this->getXml()->getElementsByTagName('Expires')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->expires = HTFunction::convertDate($this->expires, $format);
+				$this->expires[$format] = HTFunction::convertDate($this->expires[$format], $format);
 			}
 		}
-		return $this->expires;
+		return $this->expires[$format];
 	}
 
 	/**
@@ -4527,15 +4527,15 @@ class HTHofPlayer extends HTXml
 	 */
 	public function getNextBirthdayDate($format = null)
 	{
-		if(!isset($this->nextBirthday) || $this->nextBirthday === null)
+		if(!isset($this->nextBirthday[$format]) || $this->nextBirthday[$format] === null)
 		{
-			$this->nextBirthday = $this->getXml()->getElementsByTagName('NextBirthday')->item(0)->nodeValue;
+			$this->nextBirthday[$format] = $this->getXml()->getElementsByTagName('NextBirthday')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->nextBirthday = HTFunction::convertDate($this->nextBirthday, $format);
+				$this->nextBirthday[$format] = HTFunction::convertDate($this->nextBirthday[$format], $format);
 			}
 		}
-		return $this->nextBirthday;
+		return $this->nextBirthday[$format];
 	}
 
 	/**
@@ -4546,15 +4546,15 @@ class HTHofPlayer extends HTXml
 	 */
 	public function getArrivalDate($format = null)
 	{
-		if(!isset($this->arrivalDate) || $this->arrivalDate === null)
+		if(!isset($this->arrivalDate[$format]) || $this->arrivalDate[$format] === null)
 		{
-			$this->arrivalDate = $this->getXml()->getElementsByTagName('ArrivalDate')->item(0)->nodeValue;
+			$this->arrivalDate[$format] = $this->getXml()->getElementsByTagName('ArrivalDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->arrivalDate = HTFunction::convertDate($this->arrivalDate, $format);
+				$this->arrivalDate[$format] = HTFunction::convertDate($this->arrivalDate[$format], $format);
 			}
 		}
-		return $this->arrivalDate;
+		return $this->arrivalDate[$format];
 	}
 
 	/**
@@ -4579,15 +4579,15 @@ class HTHofPlayer extends HTXml
 	 */
 	public function getHofDate($format = null)
 	{
-		if(!isset($this->hofDate) || $this->hofDate === null)
+		if(!isset($this->hofDate[$format]) || $this->hofDate[$format] === null)
 		{
-			$this->hofDate = $this->getXml()->getElementsByTagName('HofDate')->item(0)->nodeValue;
+			$this->hofDate[$format] = $this->getXml()->getElementsByTagName('HofDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->hofDate = HTFunction::convertDate($this->hofDate, $format);
+				$this->hofDate[$format] = HTFunction::convertDate($this->hofDate[$format], $format);
 			}
 		}
-		return $this->hofDate;
+		return $this->hofDate[$format];
 	}
 
 	/**
@@ -5270,15 +5270,15 @@ class HTTeam extends HTCommonTeam
 	 */
 	public function getSignupDate($format = null)
 	{
-		if(!isset($this->signupDate) || $this->signupDate === null)
+		if(!isset($this->signupDate[$format]) || $this->signupDate[$format] === null)
 		{
-			$this->signupDate = $this->getXml()->getElementsByTagName('SignupDate')->item(0)->nodeValue;
+			$this->signupDate[$format] = $this->getXml()->getElementsByTagName('SignupDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->signupDate = HTFunction::convertDate($this->signupDate, $format);
+				$this->signupDate[$format] = HTFunction::convertDate($this->signupDate[$format], $format);
 			}
 		}
-		return $this->signupDate;
+		return $this->signupDate[$format];
 	}
 
 	/**
@@ -5289,15 +5289,15 @@ class HTTeam extends HTCommonTeam
 	 */
 	public function getActivationDate($format = null)
 	{
-		if(!isset($this->activationDate) || $this->activationDate === null)
+		if(!isset($this->activationDate[$format]) || $this->activationDate[$format] === null)
 		{
-			$this->activationDate = $this->getXml()->getElementsByTagName('ActivationDate')->item(0)->nodeValue;
+			$this->activationDate[$format] = $this->getXml()->getElementsByTagName('ActivationDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->activationDate = HTFunction::convertDate($this->activationDate, $format);
+				$this->activationDate[$format] = HTFunction::convertDate($this->activationDate[$format], $format);
 			}
 		}
-		return $this->activationDate;
+		return $this->activationDate[$format];
 	}
 
 	/**
@@ -5308,15 +5308,15 @@ class HTTeam extends HTCommonTeam
 	 */
 	public function getLastLoginDate($format = null)
 	{
-		if(!isset($this->lastLoginDate) || $this->lastLoginDate === null)
+		if(!isset($this->lastLoginDate[$format]) || $this->lastLoginDate[$format] === null)
 		{
-			$this->lastLoginDate = $this->getXml()->getElementsByTagName('LastLoginDate')->item(0)->nodeValue;
+			$this->lastLoginDate[$format] = $this->getXml()->getElementsByTagName('LastLoginDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->lastLoginDate = HTFunction::convertDate($this->lastLoginDate, $format);
+				$this->lastLoginDate[$format] = HTFunction::convertDate($this->lastLoginDate[$format], $format);
 			}
 		}
-		return $this->lastLoginDate;
+		return $this->lastLoginDate[$format];
 	}
 
 	/**
@@ -5501,15 +5501,15 @@ class HTTeam extends HTCommonTeam
 	{
 		if($this->isBot())
 		{
-			if(!isset($this->botDate) || $this->botDate === null)
+			if(!isset($this->botDate[$format]) || $this->botDate[$format] === null)
 			{
-				$this->botDate = $this->getXml()->getElementsByTagName('BotSince')->item(0)->nodeValue;
+				$this->botDate[$format] = $this->getXml()->getElementsByTagName('BotSince')->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->botDate = HTFunction::convertDate($this->botDate, $format);
+					$this->botDate[$format] = HTFunction::convertDate($this->botDate[$format], $format);
 				}
 			}
-			return $this->botDate;
+			return $this->botDate[$format];
 		}
 		return null;
 	}
@@ -5832,23 +5832,23 @@ class HTTeam extends HTCommonTeam
 	{
 		if($this->isHtSupporter())
 		{
-			if(!isset($this->pressDate) || $this->pressDate === null)
+			if(!isset($this->pressDate[$format]) || $this->pressDate[$format] === null)
 			{
 				$node = $this->getXml()->getElementsByTagName('SendDate');
 				if($node !== null && $node->length)
 				{
-					$this->pressDate = $node->item(0)->nodeValue;
+					$this->pressDate[$format] = $node->item(0)->nodeValue;
 					if($format !== null)
 					{
-						$this->pressDate = HTFunction::convertDate($this->pressDate, $format);
+						$this->pressDate[$format] = HTFunction::convertDate($this->pressDate[$format], $format);
 					}
 				}
 				else
 				{
-					$this->pressDate = false;
+					$this->pressDate[$format] = false;
 				}
 			}
-			return $this->pressDate;
+			return $this->pressDate[$format];
 		}
 		return null;
 	}
@@ -6071,15 +6071,15 @@ class HTTrophy extends HTXml
 	 */
 	public function getGainedDate($format = null)
 	{
-		if(!isset($this->gainedDate) || $this->gainedDate === null)
+		if(!isset($this->gainedDate[$format]) || $this->gainedDate[$format] === null)
 		{
-			$this->gainedDate = $this->getXml()->getElementsByTagName('GainedDate')->item(0)->nodeValue;
+			$this->gainedDate[$format] = $this->getXml()->getElementsByTagName('GainedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->gainedDate = HTFunction::convertDate($this->gainedDate, $format);
+				$this->gainedDate[$format] = HTFunction::convertDate($this->gainedDate[$format], $format);
 			}
 		}
-		return $this->gainedDate;
+		return $this->gainedDate[$format];
 	}
 
 	/**
@@ -6445,15 +6445,15 @@ class HTTeamSupported extends HTTeamSupporter
 	 */
 	public function getLastMatchDate($format = null)
 	{
-		if(!isset($this->lastMatchDate) || $this->lastMatchDate === null)
+		if(!isset($this->lastMatchDate[$format]) || $this->lastMatchDate[$format] === null)
 		{
-			$this->lastMatchDate = $this->getXml()->getElementsByTagName('LastMatchDate')->item(0)->nodeValue;
+			$this->lastMatchDate[$format] = $this->getXml()->getElementsByTagName('LastMatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->lastMatchDate = HTFunction::convertDate($this->lastMatchDate, $format);
+				$this->lastMatchDate[$format] = HTFunction::convertDate($this->lastMatchDate[$format], $format);
 			}
 		}
-		return $this->lastMatchDate;
+		return $this->lastMatchDate[$format];
 	}
 
 	/**
@@ -6562,15 +6562,15 @@ class HTTeamSupported extends HTTeamSupporter
 	 */
 	public function getNextMatchDate($format = null)
 	{
-		if(!isset($this->nextMatchDate) || $this->nextMatchDate === null)
+		if(!isset($this->nextMatchDate[$format]) || $this->nextMatchDate[$format] === null)
 		{
-			$this->nextMatchDate = $this->getXml()->getElementsByTagName('NextMatchMatchDate')->item(0)->nodeValue;
+			$this->nextMatchDate[$format] = $this->getXml()->getElementsByTagName('NextMatchMatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->nextMatchDate = HTFunction::convertDate($this->nextMatchDate, $format);
+				$this->nextMatchDate[$format] = HTFunction::convertDate($this->nextMatchDate[$format], $format);
 			}
 		}
-		return $this->nextMatchDate;
+		return $this->nextMatchDate[$format];
 	}
 
 	/**
@@ -6653,15 +6653,15 @@ class HTTeamSupported extends HTTeamSupporter
 	{
 		if($this->hasPressAnnouncement())
 		{
-			if(!isset($this->pressDate) || $this->pressDate === null)
+			if(!isset($this->pressDate[$format]) || $this->pressDate[$format] === null)
 			{
-				$this->pressDate = $this->getXml()->getElementsByTagName('PressAnnouncementSendDate')->item(0)->nodeValue;
+				$this->pressDate[$format] = $this->getXml()->getElementsByTagName('PressAnnouncementSendDate')->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->pressDate = HTFunction::convertDate($this->pressDate, $format);
+					$this->pressDate[$format] = HTFunction::convertDate($this->pressDate[$format], $format);
 				}
 			}
-			return $this->pressDate;
+			return $this->pressDate[$format];
 		}
 		return null;
 	}
@@ -8118,15 +8118,15 @@ class HTLeagueMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->matchDate) || $this->matchDate === null)
+		if(!isset($this->matchDate[$format]) || $this->matchDate[$format] === null)
 		{
-			$this->matchDate = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->matchDate[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->matchDate = HTFunction::convertDate($this->matchDate, $format);
+				$this->matchDate[$format] = HTFunction::convertDate($this->matchDate[$format], $format);
 			}
 		}
-		return $this->matchDate;
+		return $this->matchDate[$format];
 	}
 
 	/**
@@ -8750,15 +8750,15 @@ class HTWorldLeague extends HTXml
 	 */
 	public function getTrainingDate($format = null)
 	{
-		if(!isset($this->trainingDate) || $this->trainingDate === null)
+		if(!isset($this->trainingDate[$format]) || $this->trainingDate[$format] === null)
 		{
-			$this->trainingDate = $this->getXml()->getElementsByTagName('TrainingDate')->item(0)->nodeValue;
+			$this->trainingDate[$format] = $this->getXml()->getElementsByTagName('TrainingDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->trainingDate = HTFunction::convertDate($this->trainingDate, $format);
+				$this->trainingDate[$format] = HTFunction::convertDate($this->trainingDate[$format], $format);
 			}
 		}
-		return $this->trainingDate;
+		return $this->trainingDate[$format];
 	}
 
 	/**
@@ -8769,15 +8769,15 @@ class HTWorldLeague extends HTXml
 	 */
 	public function getEconomyDate($format = null)
 	{
-		if(!isset($this->economyDate) || $this->economyDate === null)
+		if(!isset($this->economyDate[$format]) || $this->economyDate[$format] === null)
 		{
-			$this->economyDate = $this->getXml()->getElementsByTagName('EconomyDate')->item(0)->nodeValue;
+			$this->economyDate[$format] = $this->getXml()->getElementsByTagName('EconomyDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->economyDate = HTFunction::convertDate($this->economyDate, $format);
+				$this->economyDate[$format] = HTFunction::convertDate($this->economyDate[$format], $format);
 			}
 		}
-		return $this->economyDate;
+		return $this->economyDate[$format];
 	}
 
 	/**
@@ -8788,15 +8788,15 @@ class HTWorldLeague extends HTXml
 	 */
 	public function getCupMatchDate($format = null)
 	{
-		if(!isset($this->cupMatchDate) || $this->cupMatchDate === null)
+		if(!isset($this->cupMatchDate[$format]) || $this->cupMatchDate[$format] === null)
 		{
-			$this->cupMatchDate = $this->getXml()->getElementsByTagName('CupMatchDate')->item(0)->nodeValue;
+			$this->cupMatchDate[$format] = $this->getXml()->getElementsByTagName('CupMatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->cupMatchDate = HTFunction::convertDate($this->cupMatchDate, $format);
+				$this->cupMatchDate[$format] = HTFunction::convertDate($this->cupMatchDate[$format], $format);
 			}
 		}
-		return $this->cupMatchDate;
+		return $this->cupMatchDate[$format];
 	}
 
 	/**
@@ -8807,15 +8807,15 @@ class HTWorldLeague extends HTXml
 	 */
 	public function getSeriesMatchDate($format = null)
 	{
-		if(!isset($this->seriesMatchDate) || $this->seriesMatchDate === null)
+		if(!isset($this->seriesMatchDate[$format]) || $this->seriesMatchDate[$format] === null)
 		{
-			$this->seriesMatchDate = $this->getXml()->getElementsByTagName('SeriesMatchDate')->item(0)->nodeValue;
+			$this->seriesMatchDate[$format] = $this->getXml()->getElementsByTagName('SeriesMatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->seriesMatchDate = HTFunction::convertDate($this->seriesMatchDate, $format);
+				$this->seriesMatchDate[$format] = HTFunction::convertDate($this->seriesMatchDate[$format], $format);
 			}
 		}
-		return $this->seriesMatchDate;
+		return $this->seriesMatchDate[$format];
 	}
 
 	/**
@@ -9073,15 +9073,15 @@ class HTTraining extends HTCommonSubscriber
 	 */
 	public function getTrainerArrivalDate($format = null)
 	{
-		if(!isset($this->trainerArrivalDate) || $this->trainerArrivalDate === null)
+		if(!isset($this->trainerArrivalDate[$format]) || $this->trainerArrivalDate[$format] === null)
 		{
-			$this->trainerArrivalDate = $this->getXml()->getElementsByTagName('ArrivalDate')->item(0)->nodeValue;
+			$this->trainerArrivalDate[$format] = $this->getXml()->getElementsByTagName('ArrivalDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->trainerArrivalDate = HTFunction::convertDate($this->trainerArrivalDate, $format);
+				$this->trainerArrivalDate[$format] = HTFunction::convertDate($this->trainerArrivalDate[$format], $format);
 			}
 		}
-		return $this->trainerArrivalDate;
+		return $this->trainerArrivalDate[$format];
 	}
 
 	/**
@@ -9527,15 +9527,15 @@ class HTTeamTransferHistory extends HTCommonTeam
 	 */
 	public function getTeamActivatedDate($format = null)
 	{
-		if(!isset($this->activatedDate) || $this->activatedDate === null)
+		if(!isset($this->activatedDate[$format]) || $this->activatedDate[$format] === null)
 		{
-			$this->activatedDate = $this->getXml()->getElementsByTagName('ActivatedDate')->item(0)->nodeValue;
+			$this->activatedDate[$format] = $this->getXml()->getElementsByTagName('ActivatedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->activatedDate = HTFunction::convertDate($this->activatedDate, $format);
+				$this->activatedDate[$format] = HTFunction::convertDate($this->activatedDate[$format], $format);
 			}
 		}
-		return $this->activatedDate;
+		return $this->activatedDate[$format];
 	}
 
 	/**
@@ -9642,15 +9642,15 @@ class HTTeamTransferHistory extends HTCommonTeam
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 
 	/**
@@ -9661,15 +9661,15 @@ class HTTeamTransferHistory extends HTCommonTeam
 	 */
 	public function getEndDate($format = null)
 	{
-		if(!isset($this->endDate) || $this->endDate === null)
+		if(!isset($this->endDate[$format]) || $this->endDate[$format] === null)
 		{
-			$this->endDate = $this->getXml()->getElementsByTagName('EndDate')->item(0)->nodeValue;
+			$this->endDate[$format] = $this->getXml()->getElementsByTagName('EndDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->endDate = HTFunction::convertDate($this->endDate, $format);
+				$this->endDate[$format] = HTFunction::convertDate($this->endDate[$format], $format);
 			}
 		}
-		return $this->endDate;
+		return $this->endDate[$format];
 	}
 }
 class HTPlayerTransferHistory extends HTGlobal
@@ -9689,15 +9689,15 @@ class HTPlayerTransferHistory extends HTGlobal
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 
 	/**
@@ -9708,15 +9708,15 @@ class HTPlayerTransferHistory extends HTGlobal
 	 */
 	public function getEndDate($format = null)
 	{
-		if(!isset($this->endDate) || $this->endDate === null)
+		if(!isset($this->endDate[$format]) || $this->endDate[$format] === null)
 		{
-			$this->endDate = $this->getXml()->getElementsByTagName('EndDate')->item(0)->nodeValue;
+			$this->endDate[$format] = $this->getXml()->getElementsByTagName('EndDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->endDate = HTFunction::convertDate($this->endDate, $format);
+				$this->endDate[$format] = HTFunction::convertDate($this->endDate[$format], $format);
 			}
 		}
-		return $this->endDate;
+		return $this->endDate[$format];
 	}
 
 	/**
@@ -9833,15 +9833,15 @@ class HTTransfer extends HTXml
 	 */
 	public function getDeadline($format = null)
 	{
-		if(!isset($this->deadline) || $this->deadline === null)
+		if(!isset($this->deadline[$format]) || $this->deadline[$format] === null)
 		{
-			$this->deadline = $this->getXml()->getElementsByTagName('Deadline')->item(0)->nodeValue;
+			$this->deadline[$format] = $this->getXml()->getElementsByTagName('Deadline')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->deadline = HTFunction::convertDate($this->deadline, $format);
+				$this->deadline[$format] = HTFunction::convertDate($this->deadline[$format], $format);
 			}
 		}
-		return $this->deadline;
+		return $this->deadline[$format];
 	}
 
 	/**
@@ -10689,15 +10689,15 @@ class HTTeamPlayer extends HTXml
 	 */
 	public function getNextBirthDay($format = null)
 	{
-		if(!isset($this->birthday) || $this->birthday === null)
+		if(!isset($this->birthday[$format]) || $this->birthday[$format] === null)
 		{
-			$this->birthday = date('Y-m-d', time()+((self::DAYSINYEAR-$this->getDays())*24*3600));
+			$this->birthday[$format] = date('Y-m-d', time()+((self::DAYSINYEAR-$this->getDays())*24*3600));
 			if($format !== null)
 			{
-				$this->birthday = HTFunction::convertDate($this->birthday, $format);
+				$this->birthday[$format] = HTFunction::convertDate($this->birthday[$format], $format);
 			}
 		}
-		return $this->birthday;
+		return $this->birthday[$format];
 	}
 
 	/**
@@ -11738,15 +11738,15 @@ class HTPlayer extends HTCommonSubscriber
 	 */
 	public function getNextBirthDay($format = null)
 	{
-		if(!isset($this->birthday) || $this->birthday === null)
+		if(!isset($this->birthday[$format]) || $this->birthday[$format] === null)
 		{
-			$this->birthday = $this->getXml()->getElementsByTagName('NextBirthDay')->item(0)->nodeValue;
+			$this->birthday[$format] = $this->getXml()->getElementsByTagName('NextBirthDay')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->birthday = HTFunction::convertDate($this->birthday, $format);
+				$this->birthday[$format] = HTFunction::convertDate($this->birthday[$format], $format);
 			}
 		}
-		return $this->birthday;
+		return $this->birthday[$format];
 	}
 
 	/**
@@ -11915,15 +11915,15 @@ class HTPlayerMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('Date')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('Date')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -12195,15 +12195,15 @@ class HTTeamMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -12323,15 +12323,15 @@ class HTMatch extends HTGlobal
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 
 	/**
@@ -12342,15 +12342,15 @@ class HTMatch extends HTGlobal
 	 */
 	public function getEndDate($format = null)
 	{
-		if(!isset($this->endDate) || $this->endDate === null)
+		if(!isset($this->endDate[$format]) || $this->endDate[$format] === null)
 		{
-			$this->endDate = $this->getXml()->getElementsByTagName('FinishedDate')->item(0)->nodeValue;
+			$this->endDate[$format] = $this->getXml()->getElementsByTagName('FinishedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->endDate = HTFunction::convertDate($this->endDate, $format);
+				$this->endDate[$format] = HTFunction::convertDate($this->endDate[$format], $format);
 			}
 		}
-		return $this->endDate;
+		return $this->endDate[$format];
 	}
 
 	/**
@@ -13461,15 +13461,15 @@ class HTMatchArchiveMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -13619,15 +13619,15 @@ class HTLineup extends HTCommonTeam
 	 */
 	public function getMatchDate($format = null)
 	{
-		if(!isset($this->matchDate) || $this->matchDate === null)
+		if(!isset($this->matchDate[$format]) || $this->matchDate[$format] === null)
 		{
-			$this->matchDate = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->matchDate[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->matchDate = HTFunction::convertDate($this->matchDate, $format);
+				$this->matchDate[$format] = HTFunction::convertDate($this->matchDate[$format], $format);
 			}
 		}
-		return $this->matchDate;
+		return $this->matchDate[$format];
 	}
 
 	/**
@@ -14336,15 +14336,15 @@ class HTLiveMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -15938,15 +15938,15 @@ class HTWorldCupGroupRound extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 }
 class HTAlliances extends HTGlobal
@@ -16296,15 +16296,15 @@ class HTArenaCapacity extends HTXml
 	{
 		if($this->isLastRebuildDateAvailable())
 		{
-			if(!isset($this->lastRebuildDate) || $this->lastRebuildDate === null)
+			if(!isset($this->lastRebuildDate[$format]) || $this->lastRebuildDate[$format] === null)
 			{
-				$this->lastRebuildDate = $this->getXml()->getElementsByTagName('RebuiltDate')->item(0)->nodeValue;
+				$this->lastRebuildDate[$format] = $this->getXml()->getElementsByTagName('RebuiltDate')->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->lastRebuildDate = HTFunction::convertDate($this->lastRebuildDate, $format);
+					$this->lastRebuildDate[$format] = HTFunction::convertDate($this->lastRebuildDate[$format], $format);
 				}
 			}
-			return $this->lastRebuildDate;
+			return $this->lastRebuildDate[$format];
 		}
 		return null;
 	}
@@ -16317,19 +16317,19 @@ class HTArenaCapacity extends HTXml
 	 */
 	public function getExpansionDate($format = null)
 	{
-		if(!isset($this->expansionDate) || $this->expansionDate === null)
+		if(!isset($this->expansionDate[$format]) || $this->expansionDate[$format] === null)
 		{
 			$node = $this->getXml()->getElementsByTagName('ExpansionDate');
 			if($node !== null && $node->length)
 			{
-				$this->expansionDate = $this->getXml()->getElementsByTagName('ExpansionDate')->item(0)->nodeValue;
+				$this->expansionDate[$format] = $this->getXml()->getElementsByTagName('ExpansionDate')->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->expansionDate = HTFunction::convertDate($this->expansionDate, $format);
+					$this->expansionDate[$format] = HTFunction::convertDate($this->expansionDate[$format], $format);
 				}
 			}
 		}
-		return $this->expansionDate;
+		return $this->expansionDate[$format];
 	}
 
 	/**
@@ -16564,15 +16564,15 @@ class HTMatchOrders extends HTGlobal
 	{
 		if($this->isDataAvailable())
 		{
-			if(!isset($this->date) || $this->date === null)
+			if(!isset($this->date[$format]) || $this->date[$format] === null)
 			{
-				$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+				$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->date = HTFunction::convertDate($this->date, $format);
+					$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 				}
 			}
-			return $this->date;
+			return $this->date[$format];
 		}
 		return null;
 	}
@@ -17113,15 +17113,15 @@ class HTArenaMyStats extends HTGlobal
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('FirstDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('FirstDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 
 	/**
@@ -17132,15 +17132,15 @@ class HTArenaMyStats extends HTGlobal
 	 */
 	public function getEndDate($format = null)
 	{
-		if(!isset($this->endDate) || $this->endDate === null)
+		if(!isset($this->endDate[$format]) || $this->endDate[$format] === null)
 		{
-			$this->endDate = $this->getXml()->getElementsByTagName('LastDate')->item(0)->nodeValue;
+			$this->endDate[$format] = $this->getXml()->getElementsByTagName('LastDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->endDate = HTFunction::convertDate($this->endDate, $format);
+				$this->endDate[$format] = HTFunction::convertDate($this->endDate[$format], $format);
 			}
 		}
-		return $this->endDate;
+		return $this->endDate[$format];
 	}
 
 	/**
@@ -17346,15 +17346,15 @@ class HTArenasStats extends HTGlobal
 	 */
 	public function getStatsDate($format = null)
 	{
-		if(!isset($this->createDate) || $this->createDate === null)
+		if(!isset($this->createDate[$format]) || $this->createDate[$format] === null)
 		{
-			$this->createDate = $this->getXml()->getElementsByTagName('CreatedDate')->item(0)->nodeValue;
+			$this->createDate[$format] = $this->getXml()->getElementsByTagName('CreatedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->createDate = HTFunction::convertDate($this->createDate, $format);
+				$this->createDate[$format] = HTFunction::convertDate($this->createDate[$format], $format);
 			}
 		}
-		return $this->createDate;
+		return $this->createDate[$format];
 	}
 
 	/**
@@ -17670,15 +17670,15 @@ class HTChallenge extends HTXml
 	 */
 	public function getMatchDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchTime')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchTime')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -18090,15 +18090,15 @@ class HTCupMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -18828,15 +18828,15 @@ class HTBookmarkPlayer extends HTBookmarkGlobal
 	 */
 	public function getDeadline($format = null)
 	{
-		if(!isset($this->deadline) || $this->deadline === null)
+		if(!isset($this->deadline[$format]) || $this->deadline[$format] === null)
 		{
-			$this->deadline = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
+			$this->deadline[$format] = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->deadline = HTFunction::convertDate($this->deadline, $format);
+				$this->deadline[$format] = HTFunction::convertDate($this->deadline[$format], $format);
 			}
 		}
-		return $this->deadline;
+		return $this->deadline[$format];
 	}
 }
 class HTBookmarksMatches extends HTBookmarksGlobal
@@ -18911,15 +18911,15 @@ class HTBookmarkMatch extends HTBookmarkGlobal
 	 */
 	public function getMatchDate($format = null)
 	{
-		if(!isset($this->matchDate) || $this->matchDate === null)
+		if(!isset($this->matchDate[$format]) || $this->matchDate[$format] === null)
 		{
-			$this->matchDate = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
+			$this->matchDate[$format] = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->matchDate = HTFunction::convertDate($this->matchDate, $format);
+				$this->matchDate[$format] = HTFunction::convertDate($this->matchDate[$format], $format);
 			}
 		}
-		return $this->matchDate;
+		return $this->matchDate[$format];
 	}
 }
 class HTBookmarksConfUsers extends HTBookmarksGlobal
@@ -19261,15 +19261,15 @@ class HTBookmarkYouthMatch extends HTBookmarkGlobal
 	 */
 	public function getYouthMatchDate($format = null)
 	{
-		if(!isset($this->matchDate) || $this->matchDate === null)
+		if(!isset($this->matchDate[$format]) || $this->matchDate[$format] === null)
 		{
-			$this->matchDate = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
+			$this->matchDate[$format] = $this->getXml()->getElementsByTagName('Text2')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->matchDate = HTFunction::convertDate($this->matchDate, $format);
+				$this->matchDate[$format] = HTFunction::convertDate($this->matchDate[$format], $format);
 			}
 		}
-		return $this->matchDate;
+		return $this->matchDate[$format];
 	}
 }
 class HTBookmarksYouthLeagues extends HTBookmarksGlobal
@@ -19641,15 +19641,15 @@ class HTTrainingEvent extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -19837,15 +19837,15 @@ class HTPlayerEvent extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -20022,15 +20022,15 @@ class HTAllianceDetails extends HTAllianceCommon
 	 */
 	public function getCreationDate($format = null)
 	{
-		if(!isset($this->creationDate) || $this->creationDate === null)
+		if(!isset($this->creationDate[$format]) || $this->creationDate[$format] === null)
 		{
-			$this->creationDate = $this->getXml()->getElementsByTagName('CreationDate')->item(0)->nodeValue;
+			$this->creationDate[$format] = $this->getXml()->getElementsByTagName('CreationDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->creationDate = HTFunction::convertDate($this->creationDate, $format);
+				$this->creationDate[$format] = HTFunction::convertDate($this->creationDate[$format], $format);
 			}
 		}
-		return $this->creationDate;
+		return $this->creationDate[$format];
 	}
 
 	/**
@@ -20445,19 +20445,19 @@ class HTAllianceDetails extends HTAllianceCommon
 	 */
 	public function getDissolutionDate($format = null)
 	{
-		if(!isset($this->dissolutionEndDate) || $this->dissolutionEndDate === null)
+		if(!isset($this->dissolutionEndDate[$format]) || $this->dissolutionEndDate[$format] === null)
 		{
 			$node = $this->getXml()->getElementsByTagName('DissolutionEndDate');
 			if($node !== null && $node->length)
 			{
-				$this->dissolutionEndDate = $node->item(0)->nodeValue;
+				$this->dissolutionEndDate[$format] = $node->item(0)->nodeValue;
 				if($format !== null)
 				{
-					$this->dissolutionEndDate = HTFunction::convertDate($this->dissolutionEndDate, $format);
+					$this->dissolutionEndDate[$format] = HTFunction::convertDate($this->dissolutionEndDate[$format], $format);
 				}
 			}
 		}
-		return $this->dissolutionEndDate;
+		return $this->dissolutionEndDate[$format];
 	}
 }
 class HTUser extends HTXml
@@ -20588,15 +20588,15 @@ class HTAllianceMember extends HTUser
 	 */
 	public function getShipDate($format = null)
 	{
-		if(!isset($this->shipDate) || $this->shipDate === null)
+		if(!isset($this->shipDate[$format]) || $this->shipDate[$format] === null)
 		{
-			$this->shipDate = $this->getXml()->getElementsByTagName('MemberShipDate')->item(0)->nodeValue;
+			$this->shipDate[$format] = $this->getXml()->getElementsByTagName('MemberShipDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->shipDate = HTFunction::convertDate($this->shipDate, $format);
+				$this->shipDate[$format] = HTFunction::convertDate($this->shipDate[$format], $format);
 			}
 		}
-		return $this->shipDate;
+		return $this->shipDate[$format];
 	}
 }
 class HTAllianceRoles extends HTAllianceCommon
@@ -21349,15 +21349,15 @@ class HTFansUpcomingMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->matchDate) || $this->matchDate === null)
+		if(!isset($this->matchDate[$format]) || $this->matchDate[$format] === null)
 		{
-			$this->matchDate = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->matchDate[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->matchDate = HTFunction::convertDate($this->matchDate, $format);
+				$this->matchDate[$format] = HTFunction::convertDate($this->matchDate[$format], $format);
 			}
 		}
-		return $this->matchDate;
+		return $this->matchDate[$format];
 	}
 
 	/**
@@ -21517,15 +21517,15 @@ class HTAchievement extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('EventDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**
@@ -22028,15 +22028,15 @@ class HTWorldCupMatch extends HTXml
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 
 	/**
@@ -22047,15 +22047,15 @@ class HTWorldCupMatch extends HTXml
 	 */
 	public function getEndDate($format = null)
 	{
-		if(!isset($this->endDate) || $this->endDate === null)
+		if(!isset($this->endDate[$format]) || $this->endDate[$format] === null)
 		{
-			$this->endDate = $this->getXml()->getElementsByTagName('FinishedDate')->item(0)->nodeValue;
+			$this->endDate[$format] = $this->getXml()->getElementsByTagName('FinishedDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->endDate = HTFunction::convertDate($this->endDate, $format);
+				$this->endDate[$format] = HTFunction::convertDate($this->endDate[$format], $format);
 			}
 		}
-		return $this->endDate;
+		return $this->endDate[$format];
 	}
 
 	/**
@@ -22125,15 +22125,15 @@ class HTWorldCupRound extends HTXml
 	 */
 	public function getStartDate($format = null)
 	{
-		if(!isset($this->startDate) || $this->startDate === null)
+		if(!isset($this->startDate[$format]) || $this->startDate[$format] === null)
 		{
-			$this->startDate = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
+			$this->startDate[$format] = $this->getXml()->getElementsByTagName('StartDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->startDate = HTFunction::convertDate($this->startDate, $format);
+				$this->startDate[$format] = HTFunction::convertDate($this->startDate[$format], $format);
 			}
 		}
-		return $this->startDate;
+		return $this->startDate[$format];
 	}
 }
 class HTNationalMatches extends HTGlobal
@@ -22239,15 +22239,15 @@ class HTNationalMatch extends HTXml
 	 */
 	public function getDate($format = null)
 	{
-		if(!isset($this->date) || $this->date === null)
+		if(!isset($this->date[$format]) || $this->date[$format] === null)
 		{
-			$this->date = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
+			$this->date[$format] = $this->getXml()->getElementsByTagName('MatchDate')->item(0)->nodeValue;
 			if($format !== null)
 			{
-				$this->date = HTFunction::convertDate($this->date, $format);
+				$this->date[$format] = HTFunction::convertDate($this->date[$format], $format);
 			}
 		}
-		return $this->date;
+		return $this->date[$format];
 	}
 
 	/**

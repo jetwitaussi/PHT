@@ -9,6 +9,7 @@ Version 2.12 [2012-XX-XX]
  * New getKeyId() and getKeyVariation() functions in HTLiveMatchEvent class
 
  * Fix getLeague() function in HTWorldDetails class
+ * Fix all functions which deal with dates, caches for date formats are integrated transparently
 
 
 Version 2.11 [2012-01-20]
