@@ -5,11 +5,19 @@
 Version 2.12 [2012-XX-XX]
 -------------------------
 
- * Use version 2.1 of matchdetails file
+ * Use version 2.2 of matchdetails file
+ * Use version 1.4 of leaguedetails file
+ * Use version 1.7 of matchlineup file
  * New getKeyId() and getKeyVariation() functions in HTLiveMatchEvent class
+ * New getWonNumber(), getDrawsNumber() and getLostNumber() functions in HTLeagueTeam class
+ * New getFirstName(), getLastName() and getNickName() functions in HTLineupPlayer class
+ * New getTotalInjuries() and getInjury() functions in HTMatch class
+ * New HTMatchInjury class
 
  * Fix getLeague() function in HTWorldDetails class
  * Fix all functions which deal with dates, caches for date formats are integrated transparently
+
+ * Function getPositionCode() in HTLineupPlayer is marked as deprecated. Will be removed within next version
 
 
 Version 2.11 [2012-01-20]
