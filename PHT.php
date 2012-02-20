@@ -7482,6 +7482,7 @@ class HTLeague extends HTCommonLeagueLevel
 	private $leagueId = null;
 	private $leagueName = null;
 	private $teams = array();
+	private $currentRound = null;
 
 	/**
 	 * Return league level
@@ -7561,6 +7562,20 @@ class HTLeague extends HTCommonLeagueLevel
 			return $this->teams[$position];
 		}
 		return null;
+	}
+
+	/**
+	 * Return current match round
+	 *
+	 * @return Integer
+	 */
+	public function getCurrentMatchRound()
+	{
+		if(!isset($this->currentRound) || $this->currentRound === null)
+		{
+			$this->currentRound = $this->getXml()->getElementsByTagName('CurrentMatchRound')->item(0)->nodeValue;
+		}
+		return $this->currentRound;
 	}
 }
 class HTLeagueTeam extends HTXml

@@ -13,6 +13,7 @@ Version 2.12 [2012-XX-XX]
  * New getFirstName(), getLastName() and getNickName() functions in HTLineupPlayer class
  * New getTotalInjuries() and getInjury() functions in HTMatch class
  * New HTMatchInjury class
+ * New getCurrentMatchRound() function in HTLeague class
 
  * Fix getLeague() function in HTWorldDetails class
  * Fix all functions which deal with dates, caches for date formats are integrated transparently
