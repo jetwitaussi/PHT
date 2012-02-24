@@ -15453,29 +15453,47 @@ class HTNationalTeamDetail extends HTCommonTeam
 	}
 
 	/**
-	 * Return dress code
-	 *
+	 * @deprecated Use getDressURI() instead
 	 * @return String
 	 */
 	public function getDressCode()
 	{
+		return $this->getDressURI();
+	}
+
+	/**
+	 * Return dress uri
+	 *
+	 * @return String
+	 */
+	public function getDressURI()
+	{
 		if(!isset($this->dress) || $this->dress === null)
 		{
-			$this->dress = $this->getXml()->getElementsByTagName('Dress')->item(0)->nodeValue;
+			$this->dress = $this->getXml()->getElementsByTagName('DressURI')->item(0)->nodeValue;
 		}
 		return $this->dress;
 	}
 
 	/**
-	 * Return dress alternate code
-	 *
+	 * @deprecated Use getDressAlternateURI() function
 	 * @return String
 	 */
 	public function getDressAlternateCode()
 	{
+		return $this->getDressAlternateURI();
+	}
+
+	/**
+	 * Return dress alternate uri
+	 *
+	 * @return String
+	 */
+	public function getDressAlternateURI()
+	{
 		if(!isset($this->dressAlternate) || $this->dressAlternate === null)
 		{
-			$this->dressAlternate = $this->getXml()->getElementsByTagName('DressAlternate')->item(0)->nodeValue;
+			$this->dressAlternate = $this->getXml()->getElementsByTagName('DressAlternateURI')->item(0)->nodeValue;
 		}
 		return $this->dressAlternate;
 	}

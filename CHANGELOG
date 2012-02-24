@@ -14,11 +14,13 @@ Version 2.12 [2012-XX-XX]
  * New getTotalInjuries() and getInjury() functions in HTMatch class
  * New HTMatchInjury class
  * New getCurrentMatchRound() function in HTLeague class
+ * New getDressURI() and getDressAlternateURI() functions in HTNationalTeamDetail class
 
  * Fix getLeague() function in HTWorldDetails class
  * Fix all functions which deal with dates, caches for date formats are integrated transparently
 
  * Function getPositionCode() in HTLineupPlayer is marked as deprecated. Will be removed within next version
+ * Functions getDressCode() and getDressAlternateCode() in HTNationalTeamDetail class are marked as deprecated. Will be removed within next version
 
 
 Version 2.11 [2012-01-20]
