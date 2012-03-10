@@ -2,12 +2,21 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
-Version 2.12 [2012-XX-XX]
+Version 2.12 [2012-03-10]
 -------------------------
 
+ * Use version 2.4 of matches file
  * Use version 2.2 of matchdetails file
  * Use version 1.4 of leaguedetails file
  * Use version 1.7 of matchlineup file
+ * Use version 1.0 of youthteamdetails file
+ * Use version 1.0 of youthavatars file
+ * Use version 1.0 of youthplayerlist file
+ * Use version 1.4 of allianceDetails file
+ * Use version 2.2 of players file
+ * Use version 2.1 of playerdetails file
+ * Use version 1.2 of worldcup file
+ * New clearHofPlayers() and clearAllHofPlayers() in CHPPConnection class
  * New getKeyId() and getKeyVariation() functions in HTLiveMatchEvent class
  * New getWonNumber(), getDrawsNumber() and getLostNumber() functions in HTLeagueTeam class
  * New getFirstName(), getLastName() and getNickName() functions in HTLineupPlayer class
@@ -15,9 +24,32 @@ Version 2.12 [2012-XX-XX]
  * New HTMatchInjury class
  * New getCurrentMatchRound() function in HTLeague class
  * New getDressURI() and getDressAlternateURI() functions in HTNationalTeamDetail class
+ * New getYouthTeam(), clearYouthTeam() and clearYouthTeams() functions in CHPPConnection class
+ * New HTYouthTeam class
+ * New getYouthScouts(), clearYouthScouts() and clearAllYouthScouts() functions in CHPPConnection class
+ * New HTYouthScouts ans HTYouthScout classes
+ * New clearAvatars(), getYouthAvatars() and clearYouthAvatars() functions in CHPPConnection class
+ * New HTYouthAvatars and HTYouthPlayerAvatar classes
+ * New getYouthTeamPlayers(), clearYouthTeamPlayers() and clearYouthTeamsPlayers() functions in CHPPConnection class
+ * New getYouthTeamPlayersDetails() and clearYouthTeamsPlayersDetails() functions in CHPPConnection class
+ * New getYouthTeamPlayersUnlockskills() and clearYouthTeamsPlayersDetails() functions in CHPPConnection class
+ * New getYouthPlayer(), clearYouthPlayer() and clearYouthPlayers() functions in CHPPConnection class
+ * New HTYouthTeamPlayers, HTYouthPlayer, HTYouthPlayerLastMatch, HTYouthScoutCall, HTYouthScoutComment and HTYouthPlayerSkill classes
+ * New parameter in getInvestment() function in HTYouthSquad class
+ * New HTCommonAvatar class, internal class base for all avatars
+ * New getBackground() and getHtml() functions in HTPlayerAvatar class
+ * New getMaximumMember(), getRequestType() and getDescription() functions in HTAllianceRole class
+ * New isYouth(), getLeagueId(), getLeagueName(), getLeagueLevelUnitId(), getLeagueLevelUnitName() and getLeagueLevel() functions in HTTeamMatches class
 
  * Fix getLeague() function in HTWorldDetails class
  * Fix all functions which deal with dates, caches for date formats are integrated transparently
+ * Fix phpdoc for getAvatars() function in CHPPConnection class
+ * Fix getSpecialists() function in HTClub class to handle several calls with differents currencies
+ * Fix isInCup() function in HTTeam class
+
+ * Remove getAllianceRoleDetails(), clearAllianceRoleDetails(), clearAllianceRolesDetails(), and clearAlliancesRolesDetails() functions in CHPPConnection class
+   Remove HTAllianceRoleDetails class because of non existence anymore of actionType viewRole in alliancedetails file
+ * Remove getBestMatch() functions in HTTeamPlayer and HTPlayer classes as data is no more available
 
  * Function getPositionCode() in HTLineupPlayer is marked as deprecated. Will be removed within next version
  * Functions getDressCode() and getDressAlternateCode() in HTNationalTeamDetail class are marked as deprecated. Will be removed within next version
