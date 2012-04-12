@@ -2,6 +2,38 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.13 [2012-04-12]
+-------------------------
+
+ * Use version 2.3 of matchdetails file
+ * Use version 2.1 of matchorders file
+ * Use version 1.8 of matchlineup file
+ * New getTournamentMatchDetails(), clearTournamentMatchDetail() and clearTournamentMatchesDetails() functions in CHPPConnection class
+ * New isYouth() and isTournament() functions in HTMatch class
+ * New getSeniorMatchOrders(), clearSeniorMatchOrders(), clearSeniorMatchesOrders() functions in CHPPConnection class
+ * New getYouthMatchOrders(), clearYouthMatchOrders(), clearYouthMatchesOrders() functions in CHPPConnection class
+ * New getTournamentMatchOrders(), clearTournamentMatchOrders(), clearTournamentMatchesOrders() functions in CHPPConnection class
+ * New getTournamentLineup(), clearTournamentLineup(), clearTournamentLineups() functions in CHPPConnection class
+ * New isTournament() and isYouth() functions in HTTeamMatch class
+ * New getFirstName(), getLastName() and getNickName() functions in HTMatchOrdersPlayer class
+ * New getSourceSystem() function in HTSetLineup class
+ * Change CHPPConnection::oauthFirstTokenSecret scope, now the variable is protected
+ * New getGoalsInCareer(), getGoalsInCup(), getGoalsInLeague(), getGoalsInFriendly() and getHattricksInCareer() function in HTPlayer class
+
+ * Fix getKey(), getKeyId() and getKeyVariation() functions in HTLiveMatchEvent class
+ * Fix HTYouthPlayerSkill class
+ * Fix getEndDate() function in HTMatch class
+ * Fix getPlayerById() function in HTAvatars class
+ * Fix getXml() function in HTXml class
+
+ * Parameters of createNewLineup() function in CHPPConnection class have changed: $isYouth boolean parameter has changed to $sourceSystem string parameter, use HTMatch constants to set the value for your lineup
+   Constructor parameters of HTSetLineup have changed, $isYouth boolean parameter has changed to $sourceSystem string parameter, use HTMatch constants to set the value for your lineup
+
+ * Remove isYouth() function in HTSetLineup class
+
+ * Functions getMatchOrders(), clearMatchOrders() and clearMatchesOrders() in CHPPConnection is marked as deprecated. Will be removed within next version
+
+
 Version 2.12 [2012-03-10]
 -------------------------
 
