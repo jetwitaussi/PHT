@@ -2,6 +2,12 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.13.1 [2012-04-13]
+---------------------------
+
+ * Fix isTrainer() function in HTPlayer class
+
+
 Version 2.13 [2012-04-12]
 -------------------------
 

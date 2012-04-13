@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.13 - 2012-04-12
+ * PHT 2.13.1 - 2012-04-13
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.13
+ * @version 2.13.1
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -14178,7 +14178,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if(!isset($this->isTrainer) || $this->isTrainer === null)
 		{
-			$this->isTrainer = $this->getXml()->getElementsByTagName('TrainerData')->length > 0;
+			$this->isTrainer = $this->getXml()->getElementsByTagName('TrainerData')->item(0)->hasChildNodes();
 		}
 		return $this->isTrainer;
 	}
