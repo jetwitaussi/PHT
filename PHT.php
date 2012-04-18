@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.13.1 - 2012-04-13
+ * PHT 2.13.2 - 2012-04-17
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.13.1
+ * @version 2.13.2
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -4516,7 +4516,7 @@ class HTXml
 	 */
 	public function getXml($asObject = true)
 	{
-		if($this->xml === null || @$this->xml->saveXML() === false)
+		if($this->xml === null || @$this->xml->saveXML() === null)
 		{
 			$this->xml = new DOMDocument('1.0', 'UTF-8');
 			$this->xml->loadXML($this->xmlText);
@@ -8391,7 +8391,7 @@ class HTYouthScoutComment extends HTXml
 class HTYouthPlayerSkill extends HTXml
 {
 	/**
-	 * @param DOMElement $xml
+	 * @param DOMDocument $xml
 	 */
 	public function __construct($xml)
 	{

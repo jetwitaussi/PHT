@@ -2,6 +2,12 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.13.2 [2012-04-17]
+---------------------------
+
+* Fix getXml() function in HTXml class
+
+
 Version 2.13.1 [2012-04-13]
 ---------------------------
 
