@@ -2,6 +2,15 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.13.3 [2012-04-24]
+---------------------------
+
+ * New getPlayerTypeSearch() and getLastCallDate() functions in HTYouthScout class
+
+ * Fix HTYouthPlayer class
+ * Fix getYouthPlayer() function in HTYouthTeamPlayers class
+
+
 Version 2.13.2 [2012-04-17]
 ---------------------------
 

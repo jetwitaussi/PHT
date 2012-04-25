@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.13.2 - 2012-04-17
+ * PHT 2.13.3 - 2012-04-24
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.13.2
+ * @version 2.13.3
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -7162,6 +7162,25 @@ class HTYouthScout extends HTXml
 	}
 
 	/**
+	 * Return last call date
+	 *
+	 * @param String $format (php date() function format)
+	 * @return String
+	 */
+	public function getLastCallDate($format = null)
+	{
+		if(!isset($this->lastCall[$format]) || $this->lastCall[$format] === null)
+		{
+			$this->lastCall[$format] = $this->getXml()->getElementsByTagName('LastCalled')->item(0)->nodeValue;
+			if($format !== null)
+			{
+				$this->lastCall[$format] = HTFunction::convertDate($this->lastCall[$format], $format);
+			}
+		}
+		return $this->lastCall[$format];
+	}
+
+	/**
 	 * Return if scout is in travel
 	 *
 	 * @return Boolean
@@ -7225,6 +7244,20 @@ class HTYouthScout extends HTXml
 		}
 		return $this->travelType;
 	}
+
+	/**
+	 * Return player type search
+	 *
+	 * @return Integer
+	 */
+	public function getPlayerTypeSearch()
+	{
+		if(!isset($this->typeSearch) || $this->typeSearch === null)
+		{
+			$this->typeSearch = $this->getXml()->getElementsByTagName('PlayerTypeSearch')->item(0)->nodeValue;
+		}
+		return $this->typeSearch;
+	}
 }
 class HTYouthTeamPlayers extends HTGlobal
 {
@@ -7265,14 +7298,14 @@ class HTYouthTeamPlayers extends HTGlobal
 				$nodeList = $xpath->query('//YouthPlayer');
 				$youth = new DOMDocument('1.0', 'UTF-8');
 				$youth->appendChild($youth->importNode($nodeList->item($number), true));
-				$this->players[$number] = new HTYouthPlayer($youth);
+				$this->players[$number] = new HTYouthPlayer($youth->saveXML());
 			}
 			return $this->players[$number];
 		}
 		return null;
 	}
 }
-class HTYouthPlayer extends HTXml
+class HTYouthPlayer extends HTGlobal
 {
 	private $hasDetails = null;
 	private $id = null;
@@ -7316,16 +7349,6 @@ class HTYouthPlayer extends HTXml
 	private $passingskillmax = null;
 	private $setpiecesskill = null;
 	private $setpiecesskillmax = null;
-
-	/**
-	 * @param DOMDocument $xml
-	 * @param Boolean $details
-	 */
-	public function __construct($xml)
-	{
-		$this->xmlText = $xml->saveXML();
-		$this->xml = $xml;
-	}
 
 	/**
 	 * Return if details are available
