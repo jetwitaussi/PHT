@@ -1,0 +1,7 @@
+PHPUnit tests for PHT
+
+Tested with PHPUnit 3.6.10
+
+Launch: phpunit PHT/tests/
+
+To write your own tests, put your xml files into tests/xml/ folder and use PHT classes to test without CHPP connection.

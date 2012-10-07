@@ -1,0 +1,1593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HattrickData>
+  <FileName>teamdetails.xml</FileName>
+  <Version>2.6</Version>
+  <UserID>653581</UserID>
+  <FetchedDate>2012-03-06 22:02:03</FetchedDate>
+  <User>
+    <UserID>653581</UserID>
+    <Language>
+      <LanguageID>5</LanguageID>
+      <LanguageName>Français</LanguageName>
+    </Language>
+    <HasSupporter>True</HasSupporter>
+    <Loginname>CHPP-teles</Loginname>
+    <Name>HIDDEN</Name>
+    <ICQ></ICQ>
+    <SignupDate>2003-10-06 16:36:38</SignupDate>
+    <ActivationDate>2003-10-28 03:46:00</ActivationDate>
+    <LastLoginDate>2012-03-06 18:54:33</LastLoginDate>
+    <NationalTeamCoach>
+      <NationalTeam Index="0">
+        <NationalTeamID>3004</NationalTeamID>
+        <NationalTeamName>France</NationalTeamName>
+      </NationalTeam>
+    </NationalTeamCoach>
+  </User>
+  <Team>
+    <TeamID>176295</TeamID>
+    <TeamName>CPAM FC</TeamName>
+    <ShortTeamName>CPAM</ShortTeamName>
+    <Arena>
+      <ArenaID>176295</ArenaID>
+      <ArenaName>16 rue de Lausanne</ArenaName>
+    </Arena>
+    <League>
+      <LeagueID>5</LeagueID>
+      <LeagueName>France</LeagueName>
+    </League>
+    <Region>
+      <RegionID>129</RegionID>
+      <RegionName>Alsace</RegionName>
+    </Region>
+    <Trainer>
+      <PlayerID>109499810</PlayerID>
+    </Trainer>
+    <HomePage>http://www.htloto.org</HomePage>
+    <DressURI>http://res.hattrick.org/kits/11/102/1019/1018938/matchKitSmall.png</DressURI>
+    <DressAlternateURI>http://res.hattrick.org/kits/9/81/805/804563/matchKitSmall.png</DressAlternateURI>
+    <LeagueLevelUnit>
+      <LeagueLevelUnitID>36407</LeagueLevelUnitID>
+      <LeagueLevelUnitName>VI.419</LeagueLevelUnitName>
+      <LeagueLevel>6</LeagueLevel>
+    </LeagueLevelUnit>
+    <BotStatus>
+      <IsBot>False</IsBot>
+    </BotStatus>
+    <Cup>
+      <StillInCup>False</StillInCup>
+    </Cup>
+    <FriendlyTeamID>175919</FriendlyTeamID>
+    <NumberOfVictories>3</NumberOfVictories>
+    <NumberOfUndefeated>4</NumberOfUndefeated>
+    <TeamRank>7054</TeamRank>
+    <Fanclub>
+      <FanclubID>63884</FanclubID>
+      <FanclubName>L'ancien club D5</FanclubName>
+      <FanclubSize>1870</FanclubSize>
+    </Fanclub>
+    <LogoURL>http://res.hattrick.org/teamlogo/2/18/177/176295/176295.png</LogoURL>
+    <Guestbook>
+      <NumberOfGuestbookItems>2236</NumberOfGuestbookItems>
+    </Guestbook>
+    <PressAnnouncement>
+      <Subject>Les caisses sont vides</Subject>
+      <Body>La défaite de ce soir révèle l'état du club</Body>
+      <SendDate>2012-03-03 23:13:00</SendDate>
+    </PressAnnouncement>
+    <YouthTeamID>0</YouthTeamID>
+    <YouthTeamName></YouthTeamName>
+    <NumberOfVisits>2</NumberOfVisits>
+    <Flags>
+      <AwayFlags>
+        <Flag>
+          <LeagueId>5</LeagueId>
+          <LeagueName>France</LeagueName>
+          <CountryCode>FR</CountryCode>
+        </Flag>
+      </AwayFlags>
+      <HomeFlags>
+        <Flag>
+          <LeagueId>77</LeagueId>
+          <LeagueName>Al Maghrib</LeagueName>
+          <CountryCode>MO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>106</LeagueId>
+          <LeagueName>Al Urdun</LeagueName>
+          <CountryCode>JO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>118</LeagueId>
+          <LeagueName>Algérie</LeagueName>
+          <CountryCode>DZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>105</LeagueId>
+          <LeagueName>Andorra</LeagueName>
+          <CountryCode>AD</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>7</LeagueId>
+          <LeagueName>Argentina</LeagueName>
+          <CountryCode>AR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>129</LeagueId>
+          <LeagueName>Azərbaycan</LeagueName>
+          <CountryCode>AZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>123</LeagueId>
+          <LeagueName>Bahrain</LeagueName>
+          <CountryCode>BH</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>91</LeagueId>
+          <LeagueName>Belarus</LeagueName>
+          <CountryCode>BY</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>44</LeagueId>
+          <LeagueName>Belgium</LeagueName>
+          <CountryCode>BE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>74</LeagueId>
+          <LeagueName>Bolivia</LeagueName>
+          <CountryCode>BO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>69</LeagueId>
+          <LeagueName>Bosna i Hercegovina</LeagueName>
+          <CountryCode>BA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>16</LeagueId>
+          <LeagueName>Brasil</LeagueName>
+          <CountryCode>BR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>136</LeagueId>
+          <LeagueName>Brunei</LeagueName>
+          <CountryCode>BN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>62</LeagueId>
+          <LeagueName>Bulgaria</LeagueName>
+          <CountryCode>BG</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>125</LeagueId>
+          <LeagueName>Cabo Verde</LeagueName>
+          <CountryCode>CV</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>17</LeagueId>
+          <LeagueName>Canada</LeagueName>
+          <CountryCode>CA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>52</LeagueId>
+          <LeagueName>Česká republika</LeagueName>
+          <CountryCode>CZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>18</LeagueId>
+          <LeagueName>Chile</LeagueName>
+          <CountryCode>CL</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>34</LeagueId>
+          <LeagueName>China</LeagueName>
+          <CountryCode>CN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>60</LeagueId>
+          <LeagueName>Chinese Taipei</LeagueName>
+          <CountryCode>TW</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>19</LeagueId>
+          <LeagueName>Colombia</LeagueName>
+          <CountryCode>CO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>81</LeagueId>
+          <LeagueName>Costa Rica</LeagueName>
+          <CountryCode>CR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>131</LeagueId>
+          <LeagueName>Crna Gora</LeagueName>
+          <CountryCode>ME</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>61</LeagueId>
+          <LeagueName>Cymru</LeagueName>
+          <CountryCode>GB</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>89</LeagueId>
+          <LeagueName>Cyprus</LeagueName>
+          <CountryCode>CY</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>11</LeagueId>
+          <LeagueName>Danmark</LeagueName>
+          <CountryCode>DK</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>141</LeagueId>
+          <LeagueName>Dawlat Qatar</LeagueName>
+          <CountryCode>QA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>3</LeagueId>
+          <LeagueName>Deutschland</LeagueName>
+          <CountryCode>DE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>144</LeagueId>
+          <LeagueName>Dhivehi Raajje</LeagueName>
+          <CountryCode>MV</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>73</LeagueId>
+          <LeagueName>Ecuador</LeagueName>
+          <CountryCode>EC</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>56</LeagueId>
+          <LeagueName>Eesti</LeagueName>
+          <CountryCode>EE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>100</LeagueId>
+          <LeagueName>El Salvador</LeagueName>
+          <CountryCode>SV</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>2</LeagueId>
+          <LeagueName>England</LeagueName>
+          <CountryCode>GB</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>36</LeagueId>
+          <LeagueName>España</LeagueName>
+          <CountryCode>ES</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>76</LeagueId>
+          <LeagueName>Føroyar</LeagueName>
+          <CountryCode>FO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>5</LeagueId>
+          <LeagueName>France</LeagueName>
+          <CountryCode>FR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>137</LeagueId>
+          <LeagueName>Ghana</LeagueName>
+          <CountryCode>GH</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>107</LeagueId>
+          <LeagueName>Guatemala</LeagueName>
+          <CountryCode>GT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>30</LeagueId>
+          <LeagueName>Hanguk</LeagueName>
+          <CountryCode>KR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>122</LeagueId>
+          <LeagueName>Hayastan</LeagueName>
+          <CountryCode>AM</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>50</LeagueId>
+          <LeagueName>Hellas</LeagueName>
+          <CountryCode>GR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>99</LeagueId>
+          <LeagueName>Honduras</LeagueName>
+          <CountryCode>HN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>59</LeagueId>
+          <LeagueName>Hong Kong</LeagueName>
+          <CountryCode>HK</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>58</LeagueId>
+          <LeagueName>Hrvatska</LeagueName>
+          <CountryCode>HR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>20</LeagueId>
+          <LeagueName>India</LeagueName>
+          <CountryCode>IN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>54</LeagueId>
+          <LeagueName>Indonesia</LeagueName>
+          <CountryCode>ID</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>85</LeagueId>
+          <LeagueName>Iran</LeagueName>
+          <CountryCode>IR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>21</LeagueId>
+          <LeagueName>Ireland</LeagueName>
+          <CountryCode>IE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>38</LeagueId>
+          <LeagueName>Ísland</LeagueName>
+          <CountryCode>IS</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>63</LeagueId>
+          <LeagueName>Israel</LeagueName>
+          <CountryCode>IL</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>4</LeagueId>
+          <LeagueName>Italia</LeagueName>
+          <CountryCode>IT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>94</LeagueId>
+          <LeagueName>Jamaica</LeagueName>
+          <CountryCode>JM</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>112</LeagueId>
+          <LeagueName>Kazakhstan</LeagueName>
+          <CountryCode>KZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>95</LeagueId>
+          <LeagueName>Kenya</LeagueName>
+          <CountryCode>KE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>102</LeagueId>
+          <LeagueName>Kyrgyzstan</LeagueName>
+          <CountryCode>KG</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>53</LeagueId>
+          <LeagueName>Latvija</LeagueName>
+          <CountryCode>LV</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>84</LeagueId>
+          <LeagueName>Lëtzebuerg</LeagueName>
+          <CountryCode>LU</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>117</LeagueId>
+          <LeagueName>Liechtenstein</LeagueName>
+          <CountryCode>LI</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>66</LeagueId>
+          <LeagueName>Lietuva</LeagueName>
+          <CountryCode>LT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>120</LeagueId>
+          <LeagueName>Lubnan</LeagueName>
+          <CountryCode>LB</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>51</LeagueId>
+          <LeagueName>Magyarország</LeagueName>
+          <CountryCode>HU</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>97</LeagueId>
+          <LeagueName>Makedonija</LeagueName>
+          <CountryCode>MK</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>45</LeagueId>
+          <LeagueName>Malaysia</LeagueName>
+          <CountryCode>MY</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>101</LeagueId>
+          <LeagueName>Malta</LeagueName>
+          <CountryCode>MT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>6</LeagueId>
+          <LeagueName>México</LeagueName>
+          <CountryCode>MX</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>33</LeagueId>
+          <LeagueName>Misr</LeagueName>
+          <CountryCode>EG</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>135</LeagueId>
+          <LeagueName>Moçambique</LeagueName>
+          <CountryCode>MZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>103</LeagueId>
+          <LeagueName>Moldova</LeagueName>
+          <CountryCode>MD</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>14</LeagueId>
+          <LeagueName>Nederland</LeagueName>
+          <CountryCode>NL</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>111</LeagueId>
+          <LeagueName>Nicaragua</LeagueName>
+          <CountryCode>NI</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>75</LeagueId>
+          <LeagueName>Nigeria</LeagueName>
+          <CountryCode>NG</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>22</LeagueId>
+          <LeagueName>Nippon</LeagueName>
+          <CountryCode>JP</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>9</LeagueId>
+          <LeagueName>Norge</LeagueName>
+          <CountryCode>NO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>93</LeagueId>
+          <LeagueName>Northern Ireland</LeagueName>
+          <CountryCode>GB</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>145</LeagueId>
+          <LeagueName>O’zbekiston</LeagueName>
+          <CountryCode>UZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>15</LeagueId>
+          <LeagueName>Oceania</LeagueName>
+          <CountryCode>AU</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>39</LeagueId>
+          <LeagueName>Österreich</LeagueName>
+          <CountryCode>AT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>71</LeagueId>
+          <LeagueName>Pakistan</LeagueName>
+          <CountryCode>PK</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>96</LeagueId>
+          <LeagueName>Panamá</LeagueName>
+          <CountryCode>PA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>72</LeagueId>
+          <LeagueName>Paraguay</LeagueName>
+          <CountryCode>PY</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>23</LeagueId>
+          <LeagueName>Perú</LeagueName>
+          <CountryCode>PE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>55</LeagueId>
+          <LeagueName>Pilipinas</LeagueName>
+          <CountryCode>PH</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>24</LeagueId>
+          <LeagueName>Polska</LeagueName>
+          <CountryCode>PL</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>25</LeagueId>
+          <LeagueName>Portugal</LeagueName>
+          <CountryCode>PT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>31</LeagueId>
+          <LeagueName>Prathet Thai</LeagueName>
+          <CountryCode>TH</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>88</LeagueId>
+          <LeagueName>República Dominicana</LeagueName>
+          <CountryCode>DO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>37</LeagueId>
+          <LeagueName>România</LeagueName>
+          <CountryCode>RO</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>35</LeagueId>
+          <LeagueName>Rossiya</LeagueName>
+          <CountryCode>RU</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>104</LeagueId>
+          <LeagueName>Sakartvelo</LeagueName>
+          <CountryCode>GE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>79</LeagueId>
+          <LeagueName>Saudi Arabia</LeagueName>
+          <CountryCode>SA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>46</LeagueId>
+          <LeagueName>Schweiz</LeagueName>
+          <CountryCode>CH</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>26</LeagueId>
+          <LeagueName>Scotland</LeagueName>
+          <CountryCode>GB</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>121</LeagueId>
+          <LeagueName>Sénégal</LeagueName>
+          <CountryCode>SN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>98</LeagueId>
+          <LeagueName>Shqipëria</LeagueName>
+          <CountryCode>AL</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>47</LeagueId>
+          <LeagueName>Singapore</LeagueName>
+          <CountryCode>SG</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>64</LeagueId>
+          <LeagueName>Slovenija</LeagueName>
+          <CountryCode>SI</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>67</LeagueId>
+          <LeagueName>Slovensko</LeagueName>
+          <CountryCode>SK</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>27</LeagueId>
+          <LeagueName>South Africa</LeagueName>
+          <CountryCode>ZA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>57</LeagueId>
+          <LeagueName>Srbija</LeagueName>
+          <CountryCode>RS</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>12</LeagueId>
+          <LeagueName>Suomi</LeagueName>
+          <CountryCode>FI</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>113</LeagueId>
+          <LeagueName>Suriname</LeagueName>
+          <CountryCode>SR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>1</LeagueId>
+          <LeagueName>Sverige</LeagueName>
+          <CountryCode>SE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>142</LeagueId>
+          <LeagueName>Tanzania</LeagueName>
+          <CountryCode>TZ</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>80</LeagueId>
+          <LeagueName>Tounes</LeagueName>
+          <CountryCode>TN</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>110</LeagueId>
+          <LeagueName>Trinidad &amp; Tobago</LeagueName>
+          <CountryCode>TT</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>32</LeagueId>
+          <LeagueName>Türkiye</LeagueName>
+          <CountryCode>TR</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>68</LeagueId>
+          <LeagueName>Ukraina</LeagueName>
+          <CountryCode>UA</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>83</LeagueId>
+          <LeagueName>United Arab Emirates</LeagueName>
+          <CountryCode>AE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>28</LeagueId>
+          <LeagueName>Uruguay</LeagueName>
+          <CountryCode>UY</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>8</LeagueId>
+          <LeagueName>USA</LeagueName>
+          <CountryCode>US</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>29</LeagueId>
+          <LeagueName>Venezuela</LeagueName>
+          <CountryCode>VE</CountryCode>
+        </Flag>
+        <Flag>
+          <LeagueId>70</LeagueId>
+          <LeagueName>Việt Nam</LeagueName>
+          <CountryCode>VN</CountryCode>
+        </Flag>
+      </HomeFlags>
+    </Flags>
+    <TrophyList>
+      <Trophy>
+        <TrophyTypeId>17</TrophyTypeId>
+        <TrophySeason>36</TrophySeason>
+        <LeagueLevel>5</LeagueLevel>
+        <LeagueLevelUnitName>V.68</LeagueLevelUnitName>
+        <GainedDate>2008-09-27 04:25:00</GainedDate>
+        <ImageUrl>/App_Themes/Standard/Images/Trophies/v.png</ImageUrl>
+      </Trophy>
+      <Trophy>
+        <TrophyTypeId>17</TrophyTypeId>
+        <TrophySeason>33</TrophySeason>
+        <LeagueLevel>5</LeagueLevel>
+        <LeagueLevelUnitName>V.167</LeagueLevelUnitName>
+        <GainedDate>2007-10-27 05:46:00</GainedDate>
+        <ImageUrl>/App_Themes/Standard/Images/Trophies/v.png</ImageUrl>
+      </Trophy>
+      <Trophy>
+        <TrophyTypeId>17</TrophyTypeId>
+        <TrophySeason>25</TrophySeason>
+        <LeagueLevel>5</LeagueLevel>
+        <LeagueLevelUnitName>V.240</LeagueLevelUnitName>
+        <GainedDate>2005-05-14 02:38:00</GainedDate>
+        <ImageUrl>/App_Themes/Standard/Images/Trophies/v.png</ImageUrl>
+      </Trophy>
+      <Trophy>
+        <TrophyTypeId>17</TrophyTypeId>
+        <TrophySeason>24</TrophySeason>
+        <LeagueLevel>5</LeagueLevel>
+        <LeagueLevelUnitName>V.240</LeagueLevelUnitName>
+        <GainedDate>2005-01-22 02:36:00</GainedDate>
+        <ImageUrl>/App_Themes/Standard/Images/Trophies/v.png</ImageUrl>
+      </Trophy>
+    </TrophyList>
+    <SupportedTeams>
+      <SupportedTeam>
+        <UserId>967085</UserId>
+        <LoginName>_obe_</LoginName>
+        <TeamId>293814</TeamId>
+        <TeamName>lokomotiv secu</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>36215</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.227</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370344750</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>293814</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>lokomotiv secu</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>2</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>962440</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>PyRoX Strasbourg</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377227040</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:25:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>360418</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>lokomotiv secu</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>360418</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Bovenkarspel Diamonds</NextMatchAwayTeamName>
+        </NextMatch>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>500813</UserId>
+        <LoginName>--JA--</LoginName>
+        <TeamId>176828</TeamId>
+        <TeamName>axium</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>5485</LeagueLevelUnitID>
+        <LeagueLevelUnitName>IV.36</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370316123</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>176828</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>axium</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>4</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>592479</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>US Putanges</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377108923</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>176828</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>tim olympique</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>176828</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>axium</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-01-22 02:40:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>eau de boudin</PressAnnouncementSubject>
+          <PressAnnouncementBody>une match préparé depuis 3 semaines</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>838632</UserId>
+        <LoginName>Golyath</LoginName>
+        <TeamId>176664</TeamId>
+        <TeamName>INRIATeam</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>723</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.16</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370314112</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>960595</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Torpedo Raphèle</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>5</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>176664</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>INRIATeam</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377108802</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>176664</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Silverteam95150</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>176664</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>INRIATeam</NextMatchAwayTeamName>
+        </NextMatch>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>7919546</UserId>
+        <LoginName>Max-67</LoginName>
+        <TeamId>1752333</TeamId>
+        <TeamName>Willgottheim</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>73730</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.915</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370440634</LastMatchId>
+          <LastMatchDate>2012-03-03 21:10:00</LastMatchDate>
+          <LastMatchHomeTeamId>298286</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>patate power</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>1</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1752333</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Willgottheim</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>2</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377170371</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:20:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>697119</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Willgottheim</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>697119</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Tobosarii</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-26 22:14:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>1ère journée</PressAnnouncementSubject>
+          <PressAnnouncementBody>on va essayer de pas prendre trop de but lol</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>7921358</UserId>
+        <LoginName>babar67</LoginName>
+        <TeamId>1752832</TeamId>
+        <TeamName>les Suffers</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>36858</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.870</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370380772</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1752832</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>les Suffers</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>6</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>964413</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Ici C VAFC2</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377170030</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:20:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1083153</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>les Suffers</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1083153</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Jw.Stalker</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2010-05-08 22:56:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>; - {</PressAnnouncementSubject>
+          <PressAnnouncementBody>Une bonne claque sa fait toujours du bien</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>5955103</UserId>
+        <LoginName>papou57</LoginName>
+        <TeamId>1752249</TeamId>
+        <TeamName>PAPOU TEAM</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>36407</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.419</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370355515</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1762404</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Racing Club Lagardais</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>0</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1752249</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>PAPOU TEAM</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377107564</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:05:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1763983</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>PAPOU TEAM</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1763983</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>LEGE CAP FERRET</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2011-12-24 14:58:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Bonnes Fêtes</PressAnnouncementSubject>
+          <PressAnnouncementBody>Bonnes Fêtes à tous  !!</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>9126184</UserId>
+        <LoginName>judoboy-77</LoginName>
+        <TeamId>960249</TeamId>
+        <TeamName>Geudertheim</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>73200</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.385</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370410953</LastMatchId>
+          <LastMatchDate>2012-03-03 21:10:00</LastMatchDate>
+          <LastMatchHomeTeamId>960249</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Geudertheim</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>4</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>592652</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>u.s sir</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377109690</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>294526</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Geudertheim</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>294526</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Montélimar AS</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2010-11-22 21:28:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject> Nouvelle Saison</PressAnnouncementSubject>
+          <PressAnnouncementBody>Me revoilà et ça va faire mal !!!!!!!!!!!!!!!!!!</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>1186200</UserId>
+        <LoginName>nikios2098</LoginName>
+        <TeamId>295413</TeamId>
+        <TeamName>Festina 2098</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>722</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.15</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370314048</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>295413</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Festina 2098</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>1</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1162208</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>sporting cagoule</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>3</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377108773</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>295413</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>FC Dolphins Patriots</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>295413</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Festina 2098</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2011-01-23 12:09:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>4 blessés en 2 matchs</PressAnnouncementSubject>
+          <PressAnnouncementBody>vivement que Figgest soit plus dans la division , ça coute trop cher de le rencontrer :)</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>604536</UserId>
+        <LoginName>Caranza</LoginName>
+        <TeamId>188418</TeamId>
+        <TeamName>Racing Pelt</TeamName>
+        <LeagueID>44</LeagueID>
+        <LeagueName>Belgium</LeagueName>
+        <LeagueLevelUnitID>8716</LeagueLevelUnitID>
+        <LeagueLevelUnitName>II.2</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>372950122</LastMatchId>
+          <LastMatchDate>2012-03-04 13:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>516188</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>aSTrolABe</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>3</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>188418</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Racing Pelt</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377098125</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 13:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>188418</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>United Merksem</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>188418</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Racing Pelt</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2010-07-25 23:51:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Eerste klasse !</PressAnnouncementSubject>
+          <PressAnnouncementBody>Wat 7 jaar geleden een onbereikbare</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>6972187</UserId>
+        <LoginName>gibbux</LoginName>
+        <TeamId>1728814</TeamId>
+        <TeamName>Carini e Coccolosi</TeamName>
+        <LeagueID>4</LeagueID>
+        <LeagueName>Italia</LeagueName>
+        <LeagueLevelUnitID>737</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.9</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>377030214</LastMatchId>
+          <LastMatchDate>2012-03-06 19:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1910413</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Ac pezz</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>1</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1728814</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Carini e Coccolosi</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>4</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>365990829</NextMatchId>
+          <NextMatchMatchDate>2012-03-10 12:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1735238</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Carini e Coccolosi</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1735238</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Real Beppe F.C.</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-03-03 13:57:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Legnate e ossa rotte.</PressAnnouncementSubject>
+          <PressAnnouncementBody>Sapevamo che era una sfida al limite</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>5578333</UserId>
+        <LoginName>Ann_G_WhyWe</LoginName>
+        <TeamId>976984</TeamId>
+        <TeamName>Grassportfreunde Gantepoth</TeamName>
+        <LeagueID>3</LeagueID>
+        <LeagueName>Deutschland</LeagueName>
+        <LeagueLevelUnitID>6174</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.83</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>377036412</LastMatchId>
+          <LastMatchDate>2012-03-06 18:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1154458</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Kabelhorst</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>1</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>976984</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Grassportfreunde Gantepoth</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>3</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>368748997</NextMatchId>
+          <NextMatchMatchDate>2012-03-10 18:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>976984</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Flensburg YAAR's</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>976984</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Grassportfreunde Gantepoth</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2010-12-22 23:11:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>...</PressAnnouncementSubject>
+          <PressAnnouncementBody>N E W Y E A R 2 0 1 2</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>3885942</UserId>
+        <LoginName>NachoG82</LoginName>
+        <TeamId>1029304</TeamId>
+        <TeamName>Córdoba Atletico Club</TeamName>
+        <LeagueID>7</LeagueID>
+        <LeagueName>Argentina</LeagueName>
+        <LeagueLevelUnitID>349</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.3</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>375234398</LastMatchId>
+          <LastMatchDate>2012-03-04 22:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>445757</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Homer Jay</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>3</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1029304</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Córdoba Atletico Club</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>2</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377162517</NextMatchId>
+          <NextMatchMatchDate>2012-03-08 01:30:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1029304</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Deserius F.C.</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1029304</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Córdoba Atletico Club</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-14 16:23:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Bienvenido Angelito!!!</PressAnnouncementSubject>
+          <PressAnnouncementBody>El club está orgulloso de anunciar</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>9433555</UserId>
+        <LoginName>Superbots</LoginName>
+        <TeamId>974551</TeamId>
+        <TeamName>Italian champions</TeamName>
+        <LeagueID>18</LeagueID>
+        <LeagueName>Chile</LeagueName>
+        <LeagueLevelUnitID>35564</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.600</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>375655851</LastMatchId>
+          <LastMatchDate>2012-03-04 22:40:00</LastMatchDate>
+          <LastMatchHomeTeamId>968495</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Xmegma Team</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>0</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>974551</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Italian champions</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>3</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377149567</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 22:40:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>974551</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Llay-Llay FC</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>974551</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Italian champions</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-14 20:25:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>What the fck happened?!?</PressAnnouncementSubject>
+          <PressAnnouncementBody>Como fue que terminamos la primera parte</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>1282619</UserId>
+        <LoginName>Cokmen</LoginName>
+        <TeamId>337007</TeamId>
+        <TeamName>LauternPikes</TeamName>
+        <LeagueID>3</LeagueID>
+        <LeagueName>Deutschland</LeagueName>
+        <LeagueLevelUnitID>15607</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.265</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>377216148</LastMatchId>
+          <LastMatchDate>2012-03-06 18:30:00</LastMatchDate>
+          <LastMatchHomeTeamId>337007</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>LauternPikes</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>3</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>458335</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Suzuki F.C</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>368773532</NextMatchId>
+          <NextMatchMatchDate>2012-03-10 18:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1289992</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>LauternPikes</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1289992</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>SV Klein Belitz 2</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-01-21 22:37:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>OMG !</PressAnnouncementSubject>
+          <PressAnnouncementBody>i can't believe that</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>6001516</UserId>
+        <LoginName>Schwager</LoginName>
+        <TeamId>1141508</TeamId>
+        <TeamName>Sturmvogel Oberhavel e.V.</TeamName>
+        <LeagueID>3</LeagueID>
+        <LeagueName>Deutschland</LeagueName>
+        <LeagueLevelUnitID>6181</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.90</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>368749391</LastMatchId>
+          <LastMatchDate>2012-03-03 18:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1141508</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Sturmvogel Oberhavel e.V.</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>2</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>334223</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>FC Sydslesvig Flensburg 08</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>4</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377170015</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 08:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1141508</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>real_madriddddddd</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1141508</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Sturmvogel Oberhavel e.V.</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2010-10-21 20:11:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>European Championship 2012</PressAnnouncementSubject>
+          <PressAnnouncementBody>EVERY FRIEND IS WELCOME !</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>1325602</UserId>
+        <LoginName>Izozimo</LoginName>
+        <TeamId>101955</TeamId>
+        <TeamName>Rivercastle FC</TeamName>
+        <LeagueID>1</LeagueID>
+        <LeagueName>Sverige</LeagueName>
+        <LeagueLevelUnitID>160</LeagueLevelUnitID>
+        <LeagueLevelUnitName>IV.75</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>372552268</LastMatchId>
+          <LastMatchDate>2012-03-04 10:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>101955</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Rivercastle FC</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>3</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>9642</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Industrisektionen FC</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377135694</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 19:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>101955</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>BK Stenhårt</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>101955</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Rivercastle FC</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2011-10-16 14:19:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Vi vann!</PressAnnouncementSubject>
+          <PressAnnouncementBody>Skytteligan!</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>256786</UserId>
+        <LoginName>CHPP-Alf</LoginName>
+        <TeamId>47201</TeamId>
+        <TeamName>Alf Trickers</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>709</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.2</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370313326</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>47201</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Alf Trickers</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>0</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1751122</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>AS LE HAILLAN</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>2</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377108775</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>47201</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>team kawasaki</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>47201</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Alf Trickers</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-20 14:58:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Saison 48 : 8 ans de Hattrick</PressAnnouncementSubject>
+          <PressAnnouncementBody>Ca nous rajeunit pas tout ça.</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>7158679</UserId>
+        <LoginName>Freejag</LoginName>
+        <TeamId>853414</TeamId>
+        <TeamName>Atletico Giaguaro</TeamName>
+        <LeagueID>4</LeagueID>
+        <LeagueName>Italia</LeagueName>
+        <LeagueLevelUnitID>68086</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.455</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>377032194</LastMatchId>
+          <LastMatchDate>2012-03-06 19:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>853414</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Atletico Giaguaro</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>3</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1171751</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Futatsu_no_biiru</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>366165424</NextMatchId>
+          <NextMatchMatchDate>2012-03-10 12:30:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1728632</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Atletico Giaguaro</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1728632</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>collegno</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-20 17:41:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>GIAGUARO'S WORLD TOUR - Season 48</PressAnnouncementSubject>
+          <PressAnnouncementBody>First of all, great result</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>9202189</UserId>
+        <LoginName>horb_03</LoginName>
+        <TeamId>1155570</TeamId>
+        <TeamName>1. FC Mühltroff</TeamName>
+        <LeagueID>3</LeagueID>
+        <LeagueName>Deutschland</LeagueName>
+        <LeagueLevelUnitID>142174</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VIII.1495</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>368957091</LastMatchId>
+          <LastMatchDate>2012-03-03 18:20:00</LastMatchDate>
+          <LastMatchHomeTeamId>1155570</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>1. FC Mühltroff</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>2</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>824385</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>FV Dietrichingen</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377245147</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 06:15:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1155570</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Black Panthers Karachi</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1155570</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>1. FC Mühltroff</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>0001-01-01 00:00:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject />
+          <PressAnnouncementBody />
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>7607888</UserId>
+        <LoginName>Mugen-</LoginName>
+        <TeamId>1755446</TeamId>
+        <TeamName>Aasgard</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>21783</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.207</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>370329286</LastMatchId>
+          <LastMatchDate>2012-03-03 21:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1755446</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Aasgard</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>4</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>961589</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>saint-ètienne 77</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377109748</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 15:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1755446</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>stanic</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1755446</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Aasgard</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-25 00:37:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Et les finances ?</PressAnnouncementSubject>
+          <PressAnnouncementBody>L'audit du club réalisé cette semaine a clairement montré qu'Aasgard avait changé d'époque.</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>8831801</UserId>
+        <LoginName>RUKENT</LoginName>
+        <TeamId>1739099</TeamId>
+        <TeamName>Spartak SPb</TeamName>
+        <LeagueID>35</LeagueID>
+        <LeagueName>Rossiya</LeagueName>
+        <LeagueLevelUnitID>76727</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.248</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>371676752</LastMatchId>
+          <LastMatchDate>2012-03-04 08:30:00</LastMatchDate>
+          <LastMatchHomeTeamId>1739099</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Spartak SPb</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>7</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1743937</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>ZenitPeterburg</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>1</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377070025</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 08:30:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1739264</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Spartak SPb</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1739264</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>fc eastside moscow</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-06 18:29:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Первое серебро в пятёрке!</PressAnnouncementSubject>
+          <PressAnnouncementBody>После вчерашней победы над</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>605428</UserId>
+        <LoginName>Sigi1</LoginName>
+        <TeamId>248441</TeamId>
+        <TeamName>BSC Newcastle United</TeamName>
+        <LeagueID>46</LeagueID>
+        <LeagueName>Schweiz</LeagueName>
+        <LeagueLevelUnitID>31019</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.975</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>369368781</LastMatchId>
+          <LastMatchDate>2012-03-03 17:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1490968</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>_*Worldstars*_</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>2</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>248441</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>BSC Newcastle United</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377208655</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 23:40:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>248441</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Managua FC</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>248441</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>BSC Newcastle United</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-02-16 10:20:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Friendlys Saison 34 (Switzerland)</PressAnnouncementSubject>
+          <PressAnnouncementBody>1: Cup</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>8865479</UserId>
+        <LoginName>KingHagi</LoginName>
+        <TeamId>1061920</TeamId>
+        <TeamName>CS Laguna</TeamName>
+        <LeagueID>37</LeagueID>
+        <LeagueName>România</LeagueName>
+        <LeagueLevelUnitID>22469</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.509</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>365284318</LastMatchId>
+          <LastMatchDate>2012-03-03 10:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>694797</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>GENK-SQUAD</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>6</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1061920</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>CS Laguna</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377266206</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 10:00:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>987495</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>CS Laguna</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>987495</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Salina FC</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2011-07-08 19:38:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>Best Flags</PressAnnouncementSubject>
+          <PressAnnouncementBody>This federation wants to help all of you</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+      <SupportedTeam>
+        <UserId>6801818</UserId>
+        <LoginName>Icelandy</LoginName>
+        <TeamId>1175812</TeamId>
+        <TeamName>Fc Svartakaffid</TeamName>
+        <LeagueID>4</LeagueID>
+        <LeagueName>Italia</LeagueName>
+        <LeagueLevelUnitID>28772</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.71</LeagueLevelUnitName>
+        <LastMatch>
+          <LastMatchId>366035319</LastMatchId>
+          <LastMatchDate>2012-03-03 12:00:00</LastMatchDate>
+          <LastMatchHomeTeamId>1910187</LastMatchHomeTeamId>
+          <LastMatchHomeTeamName>Con la Fede e con l'Ardore</LastMatchHomeTeamName>
+          <LastMatchHomeGoals>4</LastMatchHomeGoals>
+          <LastMatchAwayTeamId>1175812</LastMatchAwayTeamId>
+          <LastMatchAwayTeamName>Fc Svartakaffid</LastMatchAwayTeamName>
+          <LastMatchAwayGoals>0</LastMatchAwayGoals>
+        </LastMatch>
+        <NextMatch>
+          <NextMatchId>377221390</NextMatchId>
+          <NextMatchMatchDate>2012-03-07 16:10:00</NextMatchMatchDate>
+          <NextMatchHomeTeamId>1175812</NextMatchHomeTeamId>
+          <NextMatchHomeTeamName>Doha Emirates</NextMatchHomeTeamName>
+          <NextMatchAwayTeamId>1175812</NextMatchAwayTeamId>
+          <NextMatchAwayTeamName>Fc Svartakaffid</NextMatchAwayTeamName>
+        </NextMatch>
+        <PressAnnouncement>
+          <PressAnnouncementSendDate>2012-01-16 12:16:00</PressAnnouncementSendDate>
+          <PressAnnouncementSubject>+100 for flag</PressAnnouncementSubject>
+          <PressAnnouncementBody>Welcome in +100 for flag</PressAnnouncementBody>
+        </PressAnnouncement>
+      </SupportedTeam>
+    </SupportedTeams>
+    <MySupporters>
+      <SupporterTeam>
+        <UserId>11196534</UserId>
+        <LoginName>Llalundo</LoginName>
+        <TeamId>629715</TeamId>
+        <TeamName>PesFc Kawa Llalundo</TeamName>
+        <LeagueID>46</LeagueID>
+        <LeagueName>Schweiz</LeagueName>
+        <LeagueLevelUnitID>30476</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.432</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>7607888</UserId>
+        <LoginName>Mugen-</LoginName>
+        <TeamId>1755446</TeamId>
+        <TeamName>Aasgard</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>21783</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.207</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>256786</UserId>
+        <LoginName>CHPP-Alf</LoginName>
+        <TeamId>47201</TeamId>
+        <TeamName>Alf Trickers</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>709</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.2</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>1186200</UserId>
+        <LoginName>nikios2098</LoginName>
+        <TeamId>295413</TeamId>
+        <TeamName>Festina 2098</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>722</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.15</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>423674</UserId>
+        <LoginName>me9mill</LoginName>
+        <TeamId>57432</TeamId>
+        <TeamName>Metheringham Mill FC</TeamName>
+        <LeagueID>2</LeagueID>
+        <LeagueName>England</LeagueName>
+        <LeagueLevelUnitID>515</LeagueLevelUnitID>
+        <LeagueLevelUnitName>II.3</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>3885942</UserId>
+        <LoginName>NachoG82</LoginName>
+        <TeamId>1029304</TeamId>
+        <TeamName>Córdoba Atletico Club</TeamName>
+        <LeagueID>7</LeagueID>
+        <LeagueName>Argentina</LeagueName>
+        <LeagueLevelUnitID>349</LeagueLevelUnitID>
+        <LeagueLevelUnitName>III.3</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>500813</UserId>
+        <LoginName>--JA--</LoginName>
+        <TeamId>176828</TeamId>
+        <TeamName>axium</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>5485</LeagueLevelUnitID>
+        <LeagueLevelUnitName>IV.36</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>9126184</UserId>
+        <LoginName>judoboy-77</LoginName>
+        <TeamId>960249</TeamId>
+        <TeamName>Geudertheim</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>73200</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.385</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>5955103</UserId>
+        <LoginName>papou57</LoginName>
+        <TeamId>1752249</TeamId>
+        <TeamName>PAPOU TEAM</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>36407</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.419</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>7921358</UserId>
+        <LoginName>babar67</LoginName>
+        <TeamId>1752832</TeamId>
+        <TeamName>les Suffers</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>36858</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VI.870</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>7919546</UserId>
+        <LoginName>Max-67</LoginName>
+        <TeamId>1752333</TeamId>
+        <TeamName>Willgottheim</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>73730</LeagueLevelUnitID>
+        <LeagueLevelUnitName>VII.915</LeagueLevelUnitName>
+      </SupporterTeam>
+      <SupporterTeam>
+        <UserId>1763809</UserId>
+        <LoginName>CryssDG</LoginName>
+        <TeamId>586310</TeamId>
+        <TeamName>Bussy Pegases</TeamName>
+        <LeagueID>5</LeagueID>
+        <LeagueName>France</LeagueName>
+        <LeagueLevelUnitID>21603</LeagueLevelUnitID>
+        <LeagueLevelUnitName>V.27</LeagueLevelUnitName>
+      </SupporterTeam>
+    </MySupporters>
+  </Team>
+</HattrickData>
