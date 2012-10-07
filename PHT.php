@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.13.3 - 2012-04-24
+ * PHT 2.14 - 2012-10-07
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.13.3
+ * @version 2.14
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -322,11 +322,10 @@ class CHPPConnection
 	}
 
 	/**
-	 * Returns HTCheckToken object
+	 * Invalidate a token
 	 *
 	 * @param String $oauthToken
 	 * @param String $oauthTokenSecret
-	 * @return HTCheckToken
 	 */
 	public function invalidateToken($oauthToken = null, $oauthTokenSecret = null)
 	{
@@ -398,7 +397,7 @@ class CHPPConnection
 	}
 
 	/**
-	 * @return String
+	 * @return Integer
 	 */
 	protected function getTimestamp()
 	{
@@ -475,7 +474,7 @@ class CHPPConnection
 	}
 
 	/**
-	 * Urlencode paramters properly for oauth query
+	 * Urlencode parameters properly for oauth query
 	 *
 	 * @param Array|String $input
 	 * @return String
@@ -553,6 +552,24 @@ class CHPPConnection
 		{
 			file_put_contents($this->logfile, date("Y-m-d H:i:s ").$text."\n", FILE_APPEND);
 		}
+	}
+
+	/**
+	 * Return if chpp server is available or not
+	 *
+	 * @param Integer $timeout (Timeout in milliseconds)
+	 * @return Boolean
+	 */
+	public function pingChppServer($timeout = 1000)
+	{
+		$curl = curl_init(self::XML_SERVER);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_NOBODY, true);
+		curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
+		curl_setopt($curl, CURLOPT_TIMEOUT_MS, (int)$timeout);
+		$header = curl_exec($curl);
+		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		return ((int)$code) === 200;
 	}
 
 	/**
@@ -1916,13 +1933,13 @@ class CHPPConnection
 	 * Add a match to HT-Live
 	 *
 	 * @param Integer $matchId
-	 * @param Boolean $isYouth
+	 * @param String $sourceSystem
 	 */
-	public function addLiveMatch($matchId, $isYouth = false)
+	public function addLiveMatch($matchId, $sourceSystem = 'hattrick')
 	{
 		if($this->liveNumber < 20)
 		{
-			$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'addMatch', 'matchID'=>$matchId, 'version'=>'1.7', 'isYouth'=>$isYouth));
+			$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'addMatch', 'matchID'=>$matchId, 'version'=>'1.8', 'sourceSystem'=>$sourceSystem));
 			$this->fetchUrl($url);
 			if($this->liveNumber === null)
 			{
@@ -1939,11 +1956,11 @@ class CHPPConnection
 	 * Delete a match in HT-Live
 	 *
 	 * @param Integer $matchId
-	 * @param Boolean $isYouth
+	 * @param String $sourceSystem
 	 */
-	public function deleteLiveMatch($matchId, $isYouth = false)
+	public function deleteLiveMatch($matchId, $sourceSystem = 'hattrick')
 	{
-		$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'deleteMatch', 'matchID'=>$matchId, 'version'=>'1.7', 'isYouth'=>$isYouth));
+		$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'deleteMatch', 'matchID'=>$matchId, 'version'=>'1.8', 'sourceSystem'=>$sourceSystem));
 		$this->fetchUrl($url);
 		$this->liveNumber--;
 		if($this->liveNumber <= 0)
@@ -1958,7 +1975,7 @@ class CHPPConnection
 	 */
 	public function clearAllLiveMatches()
 	{
-		$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'clearAll', 'version'=>'1.7'));
+		$url = $this->buildUrl(array('file'=>'live', 'actionType'=>'clearAll', 'version'=>'1.8'));
 		$this->fetchUrl($url);
 		$this->liveNumber = null;
 		$this->liveJson = null;
@@ -1989,7 +2006,7 @@ class CHPPConnection
 			$action = 'viewAll';
 			$this->liveAllEvents = true;
 		}
-		$params = array('file'=>'live', 'actionType'=>$action, 'version'=>'1.7');
+		$params = array('file'=>'live', 'actionType'=>$action, 'version'=>'1.8');
 		if($includeStartingLineup === true)
 		{
 			$params['includeStartingLineup'] = 'true';
@@ -2007,7 +2024,7 @@ class CHPPConnection
 			$match = $liveObject->getMatch($i);
 			$json[] = array(
 				'matchId' => $match->getId(),
-				'isYouth' => $match->isYouth() ? 'true' : 'false',
+				'sourceSystem' => $match->getSourceSystem(),
 				'index' 	=> $match->getLastEventIndexShown()
 			);
 		}
@@ -15935,6 +15952,11 @@ class HTMatchArena extends HTXml
 	private $name = null;
 	private $weatherId = null;
 	private $spectators = null;
+	private $total = null;
+	private $terraces = null;
+	private $basic = null;
+	private $roof = null;
+	private $vip = null;
 
 	/**
 	 * @param DOMDocument $xml
@@ -15999,6 +16021,78 @@ class HTMatchArena extends HTXml
 			$this->spectators = $this->getXml()->getElementsByTagName('SoldTotal')->item(0)->nodeValue;
 		}
 		return $this->spectators;
+	}
+
+	/**
+	 * Return number of sold terraces
+	 *
+	 * @return Integer
+	 */
+	public function getSoldTerraces()
+	{
+		if(!isset($this->terraces) || $this->terraces === null)
+		{
+			$node = $this->getXml()->getElementsByTagName('SoldTerraces');
+			if($node->length)
+			{
+				$this->terraces = $node->item(0)->nodeValue;
+			}
+		}
+		return $this->terraces;
+	}
+
+	/**
+	 * Return number of sold terraces
+	 *
+	 * @return Integer
+	 */
+	public function getSoldBasic()
+	{
+		if(!isset($this->basic) || $this->basic === null)
+		{
+			$node = $this->getXml()->getElementsByTagName('SoldBasic');
+			if($node->length)
+			{
+				$this->basic = $node->item(0)->nodeValue;
+			}
+		}
+		return $this->basic;
+	}
+
+	/**
+	 * Return number of sold roof
+	 *
+	 * @return Integer
+	 */
+	public function getSoldRoof()
+	{
+		if(!isset($this->roof) || $this->roof === null)
+		{
+			$node = $this->getXml()->getElementsByTagName('SoldRoof');
+			if($node->length)
+			{
+				$this->roof = $node->item(0)->nodeValue;
+			}
+		}
+		return $this->roof;
+	}
+
+	/**
+	 * Return number of sold VIP
+	 *
+	 * @return Integer
+	 */
+	public function getSoldVip()
+	{
+		if(!isset($this->vip) || $this->vip === null)
+		{
+			$node = $this->getXml()->getElementsByTagName('SoldVIP');
+			if($node->length)
+			{
+				$this->vip = $node->item(0)->nodeValue;
+			}
+		}
+		return $this->vip;
 	}
 }
 class HTMatchGoal extends HTXml
@@ -17116,7 +17210,7 @@ class HTLive extends HTGlobal
 }
 class HTLiveMatch extends HTXml
 {
-	private $isYouth = null;
+	private $sourceSystem = null;
 	private $id = null;
 	private $date	= null;
 	private $homeTeamId = null;
@@ -17145,17 +17239,17 @@ class HTLiveMatch extends HTXml
 	}
 
 	/**
-	 * Is the match a youth match ?
+	 * Return match source system
 	 *
-	 * @return Boolean
+	 * @return String
 	 */
-	public function isYouth()
+	public function getSourceSystem()
 	{
-		if(!isset($this->isYouth) || $this->isYouth === null)
+		if(!isset($this->sourceSystem) || $this->sourceSystem === null)
 		{
-			$this->isYouth = strtolower($this->getXml()->getElementsByTagName('IsYouth')->item(0)->nodeValue) == "true";
+			$this->sourceSystem = $this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue;
 		}
-		return $this->isYouth;
+		return $this->sourceSystem;
 	}
 
 	/**
@@ -21071,7 +21165,7 @@ class HTCupMatch extends HTXml
 	/**
 	 * Return home team id
 	 *
-	 * @return String
+	 * @return Integer
 	 */
 	public function getHomeTeamId()
 	{
@@ -21099,7 +21193,7 @@ class HTCupMatch extends HTXml
 	/**
 	 * Return away team id
 	 *
-	 * @return String
+	 * @return Integer
 	 */
 	public function getAwayTeamId()
 	{
@@ -21227,7 +21321,7 @@ class HTCupMatch extends HTXml
 	/**
 	 * Return home league name
 	 *
-	 * @return Integer
+	 * @return String
 	 */
 	public function getHomeLeagueName()
 	{
@@ -21245,7 +21339,7 @@ class HTCupMatch extends HTXml
 	/**
 	 * Return away league name
 	 *
-	 * @return Integer
+	 * @return String
 	 */
 	public function getAwayLeagueName()
 	{

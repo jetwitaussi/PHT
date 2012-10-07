@@ -2,6 +2,26 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.14 [2012-10-07]
+-------------------------
+
+ * New version 1.8 of live file
+ * New getSourceSystem() function in HTLiveMatch class
+ * New CHPPConnection::pingChppServer() function to check if chpp is online
+ * New getSoldTerraces(), getSoldBasic(), getSoldRoof(), getSoldVip() functions in HTMatchArena class
+
+ * Fix comments on HTCupMatch functions
+ * Fix comments on CHPPConnection::invalidateToken() function
+ * Fix comments on protected methods in CHPPConnection class
+ * Fix missing arena details in HTMatch class
+
+ * Remove isYouth() function in HTLiveMatch class
+
+ * Change function signature:
+     CHPPConnection::addLiveMatch() second parameter is now a string for sourceSystem instead of a boolean
+     CHPPConnection::deleteLiveMatch() second parameter is now a string for sourceSystem instead of a boolean
+
+
 Version 2.13.3 [2012-04-24]
 ---------------------------
 
