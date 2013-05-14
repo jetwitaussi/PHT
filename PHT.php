@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.16 - 2013-05-10
+ * PHT 2.16.1 - 2013-05-13
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.16
+ * @version 2.16.1
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -2657,12 +2657,13 @@ class CHPPConnection
 	/**
 	 * Return HTArenaMyStats object
 	 *
-	 * @param Integer $matchType (constant taken from HTArenaMyStats class)
+	 * @param String $matchType (constant taken from HTArenaMyStats class)
 	 * @param String $startDate (format should be : yyyy-mm-dd)
 	 * @param String $endDate (format should be : yyyy-mm-dd)
+	 * @param Integer $arenaId
 	 * @return HTArenaMyStats
 	 */
-	public function getMyArenaStats($matchType = HTArenaMyStats::ALL, $startDate= null, $endDate = null)
+	public function getMyArenaStats($matchType = HTArenaMyStats::ALL, $startDate= null, $endDate = null, $arenaId = null)
 	{
 		if($startDate === null || preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $startDate))
 		{
@@ -2673,12 +2674,16 @@ class CHPPConnection
 				{
 					$matchType = HTArenaMyStats::ALL;
 				}
-				if(!isset($this->myArenaStats[$matchType][strtotime($startDate)][strtotime($endDate)]) || $this->myArenaStats[$matchType][strtotime($startDate)][strtotime($endDate)] === null)
+				if($arenaId === null)
 				{
-					$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'MyArena', 'matchType'=>$matchType, 'firstDate'=>$startDate, 'lastDate'=>$endDate, 'version'=>'1.4'));
-					$this->myArenaStats[$matchType][strtotime($startDate)][strtotime($endDate)] = new HTArenaMyStats($this->fetchUrl($url));
+					$arenaId = $this->getTeam()->getArenaId();
 				}
-				return $this->myArenaStats[$matchType][strtotime($startDate)][strtotime($endDate)];
+				if(!isset($this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)]) || $this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)] === null)
+				{
+					$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'MyArena', 'matchType'=>$matchType, 'firstDate'=>$startDate, 'lastDate'=>$endDate, 'version'=>'1.4', 'arenaID'=>$arenaId));
+					$this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)] = new HTArenaMyStats($this->fetchUrl($url));
+				}
+				return $this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)];
 			}
 		}
 		return null;
@@ -2687,15 +2692,20 @@ class CHPPConnection
 	/**
 	 * Delete cache of my arena statistics
 	 *
-	 * @param unknown_type $matchType (constant taken from HTArenaMyStats class)
+	 * @param String $matchType (constant taken from HTArenaMyStats class)
+	 * @param Integer $arenaId
 	 */
-	public function clearMyArenaStats($matchType = HTArenaMyStats::ALL)
+	public function clearMyArenaStats($matchType = HTArenaMyStats::ALL, $arenaId = null)
 	{
 		if(!in_array($matchType, array(HTArenaMyStats::ALL, HTArenaMyStats::COMP, HTArenaMyStats::LEAGUE, HTArenaMyStats::FRIENDLY)))
 		{
 			$matchType = HTArenaMyStats::ALL;
 		}
-		$this->myArenaStats[$matchType] = null;
+		if($arenaId === null)
+		{
+			$arenaId = $this->getTeam()->getArenaId();
+		}
+		$this->myArenaStats[$arenaId][$matchType] = null;
 	}
 
 	/**
@@ -6118,6 +6128,8 @@ class HTTeam extends HTCommonTeam
 	private $trophyNumber = null;
 	private $trophy = null;
 	private $isDeleted = null;
+	private $primary = null;
+	private $secondary = null;
 
 	public function __construct($xml, $id = null)
 	{
@@ -7183,6 +7195,42 @@ class HTTeam extends HTCommonTeam
 			$this->isDeleted = $this->getXml()->getElementsByTagName('Team')->length == 0;
 		}
 		return $this->isDeleted;
+	}
+
+	/**
+	 * Return if team is primary team
+	 *
+	 * @return Boolean
+	 */
+	public function isPrimaryTeam()
+	{
+		if(!$this->isDeleted())
+		{
+			if(!isset($this->primary) || $this->primary === null)
+			{
+				$this->primary = strtolower($this->getXml()->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
+			}
+			return $this->primary;
+		}
+		return null;
+	}
+
+	/**
+	 * Return if team is secondary team
+	 *
+	 * @return Boolean
+	 */
+	public function isSecondaryTeam()
+	{
+		if(!$this->isDeleted())
+		{
+			if(!isset($this->secondary) || $this->secondary === null)
+			{
+				$this->secondary = strtolower($this->getXml()->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'false';
+			}
+			return $this->secondary;
+		}
+		return null;
 	}
 }
 class HTYouthTeam extends HTGlobal

@@ -2,6 +2,15 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+
+Version 2.16.1 [2013-05-13]
+---------------------------
+
+ * New isPrimaryTeam() and isSecondaryTeam() functions in HTTeam class
+ * New parameter $arenaId in CHPPConnection::getMyArenaStats() function, default is primary team arena id
+ * New parameter $arenaId in CHPPConnection::clearMyArenaStats() function, default is primary team arena id
+
+
 Version 2.16 [2013-05-10]
 -------------------------
 
