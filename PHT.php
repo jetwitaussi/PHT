@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.16.1 - 2013-05-13
+ * PHT 2.17 - 2013-05-27
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.16.1
+ * @version 2.17
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -637,7 +637,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teams[$id]) || $this->teams[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.8');
+			$params = array('file'=>'teamdetails', 'version'=>'2.9');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -681,7 +681,7 @@ class CHPPConnection
 	{
 		if(!isset($this->primaryTeam[$userId]) || $this->primaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.8');
+			$params = array('file'=>'teamdetails', 'version'=>'2.9');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -702,7 +702,14 @@ class CHPPConnection
 					$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
 				}
 			}
-			$this->primaryTeam[$userId] = new HTTeam($doc->saveXML());
+			if($doc->getElementsByTagName('Team')->length)
+			{
+				$this->primaryTeam[$userId] = new HTTeam($doc->saveXML());
+			}
+			else
+			{
+				return null;
+			}
 		}
 		return $this->primaryTeam[$userId];
 	}
@@ -735,7 +742,7 @@ class CHPPConnection
 	{
 		if(!isset($this->secondaryTeam[$userId]) || $this->secondaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.8');
+			$params = array('file'=>'teamdetails', 'version'=>'2.9');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -756,7 +763,14 @@ class CHPPConnection
 					$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
 				}
 			}
-			$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
+			if($doc->getElementsByTagName('Team')->length)
+			{
+				$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
+			}
+			else
+			{
+				return null;
+			}
 		}
 		return $this->secondaryTeam[$userId];
 	}
@@ -790,7 +804,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teamsFlags[$id][$includeDomesticFlags]) || $this->teamsFlags[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.8', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'2.9', 'includeFlags'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -800,7 +814,7 @@ class CHPPConnection
 				$params['includeDomesticFlags'] = 'true';
 			}
 			$url = $this->buildUrl($params);
-			$this->teamsFlags[$id][$includeDomesticFlags] = new HTTeamFlags($this->fetchUrl($url));
+			$this->teamsFlags[$id][$includeDomesticFlags] = new HTTeamFlags($this->fetchUrl($url), $id);
 		}
 		return $this->teamsFlags[$id][$includeDomesticFlags];
 	}
@@ -842,7 +856,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsUserid[$id][$teamId]) || $this->teamsUserid[$id][$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.8'));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9'));
 			$this->teamsUserid[$id][$teamId] = new HTTeam($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsUserid[$id][$teamId];
@@ -876,9 +890,9 @@ class CHPPConnection
 	 *
 	 * @param Integer $id
 	 * @param Boolean $includeDomesticFlags
-	 * @return HTTeam
+	 * @return HTTeamFlags
 	 */
-	public function getTeamFlagsByUserId($id = null, $includeDomesticFlags = false)
+	public function getTeamFlagsByUserId($id = null, $includeDomesticFlags = false, $teamId = null)
 	{
 		if($id === null)
 		{
@@ -886,13 +900,13 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsFlagsUserid[$id][$includeDomesticFlags]) || $this->teamsFlagsUserid[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.8', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9', 'includeFlags'=>'true');
 			if($includeDomesticFlags == true)
 			{
 				$params['includeDomesticFlags'] = 'true';
 			}
 			$url = $this->buildUrl($params);
-			$this->teamsFlagsUserid[$id][$includeDomesticFlags] = new HTTeamFlags($this->fetchUrl($url));
+			$this->teamsFlagsUserid[$id][$includeDomesticFlags] = new HTTeamFlags($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsFlagsUserid[$id][$includeDomesticFlags];
 	}
@@ -923,19 +937,19 @@ class CHPPConnection
 	 * Get data of user's team supporters by default or of teamId if given
 	 *
 	 * @param Integer $id
-	 * @return HTTeam
+	 * @return HTTeamSupporters
 	 */
 	public function getTeamSupporters($id = null)
 	{
 		if(!isset($this->teamsSupporters[$id]) || $this->teamsSupporters[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.8', 'includeSupporters'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'2.9', 'includeSupporters'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
 			}
 			$url = $this->buildUrl($params);
-			$this->teamsSupporters[$id] = new HTTeamSupporters($this->fetchUrl($url));
+			$this->teamsSupporters[$id] = new HTTeamSupporters($this->fetchUrl($url), $id);
 		}
 		return $this->teamsSupporters[$id];
 	}
@@ -966,9 +980,9 @@ class CHPPConnection
 	 * Get data of user's team supporters by default or of userId if given
 	 *
 	 * @param Integer $id
-	 * @return HTTeam
+	 * @return HTTeamSupporters
 	 */
-	public function getTeamSupportersByUserId($id = null)
+	public function getTeamSupportersByUserId($id = null, $teamId = null)
 	{
 		if($id === null)
 		{
@@ -976,8 +990,8 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsSupportersUserid[$id]) || $this->teamsSupportersUserid[$id] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.8', 'includeSupporters'=>'true'));
-			$this->teamsSupportersUserid[$id] = new HTTeamSupporters($this->fetchUrl($url));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9', 'includeSupporters'=>'true'));
+			$this->teamsSupportersUserid[$id] = new HTTeamSupporters($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsSupportersUserid[$id];
 	}
@@ -6130,6 +6144,9 @@ class HTTeam extends HTCommonTeam
 	private $isDeleted = null;
 	private $primary = null;
 	private $secondary = null;
+	private $foundedDate = null;
+	private $color = null;
+	private $bgcolor = null;
 
 	public function __construct($xml, $id = null)
 	{
@@ -6387,6 +6404,29 @@ class HTTeam extends HTCommonTeam
 			}
 		}
 		return $this->activationDate[$format];
+	}
+
+	/**
+	 * Return team founded date
+	 *
+	 * @param String $format (php date() function format)
+	 * @return String
+	 */
+	public function getFoundedDate($format = null)
+	{
+		if(!$this->isDeleted())
+		{
+			if(!isset($this->foundedDate[$format]) || $this->foundedDate[$format] === null)
+			{
+				$this->foundedDate[$format] = $this->getXml()->getElementsByTagName('FoundedDate')->item(0)->nodeValue;
+				if($format !== null)
+				{
+					$this->foundedDate[$format] = HTFunction::convertDate($this->foundedDate[$format], $format);
+				}
+			}
+			return $this->foundedDate[$format];
+		}
+		return null;
 	}
 
 	/**
@@ -7229,6 +7269,48 @@ class HTTeam extends HTCommonTeam
 				$this->secondary = strtolower($this->getXml()->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'false';
 			}
 			return $this->secondary;
+		}
+		return null;
+	}
+
+	/**
+	 * Return supporter color
+	 *
+	 * @return String
+	 */
+	public function getHtSupporterColor()
+	{
+		if(!$this->isDeleted())
+		{
+			if($this->isHtSupporter())
+			{
+				if(!isset($this->color) || $this->color === null)
+				{
+					$this->color = $this->getXml()->getElementsByTagName('Color')->item(0)->nodeValue;
+				}
+				return $this->color;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return supporter background color
+	 *
+	 * @return String
+	 */
+	public function getHtSupporterBackgroundColor()
+	{
+		if(!$this->isDeleted())
+		{
+			if($this->isHtSupporter())
+			{
+				if(!isset($this->bgcolor) || $this->bgcolor === null)
+				{
+					$this->bgcolor = $this->getXml()->getElementsByTagName('BackgroundColor')->item(0)->nodeValue;
+				}
+				return $this->bgcolor;
+			}
 		}
 		return null;
 	}

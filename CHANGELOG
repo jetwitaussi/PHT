@@ -2,6 +2,18 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.17 [2013-05-27]
+-------------------------
+
+ * New version 2.9 of teamdetails file
+ * New getFoundedDate(), getHtSupporterColor(), getHtSupporterBackgroundColor() functions in HTTeam class
+ * New parameter $teamId in CHPPConnection::getTeamSupportersByUserId() function, default is primary team id
+ * New parameter $teamId in CHPPConnection::getTeamFlagsByUserId() function, default is primary team id
+
+ * Fix getTeamFlags(), getTeamFlagsByUserId(), getTeamSupporters(), getTeamSupportersByUserId(), getTeamFlagsByUserId() functions in CHPPConnection class
+
+ * Change getPrimaryTeam() and getSecondaryTeam() functions in CHPPConnection class, funcions can return null
+
 
 Version 2.16.1 [2013-05-13]
 ---------------------------
