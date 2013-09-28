@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.17 - 2013-05-27
+ * PHT 2.18 - 2013-09-28
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.17
+ * @version 2.18
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -86,8 +86,10 @@ class CHPPConnection
 	private $allianceRoles = array();
 	private $allianceRoleDetails = array();
 	private $arenas = array();
+	private $arenasTeams = array();
 	private $arenasStats = array();
 	private $myArenaStats = array();
+	private $myArenaStatsTeams = array();
 	private $matchOrders = array();
 	private $youthMatchOrders = array();
 	private $tournamentMatchOrders = array();
@@ -118,7 +120,7 @@ class CHPPConnection
 	private $bookmarksConfThreads = null;
 	private $trainingEvents = array();
 	private $playerEvents = array();
-	private $fans = null;
+	private $fans = array();
 	private $achievements = array();
 	private $flagsHome = array();
 	private $flagsAway = array();
@@ -637,7 +639,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teams[$id]) || $this->teams[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.9');
+			$params = array('file'=>'teamdetails', 'version'=>'3.0');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -681,7 +683,7 @@ class CHPPConnection
 	{
 		if(!isset($this->primaryTeam[$userId]) || $this->primaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.9');
+			$params = array('file'=>'teamdetails', 'version'=>'3.0');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -742,7 +744,7 @@ class CHPPConnection
 	{
 		if(!isset($this->secondaryTeam[$userId]) || $this->secondaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.9');
+			$params = array('file'=>'teamdetails', 'version'=>'3.0');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -804,7 +806,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teamsFlags[$id][$includeDomesticFlags]) || $this->teamsFlags[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.9', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'3.0', 'includeFlags'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -856,7 +858,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsUserid[$id][$teamId]) || $this->teamsUserid[$id][$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9'));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.0'));
 			$this->teamsUserid[$id][$teamId] = new HTTeam($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsUserid[$id][$teamId];
@@ -900,7 +902,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsFlagsUserid[$id][$includeDomesticFlags]) || $this->teamsFlagsUserid[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.0', 'includeFlags'=>'true');
 			if($includeDomesticFlags == true)
 			{
 				$params['includeDomesticFlags'] = 'true';
@@ -943,7 +945,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teamsSupporters[$id]) || $this->teamsSupporters[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'2.9', 'includeSupporters'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'3.0', 'includeSupporters'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -990,7 +992,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsSupportersUserid[$id]) || $this->teamsSupportersUserid[$id] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'2.9', 'includeSupporters'=>'true'));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.0', 'includeSupporters'=>'true'));
 			$this->teamsSupportersUserid[$id] = new HTTeamSupporters($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsSupportersUserid[$id];
@@ -1190,7 +1192,7 @@ class CHPPConnection
 	{
 		if(!isset($this->worldDetails) || $this->worldDetails === null)
 		{
-			$params = array('file'=>'worlddetails', 'version'=>'1.4');
+			$params = array('file'=>'worlddetails', 'version'=>'1.5');
 			if($includeRegions === true)
 			{
 				$params['includeRegions'] = 'true';
@@ -1218,7 +1220,7 @@ class CHPPConnection
 	{
 		if(!isset($this->worldDetailsByCountry[$countryId]) || $this->worldDetailsByCountry[$countryId] === null)
 		{
-			$params = array('file'=>'worlddetails', 'version'=>'1.4', 'countryID'=>$countryId);
+			$params = array('file'=>'worlddetails', 'version'=>'1.5', 'countryID'=>$countryId);
 			if($includeRegions === true)
 			{
 				$params['includeRegions'] = 'true';
@@ -1246,7 +1248,7 @@ class CHPPConnection
 	{
 		if(!isset($this->worldDetailsByLeague[$leagueId]) || $this->worldDetailsByLeague[$leagueId] === null)
 		{
-			$params = array('file'=>'worlddetails', 'version'=>'1.4', 'leagueID'=>$leagueId);
+			$params = array('file'=>'worlddetails', 'version'=>'1.5', 'leagueID'=>$leagueId);
 			if($includeRegions === true)
 			{
 				$params['includeRegions'] = 'true';
@@ -2640,7 +2642,7 @@ class CHPPConnection
 		}
 		if(!isset($this->arenas[$arenaId]) || $this->arenas[$arenaId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'arenadetails', 'arenaID'=>$arenaId, 'version'=>'1.4'));
+			$url = $this->buildUrl(array('file'=>'arenadetails', 'arenaID'=>$arenaId, 'version'=>'1.5'));
 			$this->arenas[$arenaId] = new HTArena($this->fetchUrl($url));
 		}
 		return $this->arenas[$arenaId];
@@ -2669,6 +2671,48 @@ class CHPPConnection
 	}
 
 	/**
+	 * Return HTArena object
+	 *
+	 * @param Integer $teamId
+	 * @return HTArena
+	 */
+	public function getArenaDetailsByTeam($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		if(!isset($this->arenasTeams[$teamId]) || $this->arenasTeams[$teamId] === null)
+		{
+			$url = $this->buildUrl(array('file'=>'arenadetails', 'teamID'=>$teamId, 'version'=>'1.5'));
+			$this->arenasTeams[$teamId] = new HTArena($this->fetchUrl($url));
+		}
+		return $this->arenasTeams[$teamId];
+	}
+
+	/**
+	 * Delete cache of arena by team
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearArenaDetailsByTeam($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->arenasTeams[$teamId] = null;
+	}
+
+	/**
+	 * Delete all caches of arenas by teams
+	 */
+	public function clearArenasDetailsByTeam()
+	{
+		$this->arenasTeams = array();
+	}
+
+	/**
 	 * Return HTArenaMyStats object
 	 *
 	 * @param String $matchType (constant taken from HTArenaMyStats class)
@@ -2694,7 +2738,7 @@ class CHPPConnection
 				}
 				if(!isset($this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)]) || $this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)] === null)
 				{
-					$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'MyArena', 'matchType'=>$matchType, 'firstDate'=>$startDate, 'lastDate'=>$endDate, 'version'=>'1.4', 'arenaID'=>$arenaId));
+					$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'MyArena', 'matchType'=>$matchType, 'firstDate'=>$startDate, 'lastDate'=>$endDate, 'version'=>'1.5', 'arenaID'=>$arenaId));
 					$this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)] = new HTArenaMyStats($this->fetchUrl($url));
 				}
 				return $this->myArenaStats[$arenaId][$matchType][strtotime($startDate)][strtotime($endDate)];
@@ -2731,6 +2775,68 @@ class CHPPConnection
 	}
 
 	/**
+	 * Return HTArenaMyStats object
+	 *
+	 * @param String $matchType (constant taken from HTArenaMyStats class)
+	 * @param String $startDate (format should be : yyyy-mm-dd)
+	 * @param String $endDate (format should be : yyyy-mm-dd)
+	 * @param Integer $teamId
+	 * @return HTArenaMyStats
+	 */
+	public function getMyArenaStatsByTeam($matchType = HTArenaMyStats::ALL, $startDate= null, $endDate = null, $teamId = null)
+	{
+		if($startDate === null || preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $startDate))
+		{
+			if($endDate === null || preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $endDate))
+			{
+				$this->analyseDate($startDate, $endDate, false);
+				if(!in_array($matchType, array(HTArenaMyStats::ALL, HTArenaMyStats::COMP, HTArenaMyStats::LEAGUE, HTArenaMyStats::FRIENDLY)))
+				{
+					$matchType = HTArenaMyStats::ALL;
+				}
+				if($teamId === null)
+				{
+					$teamId = $this->getTeam()->getTeamId();
+				}
+				if(!isset($this->myArenaStatsTeams[$teamId][$matchType][strtotime($startDate)][strtotime($endDate)]) || $this->myArenaStatsTeams[$teamId][$matchType][strtotime($startDate)][strtotime($endDate)] === null)
+				{
+					$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'MyArena', 'matchType'=>$matchType, 'firstDate'=>$startDate, 'lastDate'=>$endDate, 'version'=>'1.5', 'teamId'=>$teamId));
+					$this->myArenaStatsTeams[$teamId][$matchType][strtotime($startDate)][strtotime($endDate)] = new HTArenaMyStats($this->fetchUrl($url));
+				}
+				return $this->myArenaStatsTeams[$teamId][$matchType][strtotime($startDate)][strtotime($endDate)];
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Delete cache of my arena by team statistics
+	 *
+	 * @param String $matchType (constant taken from HTArenaMyStats class)
+	 * @param Integer $teamId
+	 */
+	public function clearMyArenaStatsByTeam($matchType = HTArenaMyStats::ALL, $teamId = null)
+	{
+		if(!in_array($matchType, array(HTArenaMyStats::ALL, HTArenaMyStats::COMP, HTArenaMyStats::LEAGUE, HTArenaMyStats::FRIENDLY)))
+		{
+			$matchType = HTArenaMyStats::ALL;
+		}
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->myArenaStatsTeams[$teamId][$matchType] = null;
+	}
+
+	/**
+	 * Delete all caches of my arena statistics
+	 */
+	public function clearMyArenaByTeamAllStats()
+	{
+		$this->myArenaStatsTeams = array();
+	}
+
+	/**
 	 * Return HTArenasStats object
 	 *
 	 * @param Integer $leagueId (by default 0 = global statistics)
@@ -2740,7 +2846,7 @@ class CHPPConnection
 	{
 		if(!isset($this->arenasStats[$leagueId]) || $this->arenasStats[$leagueId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'OtherArenas', 'statsLeagueID'=>$leagueId, 'version'=>'1.4'));
+			$url = $this->buildUrl(array('file'=>'arenadetails', 'statsType'=>'OtherArenas', 'statsLeagueID'=>$leagueId, 'version'=>'1.5'));
 			$this->arenasStats[$leagueId] = new HTArenasStats($this->fetchUrl($url));
 		}
 		return $this->arenasStats[$leagueId];
@@ -4009,18 +4115,30 @@ class CHPPConnection
 		{
 			$teamId = $this->getTeam()->getTeamId();
 		}
-		if(!isset($this->fans) || $this->fans === null)
+		if(!isset($this->fans[$teamId]) || $this->fans[$teamId] === null)
 		{
 			$url = $this->buildUrl(array('file'=>'fans', 'version'=>'1.2', 'teamId'=>$teamId));
-			$this->fans = new HTFans($this->fetchUrl($url));
+			$this->fans[$teamId] = new HTFans($this->fetchUrl($url));
 		}
-		return $this->fans;
+		return $this->fans[$teamId];
+	}
+
+	/**
+	 * Delete cache of fan team
+	 */
+	public function clearFans($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->fans[$teamId] = null;
 	}
 
 	/**
 	 * Delete cache of fans
 	 */
-	public function clearFans()
+	public function clearAllFans()
 	{
 		$this->fans = null;
 	}
@@ -4637,6 +4755,10 @@ class CHPPConnection
 		{
 			$teamId = $this->getTeam()->getYouthTeamId();
 		}
+		if($teamId === null)
+		{
+			return null;
+		}
 		if(!isset($this->youthTeamsPlayers[$teamId][$orderBy]) || $this->youthTeamsPlayers[$teamId][$orderBy] === null)
 		{
 			$params = array('file'=>'youthplayerlist', 'youthTeamId'=>$teamId, 'version'=>'1.0', 'actionType'=>'list');
@@ -4675,16 +4797,25 @@ class CHPPConnection
 	/**
 	 * Return HTYouthTeamPlayers object
 	 *
+	 * @param Integer $teamId
 	 * @param Boolean $showScoutCall
 	 * @param Boolean $showLastMatch
 	 * @param String $orderBy
 	 * @return HTYouthTeamPlayers
 	 */
-	public function getYouthTeamPlayersDetails($showScoutCall = false, $showLastMatch = false, $orderBy = null)
+	public function getYouthTeamPlayersDetails($teamId = null, $showScoutCall = false, $showLastMatch = false, $orderBy = null)
 	{
-		if(!isset($this->youthTeamsPlayersDetails[$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersDetails[$showScoutCall][$showLastMatch][$orderBy] === null)
+		if($teamId === null)
 		{
-			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'details');
+			$teamId = $this->getTeam()->getYouthTeamId();
+		}
+		if($teamId === null)
+		{
+			return null;
+		}
+		if(!isset($this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy] === null)
+		{
+			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'details', 'youthTeamID'=>$teamId);
 			if($showScoutCall === true)
 			{
 				$params['showScoutCall'] = 'true';
@@ -4698,9 +4829,23 @@ class CHPPConnection
 				$params['orderBy'] = $orderBy;
 			}
 			$url = $this->buildUrl($params);
-			$this->youthTeamsPlayersDetails[$showScoutCall][$showLastMatch][$orderBy] = new HTYouthTeamPlayers($this->fetchUrl($url));
+			$this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy] = new HTYouthTeamPlayers($this->fetchUrl($url));
 		}
-		return $this->youthTeamsPlayersDetails[$showScoutCall][$showLastMatch][$orderBy];
+		return $this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy];
+	}
+
+	/**
+	 * Clear cache of youth team players details
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearYouthTeamPlayersDetails($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getYouthTeamId();
+		}
+		$this->youthTeamsPlayersDetails[$teamId] = null;
 	}
 
 	/**
@@ -4714,16 +4859,25 @@ class CHPPConnection
 	/**
 	 * Return HTYouthTeamPlayers object
 	 *
+	 * @param Integer $teamId
 	 * @param Boolean $showScoutCall
 	 * @param Boolean $showLastMatch
 	 * @param String $orderBy
 	 * @return HTYouthTeamPlayers
 	 */
-	public function getYouthTeamPlayersUnlockskills($showScoutCall = false, $showLastMatch = false, $orderBy = null)
+	public function getYouthTeamPlayersUnlockskills($teamId, $showScoutCall = false, $showLastMatch = false, $orderBy = null)
 	{
-		if(!isset($this->youthTeamsPlayersUnlockskills[$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersUnlockskills[$showScoutCall][$showLastMatch][$orderBy] === null)
+		if($teamId === null)
 		{
-			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'unlockskills');
+			$teamId = $this->getTeam()->getYouthTeamId();
+		}
+		if($teamId === null)
+		{
+			return null;
+		}
+		if(!isset($this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy] === null)
+		{
+			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'unlockskills', 'youthTeamID'=>$teamId);
 			if($showScoutCall === true)
 			{
 				$params['showScoutCall'] = 'true';
@@ -4737,9 +4891,23 @@ class CHPPConnection
 				$params['orderBy'] = $orderBy;
 			}
 			$url = $this->buildUrl($params);
-			$this->youthTeamsPlayersUnlockskills[$showScoutCall][$showLastMatch][$orderBy] = new HTYouthTeamPlayers($this->fetchUrl($url));
+			$this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy] = new HTYouthTeamPlayers($this->fetchUrl($url));
 		}
-		return $this->youthTeamsPlayersUnlockskills[$showScoutCall][$showLastMatch][$orderBy];
+		return $this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy];
+	}
+
+	/**
+	 * Clear cache of youth teams players unlockskills
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearYouthTeamPlayersUnlockskills($teamId)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getYouthTeamId();
+		}
+		$this->youthTeamsPlayersUnlockskills[$teamId] = null;
 	}
 
 	/**
@@ -11689,6 +11857,7 @@ class HTWorldLeague extends HTXml
 	private $currencyRate = null;
 	private $cupId = null;
 	private $cupName = null;
+	private $numberActiveTeams = null;
 	private $numberActiveUsers = null;
 	private $numberWaitingUsers = null;
 	private $trainingDate = null;
@@ -11957,6 +12126,20 @@ class HTWorldLeague extends HTXml
 			$this->cupName = $this->getXml()->getElementsByTagName('CupName')->item(0)->nodeValue;
 		}
 		return $this->cupName;
+	}
+
+	/**
+	 * Return number of active teams
+	 *
+	 * @return Integer
+	 */
+	public function getNumberActiveTeams()
+	{
+		if(!isset($this->numberActiveTeams) || $this->numberActiveTeams === null)
+		{
+			$this->numberActiveTeams = $this->getXml()->getElementsByTagName('ActiveTeams')->item(0)->nodeValue;
+		}
+		return $this->numberActiveTeams;
 	}
 
 	/**
