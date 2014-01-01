@@ -2,6 +2,79 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+Version 2.19 [2014-01-01]
+-------------------------
+
+ * New version 1.0 of tournamentlist file
+ * New version 1.0 of tournamentdetails file
+ * New version 1.0 of tournamentleaguetables file
+ * New version 1.0 of tournamentfixtures file
+ * New version 1.0 of ladderlist file
+ * New version 1.0 of ladderdetails file
+ * New version 2.7 of matches file
+ * New version 1.2 of matchesarchive file
+ * New version 2.2 of training file
+ * New version 1.0 of translations file
+ * New version 2.3 of matchorders file
+ * New version 1.0 of youthleaguedetails file
+ * New version 1.0 of youthleaguefixtures file
+ * New version 1.0 of managercompendium file
+ * New version 2.5 of playerdetails file
+ * New version 3.1 of teamdetails file
+ * New version 1.0 of transfersearch file
+ * New version 1.0 of supporters file
+ * New clearClubs() function in CHPPConnection class
+ * New getTournaments(), clearTournaments(), clearAllTournaments() functions in CHPPConnection class
+ * New getTournament(), clearTournament(), clearAllTournament() functions in CHPPConnection class
+ * New HTTournaments and HTTournament classes
+ * New getTournamentLeagues(), clearTournamentLeagues(), clearAllTournamentLeagues() functions in CHPPConnection class
+ * New HTTournamentLeagueTable and HTTournamentGroup classes
+ * New getTournamentMatches(), clearTournamentMatches(), clearAllTournamentMatches() functions in CHPPConnection class
+ * New HTTournamentMatches and HTTournamentMatch classes
+ * New getTeamLadders(), clearTeamLadders(), clearAllTeamLadders() functions in CHPPConnection class
+ * New HTTeamLadders and HTTeamLadder classes
+ * New getLadder(), clearLadder(), clearLadders(), getLadderTeamPosition(), clearLadderTeamPosition(), clearLaddersTeamPosition() functions in CHPPConnection class
+ * New HTLadder and HTLadderTeam classes
+ * New getContextId() function in HTTeamMatch class
+ * New getContextId() function in HTMatchArchiveMatch class
+ * New setTrainingType(), setTrainingLevel(), setTrainingStamina() functions in CHPPConnection class
+ * New getTranslation(), clearTranslation(), clearTranslations() functions in CHPPConnection class
+ * new getUserTranslation(), clearUserTranslation() functions in CHPPConnection class
+ * New HTTranslation class
+ * New predictRatings() function in CHPPConnection class
+ * New HTLineupPrediction class
+ * New getYouthLeague(), clearYouthLeague(), clearYouthLeagues() functions in CHPPConnection class
+ * New HTYouthLeague class
+ * New getYouthLeagueSeason(), clearYouthLeagueSeason(), clearYouthLeaguesSeasons() functions in CHPPConnection class
+ * New HTYouthLeagueSeason and HTYouthLeagueMatch classes
+ * New getPlayingMatches() function in HTTeamMatches class
+ * New getManagerCompendium(), clearManagerCompendium(), clearAllManagerCompendium() functions in CHPPConnection class
+ * New HTManagerCompendium, HTCompendiumTeam and HTCompendiumNationalTeam classes
+ * New getAskingPrice(), getDeadline(), getHighestBid(), getBidderTeamId() and getBidderTeamName() functions in HTPlayer class
+ * New placeBid() function in CHPPConnection class
+ * New toSEK() function in HTMoney class
+ * New createNewSearchTransfer() and searchTransfer() functions in CHPPConnection class
+ * New HTSearchTransferCriteria, HTSearchTransfer and HTSearchTransferResult classes
+ * New getNationalTeamId() and getNationalTeamName() functions in HTPlayer class
+ * New getUserSupporters(), clearUserSupporters(), clearUsersSupporters() functions in CHPPConnection class
+ * New HTUserSupporters class
+
+ /!\ These changes may break your code, please check and update it before using this version!
+ * Change getTeamSupporters() function in CHPPConnection class to use new supporters.xml file, team data are no more included
+ * HTTeamSupporters class extends HTGlobal instead of HTTeam
+ * Remove getSupportedNumber() and getSupportedTeam() functions in HTTeamSupporters class
+ * Remove getTeamSupportersByUserId(), clearTeamSupportersByUserId(), clearTeamsSupportersByUserId() functions in CHPPConnection class
+
+ * Fix getClub() and clearClub() functions in CHPPConnection class
+ * Fix getPrice() function in HTTransfer class
+ * Fix getSalary() function in HTTeamPlayer class
+ * Fix getSalary() and isSkillsAvailable() functions in HTPlayer class
+ * Fix getYouthLeagueSeason() and clearYouthLeagueSeason() functions in CHPPConnection class
+ * Fix clearLadder() function in CHPPConnection class
+
+ * Remove deprecated function getSeasonOffet() in HTWorldLeague class
+
+
 Version 2.18 [2013-09-28]
 -------------------------
 
