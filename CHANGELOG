@@ -2,6 +2,13 @@
  PHT - Telesphore - http://pht.htloto.org
 ------------------------------------------
 
+
+Version 2.19.1 [2014-01-06]
+---------------------------
+
+ * Fix internal cache system used by functions in CHPPConnection class
+
+
 Version 2.19 [2014-01-01]
 -------------------------
 
