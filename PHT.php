@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.19.1 - 2014-01-06
+ * PHT 2.19.2 - 2014-01-13
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.19.1
+ * @version 2.19.2
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -10220,7 +10220,7 @@ class HTTeamFlags extends HTTeam
 		return null;
 	}
 }
-class HTTeamSupporters extends HTGlobal
+class HTUserSupporters extends HTGlobal
 {
 	private $total = null;
 	private $supporterNumber = null;
@@ -10273,14 +10273,14 @@ class HTTeamSupporters extends HTGlobal
 				$nodeList = $xpath->query("//MySupporters/SupporterTeam");
 				$node = new DOMDocument('1.0', 'UTF-8');
 				$node->appendChild($node->importNode($nodeList->item($index), true));
-				$this->supporterTeams[$index] = new HTTeamSupporter($node);
+				$this->supporterTeams[$index] = new HTTeamSupported($node);
 			}
 			return $this->supporterTeams[$index];
 		}
 		return null;
 	}
 }
-class HTTeamSupporter extends HTXml
+class HTTeamSupported extends HTXml
 {
 	private $userId = null;
 	private $loginName = null;
@@ -10412,7 +10412,7 @@ class HTTeamSupporter extends HTXml
 		return $this->leagueLevelUnitName;
 	}
 }
-class HTUserSupporters extends HTGlobal
+class HTTeamSupporters extends HTGlobal
 {
 	private $total = null;
 	private $supporterNumber = null;
@@ -10464,14 +10464,14 @@ class HTUserSupporters extends HTGlobal
 				$nodeList = $xpath->query("//SupportedTeams/SupportedTeam");
 				$node = new DOMDocument('1.0', 'UTF-8');
 				$node->appendChild($node->importNode($nodeList->item($index), true));
-				$this->supporterTeams[$index] = new HTTeamSupported($node);
+				$this->supporterTeams[$index] = new HTTeamSupporter($node);
 			}
 			return $this->supporterTeams[$index];
 		}
 		return null;
 	}
 }
-class HTTeamSupported extends HTTeamSupporter
+class HTTeamSupporter extends HTTeamSupported
 {
 	private $lastMatchId = null;
 	private $lastMatchDate = null;
