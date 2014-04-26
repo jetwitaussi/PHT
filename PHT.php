@@ -1,10 +1,10 @@
 <?php
 /**
- * PHT 2.19.2 - 2014-01-13
+ * PHT 2.20 - 2014-04-14
  *
  * @author Telesphore
  * @link http://pht.htloto.org
- * @version 2.19.2
+ * @version 2.20
  * @license http://www.php.net/license/3_0.txt
  */
 
@@ -151,6 +151,10 @@ class CHPPConnection
 	private $youthLeagues = array();
 	private $youthLeaguesSeasons = array();
 	private $compendium = array();
+	private $currentBids = array();
+	private $currentBidsType = array();
+	private $staffs = array();
+	private $staffsAvatars = array();
 	//----------
 
 	//---url---
@@ -626,7 +630,7 @@ class CHPPConnection
 		}
 		if(!isset($this->club[$teamId]) || $this->club[$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'club', 'version'=>'1.3', 'teamId'=>$teamId));
+			$url = $this->buildUrl(array('file'=>'club', 'version'=>'1.4', 'teamId'=>$teamId));
 			$this->club[$teamId] = new HTClub($this->fetchUrl($url));
 		}
 		return $this->club[$teamId];
@@ -1691,7 +1695,7 @@ class CHPPConnection
 	public function placeBid($teamId, $playerId, $bid, $currency = HTMoney::Sverige)
 	{
 		$bid = HTMoney::toSEK($bid, $currency);
-		$url = $this->buildUrl(array('file'=>'playerdetails', 'actionType'=>'placeBid', 'teamId'=>$teamId, 'playerID'=>$playerId, 'placeBid'=>$bid, 'version'=>'2.5'));
+		$url = $this->buildUrl(array('file'=>'playerdetails', 'actionType'=>'placeBid', 'teamId'=>$teamId, 'playerID'=>$playerId, 'placeBid'=>$bid, 'version'=>'2.6'));
 		$data = $this->fetchUrl($url);
 		$xml = new DOMDocument('1.0', 'UTF-8');
 		$xml->loadXml($data);
@@ -1700,6 +1704,140 @@ class CHPPConnection
 		$node = new DOMDocument('1.0', 'UTF-8');
 		$node->appendChild($node->importNode($nodeList->item(0), true));
 		return new HTPlayer($node);
+	}
+
+	/**
+	 * Return HTPlayer object
+	 *
+	 * @param Integer $teamId
+	 * @param Integer $playerId
+	 * @param Integer $bid
+	 * @param Integer $currency
+	 * @return HTPlayer
+	 */
+	public function placeMaxAutoBid($teamId, $playerId, $bid, $currency = HTMoney::Sverige)
+	{
+		$bid = HTMoney::toSEK($bid, $currency);
+		$url = $this->buildUrl(array('file'=>'playerdetails', 'actionType'=>'placeBid', 'teamId'=>$teamId, 'playerID'=>$playerId, 'maxBidAmount'=>$bid, 'version'=>'2.6'));
+		$data = $this->fetchUrl($url);
+		$xml = new DOMDocument('1.0', 'UTF-8');
+		$xml->loadXml($data);
+		$xpath = new DOMXPath($xml);
+		$nodeList = $xpath->query("//View");
+		$node = new DOMDocument('1.0', 'UTF-8');
+		$node->appendChild($node->importNode($nodeList->item(0), true));
+		return new HTPlayer($node);
+	}
+
+	/**
+	 * Return HTCurrentBids object
+	 *
+	 * @param Integer $teamId
+	 * @return HTCurrentBids
+	 */
+	public function getCurrentBids($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		if(!isset($this->currentBids[$teamId]) || $this->currentBids[$teamId] === null)
+		{
+			$url = $this->buildUrl(array('file'=>'currentbids', 'version'=>'1.0', 'actionType'=>'view', 'teamID'=>$teamId));
+			$this->currentBids[$teamId] = new HTCurrentBids($this->fetchUrl($url));
+		}
+		return $this->currentBids[$teamId];
+	}
+
+	/**
+	 * Delete cache of current bids
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearCurrentBids($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->currentBids[$teamId] = null;
+	}
+
+	/**
+	 * Delete all caches of current bids
+	 */
+	public function clearAllCurrentBids()
+	{
+		$this->currentBids = array();
+	}
+
+	/**
+	 * Return HTCurrentBidsType object
+	 *
+	 * @param Integer $type (see HTCurrentBid constants)
+	 * @param Integer $teamId
+	 * @return HTCurrentBidsType
+	 */
+	public function getCurrentBidsByType($type, $teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		if(!isset($this->currentBidsType[$type][$teamId]) || $this->currentBidsType[$type][$teamId] === null)
+		{
+			$url = $this->buildUrl(array('file'=>'currentbids', 'version'=>'1.0', 'actionType'=>'view', 'teamID'=>$teamId));
+			$this->currentBidsType[$type][$teamId] = new HTCurrentBidsType($this->fetchUrl($url), $type);
+		}
+		return $this->currentBidsType[$type][$teamId];
+	}
+
+	/**
+	 * Delete cache of current bids
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearCurrentBidsByType($type, $teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->currentBidsType[$type][$teamId] = null;
+	}
+
+	/**
+	 * Delete all caches of current bids
+	 */
+	public function clearAllCurrentBidsByType()
+	{
+		$this->currentBidsType = array();
+	}
+
+	/**
+	 * Ignore a transfer
+	 *
+	 * @param Integer $transferId
+	 */
+	public function ignoreTransfer($transferId)
+	{
+		$url = $this->buildUrl(array('file'=>'currentbids', 'version'=>'1.0', 'actionType'=>'ignoreTransfer', 'transferId'=>$transferId));
+		$this->fetchUrl($url);
+	}
+
+	/**
+	 * Ignore a transfer
+	 *
+	 * @param Integer $transferId
+	 */
+	public function deleteFinishedTransfers($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$url = $this->buildUrl(array('file'=>'currentbids', 'version'=>'1.0', 'actionType'=>'deleteAllFinished', 'teamId'=>$teamId));
+		$this->fetchUrl($url);
 	}
 
 	/**
@@ -1854,7 +1992,7 @@ class CHPPConnection
 	{
 		if(!isset($this->players[$playerId][$includeMatchInfo]) || $this->players[$playerId][$includeMatchInfo] === null)
 		{
-			$params = array('file'=>'playerdetails', 'version'=>'2.5', 'playerID'=>$playerId);
+			$params = array('file'=>'playerdetails', 'version'=>'2.6', 'playerID'=>$playerId);
 			if($includeMatchInfo == true)
 			{
 				$params['includeMatchInfo'] = 'true';
@@ -5158,7 +5296,7 @@ class CHPPConnection
 		}
 		if(!isset($this->youthTeamsPlayers[$teamId][$orderBy]) || $this->youthTeamsPlayers[$teamId][$orderBy] === null)
 		{
-			$params = array('file'=>'youthplayerlist', 'youthTeamId'=>$teamId, 'version'=>'1.0', 'actionType'=>'list');
+			$params = array('file'=>'youthplayerlist', 'youthTeamId'=>$teamId, 'version'=>'1.1', 'actionType'=>'list');
 			if($orderBy !== null)
 			{
 				$params['orderBy'] = $orderBy;
@@ -5212,7 +5350,7 @@ class CHPPConnection
 		}
 		if(!isset($this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersDetails[$teamId][$showScoutCall][$showLastMatch][$orderBy] === null)
 		{
-			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'details', 'youthTeamID'=>$teamId);
+			$params = array('file'=>'youthplayerlist', 'version'=>'1.1', 'actionType'=>'details', 'youthTeamID'=>$teamId);
 			if($showScoutCall === true)
 			{
 				$params['showScoutCall'] = 'true';
@@ -5274,7 +5412,7 @@ class CHPPConnection
 		}
 		if(!isset($this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy]) || $this->youthTeamsPlayersUnlockskills[$teamId][$showScoutCall][$showLastMatch][$orderBy] === null)
 		{
-			$params = array('file'=>'youthplayerlist', 'version'=>'1.0', 'actionType'=>'unlockskills', 'youthTeamID'=>$teamId);
+			$params = array('file'=>'youthplayerlist', 'version'=>'1.1', 'actionType'=>'unlockskills', 'youthTeamID'=>$teamId);
 			if($showScoutCall === true)
 			{
 				$params['showScoutCall'] = 'true';
@@ -5328,7 +5466,7 @@ class CHPPConnection
 	{
 		if(!isset($this->youthPlayers[$id][$unlockSkills][$showScoutCall][$showLastMatch]) || $this->youthPlayers[$id][$unlockSkills][$showScoutCall][$showLastMatch] === null)
 		{
-			$params = array('file'=>'youthplayerdetails', 'youthPlayerId'=>$id, 'version'=>'1.0', 'actionType'=>'details');
+			$params = array('file'=>'youthplayerdetails', 'youthPlayerId'=>$id, 'version'=>'1.1', 'actionType'=>'details');
 			if($unlockSkills === true)
 			{
 				$params['actionType'] = 'unlockskills';
@@ -5659,6 +5797,88 @@ class CHPPConnection
 	public function clearAllManagerCompendium()
 	{
 		$this->compendium = array();
+	}
+
+	/**
+	 * Return HTStaffMembers object
+	 *
+	 * @param Integer $teamId
+	 * @return HTStaffMembers
+	 */
+	public function getStaffMembers($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		if(!isset($this->staffs[$teamId]) || $this->staffs[$teamId] === null)
+		{
+			$params = array('file'=>'stafflist', 'version'=>'1.0', 'teamId'=>$teamId);
+			$url = $this->buildUrl($params);
+			$this->staffs[$teamId] = new HTStaffMembers($this->fetchUrl($url));
+		}
+		return $this->staffs[$teamId];
+	}
+
+	/**
+	 * Clear team staff members
+	 *
+	 * @param Integer $teamId
+	 */
+	public function clearStaffMembers($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->staffs[$teamId] = null;
+	}
+
+	/**
+	 * Clear all teams staff members
+	 */
+	public function clearAllStaffMembers()
+	{
+		$this->staffs = array();
+	}
+
+	/**
+	 * Return HTStaffAvatars object
+	 *
+	 * @return HTStaffAvatars
+	 */
+	public function getStaffAvatars($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		if(!isset($this->staffsAvatars[$teamId]) || $this->staffsAvatars[$teamId] === null)
+		{
+			$url = $this->buildUrl(array('file'=>'staffavatars', 'version'=>'1.0', 'teamId'=>$teamId));
+			$this->staffsAvatars[$teamId] = new HTStaffAvatars($this->fetchUrl($url));
+		}
+		return $this->staffsAvatars[$teamId];
+	}
+
+	/**
+	 * Delete cache of staff avatars
+	 */
+	public function clearStaffAvatars($teamId = null)
+	{
+		if($teamId === null)
+		{
+			$teamId = $this->getTeam()->getTeamId();
+		}
+		$this->staffsAvatars[$teamId] = null;
+	}
+
+	/**
+	 * Delete cache of all staff avatars
+	 */
+	public function clearAllStaffAvatars()
+	{
+		$this->staffsAvatars = array();
 	}
 }
 class HTXml
@@ -6590,6 +6810,90 @@ class HTYouthPlayerAvatar extends HTCommonAvatar
 		return $this->playerId;
 	}
 }
+class HTStaffAvatars extends HTGlobal
+{
+	private $staffNumber = null;
+	private $staff = null;
+	private $staffById = null;
+
+	/**
+	 * Return staff number
+	 *
+	 * @return Integer
+	 */
+	public function getStaffNumber()
+	{
+		if(!isset($this->staffNumber) || $this->staffNumber === null)
+		{
+			$this->staffNumber = $this->getXml()->getElementsByTagName('Staff')->length;
+		}
+		return $this->staffNumber	;
+	}
+
+	/**
+	 * Return HTStaffAvatar object
+	 *
+	 * @return HTPlayerAvatar
+	 */
+	public function getStaff($index)
+	{
+		$index = round($index);
+		if($index > 0 && $index <= $this->getStaffNumber())
+		{
+			--$index;
+			if(!isset($this->staff[$index]) || $this->staff[$index] === null)
+			{
+				$xpath = new DOMXPath($this->getXml());
+				$nodeList = $xpath->query("//Staff");
+				$node = new DOMDocument('1.0', 'UTF-8');
+				$node->appendChild($node->importNode($nodeList->item($index), true));
+				$this->staff[$index] = new HTStaffAvatar($node);
+			}
+			return $this->staff[$index];
+		}
+		return null;
+	}
+
+	/**
+	 * Return HTPlayerAvatar object
+	 *
+	 * @return HTPlayerAvatar
+	 */
+	public function getStaffById($id)
+	{
+		if(!isset($this->staffById[$id]) || $this->staffById[$id] === null)
+		{
+			$this->staffById[$id] = null;
+			$xpath = new DOMXPath($this->getXml());
+			$nodeList = $xpath->query("//StaffId[.='".$id."']");
+			if($nodeList->length)
+			{
+				$node = new DOMDocument('1.0', 'UTF-8');
+				$node->appendChild($node->importNode($nodeList->item(0)->parentNode, true));
+				$this->staffById[$id] = new HTStaffAvatar($node);
+			}
+		}
+		return $this->staffById[$id];
+	}
+}
+class HTStaffAvatar extends HTCommonAvatar
+{
+	private $staffId = null;
+
+	/**
+	 * Return staff id
+	 *
+	 * @return Integer
+	 */
+	public function getStaffId()
+	{
+		if(!isset($this->staffId) || $this->staffId === null)
+		{
+			$this->staffId = $this->getXml()->getElementsByTagName('StaffId')->item(0)->nodeValue;
+		}
+		return $this->staffId;
+	}
+}
 class HTLayer extends HTXml
 {
 	private $x = null;
@@ -6649,22 +6953,96 @@ class HTLayer extends HTXml
 }
 class HTClub extends HTCommonTeam
 {
-	private $specialists = null;
 	private $youthSquad = null;
+	private $trainer = null;
+	private $financial = null;
+	private $form = null;
+	private $medic = null;
+	private $spoke = null;
+	private $psycho = null;
 
 	/**
-	 * Return specialists object
+	 * Return assistant trainer levels
 	 *
-	 * @param Integer $countryCurrency (Constant taken from HTMoney class)
-	 * @return HTSpecialists
+	 * @return Integer
 	 */
-	public function getSpecialists($countryCurrency = null)
+	public function getAssistantTrainerLevels()
 	{
-		if(!isset($this->specialists[$countryCurrency]) || $this->specialists[$countryCurrency] === null)
+		if(!isset($this->trainer) || $this->trainer === null)
 		{
-			$this->specialists[$countryCurrency] = new HTSpecialists($this->getXml(), $countryCurrency);
+			$this->trainer = $this->getXml()->getElementsByTagName('AssistantTrainerLevels')->item(0)->nodeValue;
 		}
-		return $this->specialists[$countryCurrency];
+		return $this->trainer;
+	}
+
+	/**
+	 * Return financial director levels
+	 *
+	 * @return Integer
+	 */
+	public function getFinancialDirectorLevels()
+	{
+		if(!isset($this->financial) || $this->financial === null)
+		{
+			$this->financial = $this->getXml()->getElementsByTagName('FinancialDirectorLevels')->item(0)->nodeValue;
+		}
+		return $this->financial;
+	}
+
+	/**
+	 * Return form coach levels
+	 *
+	 * @return Integer
+	 */
+	public function getFormCoachLevels()
+	{
+		if(!isset($this->form) || $this->form === null)
+		{
+			$this->form = $this->getXml()->getElementsByTagName('FormCoachLevels')->item(0)->nodeValue;
+		}
+		return $this->form;
+	}
+
+	/**
+	 * Return medic levels
+	 *
+	 * @return Integer
+	 */
+	public function getMedicLevels()
+	{
+		if(!isset($this->medic) || $this->medic === null)
+		{
+			$this->medic = $this->getXml()->getElementsByTagName('MedicLevels')->item(0)->nodeValue;
+		}
+		return $this->medic;
+	}
+
+	/**
+	 * Return spokesperson levels
+	 *
+	 * @return Integer
+	 */
+	public function getSpokespersonLevels()
+	{
+		if(!isset($this->spoke) || $this->spoke === null)
+		{
+			$this->spoke = $this->getXml()->getElementsByTagName('SpokespersonLevels')->item(0)->nodeValue;
+		}
+		return $this->spoke;
+	}
+
+	/**
+	 * Return sport psychologist levels
+	 *
+	 * @return Integer
+	 */
+	public function getSportPsychologistLevels()
+	{
+		if(!isset($this->psycho) || $this->psycho === null)
+		{
+			$this->psycho = $this->getXml()->getElementsByTagName('SportPsychologistLevels')->item(0)->nodeValue;
+		}
+		return $this->psycho;
 	}
 
 	/**
@@ -6743,208 +7121,195 @@ class HTYouthSquad extends HTXml
 		return $this->youthLevel;
 	}
 }
-class HTSpecialists extends HTXml
+class HTStaffMembers extends HTGlobal
 {
-	private $money = null;
-	private $assistantTrainers = null;
-	private $assistantTrainersCost = null;
-	private $psychologists = null;
-	private $psychologistsCost = null;
-	private $pressSpokesmen = null;
-	private $pressSpokesmenCost = null;
-	private $physiotherapists = null;
-	private $physiotherapistsCost = null;
-	private $doctors = null;
-	private $doctorsCost = null;
-	private $totalCosts = null;
-	const BASE_COST = 18000;
+	private $staff = array();
+	private $staffNumber = null;
+	private $totalStaffs = null;
+	private $totalCosts = array();
+
+	/**
+	 * Return number of staffs
+	 *
+	 * @return Integer
+	 */
+	public function getNumberStaffs()
+	{
+		if(!isset($this->staffNumber) || $this->staffNumber === null)
+		{
+			$this->staffNumber = $this->getXml()->getElementsByTagName('Staff')->length;
+		}
+		return $this->staffNumber;
+	}
+
+	/**
+	 * Return HTStaff object
+	 *
+	 * @param Integer $index
+	 * @return HTStaff
+	 */
+	public function getStaff($index)
+	{
+		$index = round($index);
+		if($index > 0 && $index <= $this->getNumberStaffs())
+		{
+			--$index;
+			if(!isset($this->staff[$index]) || $this->staff[$index] === null)
+			{
+				$xpath = new DOMXPath($this->getXml());
+				$nodeList = $xpath->query('//Staff');
+				$staff = new DOMDocument('1.0', 'UTF-8');
+				$staff->appendChild($staff->importNode($nodeList->item($index), true));
+				$this->staff[$index] = new HTStaff($staff);
+			}
+			return $this->staff[$index];
+		}
+		return null;
+	}
+
+	/**
+	 * Return total staff members
+	 *
+	 * @return Integer
+	 */
+	public function getTotalStaffMembers()
+	{
+		if(!isset($this->totalStaffs) || $this->totalStaffs === null)
+		{
+			$this->totalStaffs = $this->getXml()->getElementsByTagName('TotalStaffMembers')->item(0)->nodeValue;
+		}
+		return $this->totalStaffs;
+	}
+
+	/**
+	 * Return staff total costs
+	 *
+	 * @param Integer $currency (Constant taken from HTMoney class)
+	 * @return Integer
+	 */
+	public function getTotalCosts($currency = null)
+	{
+		if(!isset($this->totalCosts[$currency]) || $this->totalCosts[$currency] === null)
+		{
+			$this->totalCosts[$currency] = $this->getXml()->getElementsByTagName('TotalCost')->item(0)->nodeValue;
+			if($currency !== null)
+			{
+				$this->totalCosts[$currency] = HTMoney::convert($this->totalCosts[$currency], $currency);
+			}
+		}
+		return $this->totalCosts[$currency];
+	}
+}
+class HTStaff extends HTXml
+{
+	private $name = null;
+	private $id = null;
+	private $type = null;
+	private $level = null;
+	private $hire = array();
+	private $cost = array();
 
 	/**
 	 * @param DOMDocument $xml
 	 */
-	public function __construct($xml, $money)
+	public function __construct($xml)
 	{
 		$this->xmlText = $xml->saveXML();
 		$this->xml = $xml;
-		$this->money = $money;
 	}
 
 	/**
-	 * Return number of assistant trainers
+	 * Return staff name
 	 *
-	 * @return Integer
+	 * @return String
 	 */
-	public function getAssistantTrainers()
+	public function getName()
 	{
-		if(!isset($this->assistantTrainers) || $this->assistantTrainers === null)
+		if(!isset($this->name) || $this->name === null)
 		{
-			$this->assistantTrainers = $this->getXml()->getElementsByTagName('AssistantTrainers')->item(0)->nodeValue;
+			$this->name = $this->getXml()->getElementsByTagName('Name')->item(0)->nodeValue;
 		}
-		return $this->assistantTrainers;
+		return $this->name;
 	}
 
 	/**
-	 * Return assistant trainers cost
+	 * Return staff id
 	 *
 	 * @return Integer
 	 */
-	public function getAssistantTrainersCost()
+	public function getId()
 	{
-		if(!isset($this->assistantTrainersCost) || $this->assistantTrainersCost === null)
+		if(!isset($this->id) || $this->id === null)
 		{
-			$this->assistantTrainersCost = $this->getAssistantTrainers() * self::BASE_COST ;
-			if($this->money !== null)
+			$this->id = $this->getXml()->getElementsByTagName('StaffId')->item(0)->nodeValue;
+		}
+		return $this->id;
+	}
+
+	/**
+	 * Return staff type
+	 *
+	 * @return Integer
+	 */
+	public function getType()
+	{
+		if(!isset($this->type) || $this->type === null)
+		{
+			$this->type = $this->getXml()->getElementsByTagName('StaffType')->item(0)->nodeValue;
+		}
+		return $this->type;
+	}
+
+	/**
+	 * Return staff level
+	 *
+	 * @return Integer
+	 */
+	public function getLevel()
+	{
+		if(!isset($this->level) || $this->level === null)
+		{
+			$this->level = $this->getXml()->getElementsByTagName('StaffLevel')->item(0)->nodeValue;
+		}
+		return $this->level;
+	}
+
+	/**
+	 * Return staff hired date
+	 *
+	 * @param String $format (php date() function format)
+	 * @return String
+	 */
+	public function getHiredDate($format = null)
+	{
+		if(!isset($this->hire[$format]) || $this->hire[$format] === null)
+		{
+			$this->hire[$format] = $this->getXml()->getElementsByTagName('HiredDate')->item(0)->nodeValue;
+			if($format !== null)
 			{
-				$this->assistantTrainersCost = HTMoney::convert($this->assistantTrainersCost, $this->money);
+				$this->hire[$format] = HTFunction::convertDate($this->hire[$format], $format);
 			}
 		}
-		return $this->assistantTrainersCost;
+		return $this->hire[$format];
 	}
 
 	/**
-	 * Return number of psychologists
+	 * Return staff cost
 	 *
+	 * @param Integer $currency (Constant taken from HTMoney class)
 	 * @return Integer
 	 */
-	public function getPsychologists()
+	public function getCost($currency = null)
 	{
-		if(!isset($this->psychologists) || $this->psychologists === null)
+		if(!isset($this->cost[$currency]) || $this->cost[$currency] === null)
 		{
-			$this->psychologists = $this->getXml()->getElementsByTagName('Psychologists')->item(0)->nodeValue;
-		}
-		return $this->psychologists;
-	}
-
-	/**
-	 * Return psychologists cost
-	 *
-	 * @return Integer
-	 */
-	public function getPsychologistsCost()
-	{
-		if(!isset($this->psychologistsCost) || $this->psychologistsCost === null)
-		{
-			$this->psychologistsCost = $this->getPsychologists() * self::BASE_COST ;
-			if($this->money !== null)
+			$this->cost[$currency] = $this->getXml()->getElementsByTagName('Cost')->item(0)->nodeValue;
+			if($currency !== null)
 			{
-				$this->psychologistsCost = HTMoney::convert($this->psychologistsCost, $this->money);
+				$this->cost[$currency] = HTMoney::convert($this->cost[$currency], $currency);
 			}
 		}
-		return $this->psychologistsCost;
-	}
-
-	/**
-	 * Return number of press spokemen
-	 *
-	 * @return Integer
-	 */
-	public function getPressSpoken()
-	{
-		if(!isset($this->pressSpokesmen) || $this->pressSpokesmen === null)
-		{
-			$this->pressSpokesmen = $this->getXml()->getElementsByTagName('PressSpokesmen')->item(0)->nodeValue;
-		}
-		return $this->pressSpokesmen;
-	}
-
-	/**
-	 * Return press spokemen cost
-	 *
-	 * @return Integer
-	 */
-	public function getPressSpokenCost()
-	{
-		if(!isset($this->pressSpokesmenCost) || $this->pressSpokesmenCost === null)
-		{
-			$this->pressSpokesmenCost = $this->getPressSpoken() * self::BASE_COST ;
-			if($this->money !== null)
-			{
-				$this->pressSpokesmenCost = HTMoney::convert($this->pressSpokesmenCost, $this->money);
-			}
-		}
-		return $this->pressSpokesmenCost;
-	}
-
-	/**
-	 * Return number of physiotherapists
-	 *
-	 * @return Integer
-	 */
-	public function getPhysiotherapists()
-	{
-		if(!isset($this->physiotherapists) || $this->physiotherapists === null)
-		{
-			$this->physiotherapists = $this->getXml()->getElementsByTagName('Physiotherapists')->item(0)->nodeValue;
-		}
-		return $this->physiotherapists;
-	}
-
-	/**
-	 * Return physiotherapists cost
-	 *
-	 * @return Integer
-	 */
-	public function getPhysiotherapistsCost()
-	{
-		if(!isset($this->physiotherapistsCost) || $this->physiotherapistsCost === null)
-		{
-			$this->physiotherapistsCost = $this->getPhysiotherapists() * self::BASE_COST ;
-			if($this->money !== null)
-			{
-				$this->physiotherapistsCost = HTMoney::convert($this->physiotherapistsCost, $this->money);
-			}
-		}
-		return $this->physiotherapistsCost;
-	}
-
-	/**
-	 * Return number of doctors
-	 *
-	 * @return Integer
-	 */
-	public function getDoctors()
-	{
-		if(!isset($this->doctors) || $this->doctors === null)
-		{
-			$this->doctors = $this->getXml()->getElementsByTagName('Doctors')->item(0)->nodeValue;
-		}
-		return $this->doctors;
-	}
-
-	/**
-	 * Return doctors cost
-	 *
-	 * @return Integer
-	 */
-	public function getDoctorsCost()
-	{
-		if(!isset($this->doctorsCost) || $this->doctorsCost === null)
-		{
-			$this->doctorsCost = $this->getDoctors() * self::BASE_COST ;
-			if($this->money !== null)
-			{
-				$this->doctorsCost = HTMoney::convert($this->doctorsCost, $this->money);
-			}
-		}
-		return $this->doctorsCost;
-	}
-
-	/**
-	 * Return total specialists costs
-	 *
-	 * @return Integer
-	 */
-	public function getTotalCosts()
-	{
-		if(!isset($this->totalCosts) || $this->totalCosts === null)
-		{
-			$this->totalCosts = $this->getAssistantTrainersCost()
-												+	$this->getPsychologistsCost()
-												+	$this->getPressSpokenCost()
-												+	$this->getPhysiotherapistsCost()
-												+	$this->getDoctorsCost();
-		}
-		return $this->totalCosts;
+		return $this->cost[$currency];
 	}
 }
 class HTTeam extends HTCommonTeam
@@ -11315,125 +11680,484 @@ class HTEconomyCostsLast extends HTEconomyCosts
 class HTMoney
 {
 	const	AlIraq = 5	;
+	const	LeagueID128 = 5	;
+	const	CountryID135 = 5	;
+
 	const	AlJazair = 0.1 ;
+	const	LeagueID118 = 0.1 ;
+	const	CountryID126 = 0.1 ;
+
 	const	AlKuwayt = 25	;
+	const	LeagueID127 = 25	;
+	const	CountryID134 = 25	;
+
 	const	AlMaghrib = 1	;
+	const LeagueID77 = 1 ;
+	const CountryID72 = 1 ;
+
 	const	AlUrdun = 5	;
+	const	LeagueID106 = 5	;
+	const	CountryID103 = 5	;
+
 	const	AlYaman = 0.1 ;
+	const	LeagueID133 = 0.1 ;
+	const	CountryID139 = 0.1 ;
+
 	const	Andorra = 10	;
+	const	LeagueID105 = 10	;
+	const	CountryID101 = 10	;
+
 	const	Angola = 0.1 ;
+	const	LeagueID130 = 0.1 ;
+	const	CountryID137 = 0.1 ;
+
 	const	Argentina = 10	;
+	const	LeagueID7 = 10	;
+	const	CountryID7 = 10	;
+
 	const	Azerbaycan = 10	;
+	const	LeagueID129 = 10	;
+	const	CountryID133 = 10	;
+
 	const	Bahrain = 20	;
+	const	LeagueID123 = 20	;
+	const	CountryID129 = 20	;
+
 	const	Bangladesh = 0.2 ;
+	const	LeagueID132 = 0.2 ;
+	const	CountryID138 = 0.2 ;
+
 	const	Barbados = 5	;
+	const	LeagueID124 = 5	;
+	const	CountryID130 = 5	;
+
 	const	Belarus = 5	;
+	const	LeagueID91 = 5	;
+	const	CountryID87 = 5	;
+
 	const	Belgie = 10	;
+	const	LeagueID44 = 10	;
+	const	CountryID38 = 10	;
+
 	const	Benin = 10	;
+	const	LeagueID139 = 10	;
+	const	CountryID147 = 10	;
+
 	const	Bolivia = 1	;
+	const	LeagueID74 = 1	;
+	const	CountryID69 = 1	;
+
 	const	BosniaAndHercegovina = 5	;
+	const	LeagueID69 = 5	;
+	const	CountryID63 = 5	;
+
 	const	Brasil = 5	;
+	const	LeagueID16 = 5	;
+	const	CountryID22 = 5	;
+
 	const	Bulgaria = 5	;
+	const	LeagueID62 = 5	;
+	const	CountryID55 = 5	;
+
 	const	CaboVerde = 0.1 ;
+	const	LeagueID125 = 0.1 ;
+	const	CountryID131 = 0.1 ;
+
 	const	Canada = 5	;
+	const	LeagueID17 = 5	;
+	const	CountryID14 = 5	;
+
 	const	CeskaRepublika = 0.25 ;
+	const	LeagueID52 = 0.25 ;
+	const	CountryID46 = 0.25 ;
+
 	const	Chile = 50	;
+	const	LeagueID18 = 50	;
+	const	CountryID17 = 50	;
+
 	const	China = 1	;
+	const	LeagueID34 = 1	;
+	const	CountryID28 = 1	;
+
 	const	ChineseTaipei = 10	;
+	const	LeagueID60 = 10	;
+	const	CountryID52 = 10	;
+
 	const	Colombia = 10	;
+	const	LeagueID19 = 10	;
+	const	CountryID18 = 10	;
+
 	const	CostaRica = 4	;
+	const	LeagueID81 = 4	;
+	const	CountryID77 = 4	;
+
 	const	IvoryCost = 20	;
+	const	LeagueID126 = 20	;
+	const	CountryID132 = 20	;
+
 	const	CrnaGora = 10	;
+	const	LeagueID131 = 10	;
+	const	CountryID136 = 10	;
+
 	const	Cymru = 15	;
+	const	LeagueID61 = 15	;
+	const	CountryID56 = 15	;
+
 	const	Cyprus = 5	;
+	const	LeagueID89 = 5	;
+	const	CountryID82 = 5	;
+
 	const	Danmark = 1	;
+	const	LeagueID11 = 1	;
+	const	CountryID10 = 1	;
+
 	const	Deutschland = 10	;
+	const	LeagueID3 = 10	;
+	const	CountryID3 = 10	;
+
 	const	Ecuador = 10	;
+	const	LeagueID73 = 10	;
+	const	CountryID68 = 10	;
+
 	const	Eesti = 0.5 ;
+	const	LeagueID56 = 0.5 ;
+	const	CountryID47 = 0.5 ;
+
 	const	ElSalvador = 10	;
+	const	LeagueID100 = 10	;
+	const	CountryID96 = 10	;
+
 	const	England = 15	;
+	const	LeagueID2 = 15	;
+	const	CountryID2 = 15	;
+
 	const	Espana = 10	;
+	const	LeagueID36 = 10	;
+	const	CountryID35 = 10	;
+
 	const	Foroyar = 1	;
+	const	LeagueID76 = 1	;
+	const	CountryID71 = 1	;
+
 	const	France = 10	;
+	const	LeagueID5 = 10	;
+	const	CountryID5 = 10	;
+
 	const	Guatemala = 10	;
+	const	LeagueID107 = 10	;
+	const	CountryID102 = 10	;
+
 	const	Hanguk = 10	;
+	const	LeagueID30 = 10	;
+	const	CountryID29 = 10	;
+
 	const	Hayastan = 20	;
+	const	LeagueID122 = 20	;
+	const	CountryID104 = 20	;
+
 	const	Hellas = 10	;
+	const	LeagueID50 = 10	;
+	const	CountryID45 = 10	;
+
 	const	Honduras = 5	;
+	const	LeagueID99 = 5	;
+	const	CountryID95 = 5	;
+
 	const	HongKong = 1	;
+	const	LeagueID59 = 1	;
+	const	CountryID53 = 1	;
+
 	const	Hrvatska = 1	;
+	const	LeagueID58 = 1	;
+	const	CountryID42 = 1	;
+
 	const	India = 0.25 ;
+	const	LeagueID20 = 0.25 ;
+	const	CountryID27 = 0.25 ;
+
 	const	Indonesia = 1	;
+	const	LeagueID54 = 1	;
+	const	CountryID49 = 1	;
+
 	const	Iran = 1	;
+	const	LeagueID85 = 1	;
+	const	CountryID80 = 1	;
+
 	const	Ireland = 10	;
+	const	LeagueID21 = 10	;
+	const	CountryID16 = 10	;
+
 	const	Island = 0.1 ;
+	const	LeagueID38 = 0.1 ;
+	const	CountryID37 = 0.1 ;
+
 	const	Israel = 2	;
+	const	LeagueID63 = 2	;
+	const	CountryID51 = 2	;
+
 	const	Italia = 10	;
+	const	LeagueID4 = 10	;
+	const	CountryID4 = 10	;
+
 	const	Jamaica = 0.5 ;
+	const	LeagueID94 = 0.5 ;
+	const	CountryID89 = 0.5 ;
+
 	const	Kazakhstan = 0.1 ;
+	const	LeagueID112 = 0.1 ;
+	const	CountryID122 = 0.1 ;
+
 	const	Kenya = 0.5 ;
+	const	LeagueID95 = 0.5 ;
+	const	CountryID90 = 0.5 ;
+
 	const	Kyrgyzstan = 0.2 ;
+	const	LeagueID102 = 0.2 ;
+	const	CountryID98 = 0.2 ;
+
 	const	Latvija = 20	;
+	const	LeagueID53 = 20	;
+	const	CountryID48 = 20	;
+
 	const	Letzebuerg = 10	;
+	const	LeagueID84 = 10	;
+	const	CountryID79 = 10	;
+
 	const	Liechtenstein = 5	;
+	const	LeagueID117 = 5	;
+	const	CountryID125 = 5	;
+
 	const	Lietuva = 2.5 ;
+	const	LeagueID66 = 2.5 ;
+	const	CountryID61 = 2.5 ;
+
 	const	Lubnan = 5	;
+	const	LeagueID120 = 5	;
+	const	CountryID128 = 5	;
+
 	const	Magyarorszag = 50	;
+	const	LeagueID51 = 50	;
+	const	CountryID44 = 50	;
+
 	const	Makedonija = 0.5 ;
+	const	LeagueID97 = 0.5 ;
+	const	CountryID92 = 0.5 ;
+
 	const	Malaysia = 2.5 ;
+	const	LeagueID45 = 2.5 ;
+	const	CountryID39 = 2.5 ;
+
 	const	Malta = 10	;
+	const	LeagueID101 = 10	;
+	const	CountryID97 = 10	;
+
 	const	Mexico = 1	;
+	const	LeagueID6 = 1	;
+	const	CountryID6 = 1	;
+
 	const	Misr = 2.5 ;
+	const	LeagueID33 = 2.5 ;
+	const	CountryID32 = 2.5 ;
+
 	const	Mocambique = 0.4 ;
+	const	LeagueID135 = 0.4 ;
+	const	CountryID142 = 0.4 ;
+
 	const	Moldova = 0.5 ;
+	const	LeagueID103 = 0.5 ;
+	const	CountryID99 = 0.5 ;
+
 	const	MongolUls = 5	;
+	const	LeagueID119 = 5	;
+	const	CountryID127 = 5	;
+
 	const	Nederland = 10	;
+	const	LeagueID14 = 10	;
+	const	CountryID12 = 10	;
+
 	const	NegaraBruneiDarussalam = 5	;
+	const	LeagueID136 = 5	;
+	const	CountryID143 = 5	;
+
 	const	Nicaragua = 0.5 ;
+	const	LeagueID111 = 0.5 ;
+	const	CountryID121 = 0.5 ;
+
 	const	Nigeria = 0.1 ;
+	const	LeagueID75 = 0.1 ;
+	const	CountryID70 = 0.1 ;
+
 	const	Nippon = 0.1 ;
+	const	LeagueID22 = 0.1 ;
+	const	CountryID25 = 0.1 ;
+
 	const	Norge = 1	;
+	const	LeagueID9 = 1	;
+	const	CountryID9 = 1	;
+
 	const	NorthernIreland = 15	;
+	const	LeagueID93 = 15	;
+	const	CountryID88 = 15	;
+
 	const	Oceania = 5	;
+	const	LeagueID15 = 5	;
+	const	CountryID13 = 5	;
+
 	const	Osterreich = 10	;
+	const	LeagueID39 = 10	;
+	const	CountryID33 = 10	;
+
 	const	Pakistan = 0.2 ;
+	const	LeagueID71 = 0.2 ;
+	const	CountryID64 = 0.2 ;
+
 	const	Panama = 10	;
+	const	LeagueID96 = 10	;
+	const	CountryID91 = 10	;
+
 	const	Paraguay = 2	;
+	const	LeagueID72 = 2	;
+	const	CountryID67 = 2	;
+
 	const	Peru = 10	;
+	const	LeagueID23 = 10	;
+	const	CountryID21 = 10	;
+
 	const	Philippines = 0.25 ;
+	const	LeagueID55 = 0.25 ;
+	const	CountryID50 = 0.25 ;
+
 	const	Polska = 2.5 ;
+	const	LeagueID24 = 2.5 ;
+	const	CountryID26 = 2.5 ;
+
 	const	Portugal = 10	;
+	const	LeagueID25 = 10	;
+	const	CountryID23 = 10	;
+
 	const	PratehKampuchea = 2.5 ;
+	const	LeagueID138 = 2.5 ;
+	const	CountryID145 = 2.5 ;
+
 	const	PrathetThai = 0.25 ;
+	const	LeagueID31 = 0.25 ;
+	const	CountryID30 = 0.25 ;
+
 	const	RepublicOfGhana = 10	;
+	const	LeagueID137 = 10	;
+	const	CountryID144 = 10	;
+
 	const	RepublicaDominicana = 0.5 ;
+	const	LeagueID88 = 0.5 ;
+	const	CountryID83 = 0.5 ;
+
 	const	Romania = 0.5 ;
+	const	LeagueID37 = 0.5 ;
+	const	CountryID36 = 0.5 ;
+
 	const	Rossiya = 0.25 ;
+	const	LeagueID35 = 0.25 ;
+	const	CountryID34 = 0.25 ;
+
 	const	Sakartvelo = 5	;
+	const	LeagueID104 = 5	;
+	const	CountryID100 = 5	;
+
 	const	SaudiArabia = 2.5 ;
+	const	LeagueID79 = 2.5 ;
+	const	CountryID75 = 2.5 ;
+
 	const	Schweiz = 5	;
+	const	LeagueID46 = 5	;
+	const	CountryID40 = 5	;
+
 	const	Scotland = 15	;
+	const	LeagueID26 = 15	;
+	const	CountryID15 = 15	;
+
 	const	Senegal = 20	;
+	const	LeagueID121 = 20	;
+	const	CountryID86 = 20	;
+
 	const	Shqiperia = 50	;
+	const	LeagueID98 = 50	;
+	const	CountryID94 = 50	;
+
 	const	Singapore = 5	;
+	const	LeagueID47 = 5	;
+	const	CountryID41 = 5	;
+
 	const	Slovenija = 10	;
+	const	LeagueID64 = 10	;
+	const	CountryID57 = 10	;
+
 	const	Slovensko = 0.2 ;
+	const	LeagueID67 = 0.2 ;
+	const	CountryID66 = 0.2 ;
+
 	const	SouthAfrica = 1.25 ;
+	const	LeagueID27 = 1.25 ;
+	const	CountryID24 = 1.25 ;
+
 	const	Srbija = 1	;
+	const	LeagueID57 = 1	;
+	const	CountryID43 = 1	;
+
 	const	Suomi = 10	;
+	const	LeagueID12 = 10	;
+	const	CountryID11 = 10	;
+
 	const	Suriname = 5	;
+	const	LeagueID113 = 5	;
+	const	CountryID123 = 5	;
+
 	const	Suriyah = 10	;
+	const	LeagueID140 = 10	;
+	const	CountryID148 = 10	;
+
 	const	Sverige = 1	;
+	const	LeagueID1 = 1	;
+	const	CountryID1 = 1	;
+
 	const	Tounes = 7	;
+	const	LeagueID80 = 7	;
+	const	CountryID76 = 7	;
+
 	const	TrinidadAndTobago = 1	;
+	const	LeagueID110 = 1	;
+	const	CountryID105 = 1	;
+
 	const	Turkiye = 10	;
+	const	LeagueID32 = 10	;
+	const	CountryID31 = 10	;
+
 	const	Ukraina = 2	;
+	const	LeagueID68 = 2	;
+	const	CountryID62 = 2	;
+
 	const	Uman = 20	;
+	const	LeagueID134 = 20	;
+	const	CountryID140 = 20	;
+
 	const	UnitedArabEmirates = 4	;
+	const	LeagueID83 = 4	;
+	const	CountryID78 = 4	;
+
 	const	Uruguay = 1	;
+	const	LeagueID28 = 1	;
+	const	CountryID19 = 1	;
+
 	const	USA = 10	;
+	const	LeagueID8 = 10	;
+	const	CountryID8 = 10	;
+
 	const	Venezuela = 10	;
+	const	LeagueID29 = 10	;
+	const	CountryID20 = 10	;
+
 	const	Vietnam = 1	;
+	const	LeagueID70 = 1	;
+	const	CountryID65 = 1	;
 
 	/**
 	 * Convert a money amount into country currency
@@ -14599,6 +15323,316 @@ class HTTransfer extends HTXml
 		return $this->tsi;
 	}
 }
+class HTCurrentBids extends HTGlobal
+{
+	private $teamId = null;
+	private $bidsNumber = null;
+	private $bids = array();
+
+	/**
+	 * Return team id
+	 *
+	 * @return Integer
+	 */
+	public function getTeamId()
+	{
+		if(!isset($this->teamId) || $this->teamId === null)
+		{
+			$this->teamId = $this->getXml()->getElementsByTagName('TeamId')->item(0)->nodeValue;
+		}
+		return $this->teamId;
+	}
+
+	/**
+	 * Return number of bids
+	 *
+	 * @return Integer
+	 */
+	public function getNumberBids()
+	{
+		if(!isset($this->bidsNumber) || $this->bidsNumber === null)
+		{
+			$this->bidsNumber = $this->getXml()->getElementsByTagName('BidItem')->length;
+		}
+		return $this->bidsNumber;
+	}
+
+	/**
+	 * Return HTCurrentBid object
+	 *
+	 * @param Integer $index
+	 * @return HTCurrentBid
+	 */
+	public function getBid($index)
+	{
+		$index = round($index);
+		if($index > 0 && $index <= $this->getNumberBids())
+		{
+			--$index;
+			if(!isset($this->bids[$index]) || $this->bids[$index] === null)
+			{
+				$xpath = new DOMXPath($this->getXml());
+				$nodeList = $xpath->query('//BidItem');
+				$bid = new DOMDocument('1.0', 'UTF-8');
+				$bidNode = $nodeList->item($index);
+				$bid->appendChild($bid->importNode($bidNode, true));
+				$type = $bidNode->parentNode->getAttribute('TrackingTypeID');
+				$this->bids[$index] = new HTCurrentBid($bid, $type);
+			}
+			return $this->bids[$index];
+		}
+		return null;
+	}
+}
+class HTCurrentBidsType extends HTGlobal
+{
+	private $type = null;
+	private $teamId = null;
+	private $bidsNumber = null;
+	private $bids = array();
+
+	/**
+	 * Create an instance
+	 *
+	 * @param String $xml
+	 * @param Integer $type
+	 */
+	public function __construct($xml, $type)
+	{
+		parent::__construct($xml);
+		$this->type = $type;
+	}
+
+	/**
+	 * Return team id
+	 *
+	 * @return Integer
+	 */
+	public function getTeamId()
+	{
+		if(!isset($this->teamId) || $this->teamId === null)
+		{
+			$this->teamId = $this->getXml()->getElementsByTagName('TeamId')->item(0)->nodeValue;
+		}
+		return $this->teamId;
+	}
+
+	/**
+	 * Return number of bids
+	 *
+	 * @return Integer
+	 */
+	public function getNumberBids()
+	{
+		if(!isset($this->bidsNumber) || $this->bidsNumber === null)
+		{
+			$xpath = new DOMXPath($this->getXml());
+			$this->bidsNumber = $xpath->query('//BidItems[@TrackingTypeID="'.$this->type.'"]/BidItem')->length;
+		}
+		return $this->bidsNumber;
+	}
+
+	/**
+	 * Return HTCurrentBid object
+	 *
+	 * @param Integer $index
+	 * @return HTCurrentBid
+	 */
+	public function getBid($index)
+	{
+		$index = round($index);
+		if($index > 0 && $index <= $this->getNumberBids())
+		{
+			--$index;
+			if(!isset($this->bids[$index]) || $this->bids[$index] === null)
+			{
+				$xpath = new DOMXPath($this->getXml());
+				$nodeList = $xpath->query('//BidItems[@TrackingTypeID="'.$this->type.'"]/BidItem');
+				$bid = new DOMDocument('1.0', 'UTF-8');
+				$bid->appendChild($bid->importNode($nodeList->item($index), true));
+				$this->bids[$index] = new HTCurrentBid($bid, $this->type);
+			}
+			return $this->bids[$index];
+		}
+		return null;
+	}
+}
+class HTCurrentBid extends HTXml
+{
+	private $type = null;
+	private $transferId = null;
+	private $playerId = null;
+	private $playerName = null;
+	private $deadline = array();
+	private $hasbid = null;
+	private $bid = array();
+	private $teamId = null;
+	private $teamName = null;
+
+	const BID_CATEGORY_SELLING = 1;
+	const BID_CATEGORY_BUYING = 2;
+	const BID_CATEGORY_MOTHERCLUB = 3;
+	const BID_CATEGORY_PREVIOUSTEAM = 4;
+	const BID_CATEGORY_HOTLISTED = 5;
+	const BID_CATEGORY_LOSING = 8;
+	const BID_CATEGORY_FINISHED = 9;
+	const BID_CATEGORY_PROSPECTS = 10;
+
+	/**
+	 * @param DOMDocument $xml
+	 * @param Integer $type
+	 */
+	public function __construct($xml, $type)
+	{
+		$this->xmlText = $xml->saveXML();
+		$this->xml = $xml;
+		$this->type = $type;
+	}
+
+	/**
+	 * Return type of bid
+	 *
+	 * @return Integer
+	 */
+	public function getType()
+	{
+		return $this->type;
+	}
+
+	/**
+	 * Return transfer id
+	 *
+	 * @return Integer
+	 */
+	public function getTransferId()
+	{
+		if(!isset($this->transferId) || $this->transferId === null)
+		{
+			$this->transferId = $this->getXml()->getElementsByTagName('TransferId')->item(0)->nodeValue;
+		}
+		return $this->transferId;
+	}
+
+	/**
+	 * Return player id
+	 *
+	 * @return Integer
+	 */
+	public function getPlayerId()
+	{
+		if(!isset($this->playerId) || $this->playerId === null)
+		{
+			$this->playerId = $this->getXml()->getElementsByTagName('PlayerId')->item(0)->nodeValue;
+		}
+		return $this->playerId;
+	}
+
+	/**
+	 * Return player name
+	 *
+	 * @return String
+	 */
+	public function getPlayerName()
+	{
+		if(!isset($this->playerName) || $this->playerName === null)
+		{
+			$this->playerName = $this->getXml()->getElementsByTagName('PlayerName')->item(0)->nodeValue;
+		}
+		return $this->playerName;
+	}
+
+	/**
+	 * Return bid deadline
+	 *
+	 * @param String $format (php date() function format)
+	 * @return String
+	 */
+	public function getDeadline($format = null)
+	{
+		if(!isset($this->deadline[$format]) || $this->deadline[$format] === null)
+		{
+			$this->deadline[$format] = $this->getXml()->getElementsByTagName('Deadline')->item(0)->nodeValue;
+			if($format !== null)
+			{
+				$this->deadline[$format] = HTFunction::convertDate($this->deadline[$format], $format);
+			}
+		}
+		return $this->deadline[$format];
+	}
+
+	/**
+	 * Return if a bid is placed
+	 *
+	 * @return Boolean
+	 */
+	public function hasBidPlaced()
+	{
+		if(!isset($this->hasbid) || $this->hasbid === null)
+		{
+			$this->hasbid = $this->getXml()->getElementsByTagName('Amount')->length;
+		}
+		return $this->hasbid;
+	}
+
+	/**
+	 * Return highest bid amount
+	 *
+	 * @param Integer $currency (Constant taken from HTMoney class)
+	 * @return Integer
+	 */
+	public function getHighestBidAmount($currency = null)
+	{
+		if($this->hasBidPlaced())
+		{
+			if(!isset($this->bid[$currency]) || $this->bid[$currency] === null)
+			{
+				$this->bid[$currency] = $this->getXml()->getElementsByTagName('Amount')->item(0)->nodeValue;
+				if($currency !== null)
+				{
+					$this->bid[$currency] = HTMoney::convert($this->bid[$currency], $currency);
+				}
+			}
+			return $this->bid[$currency];
+		}
+		return null;
+	}
+
+	/**
+	 * Return highest bid team id
+	 *
+	 * @return Integer
+	 */
+	public function getHighestBidTeamId()
+	{
+		if($this->hasBidPlaced())
+		{
+			if(!isset($this->teamId) || $this->teamId === null)
+			{
+				$this->teamId = $this->getXml()->getElementsByTagName('TeamId')->item(0)->nodeValue;
+			}
+			return $this->teamId;
+		}
+		return null;
+	}
+
+	/**
+	 * Return highest bid team name
+	 *
+	 * @return String
+	 */
+	public function getHighestBidTeamName()
+	{
+		if($this->hasBidPlaced())
+		{
+			if(!isset($this->teamName) || $this->teamName === null)
+			{
+				$this->teamName = $this->getXml()->getElementsByTagName('TeamName')->item(0)->nodeValue;
+			}
+			return $this->teamName;
+		}
+		return null;
+	}
+}
 class HTTeamPlayers extends HTCommonSubscriber
 {
 	private $numberPlayers = null;
@@ -15658,6 +16692,7 @@ class HTPlayer extends HTCommonSubscriber
 	private $askingPrice = null;
 	private $deadline = null;
 	private $highestbid = null;
+	private $autobid = null;
 	private $bidderTeamId = null;
 	private $bidderTeamName = null;
 	private $skillsAvailable = null;
@@ -16123,6 +17158,25 @@ class HTPlayer extends HTCommonSubscriber
 				$this->highestbid[$countryCurrency] = HTMoney::convert($this->getXml()->getElementsByTagName('HighestBid')->item(0)->nodeValue, $countryCurrency);
 			}
 			return $this->highestbid[$countryCurrency];
+		}
+		return null;
+	}
+
+	/**
+	 * Return maximum autobid set by user if any
+	 *
+	 * @param Integer $countryCurrency (Constant taken from HTMoney class)
+	 * @return Integer
+	 */
+	public function getMaxAutoBid($countryCurrency = null)
+	{
+		if($this->isTransferListed() && $this->getXml()->getElementsByTagName('MaxBid')->length)
+		{
+			if(!isset($this->autobid[$countryCurrency]) || $this->autobid[$countryCurrency] === null)
+			{
+				$this->autobid[$countryCurrency] = HTMoney::convert($this->getXml()->getElementsByTagName('MaxBid')->item(0)->nodeValue, $countryCurrency);
+			}
+			return $this->autobid[$countryCurrency];
 		}
 		return null;
 	}

@@ -3,10 +3,37 @@
 ------------------------------------------
 
 
+Version 2.20 [2014-04-14]
+-------------------------
+
+ * Add new constants to HTMoney class in order to use LeagueID and CountryID to get corresponding currency convertion
+ * New version 2.6 of playerdetails file
+ * New version 1.0 of currentbids file
+ * New version 1.4 of club file
+ * New version 1.0 of stafflist file
+ * New version 1.0 of staffavatars file
+ * New version 1.1 of youthplayerlist file
+ * New version 1.1 of youthplayerdetails file
+ * New placeMaxAutoBid() function in CHPPConnection class
+ * New getMaxAutoBid() function in HTPlayer class
+ * New getCurrentBids(), clearCurrentBids() and clearAllCurrentBids() functions in CHPPConnection class
+ * New getCurrentBidsByType(), clearCurrentBidsByType() and clearAllCurrentBidsByType() functions in CHPPConnection class
+ * New ignoreTransfer() and deleteFinishedTransfers() functions in CHPPConnection class
+ * New HTCurrentBids, HTCurrentBidsType and HTCurrentBid classes
+ * New getAssistantTrainerLevels(), getFinancialDirectorLevels(), getFormCoachLevels(), getMedicLevels(), getSpokespersonLevels() and getSportPsychologistLevels() functions in HTClub class
+ * New getStaffMembers(), clearStaffMembers() and clearAllStaffMembers() functions in CHPPConnection class
+ * New HTStaffMembers and HTStaff classes
+ * New getStaffAvatars(), clearStaffAvatars() and clearAllStaffAvatars() functions in CHPPConnection class
+ * New HTStaffAvatars and HTStaffAvatar class
+
+ * Remove getSpecialists() function in HTClub class
+ * Remove HTSpecialists class
+
+
 Version 2.19.2 [2014-01-13]
 ---------------------------
 
- * Update getTeamSupporters() and getUserSupporters() with related classes due to xml changes 
+ * Update getTeamSupporters() and getUserSupporters() with related classes due to xml changes
 
 
 Version 2.19.1 [2014-01-06]
