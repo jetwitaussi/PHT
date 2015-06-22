@@ -225,10 +225,9 @@ class CHPPConnection
 		$params['oauth_signature'] = $signature;
 		uksort($params, 'strcmp');
 		$url = $this->buildOauthUrl(self::OAUTH_SERVER.self::REQUEST_URL, $params);
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Request url: ".$url);
-		}
+
+		$this->log("[OAUTH] Request url: ".$url);
+
 		$return = $this->fetchUrl($url, false);
 		$result = explode('&', $return);
 		foreach($result as $val)
@@ -236,11 +235,8 @@ class CHPPConnection
 			$t = explode('=', $val);
 			$$t[0] = urldecode($t[1]);
 		}
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Request token: ".$oauth_token);
-			$this->log("[OAUTH] Request token secret: ".$oauth_token_secret);
-		}
+		$this->log("[OAUTH] Request token: ".$oauth_token);
+		$this->log("[OAUTH] Request token secret: ".$oauth_token_secret);
 		$this->setOauthToken($oauth_token);
 		$this->oauthFirstTokenSecret = $oauth_token_secret;
 		$url = self::OAUTH_SERVER.$authPage.'?oauth_token='.urlencode($this->getOauthToken());
@@ -248,10 +244,8 @@ class CHPPConnection
 		{
 			$url .= '&scope='.$scope;
 		}
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Authorize url: ".$url);
-		}
+		$this->log("[OAUTH] Authorize url: ".$url);
+
 		return $url;
 	}
 
@@ -276,10 +270,7 @@ class CHPPConnection
 		$params['oauth_signature'] = $signature;
 		uksort($params, 'strcmp');
 		$url = $this->buildOauthUrl(self::OAUTH_SERVER.self::ACCESS_URL, $params);
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Access url: ".$url);
-		}
+		$this->log("[OAUTH] Access url: ".$url);
 		$return = $this->fetchUrl($url, false);
 		$result = explode('&', $return);
 		foreach($result as $val)
@@ -290,18 +281,12 @@ class CHPPConnection
 		if(isset($oauth_token))
 		{
 			$this->setOauthToken($oauth_token);
-			if($this->canLog())
-			{
-				$this->log("[OAUTH] Access token: ".$oauth_token);
-			}
+			$this->log("[OAUTH] Access token: ".$oauth_token);
 		}
 		if(isset($oauth_token_secret))
 		{
 			$this->setOauthTokenSecret($oauth_token_secret);
-			if($this->canLog())
-			{
-				$this->log("[OAUTH] Access token secret: ".$oauth_token_secret);
-			}
+			$this->log("[OAUTH] Access token secret: ".$oauth_token_secret);
 		}
 	}
 
@@ -334,10 +319,8 @@ class CHPPConnection
 		$params['oauth_signature'] = $signature;
 		uksort($params, 'strcmp');
 		$url = $this->buildOauthUrl(self::OAUTH_SERVER.self::CHECK_URL, $params);
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Check token url: ".$url);
-		}
+		$this->log("[OAUTH] Check token url: ".$url);
+
 		return new HTCheckToken($this->fetchUrl($url, false));
 	}
 
@@ -369,10 +352,7 @@ class CHPPConnection
 		$params['oauth_signature'] = $signature;
 		uksort($params, 'strcmp');
 		$url = $this->buildOauthUrl(self::OAUTH_SERVER.self::INVAL_URL, $params);
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Invalidate token: ".$url);
-		}
+		$this->log("[OAUTH] Invalidate token: ".$url);
 		$this->fetchUrl($url, false);
 	}
 
@@ -444,17 +424,12 @@ class CHPPConnection
 	{
 		$parts = array($method, $url, $this->buildHttpQuery($params));
 		$parts = implode('&', $this->urlencodeRfc3986($parts));
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Base string: ".$parts);
-		}
+		$this->log("[OAUTH] Base string: ".$parts);
 		$key_parts = array($this->consumerSecret, $token);
 		$key = implode('&', $this->urlencodeRfc3986($key_parts));
 		$sign = base64_encode(hash_hmac('sha1', $parts, $key, true));
-		if($this->canLog())
-		{
-			$this->log("[OAUTH] Generate signature: ".$sign);
-		}
+		$this->log("[OAUTH] Generate signature: ".$sign);
+
 		return $sign;
 	}
 
@@ -4885,22 +4860,17 @@ class CHPPConnection
 		{
 			curl_setopt($curl, CURLOPT_POST, false);
 		}
-		if($this->canLog())
-		{
 			$this->log("[URL] Start fetching ".$url);
-			if(count($postParams))
-			{
-				$this->log("[URL] POST data: ".var_export($postParams, true));
-			}
-			$startTime = microtime(true);
+		if(count($postParams))
+		{
+			$this->log("[URL] POST data: ".var_export($postParams, true));
 		}
+		$startTime = microtime(true);
+
 		$xmlData = curl_exec($curl);
 		$this->requestNumber++;
-		if($this->canLog())
-		{
-			$endTime = microtime(true);
-			$this->log("[URL] Fetch done in: ".($endTime-$startTime));
-		}
+		$endTime = microtime(true);
+		$this->log("[URL] Fetch done in: ".($endTime-$startTime));
 		curl_close($curl);
 		if($check === true)
 		{
@@ -4927,18 +4897,12 @@ class CHPPConnection
 		$filename = $tmpXml->getElementsByTagName('FileName');
 		if($filename->length == 0)
 		{
-			if($this->canLog())
-			{
-				$this->log("[ERROR] XML Error: ".$xmlData);
-			}
+			$this->log("[ERROR] XML Error: ".$xmlData);
 			throw new HTError($xmlData, true);
 		}
 		if($filename->item(0)->nodeValue == self::ERROR_FILE)
 		{
-			if($this->canLog())
-			{
-				$this->log("[ERROR] CHPP Error: ".$xmlData);
-			}
+			$this->log("[ERROR] CHPP Error: ".$xmlData);
 			throw new HTError($xmlData, true);
 		}
 	}
@@ -4968,10 +4932,7 @@ class CHPPConnection
 		{
 			$params['overrideIsSupporter'] = $this->overrideSupporter;
 		}
-		if($this->canLog())
-		{
-			$this->log("[PARAMS] Query params: ".var_export($params, true));
-		}
+		$this->log("[PARAMS] Query params: ".var_export($params, true));
 		$params = array_merge($params, array(
 			'oauth_consumer_key'=>$this->consumerKey,
 			'oauth_signature_method'=>$this->signatureMethod,
