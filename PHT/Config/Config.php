@@ -174,4 +174,16 @@ abstract class Config
     const STATS_ARENA_COMPETITION = 'CompOnly';
     const STATS_ARENA_LEAGUE = 'LeagueOnly';
     const STATS_ARENA_FRIENDLY = 'FriendlyOnly';
+    const TRAINING_SETPIECES = 2;
+    const TRAINING_DEFENDING = 3;
+    const TRAINING_SCORING = 4;
+    const TRAINING_CROSSING = 5;
+    const TRAINING_SHOOTING = 6;
+    const TRAINING_SHORTPASSES = 7;
+    const TRAINING_PLAYMAKING = 8;
+    const TRAINING_GOALKEEPING = 9;
+    const TRAINING_THROUGHPASSES = 10;
+    const TRAINING_DEFENSIVEPOSITIONS = 11;
+    const TRAINING_WINGATTACKS = 12;
+
 }

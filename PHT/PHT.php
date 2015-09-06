@@ -457,7 +457,7 @@ class PHT extends Config\Base
      * Set team training
      *
      * @param integer $teamId
-     * @param integer $type (0 General (Deprecated), 1 Stamina (Deprecated), 2 Set Pieces, 3 Defending, 4	Scoring, 5 Cross Pass (Winger), 6 Shooting, 7 Short Passes, 8 Playmaking, 9 Goaltending, 10 Through Passes, 11 Defensive Positions, 12 Wing Attacks)
+     * @param integer $type (see \PHT\Config\Config TRAINING_* constants)
      * @param integer $intensity
      * @param integer $stamina
      * @return boolean
@@ -1328,4 +1328,5 @@ class PHT extends Config\Base
     {
         return Wrapper\Stats::arenas($leagueId);
     }
+
 }

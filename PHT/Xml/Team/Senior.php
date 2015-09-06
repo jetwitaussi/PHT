@@ -1016,7 +1016,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Set team training
      *
-     * @param integer $type (0 General (Deprecated), 1 Stamina (Deprecated), 2 Set Pieces, 3 Defending, 4	Scoring, 5 Cross Pass (Winger), 6 Shooting, 7 Short Passes, 8 Playmaking, 9 Goaltending, 10 Through Passes, 11 Defensive Positions, 12 Wing Attacks)
+     * @param integer $type (see \PHT\Config\Config TRAINING_* constants)
      * @param integer $intensity
      * @param integer $stamina
      * @return boolean
@@ -1323,4 +1323,5 @@ class Senior extends Xml\HTSupporter
         $nodeList = $xpath->query("//Trophy");
         return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Trophy');
     }
+
 }
