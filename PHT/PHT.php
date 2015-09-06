@@ -559,7 +559,7 @@ class PHT extends Config\Base
      * Get senior team matches
      *
      * @param integer $teamId
-     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now - 28 days to now + 28 days)
+     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
      * @return \PHT\Xml\Team\Match\Listing
      */
     public function getSeniorMatches($teamId = null, $showBeforeDate = null)
@@ -571,7 +571,7 @@ class PHT extends Config\Base
      * Get youth team matches
      *
      * @param integer $teamId
-     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now - 28 days to now + 28 days)
+     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
      * @return \PHT\Xml\Team\Match\Listing
      */
     public function getYouthMatches($teamId = null, $showBeforeDate = null)

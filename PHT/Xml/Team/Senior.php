@@ -1032,7 +1032,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Get team matches
      *
-     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now - 28 days to now + 28 days)
+     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
      * @return \PHT\Xml\Team\Match\Listing
      */
     public function getMatches($showBeforeDate = null)

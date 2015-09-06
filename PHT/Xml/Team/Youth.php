@@ -330,7 +330,7 @@ class Youth extends Xml\File
     /**
      * Get team matches
      *
-     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now - 28 days to now + 28 days)
+     * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
      * @return \PHT\Xml\Team\Match\Listing
      */
     public function getMatches($showBeforeDate = null)
@@ -349,4 +349,5 @@ class Youth extends Xml\File
     {
         return Wrapper\Team\Youth::archives($this->getId(), $startDate, $endDate);
     }
+
 }
