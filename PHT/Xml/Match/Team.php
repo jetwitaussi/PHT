@@ -89,6 +89,33 @@ class Team extends Xml\Base
     }
 
     /**
+     * Return team orders
+     *
+     * @return \PHT\Xml\Match\Orders
+     */
+    public function getOrders()
+    {
+        if ($this->system == Config\Config::MATCH_YOUTH) {
+            return Wrapper\Match::youthorders($this->matchId, $this->getId());
+        } elseif ($this->system == Config\Config::MATCH_TOURNAMENT) {
+            return Wrapper\Match::tournamentorders($this->matchId, $this->getId());
+        }
+        return Wrapper\Match::seniororders($this->matchId, $this->getId());
+    }
+
+    /**
+     * Set orders and return match orders sent object
+     *
+     * @param \PHT\Config\Orders $orders
+     * @return \PHT\Xml\Match\Orders\Sent
+     * @throws \PHT\Exception\Exception
+     */
+    public function setOrders(\PHT\Config\Orders $orders)
+    {
+        return Wrapper\Match::setorders($orders, $this->getId());
+    }
+
+    /**
      * Return dress URI
      *
      * @return string

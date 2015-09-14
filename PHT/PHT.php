@@ -728,21 +728,9 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Match\Orders\Sent
      * @throws \PHT\Exception\Exception
      */
-    public function setMatchOrders($orders, $teamId = null)
+    public function setMatchOrders(\PHT\Config\Orders $orders, $teamId = null)
     {
-        if (!$orders instanceof Config\Orders) {
-            throw new Exception\Exception('Parameter $orders should be instance of \PHT\Config\Orders');
-        }
-        if ($orders->hasError()) {
-            throw new Exception\Exception('Parameter $orders has ' . $orders->getErrorNumber() . ' errors, please fix before sending');
-        }
-        $json = $orders->getJson();
-        $params = array('file' => 'matchorders', 'actionType' => 'setmatchorder', 'version' => Config\Version::MATCHORDERS, 'matchID' => $orders->getMatchId(), 'sourceSystem' => $orders->getSourceSystem());
-        if ($teamId !== null) {
-            $params['teamId'] = $teamId;
-        }
-        $url = Network\Request::buildUrl($params, array('lineup' => $json));
-        return new Xml\Match\Orders\Sent(Network\Request::fetchUrl($url, true, array('lineup' => $json)));
+        return Wrapper\Match::setorders($orders, $teamId);
     }
 
     /**
