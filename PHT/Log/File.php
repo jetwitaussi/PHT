@@ -51,7 +51,7 @@ class File extends AbstractLogger
      */
     private function buildMessage($level, $message, $context = array())
     {
-        return sprintf("%s|%s|%s %s\n", date('Y-m-d H:i:s'), strtoupper(constant('\PHT\Log\LoggerInterface::LEVEL_' . $level)), $message, $this->formatContext($context));
+        return sprintf("%s|%s|%s %s\n", date(Config\Config::$logTime), strtoupper(constant('\PHT\Log\LoggerInterface::LEVEL_' . $level)), $message, $this->formatContext($context));
     }
 
     /**

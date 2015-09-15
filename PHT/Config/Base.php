@@ -30,6 +30,9 @@ class Base
         if (isset($config['LOG_LEVEL'])) {
             Config::$logLevel = $config['LOG_LEVEL'];
         }
+        if (isset($config['LOG_TIME'])) {
+            Config::$logTime = $config['LOG_TIME'];
+        }
         if (isset($config['LOG_FILE'])) {
             Config::$logFile = $config['LOG_FILE'];
         }

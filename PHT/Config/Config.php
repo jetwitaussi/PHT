@@ -120,6 +120,13 @@ abstract class Config
     public static $logLevel = \PHT\Log\Level::ERROR;
 
     /**
+     * log time format, use php date() format
+     *
+     * @var string
+     */
+    public static $logTime = 'Y-m-d H:i:s';
+
+    /**
      * log file path
      *
      * @var string
