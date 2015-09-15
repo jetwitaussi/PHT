@@ -14,6 +14,7 @@
 namespace PHT\Config;
 
 use PHT\Exception;
+use PHT\Log;
 
 class Base
 {
@@ -23,19 +24,31 @@ class Base
      */
     public function __construct($config)
     {
+        if (isset($config['LOG_TYPE'])) {
+            Config::$logType = $config['LOG_TYPE'];
+        }
+        if (isset($config['LOG_LEVEL'])) {
+            Config::$logLevel = $config['LOG_LEVEL'];
+        }
+        if (isset($config['LOG_FILE'])) {
+            Config::$logFile = $config['LOG_FILE'];
+        }
+        $log = Log\Logger::getInstance();
         if (!isset($config['CONSUMER_KEY']) || !isset($config['CONSUMER_SECRET'])) {
+            $log->critical('[PHT] Missing configuration parameters: CONSUMER_KEY and CONSUMER_SECRET');
             throw new Exception\Exception("CONSUMER_KEY and CONSUMER_SECRET must be defined in PHT config");
         }
-
         Config::$consumerKey = $config['CONSUMER_KEY'];
         Config::$consumerSecret = $config['CONSUMER_SECRET'];
         if (isset($config['HT_SUPPORTER'])) {
             Config::$htSupporter = $config['HT_SUPPORTER'];
         }
         if (isset($config['CACHE']) && in_array($config['CACHE'], array('none', 'session', 'apc'))) {
+            $log->debug('[PHT] Use cache: ' . $config['CACHE']);
             Config::$cache = $config['CACHE'];
         }
         if (isset($config['CACHE']) && $config['CACHE'] == 'memcached' && isset($config['MEMCACHED_SERVER_IP'])) {
+            $log->debug('[PHT] Use cache: ' . $config['CACHE']);
             Config::$cache = $config['CACHE'];
             Config::$memcachedIp = $config['MEMCACHED_SERVER_IP'];
         }
@@ -54,15 +67,6 @@ class Base
         }
         if (isset($config['PROXY_PASSWORD'])) {
             Config::$proxyPasswd = $config['PROXY_PASSWORD'];
-        }
-        if (isset($config['LOG_TYPE'])) {
-            Config::$logType = $config['LOG_TYPE'];
-        }
-        if (isset($config['LOG_LEVEL'])) {
-            Config::$logLevel = $config['LOG_LEVEL'];
-        }
-        if (isset($config['LOG_FILE'])) {
-            Config::$logFile = $config['LOG_FILE'];
         }
         if (isset($config['OAUTH_TOKEN'])) {
             Config::$oauthToken = $config['OAUTH_TOKEN'];

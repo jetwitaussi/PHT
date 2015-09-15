@@ -14,8 +14,7 @@
 namespace PHT\Network;
 
 use PHT\Config;
-
-//use PHT\Log;
+use PHT\Log;
 
 class Auth
 {
@@ -44,6 +43,7 @@ class Auth
      */
     protected static function getAuthUrl($authPage, $callback, $scope)
     {
+        $log = Log\Logger::getInstance();
         $params = array(
             'oauth_consumer_key' => Config\Config::$consumerKey,
             'oauth_signature_method' => Request::SIGN_METHOD,
@@ -55,10 +55,8 @@ class Auth
         $signature = Request::buildSignature(Url::OAUTH_SERVER . Url::REQUEST_URL, $params);
         $params['oauth_signature'] = $signature;
         uksort($params, 'strcmp');
+        $log->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::REQUEST_URL, $params);
-
-        //$this->log("[OAUTH] Request url: ".$url);
-
         $oauth_token = $oauth_token_secret = null;
         $return = Request::fetchUrl($url, false);
         $result = explode('&', $return);
@@ -68,7 +66,7 @@ class Auth
         }
 
         if (!isset($oauth_token) || !isset($oauth_token_secret)) {
-            //$this->log("[OAUTH] No token received);
+            $log->error('[OAUTH] No request token received');
             return false;
         }
 
@@ -77,9 +75,9 @@ class Auth
             $url .= '&scope=' . $scope;
         }
 
-        //$this->log("[OAUTH] Request token: ".$oauth_token);
-        //$this->log("[OAUTH] Request token secret: ".$oauth_token_secret);
-        //$this->log("[OAUTH] Authorize url: ".$url);
+        $log->debug('[OAUTH] Request token: ' . $oauth_token);
+        $log->debug('[OAUTH] Request token secret: ' . $oauth_token_secret);
+        $log->debug('[OAUTH] Authorize url: ' . $url);
 
         $conf = new Config\AuthData();
         $conf->temporaryToken = $oauth_token_secret;
@@ -96,6 +94,7 @@ class Auth
      */
     public static function retrieveAccessToken($oauthFirstTokenSecret, $token, $verifier)
     {
+        $log = Log\Logger::getInstance();
         $params = array(
             'oauth_consumer_key' => Config\Config::$consumerKey,
             'oauth_signature_method' => Request::SIGN_METHOD,
@@ -108,10 +107,8 @@ class Auth
         $signature = Request::buildSignature(Url::OAUTH_SERVER . Url::ACCESS_URL, $params, $oauthFirstTokenSecret);
         $params['oauth_signature'] = $signature;
         uksort($params, 'strcmp');
+        $log->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::ACCESS_URL, $params);
-
-        //$this->log("[OAUTH] Access url: ".$url);
-
         $oauth_token = $oauth_token_secret = null;
         $return = Request::fetchUrl($url, false);
         $result = explode('&', $return);
@@ -121,12 +118,12 @@ class Auth
         }
 
         if (!isset($oauth_token) || !isset($oauth_token_secret)) {
-            //$this->log("[OAUTH] No token received);
+            $log->error('[OAUTH] No access token received');
             return false;
         }
 
-        //$this->log("[OAUTH] Access token: ".$oauth_token);
-        //$this->log("[OAUTH] Access token secret: ".$oauth_token_secret);
+        $log->debug('[OAUTH] Access token: ' . $oauth_token);
+        $log->debug('[OAUTH] Access token secret: ' . $oauth_token_secret);
 
         $conf = new Config\AuthData();
         $conf->oauthToken = $oauth_token;
@@ -161,9 +158,8 @@ class Auth
         $signature = Request::buildSignature(Url::OAUTH_SERVER . Url::CHECK_URL, $params, $oauthTokenSecret);
         $params['oauth_signature'] = $signature;
         uksort($params, 'strcmp');
+        Log\Logger::getInstance()->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::CHECK_URL, $params);
-        //$this->log("[OAUTH] Check token url: ".$url);
-
         return new Xml\Token(Request::fetchUrl($url, false));
     }
 
@@ -192,8 +188,8 @@ class Auth
         $signature = Request::buildSignature(Url::OAUTH_SERVER . Url::INVAL_URL, $params, $oauthTokenSecret);
         $params['oauth_signature'] = $signature;
         uksort($params, 'strcmp');
+        Log\Logger::getInstance()->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::INVAL_URL, $params);
-        //$this->log("[OAUTH] Invalidate token: ".$url);
         Request::fetchUrl($url, false);
     }
 }
