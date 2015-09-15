@@ -102,9 +102,11 @@ PROXY_IP               : set your proxy ip
 PROXY_PORT             : set your proxy port
 PROXY_USER             : set your proxy username
 PROXY_PASSWORD         : set your proxy password
+LOG_TYPE               : set log type, pht provides: 'file' and 'none', set a classname to use another logger
+LOG_LEVEL              : set minimum level of log (see \PHT\Log\Level constants)
+LOG_TIME               : set log time format (use php date() format)
+LOG_FILE               : set log filename, prefer full path name
 CACHE                  : will be used to set cache mechanism you want to use, not functional right now
 MEMCACHED_SERVER_IP    : will be used to set ip of memcached server, not functional right now
 MEMCACHED_SERVER_PORT  : will be used to set port of memcached server, not functional right now
-LOG_LEVEL              : will be used to set level of log (like debug, warn, error, ...), not functional right now
-LOG_FILE               : will be used to set log filename, not functional right now
 ```
