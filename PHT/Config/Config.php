@@ -105,12 +105,19 @@ abstract class Config
     public static $proxyPasswd;
 
     /**
-     * log level inside pht
-     * either 'none', 'info', 'warn', 'error'
+     * type of logger to use. pht provide two loggers: 'file' and 'none'
+     * you can use your own logger, set the class name as type value
      *
      * @var string
      */
-    public static $logLevel = 'none';
+    public static $logType = 'none';
+
+    /**
+     * minimum log level inside pht (see \PHT\Log\Level constants)
+     *
+     * @var string
+     */
+    public static $logLevel = \PHT\Log\Level::ERROR;
 
     /**
      * log file path

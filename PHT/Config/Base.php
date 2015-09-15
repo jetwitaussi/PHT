@@ -55,6 +55,9 @@ class Base
         if (isset($config['PROXY_PASSWORD'])) {
             Config::$proxyPasswd = $config['PROXY_PASSWORD'];
         }
+        if (isset($config['LOG_TYPE'])) {
+            Config::$logType = $config['LOG_TYPE'];
+        }
         if (isset($config['LOG_LEVEL'])) {
             Config::$logLevel = $config['LOG_LEVEL'];
         }
