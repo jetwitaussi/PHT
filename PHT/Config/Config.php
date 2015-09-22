@@ -57,10 +57,25 @@ abstract class Config
      * session = use php internal session
      * apc = use internal php apc
      * memcached = use memcached server
+     * memory = use php memory, not persistent upon user requests
      *
      * @var string
      */
     public static $cache = 'none';
+
+    /**
+     * define internal prefix to store cache data and avoid conflicts
+     *
+     * @var string
+     */
+    public static $cachePrefix = 'PHT_';
+
+    /**
+     * define cache ttl in seconds, 0 means unlimited cache
+     *
+     * @var integer
+     */
+    public static $cacheTtl = 3600;
 
     /**
      * memcached server ip

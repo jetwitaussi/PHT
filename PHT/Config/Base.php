@@ -46,7 +46,7 @@ class Base
         if (isset($config['HT_SUPPORTER'])) {
             Config::$htSupporter = $config['HT_SUPPORTER'];
         }
-        if (isset($config['CACHE']) && in_array($config['CACHE'], array('none', 'session', 'apc'))) {
+        if (isset($config['CACHE']) && in_array($config['CACHE'], array('none', 'session', 'apc', 'memory'))) {
             $log->debug('[PHT] Use cache: ' . $config['CACHE']);
             Config::$cache = $config['CACHE'];
         }
@@ -58,6 +58,12 @@ class Base
         if (isset($config['CACHE']) && $config['CACHE'] == 'memcached' && isset($config['MEMCACHED_SERVER_PORT'])) {
             Config::$cache = $config['CACHE'];
             Config::$memcachedPort = $config['MEMCACHED_SERVER_PORT'];
+        }
+        if (isset($config['CACHE_PREFIX'])) {
+            Config::$cachePrefix = $config['CACHE_PREFIX'];
+        }
+        if (isset($config['CACHE_TTL'])) {
+            Config::$cacheTtl = $config['CACHE_TTL'];
         }
         if (isset($config['PROXY_IP'])) {
             Config::$proxyIp = $config['PROXY_IP'];
