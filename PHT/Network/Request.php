@@ -16,6 +16,7 @@ namespace PHT\Network;
 use PHT\Config;
 use PHT\Exception;
 use PHT\Log;
+use PHT\Cache;
 
 class Request
 {
@@ -70,6 +71,28 @@ class Request
     public static function fetchUrl($url, $check = true, $postParams = array())
     {
         $log = Log\Logger::getInstance();
+        $cacheKey = null;
+        $infos = parse_url($url);
+        if ($infos['path'] == Url::CHPP_URL && !count($postParams)) {
+            $params = array();
+            parse_str($infos['query'], $params);
+            $params = array_diff_key($params, array('oauth_consumer_key' => '', 'oauth_signature_method' => '', 'oauth_timestamp' => '', 'oauth_nonce' => '', 'oauth_version' => '', 'oauth_signature' => ''));
+            $key = array();
+            foreach ($params as $k => $v) {
+                $key[] = $k . '=' . $v;
+            }
+            $cacheKey = implode('&', $key);
+            $log->debug('[CACHE] Get key: ' . $cacheKey);
+            $xmlData = Cache\Driver::getInstance()->get($cacheKey);
+            if ($xmlData !== false) {
+                $log->debug('[CACHE] Hit');
+                if ($check === true) {
+                    self::checkXmlData($xmlData);
+                }
+                return $xmlData;
+            }
+            $log->debug('[CACHE] Miss');
+        }
         $log->debug('[NETWORK] Init request: ' . $url);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -103,6 +126,14 @@ class Request
         curl_close($curl);
         if ($check === true) {
             self::checkXmlData($xmlData);
+        }
+        if ($cacheKey !== null) {
+            $done = Cache\Driver::getInstance()->set($cacheKey, $xmlData, Config\Config::$cacheTtl);
+            if($done) {
+                $log->debug('[CACHE] Save');
+            } else {
+                $log->debug('[CACHE] Fail');
+            }
         }
         return $xmlData;
     }
