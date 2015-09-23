@@ -80,6 +80,7 @@ class Orders
     private $penaltyTen = 0;
     private $penaltyEleven = 0;
     private $tactic = 0;
+    private $coachModifier = 0;
     private $speechLevel = 0;
     private $substitutionOne = null;
     private $substitutionTwo = null;
@@ -474,6 +475,16 @@ class Orders
     }
 
     /**
+     * Define coach modifier
+     *
+     * @param integer $level (from -10 to +10)
+     */
+    public function setCoachModifier($level)
+    {
+        $this->coachModifier = $level;
+    }
+
+    /**
      * Define match attitude
      *
      * @param integer $code (use class constant ATTITUDE_*)
@@ -625,6 +636,9 @@ class Orders
         if (!in_array($def . '-' . $mid . '-' . $for, $lineups)) {
             $this->errors[] = "Invalid formation: " . $def . '-' . $mid . '-' . $for;
         }
+        if ($this->coachModifier < -10 || $this->coachModifier > 10) {
+            $this->errors[] = "Invalid coach modifier: " . $this->coachModifier . ". Value must be between -10 and 10";
+        }
         if (count($team) != count(array_unique($team))) {
             $count = array_filter(array_count_values($team), create_function('$e', 'return $e>1;'));
             foreach ($count as $id => $use) {
@@ -725,6 +739,7 @@ class Orders
         );
         $json["settings"] = array(
             "tactic" => $this->tactic,
+            "coachModifier" => $this->coachModifier,
             "speechLevel" => $this->speechLevel,
             "newLineup" => ""
         );

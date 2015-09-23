@@ -22,7 +22,7 @@ class Version
     const AVATARS = '1.1';
     const BOOKMARKS = '1.0';
     const CHALLENGES = '1.5';
-    const CLUB = '1.4';
+    const CLUB = '1.5';
     const CUPMATCHES = '1.4';
     const CURRENTBIDS = '1.0';
     const ECONOMY = '1.3';
@@ -38,7 +38,7 @@ class Version
     const MATCHES = '2.8';
     const MATCHESARCHIVE = '1.3';
     const MATCHLINEUP = '1.8';
-    const MATCHORDERS = '2.3';
+    const MATCHORDERS = '2.4';
     const NATIONALPLAYERS = '1.3';
     const NATIONALTEAMDETAILS = '1.8';
     const NATIONALTEAMMATCHES = '1.3';

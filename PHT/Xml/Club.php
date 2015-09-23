@@ -108,6 +108,16 @@ class Club extends File
     }
 
     /**
+     * Return tactical assistant levels
+     *
+     * @return integer
+     */
+    public function getTacticalAssistantLevels()
+    {
+        return $this->getXml()->getElementsByTagName('TacticalAssistantLevels')->item(0)->nodeValue;
+    }
+
+    /**
      * Get old youth pull details
      *
      * @return \PHT\Xml\OldYouthPull

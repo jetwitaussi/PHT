@@ -253,6 +253,19 @@ class Orders extends Xml\File
     }
 
     /**
+     * Return coach modifier value
+     *
+     * @return integer
+     */
+    public function getCoachModifier()
+    {
+        if ($this->isDataAvailable() && strtolower($this->getXml()->getElementsByTagName('CoachModifier')->item(0)->getAttribute('Available')) == 'true') {
+            return $this->getXml()->getElementsByTagName('CoachModifier')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
      * Return number players
      *
      * @return integer
