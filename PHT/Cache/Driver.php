@@ -23,7 +23,7 @@ class Driver
      * Create cache instance based on pht configuration
      *
      * @return \PHT\Cache\CacheInterface
-     * @throws \InvalidArgumentException
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function getInstance()
     {

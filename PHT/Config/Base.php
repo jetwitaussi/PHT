@@ -20,7 +20,7 @@ class Base
 {
     /**
      * @param array $config
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function __construct($config)
     {
@@ -39,7 +39,7 @@ class Base
         $log = Log\Logger::getInstance();
         if (!isset($config['CONSUMER_KEY']) || !isset($config['CONSUMER_SECRET'])) {
             $log->critical('[PHT] Missing configuration parameters: CONSUMER_KEY and CONSUMER_SECRET');
-            throw new Exception\Exception("CONSUMER_KEY and CONSUMER_SECRET must be defined in PHT config");
+            throw new Exception\InvalidArgumentException("CONSUMER_KEY and CONSUMER_SECRET must be defined in PHT config");
         }
         Config::$consumerKey = $config['CONSUMER_KEY'];
         Config::$consumerSecret = $config['CONSUMER_SECRET'];

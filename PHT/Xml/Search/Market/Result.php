@@ -418,7 +418,7 @@ class Result extends Xml\Base
      * @param integer $amount bid amount
      * @param integer $maxAmount max bid amount (for automatic bid)
      * @return \PHT\Xml\Player\Senior
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function setBid($teamId, $countryCurrency, $amount = null, $maxAmount = null)
     {

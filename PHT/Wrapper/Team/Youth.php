@@ -75,12 +75,12 @@ class Youth
      * @param integer $teamId
      * @param string $showBeforeDate
      * @return \PHT\Xml\Team\Match\Listing
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function matches($teamId, $showBeforeDate = null)
     {
         if ($showBeforeDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $showBeforeDate)) {
-            throw new Exception\Exception('Parameter $showBeforeDate must have format yyyy-mm-dd');
+            throw new Exception\InvalidArgumentException('Parameter $showBeforeDate must have format yyyy-mm-dd');
         }
         $params = array('file' => 'matches', 'teamID' => $teamId, 'isYouth' => 'true', 'version' => Config\Version::MATCHES);
         if ($showBeforeDate !== null) {
@@ -95,15 +95,15 @@ class Youth
      * @param string $startDate
      * @param string $endDate
      * @return \PHT\Xml\Team\Match\Archive
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function archive($teamId, $startDate = null, $endDate = null)
     {
         if ($startDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $startDate)) {
-            throw new Exception\Exception('Parameter $startDate must have format yyyy-mm-dd');
+            throw new Exception\InvalidArgumentException('Parameter $startDate must have format yyyy-mm-dd');
         }
         if ($endDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $endDate)) {
-            throw new Exception\Exception('Parameter $endDate must have format yyyy-mm-dd');
+            throw new Exception\InvalidArgumentException('Parameter $endDate must have format yyyy-mm-dd');
         }
 
         Utils\Date::analyse($startDate, $endDate);

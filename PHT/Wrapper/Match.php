@@ -162,15 +162,15 @@ class Match
      * @param \PHT\Config\Orders $orders
      * @param integer $teamId
      * @return \PHT\Xml\Match\Orders\Sent
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function setorders($orders, $teamId = null)
     {
         if (!$orders instanceof Config\Orders) {
-            throw new Exception\Exception('Parameter $orders should be instance of \PHT\Config\Orders');
+            throw new Exception\InvalidArgumentException('Parameter $orders should be instance of \PHT\Config\Orders');
         }
         if ($orders->hasError()) {
-            throw new Exception\Exception('Parameter $orders has ' . $orders->getErrorNumber() . ' errors, please fix before sending');
+            throw new Exception\InvalidArgumentException('Parameter $orders has ' . $orders->getErrorNumber() . ' errors, please fix before sending');
         }
         $json = $orders->getJson();
         $params = array('file' => 'matchorders', 'actionType' => 'setmatchorder', 'version' => Config\Version::MATCHORDERS, 'matchID' => $orders->getMatchId(), 'sourceSystem' => $orders->getSourceSystem());

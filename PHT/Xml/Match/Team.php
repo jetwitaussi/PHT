@@ -108,7 +108,7 @@ class Team extends Xml\Base
      *
      * @param \PHT\Config\Orders $orders
      * @return \PHT\Xml\Match\Orders\Sent
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function setOrders(\PHT\Config\Orders $orders)
     {

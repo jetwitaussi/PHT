@@ -48,7 +48,7 @@ class PHT extends Config\Base
      *
      * @param \PHT\Config\Team $team
      * @return \PHT\Xml\Team\Senior
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function getSeniorTeam(\PHT\Config\Team $team = null)
     {
@@ -57,7 +57,7 @@ class PHT extends Config\Base
         }
 
         if (!$team instanceof Config\Team) {
-            throw new Exception\Exception('Parameter $team should be instanceof \PHT\Config\Team');
+            throw new Exception\InvalidArgumentException('Parameter $team should be instanceof \PHT\Config\Team');
         }
 
         if ($team->primary !== null) {
@@ -74,7 +74,7 @@ class PHT extends Config\Base
      *
      * @param \PHT\Config\Team $team
      * @return \PHT\Xml\Team\Youth
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function getYouthTeam(\PHT\Config\Team $team = null)
     {
@@ -83,7 +83,7 @@ class PHT extends Config\Base
         }
 
         if (!$team instanceof Config\Team) {
-            throw new Exception\Exception('Parameter $team should be instanceof \PHT\Config\Team');
+            throw new Exception\InvalidArgumentException('Parameter $team should be instanceof \PHT\Config\Team');
         }
 
         if ($team->primary !== null) {
@@ -472,12 +472,12 @@ class PHT extends Config\Base
      *
      * @param \PHT\Config\Search $search
      * @return \PHT\Xml\Search\Response
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function search(\PHT\Config\Search $search)
     {
         if (!$search instanceof Config\Search) {
-            throw new Exception\Exception('Parameter $search should be instanceof \PHT\Config\Search');
+            throw new Exception\InvalidArgumentException('Parameter $search should be instanceof \PHT\Config\Search');
         }
         $params = array();
         if (isset($search->seniorTeamId)) {
@@ -505,7 +505,7 @@ class PHT extends Config\Base
                 $params['searchLeagueID'] = $search->countryLeagueId;
             }
         } else {
-            throw new Exception\Exception('Parameter $search should have at least one property defined to perform a search');
+            throw new Exception\InvalidArgumentException('Parameter $search should have at least one property defined to perform a search');
         }
 
         return Wrapper\Search::search($params);
@@ -726,7 +726,7 @@ class PHT extends Config\Base
      * @param \PHT\Config\Orders $orders
      * @param integer $teamId
      * @return \PHT\Xml\Match\Orders\Sent
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function setMatchOrders(\PHT\Config\Orders $orders, $teamId = null)
     {
@@ -739,7 +739,7 @@ class PHT extends Config\Base
      * @param \PHT\Config\Orders $orders
      * @param integer $teamId
      * @return \PHT\Xml\Match\Orders\Prediction
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function predictRatings($orders = null, $teamId = null)
     {
@@ -749,7 +749,7 @@ class PHT extends Config\Base
         }
         if ($orders !== null && $orders instanceof Config\Orders) {
             if ($orders->hasError()) {
-                throw new Exception\Exception('Parameter $orders has ' . $orders->getErrorNumber() . ' errors, please fix before sending');
+                throw new Exception\InvalidArgumentException('Parameter $orders has ' . $orders->getErrorNumber() . ' errors, please fix before sending');
             }
             $json = $orders->getJson();
             $params['matchID'] = $orders->getMatchId();
@@ -850,7 +850,7 @@ class PHT extends Config\Base
      * @param integer $amount bid amount
      * @param integer $maxAmount max bid amount (for automatic bid)
      * @return \PHT\Xml\Player\Senior
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function setBid($teamId, $playerId, $countryCurrency, $amount = null, $maxAmount = null)
     {
@@ -929,12 +929,12 @@ class PHT extends Config\Base
      *
      * @param \PHT\Config\Federation $federation
      * @return \PHT\Federations\Listing
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function getFederations(\PHT\Config\Federation $federation)
     {
         if (!$federation instanceof Config\Federation) {
-            throw new Exception\Exception('Parameter $federation should be type of \PHT\Config\Federation');
+            throw new Exception\InvalidArgumentException('Parameter $federation should be type of \PHT\Config\Federation');
         }
         if (isset($federation->name)) {
             $params = array('searchFor' => $federation->name, 'searchType' => 1, 'searchLanguageID' => $federation->language, 'pageIndex' => $federation->page);
@@ -945,7 +945,7 @@ class PHT extends Config\Base
         } elseif (isset($federation->user)) {
             $params = array('searchType' => 5);
         } else {
-            throw new Exception\Exception('You must define a least one search criteria (name, description, abbreviation, user) into $federation parameter');
+            throw new Exception\InvalidArgumentException('You must define a least one search criteria (name, description, abbreviation, user) into $federation parameter');
         }
         return Wrapper\Federation::search($params);
     }
@@ -1142,16 +1142,16 @@ class PHT extends Config\Base
      *
      * @param \PHT\Config\TransferMarket $criteria
      * @return \PHT\Xml\Search\Market\Response
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public function searchTransferMarket(PHT\Config\TransferMarket $criteria)
     {
         if (!$criteria instanceof Config\TransferMarket) {
-            throw new Exception\Exception('Parameter $criteria should be instance of \PHT\Config\TransferMarket');
+            throw new Exception\InvalidArgumentException('Parameter $criteria should be instance of \PHT\Config\TransferMarket');
         }
         $skill1 = $criteria->getFirstSkill();
         if ($skill1[0] === null || $skill1[1] === null || $skill1[2] === null || $criteria->getMinAge() === null || $criteria->getMaxAge() === null) {
-            throw new Exception\Exception('Parameter $criteria should define at least first skill with minimum and maximum, as well as minimum and maximum age');
+            throw new Exception\InvalidArgumentException('Parameter $criteria should define at least first skill with minimum and maximum, as well as minimum and maximum age');
         }
         $params = array('ageMin' => $criteria->getMinAge(), 'ageMax' => $criteria->getMaxAge());
         if ($criteria->getMinDays() !== null) {

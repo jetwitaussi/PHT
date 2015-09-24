@@ -52,12 +52,12 @@ class Senior
      * @param integer $amount
      * @param integer $maxAmount
      * @return \PHT\Xml\Player\Senior
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function bid($teamId, $playerId, $countryCurrency, $amount = null, $maxAmount = null)
     {
         if ($amount === null && $maxAmount === null || ($amount !== null && $amount <= 0) || ($maxAmount !== null && $maxAmount <= 0)) {
-            throw new Exception\Exception('To bid on a player you need to set a positive $amount or $maxAmount or both');
+            throw new Exception\InvalidArgumentException('To bid on a player you need to set a positive $amount or $maxAmount or both');
         }
         $params = array('file' => 'playerdetails', 'actionType' => 'placeBid', 'teamId' => $teamId, 'playerID' => $playerId, 'version' => Config\Version::PLAYERDETAILS);
         if ($amount !== null) {
@@ -82,12 +82,12 @@ class Senior
     /**
      * @param integer $transferId
      * @param integer $category
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function ignoretransfer($transferId = null, $category = null)
     {
         if ($transferId === null && $category === null) {
-            throw new Exception\Exception('At least one parameter is mandatory, either $transferId or $category');
+            throw new Exception\InvalidArgumentException('At least one parameter is mandatory, either $transferId or $category');
         }
         $params = array('file' => 'currentbids', 'version' => Config\Version::CURRENTBIDS, 'actionType' => 'ignoreTransfer');
         if ($transferId !== null) {

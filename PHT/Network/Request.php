@@ -140,14 +140,15 @@ class Request
 
     /**
      * @param string $xmlData
-     * @throws \PHT\Exception\Exception
+     * @throws \PHT\Exception\NetworkException
+     * @throws \PHT\Exception\ChppException
      */
     public static function checkXmlData($xmlData)
     {
         $tmpXml = xml_parser_create();
         if (!xml_parse($tmpXml, $xmlData, true)) {
             Log\Logger::getInstance()->critical("[API] Invalid xml: " . $xmlData);
-            throw new Exception\Exception($xmlData);
+            throw new Exception\NetworkException($xmlData);
         }
         xml_parser_free($tmpXml);
 
@@ -156,11 +157,11 @@ class Request
         $filename = $tmpXml->getElementsByTagName('FileName');
         if ($filename->length == 0) {
             Log\Logger::getInstance()->critical("[API] CHPP error: " . $xmlData);
-            throw new Exception\Exception($xmlData, true);
+            throw new Exception\ChppException($xmlData);
         }
         if ($filename->item(0)->nodeValue == Url::ERROR_FILE) {
             Log\Logger::getInstance()->critical("[API] CHPP Error: " . $xmlData);
-            throw new Exception\Exception($xmlData, true);
+            throw new Exception\ChppException($xmlData);
         }
     }
 

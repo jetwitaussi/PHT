@@ -13,6 +13,8 @@
 
 namespace PHT\Cache;
 
+use PHT\Exception;
+
 class Factory
 {
     /**
@@ -20,7 +22,7 @@ class Factory
      *
      * @param string $type
      * @return \PHT\Cache\CacheInterface
-     * @throws \InvalidArgumentException
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function create($type)
     {
@@ -28,13 +30,13 @@ class Factory
 
             case 'apc':
                 if (strtolower(ini_get('apc.enabled')) != 'on') {
-                    throw new \InvalidArgumentException("APC cache is not available");
+                    throw new Exception\InvalidArgumentException("APC cache is not available");
                 }
                 return new Apc();
 
             case 'session':
                 if (function_exists('session_status') && session_status() == PHP_SESSION_DISABLED) {
-                    throw new \InvalidArgumentException("Session is disabled and can't be used");
+                    throw new Exception\InvalidArgumentException("Session is disabled and can't be used");
                 }
                 return new Session();
 
@@ -43,7 +45,7 @@ class Factory
 
             case 'memcached':
                 if (!extension_loaded('memcached')) {
-                    throw new \InvalidArgumentException("Memcached extension is not available");
+                    throw new Exception\InvalidArgumentException("Memcached extension is not available");
                 }
                 return new Memcached();
 
@@ -51,7 +53,7 @@ class Factory
                 return new Memory();
 
             default:
-                throw new \InvalidArgumentException("Unknow cache driver: $type");
+                throw new Exception\InvalidArgumentException("Unknow cache driver: $type");
         }
     }
 

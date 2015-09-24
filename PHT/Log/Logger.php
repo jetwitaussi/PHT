@@ -23,7 +23,7 @@ class Logger
      * Create logger instance based on pht configuration
      *
      * @return \PHT\Log\AbstractLogger
-     * @throws \InvalidArgumentException
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function getInstance()
     {

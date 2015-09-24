@@ -13,6 +13,8 @@
 
 namespace PHT\Log;
 
+use PHT\Exception;
+
 class Factory
 {
     /**
@@ -21,7 +23,7 @@ class Factory
      * @param string $type
      * @param integer $level (see \PHT\Log\Level constants)
      * @return mixed|\PHT\Log\AbstractLogger
-     * @throws \InvalidArgumentException
+     * @throws \PHT\Exception\InvalidArgumentException
      */
     public static function create($type, $level)
     {
@@ -37,7 +39,7 @@ class Factory
                 if (class_exists($type)) {
                     return new $type($level);
                 }
-                throw new \InvalidArgumentException("Unknow logger type: $type");
+                throw new Exception\InvalidArgumentException("Unknow logger type: $type");
         }
     }
 }
