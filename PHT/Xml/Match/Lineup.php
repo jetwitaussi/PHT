@@ -182,6 +182,19 @@ class Lineup extends Xml\File
     }
 
     /**
+     * Return team coach modifier used
+     *
+     * @return integer
+     */
+    public function getCoachModifier()
+    {
+        if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('StyleOfPlay')->item(0)->nodeValue;
+    }
+
+    /**
      * Return player number in starting lineup
      *
      * @return integer

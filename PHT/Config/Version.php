@@ -37,7 +37,7 @@ class Version
     const MATCHDETAILS = '2.7';
     const MATCHES = '2.8';
     const MATCHESARCHIVE = '1.3';
-    const MATCHLINEUP = '1.8';
+    const MATCHLINEUP = '1.9';
     const MATCHORDERS = '2.4';
     const NATIONALPLAYERS = '1.3';
     const NATIONALTEAMDETAILS = '1.8';
