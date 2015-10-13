@@ -40,7 +40,7 @@ class Players extends Xml\File
     public function getPlayer($index)
     {
         $index = round($index);
-        if ($index >= Config\Config::$forIndex && $index < $this->getYouthPlayerNumber() + Config\Config::$forIndex) {
+        if ($index >= Config\Config::$forIndex && $index < $this->getPlayerNumber() + Config\Config::$forIndex) {
             $index -= Config\Config::$forIndex;
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//YouthPlayer');
