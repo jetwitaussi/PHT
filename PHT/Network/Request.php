@@ -223,7 +223,7 @@ class Request
     public static function urlencodeRfc3986($input)
     {
         if (is_array($input)) {
-            return array_map(array(self, 'urlencodeRfc3986'), $input);
+            return array_map(array(__CLASS__, 'urlencodeRfc3986'), $input);
         }
         return str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($input)));
     }
