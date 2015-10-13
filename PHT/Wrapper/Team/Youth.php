@@ -130,6 +130,6 @@ class Youth
             $params['youthTeamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::YOUTH);
+        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::YOUTH, $teamId);
     }
 }

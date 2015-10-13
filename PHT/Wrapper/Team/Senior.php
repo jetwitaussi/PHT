@@ -231,7 +231,7 @@ class Senior
             $params['teamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Senior\Hof(Network\Request::fetchUrl($url));
+        return new Xml\Team\Senior\Hof(Network\Request::fetchUrl($url), $teamId);
     }
 
     /**
@@ -245,7 +245,7 @@ class Senior
             $params['teamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::SENIOR);
+        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::SENIOR, $teamId);
     }
 
     /**
@@ -259,7 +259,7 @@ class Senior
             $params['teamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::HOF);
+        return new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::HOF, $teamId);
     }
 
     /**

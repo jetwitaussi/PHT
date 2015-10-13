@@ -76,6 +76,54 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return player's team id
+     *
+     * @return integer
+     */
+    public function getTeamId()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//OwningTeam/TeamID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player's team
+     *
+     * @return \PHT\Xml\Team\Senior
+     */
+    public function getTeam()
+    {
+        return Wrapper\Team\Senior::team($this->getTeamId());
+    }
+
+    /**
+     * Return player's team name
+     *
+     * @return integer
+     */
+    public function getTeamName()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//OwningTeam/TeamName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $avatars = Wrapper\Team\Senior::avatars($this->getTeamId());
+        foreach ($avatars->getAvatars() as $avatar) {
+            if ($avatar->getPlayerId() == $this->getId()) {
+                return $avatar;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Return player shirt number if team is hattrick supporter
      *
      * @return integer
@@ -127,9 +175,10 @@ class Senior extends Xml\HTSupporter
      *
      * @return integer
      */
-    public function getLeagueId()
+    public function getTeamLeagueId()
     {
-        return $this->getXml()->getElementsByTagName('LeagueID')->item(0)->nodeValue;
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//OwningTeam/LeagueID')->item(0)->nodeValue;
     }
 
     /**
@@ -137,9 +186,9 @@ class Senior extends Xml\HTSupporter
      *
      * @return \PHT\Xml\World\Country
      */
-    public function getCountry()
+    public function getTeamCountry()
     {
-        return Wrapper\World::country($this->getLeagueId());
+        return Wrapper\World::country($this->getTeamLeagueId());
     }
 
     /**

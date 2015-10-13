@@ -19,13 +19,17 @@ use PHT\Wrapper;
 
 class Hof extends Xml\Base
 {
+    private $teamId;
+
     /**
      * @param \DOMDocument $xml
+     * @param integer $teamId
      */
-    public function __construct($xml)
+    public function __construct($xml, $teamId = null)
     {
         $this->xmlText = $xml->saveXML();
         $this->xml = $xml;
+        $this->teamId = $teamId;
     }
 
     /**
@@ -165,4 +169,21 @@ class Hof extends Xml\Base
     {
         return Wrapper\World::country(null, $this->getCountryId());
     }
+
+    /**
+     * Return player avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $avatars = Wrapper\Team\Senior::hofavatars($this->teamId);
+        foreach ($avatars->getAvatars() as $avatar) {
+            if ($avatar->getPlayerId() == $this->getId()) {
+                return $avatar;
+            }
+        }
+        return null;
+    }
+
 }

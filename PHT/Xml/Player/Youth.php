@@ -278,6 +278,22 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return player avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $avatars = Wrapper\Team\Youth::avatars($this->getYouthTeamId());
+        foreach ($avatars->getAvatars() as $avatar) {
+            if ($avatar->getPlayerId() == $this->getId()) {
+                return $avatar;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Return senior team id
      *
      * @return integer

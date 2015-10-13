@@ -19,6 +19,18 @@ use PHT\Utils;
 
 class Hof extends Xml\File
 {
+    private $teamId;
+
+    /**
+     * @param string $xml
+     * @param integer $teamId
+     */
+    public function __construct($xml, $teamId = null)
+    {
+        parent::__construct($xml);
+        $this->teamId = $teamId;
+    }
+
     /**
      * Return player number
      *
@@ -43,7 +55,7 @@ class Hof extends Xml\File
             $nodeList = $xpath->query("//Player");
             $node = new \DOMDocument('1.0', 'UTF-8');
             $node->appendChild($node->importNode($nodeList->item($index), true));
-            return new Xml\Player\Hof($node);
+            return new Xml\Player\Hof($node, $this->teamId);
         }
         return null;
     }
@@ -57,6 +69,6 @@ class Hof extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Player");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Hof');
+        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Hof', $this->teamId);
     }
 }
