@@ -201,7 +201,7 @@ class Match extends File
         $nodeList = $xpath->query('//Arena');
         $arena = new \DOMDocument('1.0', 'UTF-8');
         $arena->appendChild($arena->importNode($nodeList->item(0), true));
-        return Match\Arena($arena, $this->type);
+        return new Match\Arena($arena, $this->type);
     }
 
     /**
