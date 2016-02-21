@@ -178,9 +178,9 @@ class Worldcup extends Xml\File
             $index -= Config\Config::$forIndex;
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//Group');
-            $team = new \DOMDocument('1.0', 'UTF-8');
-            $team->appendChild($team->importNode($nodeList->item($index), true));
-            return new Worldcup\Team($team);
+            $group = new \DOMDocument('1.0', 'UTF-8');
+            $group->appendChild($group->importNode($nodeList->item($index), true));
+            return new Worldcup\Group($group);
         }
         return null;
     }
@@ -194,6 +194,6 @@ class Worldcup extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Group');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Team');
+        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Group');
     }
 }

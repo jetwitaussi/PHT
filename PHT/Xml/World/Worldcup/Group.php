@@ -15,6 +15,7 @@ namespace PHT\Xml\World\Worldcup;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Utils;
 
 class Group extends Xml\Base
 {
@@ -72,7 +73,7 @@ class Group extends Xml\Base
             $nodeList = $xpath->query('//Team');
             $team = new \DOMDocument('1.0', 'UTF-8');
             $team->appendChild($team->importNode($nodeList->item($index), true));
-            return new Worldcup\Team($team);
+            return new Team($team);
         }
         return null;
     }
