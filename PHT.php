@@ -233,7 +233,7 @@ class CHPPConnection
 		foreach($result as $val)
 		{
 			$t = explode('=', $val);
-			$$t[0] = urldecode($t[1]);
+			${$t[0]} = urldecode($t[1]);
 		}
 		$this->log("[OAUTH] Request token: ".$oauth_token);
 		$this->log("[OAUTH] Request token secret: ".$oauth_token_secret);
@@ -276,7 +276,7 @@ class CHPPConnection
 		foreach($result as $val)
 		{
 			$t = explode('=', $val);
-			$$t[0] = urldecode($t[1]);
+			${$t[0]} = urldecode($t[1]);
 		}
 		if(isset($oauth_token))
 		{
