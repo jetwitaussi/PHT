@@ -244,11 +244,7 @@ class Chunk extends Xml\Base
      */
     public function getGoalsInLeague()
     {
-        $goals = $this->getXml()->getElementsByTagName('LeagueGoals')->item(0)->nodeValue;
-        if (is_int($goals)) {
-            return $goals;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('LeagueGoals')->item(0)->nodeValue;
     }
 
     /**
@@ -258,11 +254,7 @@ class Chunk extends Xml\Base
      */
     public function getGoalsInCup()
     {
-        $goals = $this->getXml()->getElementsByTagName('CupGoals')->item(0)->nodeValue;
-        if (is_int($goals)) {
-            return $goals;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('CupGoals')->item(0)->nodeValue;
     }
 
     /**
@@ -272,11 +264,7 @@ class Chunk extends Xml\Base
      */
     public function getGoalsInFriendly()
     {
-        $goals = $this->getXml()->getElementsByTagName('FriendliesGoals')->item(0)->nodeValue;
-        if (is_int($goals)) {
-            return $goals;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('FriendliesGoals')->item(0)->nodeValue;
     }
 
     /**
@@ -286,11 +274,7 @@ class Chunk extends Xml\Base
      */
     public function getGoalsInCareer()
     {
-        $goals = $this->getXml()->getElementsByTagName('CareerGoals')->item(0)->nodeValue;
-        if (is_int($goals)) {
-            return $goals;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('CareerGoals')->item(0)->nodeValue;
     }
 
     /**
@@ -300,11 +284,7 @@ class Chunk extends Xml\Base
      */
     public function getHattricksInCareer()
     {
-        $goals = $this->getXml()->getElementsByTagName('CareerHattricks')->item(0)->nodeValue;
-        if (is_int($goals)) {
-            return $goals;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('CareerHattricks')->item(0)->nodeValue;
     }
 
     /**
@@ -378,11 +358,7 @@ class Chunk extends Xml\Base
      */
     public function getCards()
     {
-        $cards = $this->getXml()->getElementsByTagName('Cards')->item(0)->nodeValue;
-        if (is_int($cards)) {
-            return $cards;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('Cards')->item(0)->nodeValue;
     }
 
     /**
@@ -392,11 +368,7 @@ class Chunk extends Xml\Base
      */
     public function getInjury()
     {
-        $injury = $this->getXml()->getElementsByTagName('InjuryLevel')->item(0)->nodeValue;
-        if (is_int($injury)) {
-            return $injury;
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('InjuryLevel')->item(0)->nodeValue;
     }
 
     /**
