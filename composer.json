@@ -1,0 +1,21 @@
+{
+    "name": "jetwitaussi/pht",
+    "type": "library",
+    "description": "PHP Framework for CHPP applications related to Hattrick website",
+    "homepage": "https://github.com/jetwitaussi/PHT",
+    "license": "BEER-WARE",
+    "require": {
+        "php": ">=5.3",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-pcre": "*",
+        "ext-Reflection": "*",
+        "ext-xml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHT\\": "PHT"
+        }
+    }
+}
