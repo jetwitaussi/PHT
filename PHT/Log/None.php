@@ -13,7 +13,7 @@
 
 namespace PHT\Log;
 
-class Void extends AbstractLogger
+class None extends AbstractLogger
 {
     /**
      * Perform log action

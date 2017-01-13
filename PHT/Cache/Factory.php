@@ -41,7 +41,7 @@ class Factory
                 return new Session();
 
             case 'none':
-                return new Void();
+                return new None();
 
             case 'memcached':
                 if (!extension_loaded('memcached')) {

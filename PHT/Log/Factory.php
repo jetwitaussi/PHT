@@ -30,7 +30,7 @@ class Factory
         switch ($type) {
 
             case 'none':
-                return new Void($level);
+                return new None($level);
 
             case 'file':
                 return new File($level);

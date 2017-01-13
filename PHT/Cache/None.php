@@ -13,7 +13,7 @@
 
 namespace PHT\Cache;
 
-class Void implements CacheInterface
+class None implements CacheInterface
 {
     /**
      * Delete keys related to xml filename
