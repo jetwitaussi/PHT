@@ -93,6 +93,8 @@ class Training extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//TrainingEvent');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Event\Training');
+        /** @var \PHT\Xml\Player\Event\Training[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Event\Training');
+        return $data;
     }
 }

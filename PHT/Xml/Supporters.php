@@ -94,14 +94,16 @@ class Supporters extends File
     public function getSupporters()
     {
         $xpath = new \DOMXPath($this->getXml());
-        if ($this->params['actionType'] == self::userAction) {
+        if ($this->params['actionType'] == self::USER_ACTION) {
             $nodeList = $xpath->query("//MySupporters/SupporterTeam");
             $type = '\PHT\Xml\User\Supporter';
         } else {
             $nodeList = $xpath->query("//SupportedTeams/SupportedTeam");
             $type = '\PHT\Xml\Team\Supporter';
         }
-        return new Utils\XmlIterator($nodeList, $type);
+        /** @var \PHT\Xml\Team\Supporter[]|\PHT\Xml\User\Supporter[] $data */
+        $data = new Utils\XmlIterator($nodeList, $type);
+        return $data;
     }
 
     /**

@@ -58,7 +58,7 @@ class Team extends Xml\Base
         if ($this->system == Config\Config::MATCH_YOUTH) {
             return Wrapper\Team\Youth::team($this->getId());
         } elseif ($this->system == Config\Config::MATCH_NATIONAL) {
-            return Wrapper\Team\National::team($this->getId());
+            return Wrapper\National::team($this->getId());
         }
         return Wrapper\Team\Senior::team($this->getId());
     }
@@ -110,7 +110,7 @@ class Team extends Xml\Base
      * @return \PHT\Xml\Match\Orders\Sent
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function setOrders(\PHT\Config\Orders $orders)
+    public function setOrders(Config\Orders $orders)
     {
         return Wrapper\Match::setorders($orders, $this->getId());
     }

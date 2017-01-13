@@ -94,6 +94,8 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Ladder');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Ladders\Chunk', $this->teamId);
+        /** @var \PHT\Xml\Tournaments\Ladders\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Ladders\Chunk', $this->teamId);
+        return $data;
     }
 }

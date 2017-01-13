@@ -64,13 +64,15 @@ class Flags extends Senior
     /**
      * Return iterator of flag objects
      *
-     * @return \PHT\Xml\Flag
+     * @return \PHT\Xml\Flag[]
      */
     public function getHomeFlags()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//HomeFlags/Flag");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Flag');
+        /** @var \PHT\Xml\Flag[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Flag');
+        return $data;
     }
 
     /**
@@ -96,12 +98,14 @@ class Flags extends Senior
     /**
      * Return iterator of flag objects
      *
-     * @return \PHT\Xml\Flag
+     * @return \PHT\Xml\Flag[]
      */
     public function getAwayFlags()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//AwayFlags/Flag");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Flag');
+        /** @var \PHT\Xml\Flag[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Flag');
+        return $data;
     }
 }

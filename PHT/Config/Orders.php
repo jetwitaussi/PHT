@@ -656,7 +656,7 @@ class Orders
                 }
             }
         }
-        return $this->getErrorsNumber() > 0;
+        return $this->getErrorNumber() > 0;
     }
 
     /**

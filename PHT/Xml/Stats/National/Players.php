@@ -109,6 +109,8 @@ class Players extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Achievement');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Stats\National\Player', $this->getTeamId());
+        /** @var \PHT\Xml\Stats\National\Player[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Stats\National\Player', $this->getTeamId());
+        return $data;
     }
 }

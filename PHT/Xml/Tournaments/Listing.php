@@ -15,6 +15,7 @@ namespace PHT\Xml\Tournaments;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Utils;
 
 class Listing extends Xml\File
 {
@@ -57,6 +58,8 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Tournament');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Tournament');
+        /** @var \PHT\Xml\Tournaments\Tournament[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Tournament');
+        return $data;
     }
 }

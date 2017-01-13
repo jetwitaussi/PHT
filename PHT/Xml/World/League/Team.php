@@ -16,6 +16,7 @@ namespace PHT\Xml\World\League;
 use PHT\Xml;
 use PHT\Network;
 use PHT\Config;
+use PHT\Wrapper;
 
 class Team extends Xml\Base
 {
@@ -23,6 +24,7 @@ class Team extends Xml\Base
 
     /**
      * @param \DOMDocument $xml
+     * @param string $type
      */
     public function __construct($xml, $type)
     {
@@ -39,6 +41,26 @@ class Team extends Xml\Base
     public function getId()
     {
         return $this->getXml()->getElementsByTagName('TeamID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return user id
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->getXml()->getElementsByTagName('UserId')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return user
+     *
+     * @return \PHT\Xml\User
+     */
+    public function getUser()
+    {
+        return Wrapper\User::user($this->getUserId());
     }
 
     /**
@@ -176,7 +198,7 @@ class Team extends Xml\Base
             return new Xml\Team\Senior(Network\Request::fetchUrl($url), $this->getId());
         } elseif ($this->type == Config\Config::YOUTH) {
             $url = Network\Request::buildUrl(array('file' => 'youthteamdetails', 'youthTeamId' => $this->getId(), 'version' => Config\Version::YOUTHTEAMDETAILS));
-            return Xml\Team\Youth(Network\Request::fetchUrl($url));
+            return new Xml\Team\Youth(Network\Request::fetchUrl($url));
         }
         return null;
     }

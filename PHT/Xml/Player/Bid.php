@@ -144,6 +144,7 @@ class Bid extends Xml\Base
         if ($this->hasBidPlaced()) {
             return Wrapper\Team\Senior::team($this->getBidTeamId());
         }
+        return null;
     }
 
     /**

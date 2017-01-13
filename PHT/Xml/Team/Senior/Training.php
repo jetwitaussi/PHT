@@ -252,14 +252,15 @@ class Training extends Xml\HTSupporter
     /**
      * Return iterator of special training objects
      *
-     * @param integer $index
      * @return \PHT\Xml\Team\Senior\Training\Special
      */
     public function getSpecialTrainings()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Senior\Training\Special');
+        /** @var \PHT\Xml\Team\Senior\Training\Special $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Senior\Training\Special');
+        return $data;
     }
 
     /**

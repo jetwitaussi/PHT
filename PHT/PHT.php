@@ -50,7 +50,7 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Team\Senior
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function getSeniorTeam(\PHT\Config\Team $team = null)
+    public function getSeniorTeam(Config\Team $team = null)
     {
         if ($team === null) {
             return $this->findSeniorTeam();
@@ -76,7 +76,7 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Team\Youth
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function getYouthTeam(\PHT\Config\Team $team = null)
+    public function getYouthTeam(Config\Team $team = null)
     {
         if ($team === null) {
             return $this->findYouthTeam();
@@ -386,13 +386,16 @@ class PHT extends Config\Base
      * Get youth team players
      *
      * @param integer $teamId
-     * @param boolean $orderBy
+     * @param boolean $unlockSkills
+     * @param boolean $showScoutCall
+     * @param boolean $showLastMatch
+     * @param string $orderBy
      * @return \PHT\Xml\Team\Youth\Players
      */
     public function getYouthPlayers($teamId = null, $unlockSkills = false, $showScoutCall = true, $showLastMatch = true, $orderBy = null)
     {
         if ($teamId === null) {
-            $teamId = $this->getYouthTeam()->getYouthTeamId();
+            $teamId = $this->getYouthTeam()->getId();
         }
         if ($teamId === null) {
             return null;
@@ -423,7 +426,7 @@ class PHT extends Config\Base
     public function getYouthScouts($teamId = null)
     {
         if ($teamId === null) {
-            $teamId = $this->getYouthTeam()->getYouthTeamId();
+            $teamId = $this->getYouthTeam()->getId();
         }
         if ($teamId === null) {
             return null;
@@ -474,12 +477,11 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Search\Response
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function search(\PHT\Config\Search $search)
+    public function search(Config\Search $search)
     {
         if (!$search instanceof Config\Search) {
             throw new Exception\InvalidArgumentException('Parameter $search should be instanceof \PHT\Config\Search');
         }
-        $params = array();
         if (isset($search->seniorTeamId)) {
             $params = array('searchType' => '4', 'searchID' => $search->seniorTeamId);
         } elseif (isset($search->seniorTeamName)) {
@@ -515,7 +517,7 @@ class PHT extends Config\Base
      * Get nt/u20 teams list
      *
      * @param boolean $u20
-     * @return \PHT\Xml\NationalTeams
+     * @return \PHT\Xml\National\Teams
      */
     public function getNationalTeams($u20 = false)
     {
@@ -537,7 +539,7 @@ class PHT extends Config\Base
      * Get nt/u20 players
      *
      * @param integer $teamId
-     * @return \PHT\Xml\NationalPlayers
+     * @return \PHT\Xml\National\Players
      */
     public function getNationalPlayers($teamId)
     {
@@ -548,7 +550,7 @@ class PHT extends Config\Base
      * Get nt/u20 matches list
      *
      * @param boolean $u20
-     * @return \PHT\Xml\NationalMatches
+     * @return \PHT\Xml\National\Matches
      */
     public function getNationalMatches($u20 = false)
     {
@@ -728,7 +730,7 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Match\Orders\Sent
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function setMatchOrders(\PHT\Config\Orders $orders, $teamId = null)
+    public function setMatchOrders(Config\Orders $orders, $teamId = null)
     {
         return Wrapper\Match::setorders($orders, $teamId);
     }
@@ -810,7 +812,6 @@ class PHT extends Config\Base
      * Return senior team transfers history object
      *
      * @param integer $teamId
-     * @param integer $page
      * @return \PHT\Xml\Team\Transfer\History
      */
     public function getTeamTransfersHistory($teamId = null)
@@ -834,7 +835,7 @@ class PHT extends Config\Base
      *
      * @param integer $teamId
      * @param integer $onlyType (see \PHT\Config\Config BID_* constants)
-     * @return \PHT\Xml\Team\Bids
+     * @return \PHT\Xml\Team\Transfer\Bids
      */
     public function getBids($teamId = null, $onlyType = null)
     {
@@ -928,10 +929,10 @@ class PHT extends Config\Base
      * Return federations listing object
      *
      * @param \PHT\Config\Federation $federation
-     * @return \PHT\Federations\Listing
+     * @return \PHT\Xml\Federations\Listing
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function getFederations(\PHT\Config\Federation $federation)
+    public function getFederations(Config\Federation $federation)
     {
         if (!$federation instanceof Config\Federation) {
             throw new Exception\InvalidArgumentException('Parameter $federation should be type of \PHT\Config\Federation');
@@ -966,7 +967,7 @@ class PHT extends Config\Base
      *
      * @param integer $federationId
      * @param string $onlyLetter
-     * @return \PHT\Xml\Federation\Members
+     * @return \PHT\Xml\Federations\Members
      */
     public function getFederationMembers($federationId, $onlyLetter = null)
     {
@@ -977,7 +978,7 @@ class PHT extends Config\Base
      * Return federation roles list
      *
      * @param integer $federationId
-     * @return \PHT\Xml\Federation\Roles
+     * @return \PHT\Xml\Federations\Roles
      */
     public function getFederationRoles($federationId)
     {
@@ -1072,7 +1073,6 @@ class PHT extends Config\Base
      *
      * @param integer $season
      * @param integer $cupId
-     * @param integer $matchRound
      * @return \PHT\Xml\World\Worldcup
      */
     public function getWorldcup($season, $cupId = null)
@@ -1144,7 +1144,7 @@ class PHT extends Config\Base
      * @return \PHT\Xml\Search\Market\Response
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function searchTransferMarket(PHT\Config\TransferMarket $criteria)
+    public function searchTransferMarket(Config\TransferMarket $criteria)
     {
         if (!$criteria instanceof Config\TransferMarket) {
             throw new Exception\InvalidArgumentException('Parameter $criteria should be instance of \PHT\Config\TransferMarket');
@@ -1226,7 +1226,7 @@ class PHT extends Config\Base
      *
      * @param integer $teamId
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challenges
+     * @return \PHT\Xml\Team\Challengeable\Listing
      */
     public function getChallenges($teamId = null, $weekendFriendly = false)
     {
@@ -1263,7 +1263,7 @@ class PHT extends Config\Base
         if ($teamId !== null) {
             $params['teamId'] = $teamId;
         }
-        $url = Network\Request::buildUrl();
+        $url = Network\Request::buildUrl($params);
         return new Xml\Team\Challengeable\Listing(Network\Request::fetchUrl($url));
     }
 

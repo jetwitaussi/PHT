@@ -15,10 +15,12 @@ namespace PHT\Network;
 
 use PHT\Config;
 use PHT\Log;
+use PHT\Xml;
 
 class Auth
 {
     /**
+     * @param string $callback
      * @param string $scope
      * @return boolean|\PHT\Config\AuthData
      */
@@ -28,6 +30,7 @@ class Auth
     }
 
     /**
+     * @param string $callback
      * @param string $scope
      * @return boolean|\PHT\Config\AuthData
      */
@@ -37,7 +40,8 @@ class Auth
     }
 
     /**
-     * @param string $page
+     * @param string $authPage
+     * @param string $callback
      * @param string $scope
      * @return boolean|\PHT\Config\AuthData
      */
@@ -139,7 +143,7 @@ class Auth
      * @param string $oauthTokenSecret
      * @return \PHT\Xml\Token
      */
-    public function checkToken($oauthToken = null, $oauthTokenSecret = null)
+    public static function checkToken($oauthToken = null, $oauthTokenSecret = null)
     {
         if ($oauthToken === null) {
             $oauthToken = Config\Config::$oauthToken;
@@ -169,7 +173,7 @@ class Auth
      * @param string $oauthToken
      * @param string $oauthTokenSecret
      */
-    public function invalidateToken($oauthToken = null, $oauthTokenSecret = null)
+    public static function invalidateToken($oauthToken = null, $oauthTokenSecret = null)
     {
         if ($oauthToken === null) {
             $oauthToken = Config\Config::$oauthToken;

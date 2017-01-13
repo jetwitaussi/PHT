@@ -57,6 +57,8 @@ class I18n extends File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Language');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\I18n\Language');
+        /** @var \PHT\Xml\I18n\Language[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\I18n\Language');
+        return $data;
     }
 }

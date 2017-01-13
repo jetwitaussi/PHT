@@ -58,7 +58,9 @@ class Bookmarks extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Bookmark');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Bookmark\Element');
+        /** @var \PHT\Xml\User\Bookmark\Element[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Bookmark\Element');
+        return $data;
     }
 
     /**
@@ -106,7 +108,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Team\Senior');
+        /** @var \PHT\Xml\User\Bookmark\Team\Senior[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Team\Senior');
+        return $data;
     }
 
     /**
@@ -154,7 +158,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Player\Senior');
+        /** @var \PHT\Xml\User\Bookmark\Player\Senior[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Player\Senior');
+        return $data;
     }
 
     /**
@@ -202,7 +208,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        /** @var \PHT\Xml\User\Bookmark\Match[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        return $data;
     }
 
     /**
@@ -250,7 +258,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\User');
+        /** @var \PHT\Xml\User\Bookmark\User[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\User');
+        return $data;
     }
 
     /**
@@ -298,7 +308,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\League\Senior');
+        /** @var \PHT\Xml\User\Bookmark\League\Senior[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\League\Senior');
+        return $data;
     }
 
     /**
@@ -346,7 +358,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Team\Youth');
+        /** @var \PHT\Xml\User\Bookmark\Team\Youth[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Team\Youth');
+        return $data;
     }
 
     /**
@@ -394,7 +408,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Player\Youth');
+        /** @var \PHT\Xml\User\Bookmark\Player\Youth[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Player\Youth');
+        return $data;
     }
 
     /**
@@ -442,7 +458,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        /** @var \PHT\Xml\User\Bookmark\Match[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        return $data;
     }
 
     /**
@@ -490,7 +508,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\League\Youth');
+        /** @var \PHT\Xml\User\Bookmark\League\Youth[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\League\Youth');
+        return $data;
     }
 
     /**
@@ -538,7 +558,9 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Post');
+        /** @var \PHT\Xml\User\Bookmark\Post[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Post');
+        return $data;
     }
 
     /**
@@ -586,6 +608,8 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Thread');
+        /** @var \PHT\Xml\User\Bookmark\Thread[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Thread');
+        return $data;
     }
 }

@@ -134,6 +134,7 @@ class Listing extends Xml\File
         if (!$this->isYouth()) {
             return Wrapper\World\League::senior($this->getSeniorLeagueId());
         }
+        return null;
     }
 
     /**
@@ -199,7 +200,9 @@ class Listing extends Xml\File
     public function getMatches()
     {
         $nodeList = $this->getXml()->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 
     /**
@@ -225,12 +228,14 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Status[.="' . Config\Config::MATCH_TOCOME . '"]');
+        $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
         for ($i = 0; $i < $nodeList->length; $i++) {
-            $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
             $xmlMatch->appendChild($xmlMatch->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodeList = $xmlMatch->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 
     /**
@@ -256,12 +261,14 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Status[.="' . Config\Config::MATCH_PLAYED . '"]');
+        $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
         for ($i = 1; $i <= $nodeList->length; $i++) {
-            $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
             $xmlMatch->appendChild($xmlMatch->importNode($nodeList->item($nodeList->length - $i)->parentNode, true));
         }
         $nodeList = $xmlMatch->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 
     /**
@@ -273,11 +280,13 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Status[.="' . Config\Config::MATCH_LIVE . '"]');
+        $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
         for ($i = 0; $i < $nodeList->length; $i++) {
-            $xmlMatch = new \DOMDocument('1.0', 'UTF-8');
             $xmlMatch->appendChild($xmlMatch->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodeList = $xmlMatch->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 }

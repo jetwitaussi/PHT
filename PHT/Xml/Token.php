@@ -67,13 +67,7 @@ class Token extends File
      */
     public function getExpirationDate($format = null)
     {
-        if (!isset($this->expires[$format]) || $this->expires[$format] === null) {
-            $this->expires[$format] = $this->getXml()->getElementsByTagName('Expires')->item(0)->nodeValue;
-            if ($format !== null) {
-                $this->expires[$format] = Utils\Date::convert($this->expires[$format], $format);
-            }
-        }
-        return $this->expires[$format];
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Expires')->item(0)->nodeValue, $format);
     }
 
     /**

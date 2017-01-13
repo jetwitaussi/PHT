@@ -26,7 +26,7 @@ class Youth extends Xml\File
      */
     public function isDeleted()
     {
-        return $this->getTeamId() === null;
+        return $this->getId() === null;
     }
 
     /**
@@ -138,7 +138,6 @@ class Youth extends Xml\File
     /**
      * Get world region details
      *
-     * @param integer $id
      * @return \PHT\Xml\World\Region
      */
     public function getRegion()
@@ -165,7 +164,7 @@ class Youth extends Xml\File
     /**
      * Return arena
      *
-     * @return \PHT\Xml\Team\Senior\Arena
+     * @return \PHT\Xml\Team\Arena
      */
     public function getArena()
     {

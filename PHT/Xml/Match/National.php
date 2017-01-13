@@ -87,7 +87,7 @@ class National extends Xml\Base
     /**
      * Return home national team
      *
-     * @return \PHT\Xml\Team\National
+     * @return \PHT\Xml\Team\National\Chunk
      */
     public function getHomeTeam()
     {
@@ -113,7 +113,7 @@ class National extends Xml\Base
     /**
      * Return away national team
      *
-     * @return \PHT\Xml\Team\National
+     * @return \PHT\Xml\Team\National\Chunk
      */
     public function getAwayTeam()
     {

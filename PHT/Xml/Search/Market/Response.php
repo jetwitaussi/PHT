@@ -101,13 +101,15 @@ class Response extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//TransferResult');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Search\Market\Result');
+        /** @var \PHT\Xml\Search\Market\Result[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Search\Market\Result');
+        return $data;
     }
 
     /**
      * Return first page of results
      *
-     * @return \PHT\Xml\Search\Response
+     * @return \PHT\Xml\Search\Market\Response
      */
     public function getFirstPage()
     {

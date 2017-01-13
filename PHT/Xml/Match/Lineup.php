@@ -66,7 +66,7 @@ class Lineup extends Xml\File
         if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
             return Wrapper\Team\Youth::team($this->getHomeTeamId());
         } elseif (in_array($this->getMatchType(), array(10, 11, 12))) {
-            return Wrapper\Team\National::team($this->getHomeTeamId());
+            return Wrapper\National::team($this->getHomeTeamId());
         }
         return Wrapper\Team\Senior::team($this->getHomeTeamId());
     }
@@ -101,7 +101,7 @@ class Lineup extends Xml\File
         if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
             return Wrapper\Team\Youth::team($this->getAwayTeamId());
         } elseif (in_array($this->getMatchType(), array(10, 11, 12))) {
-            return Wrapper\Team\National::team($this->getAwayTeamId());
+            return Wrapper\National::team($this->getAwayTeamId());
         }
         return Wrapper\Team\Senior::team($this->getAwayTeamId());
     }
@@ -226,6 +226,7 @@ class Lineup extends Xml\File
             $player->appendChild($player->importNode($nodeList->item($index), true));
             return new Lineup\Player($player, $type);
         }
+        return null;
     }
 
     /**
@@ -241,7 +242,9 @@ class Lineup extends Xml\File
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//StartingLineup/Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        /** @var \PHT\Xml\Match\Lineup\Player[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        return $data;
     }
 
     /**
@@ -276,6 +279,7 @@ class Lineup extends Xml\File
             $player->appendChild($player->importNode($nodeList->item($index), true));
             return new Lineup\Player($player, $type);
         }
+        return null;
     }
 
     /**
@@ -291,7 +295,9 @@ class Lineup extends Xml\File
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Lineup/Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        /** @var \PHT\Xml\Match\Lineup\Player[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        return $data;
     }
 
     /**
@@ -344,7 +350,9 @@ class Lineup extends Xml\File
             $type = Config\Config::MATCH_NATIONAL;
         }
         $nodeList = $this->getXml()->getElementsByTagName('Substitution');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Substitution', $type);
+        /** @var \PHT\Xml\Match\Lineup\Substitution[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Substitution', $type);
+        return $data;
     }
 
     /**

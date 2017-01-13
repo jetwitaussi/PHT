@@ -58,6 +58,8 @@ class Players extends Xml\HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\National');
+        /** @var \PHT\Xml\Player\National[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\National');
+        return $data;
     }
 }

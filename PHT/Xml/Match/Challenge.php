@@ -152,13 +152,13 @@ class Challenge extends Xml\Base
     }
 
     /**
-     * Return league id
+     * Return counry id
      *
      * @return integer
      */
-    public function getLeagueId()
+    public function getCountryId()
     {
-        return $this->getXml()->getElementsByTagName('LeagueID')->item(0)->nodeValue;
+        return $this->getXml()->getElementsByTagName('CountryID')->item(0)->nodeValue;
     }
 
     /**
@@ -168,17 +168,17 @@ class Challenge extends Xml\Base
      */
     public function getCountry()
     {
-        return Wrapper\World::country($this->getLeagueId());
+        return Wrapper\World::country(null, $this->getCountryId());
     }
 
     /**
-     * Return league name
+     * Return country name
      *
      * @return string
      */
-    public function getLeagueName()
+    public function getCountryName()
     {
-        return $this->getXml()->getElementsByTagName('LeagueName')->item(0)->nodeValue;
+        return $this->getXml()->getElementsByTagName('CountryName')->item(0)->nodeValue;
     }
 
     /**

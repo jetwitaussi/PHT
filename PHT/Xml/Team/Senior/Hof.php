@@ -69,6 +69,8 @@ class Hof extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Player");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Hof', $this->teamId);
+        /** @var \PHT\Xml\Player\Hof[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Hof', $this->teamId);
+        return $data;
     }
 }

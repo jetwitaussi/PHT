@@ -110,7 +110,9 @@ class Worldcup extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//WorldCupScores/Team');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Team');
+        /** @var \PHT\Xml\World\Worldcup\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Team');
+        return $data;
     }
 
     /**
@@ -152,7 +154,9 @@ class Worldcup extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Round');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Round');
+        /** @var \PHT\Xml\World\Worldcup\Round[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Round');
+        return $data;
     }
 
     /**
@@ -194,6 +198,8 @@ class Worldcup extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Group');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Group');
+        /** @var \PHT\Xml\World\Worldcup\Group[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Group');
+        return $data;
     }
 }

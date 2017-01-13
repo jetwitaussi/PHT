@@ -16,6 +16,7 @@ namespace PHT\Xml\World\League;
 use PHT\Xml;
 use PHT\Wrapper;
 use PHT\Config;
+use PHT\Utils;
 
 class Youth extends Xml\File
 {
@@ -82,14 +83,15 @@ class Youth extends Xml\File
     /**
      * Return iterator of league team objects
      *
-     * @param integer $position from 1 to 8
      * @return \PHT\Xml\World\League\Team[]
      */
     public function getTeams()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Team");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::YOUTH);
+        /** @var \PHT\Xml\World\League\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::YOUTH);
+        return $data;
     }
 
     /**

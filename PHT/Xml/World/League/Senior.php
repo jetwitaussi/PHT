@@ -123,14 +123,15 @@ class Senior extends Xml\File
     /**
      * Return iterator of league team objects
      *
-     * @param integer $position from 1 to 8
      * @return \PHT\Xml\World\League\Team[]
      */
     public function getTeams()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Team");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::SENIOR);
+        /** @var \PHT\Xml\World\League\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::SENIOR);
+        return $data;
     }
 
     /**

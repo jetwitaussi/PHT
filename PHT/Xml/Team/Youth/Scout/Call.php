@@ -127,6 +127,8 @@ class Call extends Xml\Base
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//ScoutComment");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Youth\Scout\Comment');
+        /** @var \PHT\Xml\Team\Youth\Scout\Comment[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Youth\Scout\Comment');
+        return $data;
     }
 }

@@ -373,6 +373,7 @@ class TransferMarket
      * Returns min price
      *
      * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
      */
     public function getMinPrice($countryCurrency = null)
     {
@@ -386,6 +387,7 @@ class TransferMarket
      * Returns max price
      *
      * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
      */
     public function getMaxPrice($countryCurrency = null)
     {

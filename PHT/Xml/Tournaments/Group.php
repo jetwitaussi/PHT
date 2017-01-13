@@ -77,6 +77,8 @@ class Group extends Xml\Base
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Team');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::SENIOR);
+        /** @var \PHT\Xml\World\League\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Team', Config\Config::SENIOR);
+        return $data;
     }
 }

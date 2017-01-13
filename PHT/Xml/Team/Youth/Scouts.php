@@ -93,6 +93,8 @@ class Scouts extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Scout');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Youth\Scout', $this->teamId);
+        /** @var \PHT\Xml\Team\Youth\Scout[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Youth\Scout', $this->teamId);
+        return $data;
     }
 }

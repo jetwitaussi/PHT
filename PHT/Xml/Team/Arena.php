@@ -15,6 +15,7 @@ namespace PHT\Xml\Team;
 
 use PHT\Xml;
 use PHT\Wrapper;
+use PHT\Config;
 
 class Arena extends Xml\File
 {
@@ -167,9 +168,9 @@ class Arena extends Xml\File
     public function getFutureCapacity()
     {
         if ($this->isFutureCapacityAvailable()) {
-            return $this->getCurrentCapacity() + $this->getExpandedCapacity();
+            return $this->getCurrentCapacity()->getTotal() + $this->getExpandedCapacity()->getTotal();
         }
-        return $this->getCurrentCapacity();
+        return $this->getCurrentCapacity()->getTotal();
     }
 
     /**

@@ -15,6 +15,7 @@ namespace PHT\Xml\Team\Match;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Utils;
 
 class Archive extends Xml\File
 {
@@ -121,6 +122,8 @@ class Archive extends Xml\File
     public function getMatches()
     {
         $nodeList = $this->getXml()->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 }

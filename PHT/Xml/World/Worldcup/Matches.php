@@ -98,7 +98,9 @@ class Matches extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 
     /**
@@ -140,6 +142,8 @@ class Matches extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Round');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Round');
+        /** @var \PHT\Xml\World\Worldcup\Round[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Worldcup\Round');
+        return $data;
     }
 }

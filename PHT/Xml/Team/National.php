@@ -14,6 +14,7 @@
 namespace PHT\Xml\Team;
 
 use PHT\Xml;
+use PHT\Config;
 use PHT\Wrapper;
 
 class National extends Xml\File
@@ -96,36 +97,6 @@ class National extends Xml\File
     public function getCountry()
     {
         return Wrapper\World::country($this->getLeagueId());
-    }
-
-    /**
-     * Return trainer player id
-     *
-     * @return integer
-     */
-    public function getTrainerId()
-    {
-        return $this->getXml()->getElementsByTagName('PlayerID')->item(0)->nodeValue;
-    }
-
-    /**
-     * Return trainer player
-     *
-     * @return \PHT\Xml\Player\Senior
-     */
-    public function getTrainer()
-    {
-        return Wrapper\Player\Senior::player($this->getTrainerId());
-    }
-
-    /**
-     * Return trainer player name
-     *
-     * @return string
-     */
-    public function getTrainerName()
-    {
-        return $this->getXml()->getElementsByTagName('PlayerName')->item(0)->nodeValue;
     }
 
     /**
@@ -341,8 +312,7 @@ class National extends Xml\File
     /**
      * Get team players
      *
-     * @param integer $teamId
-     * @return \PHT\Xml\NationalPlayers
+     * @return \PHT\Xml\National\Players
      */
     public function getPlayers()
     {
@@ -383,7 +353,7 @@ class National extends Xml\File
      * Return challenges, only team belongs to connected user
      *
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challenges
+     * @return \PHT\Xml\Team\Challengeable\Listing
      */
     public function getChallenges($weekendFriendly = false)
     {

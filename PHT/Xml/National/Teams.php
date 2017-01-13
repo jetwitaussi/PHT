@@ -110,6 +110,8 @@ class Teams extends Xml\HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//NationalTeam');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\National\Chunk');
+        /** @var \PHT\Xml\Team\National\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\National\Chunk');
+        return $data;
     }
 }

@@ -94,7 +94,9 @@ class Challenges extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Challenge');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Challenge');
+        /** @var \PHT\Xml\Match\Challenge $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Challenge');
+        return $data;
     }
 
     /**
@@ -136,6 +138,8 @@ class Challenges extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Offer');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Challenge');
+        /** @var \PHT\Xml\Match\Challenge[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Challenge');
+        return $data;
     }
 }

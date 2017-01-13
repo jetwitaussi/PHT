@@ -27,8 +27,9 @@ class Youth
      */
     public static function team($id)
     {
-        $url = Network\Request::buildUrl(array('file' => 'youthteamdetails', 'youthTeamId' => $id, 'version' => Config\Version::YOUTHTEAMDETAILS));
-        return Xml\Team\Youth(Network\Request::fetchUrl($url));
+        $params = array('file' => 'youthteamdetails', 'youthTeamId' => $id, 'version' => Config\Version::YOUTHTEAMDETAILS);
+        $url = Network\Request::buildUrl($params);
+        return new Xml\Team\Youth(Network\Request::fetchUrl($url));
     }
 
     /**
@@ -67,8 +68,9 @@ class Youth
      */
     public static function scouts($teamId)
     {
-        $url = $this->buildUrl(array('file' => 'youthteamdetails', 'youthTeamId' => $teamId, 'version' => Config\Version::YOUTHPLAYERLIST, 'showScouts' => 'true'));
-        return new Xml\Team\Youth\Scouts($this->fetchUrl($url));
+        $params = array('file' => 'youthteamdetails', 'youthTeamId' => $teamId, 'version' => Config\Version::YOUTHPLAYERLIST, 'showScouts' => 'true');
+        $url = Network\Request::buildUrl($params);
+        return new Xml\Team\Youth\Scouts(Network\Request::fetchUrl($url));
     }
 
     /**
@@ -97,7 +99,7 @@ class Youth
      * @return \PHT\Xml\Team\Match\Archive
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public static function archive($teamId, $startDate = null, $endDate = null)
+    public static function archives($teamId, $startDate = null, $endDate = null)
     {
         if ($startDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $startDate)) {
             throw new Exception\InvalidArgumentException('Parameter $startDate must have format yyyy-mm-dd');
@@ -121,7 +123,7 @@ class Youth
 
     /**
      * @param integer $teamId
-     * @return \PHT\Xml\Team\Youth\Avatars
+     * @return \PHT\Xml\Team\Avatars
      */
     public static function avatars($teamId = null)
     {

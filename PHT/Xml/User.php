@@ -128,7 +128,9 @@ class User extends HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Team');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\Team');
+        /** @var \PHT\Xml\Compendium\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\Team');
+        return $data;
     }
 
     /**
@@ -170,7 +172,9 @@ class User extends HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//NationalTeam');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\National');
+        /** @var \PHT\Xml\Compendium\National[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\National');
+        return $data;
     }
 
     /**
@@ -216,5 +220,49 @@ class User extends HTSupporter
     public function getSupporters($page = 0, $size = 50)
     {
         return Wrapper\Supporters::listing(null, $this->getId(), $page, $size);
+    }
+
+    /**
+     * Return number of last logins
+     *
+     * @return integer
+     */
+    public function getLastLoginNumber()
+    {
+        return $this->getXml()->getElementsByTagName('LoginTime')->length;
+    }
+
+    /**
+     * Return last login object
+     *
+     * @param integer $index
+     * @return \PHT\Xml\Compendium\Login
+     */
+    public function getLastLogin($index)
+    {
+        $index = round($index);
+        if ($index >= Config\Config::$forIndex && $index < $this->getLastLoginNumber() + Config\Config::$forIndex) {
+            $index -= Config\Config::$forIndex;
+            $xpath = new \DOMXPath($this->getXml());
+            $nodeList = $xpath->query('//LoginTime');
+            $login = new \DOMDocument('1.0', 'UTF-8');
+            $login->appendChild($login->importNode($nodeList->item($index), true));
+            return new Compendium\Login($login);
+        }
+        return null;
+    }
+
+    /**
+     * Return iterator of user last logins
+     *
+     * @return \PHT\Xml\Compendium\Login[]
+     */
+    public function getLastLogins()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//LoginTime');
+        /** @var \PHT\Xml\Compendium\Login[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\Login');
+        return $data;
     }
 }

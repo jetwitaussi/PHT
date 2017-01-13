@@ -60,8 +60,7 @@ class National extends Xml\Base
     /**
      * Get national team players
      *
-     * @param integer $teamId
-     * @return \PHT\Xml\NationalPlayers
+     * @return \PHT\Xml\National\Players
      */
     public function getPlayers()
     {

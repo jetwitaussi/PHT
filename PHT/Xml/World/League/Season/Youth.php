@@ -97,6 +97,7 @@ class Youth extends Xml\File
     public function getLastRound()
     {
         foreach (array_reverse($this->getRounds()) as $round) {
+            /** @var \PHT\Xml\World\League\Season\Round $round */
             if ($round->getMatch(Config\Config::$forIndex)->getStatus() == Config\Config::MATCH_PLAYED) {
                 return $round;
             }
@@ -161,10 +162,10 @@ class Youth extends Xml\File
             if ($matches->getElementsByTagName('HomeGoals')->length) {
                 $homeGoals = $matches->getElementsByTagName('HomeGoals')->item(0)->nodeValue;
                 $awayGoals = $matches->getElementsByTagName('AwayGoals')->item(0)->nodeValue;
-                $tmp[$homeId]['goalsfor'] += $homeGoals;
-                $tmp[$homeId]['goalsagainst'] += $awayGoals;
-                $tmp[$awayId]['goalsfor'] += $awayGoals;
-                $tmp[$awayId]['goalsagainst'] += $homeGoals;
+                $tmp[$homeId]['goalsfor'] += (int)$homeGoals;
+                $tmp[$homeId]['goalsagainst'] += (int)$awayGoals;
+                $tmp[$awayId]['goalsfor'] += (int)$awayGoals;
+                $tmp[$awayId]['goalsagainst'] += (int)$homeGoals;
                 $tmp[$homeId]['played'] ++;
                 $tmp[$awayId]['played'] ++;
                 if ($homeGoals > $awayGoals) {

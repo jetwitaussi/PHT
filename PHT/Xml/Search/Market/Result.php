@@ -111,7 +111,7 @@ class Result extends Xml\Base
      */
     public function getCountry()
     {
-        return Wrapper\World::country(null, $this->getPlayerCountryId());
+        return Wrapper\World::country(null, $this->getCountryId());
     }
 
     /**

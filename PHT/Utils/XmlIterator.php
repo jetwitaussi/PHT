@@ -16,7 +16,7 @@ namespace PHT\Utils;
 class XmlIterator implements \Iterator
 {
     /**
-     * @var DOMNodeList
+     * @var \DOMNodeList
      */
     private $nodes;
 
@@ -52,6 +52,9 @@ class XmlIterator implements \Iterator
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function current()
     {
         $node = new \DOMDocument('1.0', 'UTF-8');
@@ -62,6 +65,9 @@ class XmlIterator implements \Iterator
         return new $this->type($node);
     }
 
+    /**
+     * @return integer
+     */
     public function key()
     {
         return $this->item;
@@ -77,6 +83,9 @@ class XmlIterator implements \Iterator
         $this->item = 0;
     }
 
+    /**
+     * @return boolean
+     */
     public function valid()
     {
         return $this->item < $this->nodes->length;

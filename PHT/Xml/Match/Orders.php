@@ -80,7 +80,7 @@ class Orders extends Xml\File
             if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
                 return Wrapper\Team\Youth::team($this->getHomeTeamId());
             } elseif (in_array($this->getMatchType(), array(10, 11, 12))) {
-                return Wrapper\Team\National::team($this->getHomeTeamId());
+                return Wrapper\National::team($this->getHomeTeamId());
             }
             return Wrapper\Team\Senior::team($this->getHomeTeamId());
         }
@@ -124,7 +124,7 @@ class Orders extends Xml\File
             if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
                 return Wrapper\Team\Youth::team($this->getAwayTeamId());
             } elseif (in_array($this->getMatchType(), array(10, 11, 12))) {
-                return Wrapper\Team\National::team($this->getAwayTeamId());
+                return Wrapper\National::team($this->getAwayTeamId());
             }
             return Wrapper\Team\Senior::team($this->getAwayTeamId());
         }
@@ -319,7 +319,9 @@ class Orders extends Xml\File
             }
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//Player');
-            return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+            /** @var \PHT\Xml\Match\Lineup\Player[] $data */
+            $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+            return $data;
         }
         return null;
     }
@@ -403,7 +405,9 @@ class Orders extends Xml\File
             }
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//PlayerOrder');
-            return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Orders\Order', $type);
+            /** @var \PHT\Xml\Match\Orders\Order[] $data */
+            $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Orders\Order', $type);
+            return $data;
         }
         return null;
     }
@@ -469,7 +473,9 @@ class Orders extends Xml\File
                 $order->appendChild($order->importNode($nodeList->item($i)->parentNode, true));
             }
             $nodes = $order->getElementsByTagName('PlayerOrder');
-            return new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Orders\Order', $type);
+            /** @var \PHT\Xml\Match\Orders\Order[] $data */
+            $data = new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Orders\Order', $type);
+            return $data;
         }
         return null;
     }

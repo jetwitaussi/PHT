@@ -48,6 +48,7 @@ class File extends AbstractLogger
      * @param integer $level (see \PHT\Log\Level constants)
      * @param string $message
      * @param array $context
+     * @return string
      */
     private function buildMessage($level, $message, $context = array())
     {

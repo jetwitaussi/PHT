@@ -119,4 +119,14 @@ class Goal extends Xml\Base
     {
         return $this->getXml()->getElementsByTagName('ScorerMinute')->item(0)->nodeValue;
     }
+
+    /**
+     * Return match part when goal happened
+     *
+     * @return integer
+     */
+    public function getMatchPart()
+    {
+        return $this->getXml()->getElementsByTagName('MatchPart')->item(0)->nodeValue;
+    }
 }

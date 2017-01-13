@@ -89,6 +89,8 @@ class Roles extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Role');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Role');
+        /** @var \PHT\Xml\Federations\Role[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Role');
+        return $data;
     }
 }

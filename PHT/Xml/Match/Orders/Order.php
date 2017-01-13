@@ -15,6 +15,7 @@ namespace PHT\Xml\Match\Orders;
 
 use PHT\Xml;
 use PHT\Wrapper;
+use PHT\Config;
 
 class Order extends Xml\Base
 {

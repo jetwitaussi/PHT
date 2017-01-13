@@ -13,6 +13,8 @@
 
 namespace PHT\Config;
 
+use PHT\Log;
+
 abstract class Config
 {
     /**
@@ -132,7 +134,7 @@ abstract class Config
      *
      * @var string
      */
-    public static $logLevel = \PHT\Log\Level::ERROR;
+    public static $logLevel = Log\Level::ERROR;
 
     /**
      * log time format, use php date() format

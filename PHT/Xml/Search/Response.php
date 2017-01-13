@@ -141,7 +141,9 @@ class Response extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Result');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Search\Result');
+        /** @var \PHT\Xml\Search\Result[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Search\Result');
+        return $data;
     }
 
     /**

@@ -68,6 +68,8 @@ class Achievements extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Achievement');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Achievement\Success');
+        /** @var \PHT\Xml\User\Achievement\Success[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Achievement\Success');
+        return $data;
     }
 }

@@ -74,7 +74,7 @@ class Chunk extends Xml\Base
      */
     public function getLadder($page = -1, $size = 25)
     {
-        return Wrapper\Tournament::ladder($this->getId(), $this->teamId, $page, $size);
+        return Wrapper\Tournament::ladder($this->getLadderId(), $this->teamId, $page, $size);
     }
 
     /**

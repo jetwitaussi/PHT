@@ -58,7 +58,9 @@ class Players extends Xml\HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Senior\Chunk');
+        /** @var \PHT\Xml\Player\Senior\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Senior\Chunk');
+        return $data;
     }
 
     /**

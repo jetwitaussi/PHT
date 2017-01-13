@@ -26,6 +26,7 @@ class Costs extends Xml\Base
      *
      * @param \DOMDocument $xml
      * @param integer $money
+     * @param boolean $last
      */
     public function __construct($xml, $money = null, $last = false)
     {

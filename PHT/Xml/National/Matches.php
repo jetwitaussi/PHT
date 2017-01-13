@@ -68,6 +68,8 @@ class Matches extends Xml\HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\National', $this->isU20Matches());
+        /** @var \PHT\Xml\Match\National[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\National', $this->isU20Matches());
+        return $data;
     }
 }

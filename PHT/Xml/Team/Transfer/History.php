@@ -134,7 +134,9 @@ class History extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Transfer');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Transfer');
+        /** @var \PHT\Xml\Transfer[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Transfer');
+        return $data;
     }
 
     /**
@@ -196,10 +198,10 @@ class History extends Xml\File
      */
     public function getNextPage()
     {
-        if ($this->getPage() + 1 > $this->getTotalPage()) {
+        if ($this->getCurrentPage() + 1 > $this->getTotalPage()) {
             return null;
         }
-        return Wrapper\Team\Senior::transfershistory($this->getTeamId(), $this->getPage() + 1);
+        return Wrapper\Team\Senior::transfershistory($this->getTeamId(), $this->getCurrentPage() + 1);
     }
 
     /**
@@ -209,10 +211,10 @@ class History extends Xml\File
      */
     public function getPreviousPage()
     {
-        if ($this->getPage() - 1 < 1) {
+        if ($this->getCurrentPage() - 1 < 1) {
             return null;
         }
-        return Wrapper\Team\Senior::transfershistory($this->getTeamId(), $this->getPage() - 1);
+        return Wrapper\Team\Senior::transfershistory($this->getTeamId(), $this->getCurrentPage() - 1);
     }
 
     /**
@@ -228,6 +230,7 @@ class History extends Xml\File
     /**
      * Return a page of transfers, start at 1 and ends at getTotalPage()
      *
+     * @param integer $page
      * @return \PHT\Xml\Team\Transfer\History
      */
     public function getPage($page)

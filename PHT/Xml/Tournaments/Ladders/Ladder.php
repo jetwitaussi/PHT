@@ -85,7 +85,7 @@ class Ladder extends Xml\File
     /**
      * Return next page for this ladder
      *
-     * @return \PHT\Xml\Tournament\Ladders\Ladder
+     * @return \PHT\Xml\Tournaments\Ladders\Ladder
      */
     public function getNextPage()
     {
@@ -95,7 +95,7 @@ class Ladder extends Xml\File
     /**
      * Return previous page for this ladder
      *
-     * @return \PHT\Xml\Tournament\Ladders\Ladder
+     * @return \PHT\Xml\Tournaments\Ladders\Ladder
      */
     public function getPreviousPage()
     {
@@ -185,6 +185,8 @@ class Ladder extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Team');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Ladders\Team');
+        /** @var \PHT\Xml\Tournaments\Ladders\Team[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Ladders\Team');
+        return $data;
     }
 }

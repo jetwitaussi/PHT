@@ -142,7 +142,7 @@ class Senior
      * @param integer $stamina
      * @return boolean
      */
-    public function train($teamId, $type = null, $intensity = null, $stamina = null)
+    public static function train($teamId, $type = null, $intensity = null, $stamina = null)
     {
         if ($type === null && $intensity === null && $stamina === null) {
             return false;
@@ -362,13 +362,13 @@ class Senior
             $params['userID'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return Xml\Team\Flags(Network\Request::fetchUrl($url), $teamId);
+        return new Xml\Team\Flags(Network\Request::fetchUrl($url), $teamId);
     }
 
     /**
      * @param integer $teamId
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challenges
+     * @return \PHT\Xml\Team\Challengeable\Listing
      */
     public static function challenges($teamId = null, $weekendFriendly = false)
     {
@@ -377,7 +377,7 @@ class Senior
             $params['teamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Challenge\Listing(Network\Request::fetchUrl($url));
+        return new Xml\Team\Challengeable\Listing(Network\Request::fetchUrl($url));
     }
 
     /**

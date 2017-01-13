@@ -16,6 +16,7 @@ namespace PHT\Xml\Federations;
 use PHT\Xml;
 use PHT\Config;
 use PHT\Utils;
+use PHT\Wrapper;
 
 class Members extends Xml\File
 {
@@ -88,6 +89,8 @@ class Members extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Member');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Member', $this->getFederationId());
+        /** @var \PHT\Xml\Federations\Member[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Member', $this->getFederationId());
+        return $data;
     }
 }

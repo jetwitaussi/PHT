@@ -46,7 +46,7 @@ class Cup extends Xml\File
      */
     public function getRound()
     {
-        return $this->getXml()->getElementsByTagName('CupRound')->item(0)->nodeVale;
+        return $this->getXml()->getElementsByTagName('CupRound')->item(0)->nodeValue;
     }
 
     /**
@@ -98,6 +98,8 @@ class Cup extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 }

@@ -81,12 +81,13 @@ class Avatars extends Xml\File
     /**
      * Return avatar object
      *
+     * @param integer $index
      * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar
      */
     public function getAvatar($index)
     {
         $index = round($index);
-        if ($index >= Config\Config::$forIndex && $index < $this->getPlayerNumber() + Config\Config::$forIndex) {
+        if ($index >= Config\Config::$forIndex && $index < $this->getAvatarNumber() + Config\Config::$forIndex) {
             $tag = 'Player';
             if ($this->type == Config\Config::STAFF) {
                 $tag = 'Staff';
@@ -123,12 +124,15 @@ class Avatars extends Xml\File
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//" . $tag);
-        return new Utils\XmlIterator($nodeList, $ns, array('type' => $this->type, 'team' => $this->getTeamId()));
+        /** @var \PHT\Xml\Player\Avatar[]|\PHT\Xml\Team\Staff\Avatar[] $data */
+        $data = new Utils\XmlIterator($nodeList, $ns, array('type' => $this->type, 'team' => $this->getTeamId()));
+        return $data;
     }
 
     /**
      * Return avatar object
      *
+     * @param integer $id
      * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar
      */
     public function getAvatarById($id)

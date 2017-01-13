@@ -65,7 +65,7 @@ class Memcached implements CacheInterface
     public function delete($key)
     {
         $key = str_replace(' ', '_', $key);  
-        $this->obj->delete(sha1($key), 0);
+        return $this->obj->delete(sha1($key), 0);
     }
 
     /**

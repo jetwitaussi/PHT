@@ -71,7 +71,9 @@ class Listing extends Xml\HTSupporter
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Alliance');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Chunk');
+        /** @var \PHT\Xml\Federations\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Federations\Chunk');
+        return $data;
     }
 
     /**
@@ -97,7 +99,7 @@ class Listing extends Xml\HTSupporter
     /**
      * Return first page of results
      *
-     * @return \PHT\Xml\User\Federations\Listing
+     * @return \PHT\Xml\Federations\Listing
      */
     public function getFirstPage()
     {
@@ -109,7 +111,7 @@ class Listing extends Xml\HTSupporter
     /**
      * Return next page of results
      *
-     * @return \PHT\Xml\User\Federations\Listing
+     * @return \PHT\Xml\Federations\Listing
      */
     public function getNextPage()
     {
@@ -124,7 +126,7 @@ class Listing extends Xml\HTSupporter
     /**
      * Return previous page of results
      *
-     * @return \PHT\Xml\User\Federations\Listing
+     * @return \PHT\Xml\Federations\Listing
      */
     public function getPreviousPage()
     {
@@ -139,7 +141,7 @@ class Listing extends Xml\HTSupporter
     /**
      * Return last page of results
      *
-     * @return \PHT\Xml\User\Federations\Listing
+     * @return \PHT\Xml\Federations\Listing
      */
     public function getLastPage()
     {
@@ -151,7 +153,8 @@ class Listing extends Xml\HTSupporter
     /**
      * Return a page of results, start at 0 and ends at getTotalPage() - 1
      *
-     * @return \PHT\Xml\User\Federations\Listing
+     * @param integer $page
+     * @return \PHT\Xml\Federations\Listing
      */
     public function getPage($page)
     {

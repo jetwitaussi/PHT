@@ -16,6 +16,7 @@ namespace PHT\Wrapper;
 use PHT\Xml;
 use PHT\Config;
 use PHT\Network;
+use PHT\Exception;
 
 class Match
 {
@@ -96,6 +97,7 @@ class Match
     }
 
     /**
+     * @param string $type
      * @param integer $matchId
      * @param integer $teamId
      * @return \PHT\Xml\Match\Lineup
@@ -144,6 +146,7 @@ class Match
     }
 
     /**
+     * @param string $type
      * @param integer $matchId
      * @param integer $teamId
      * @return \PHT\Xml\Match\Orders

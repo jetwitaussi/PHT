@@ -69,6 +69,8 @@ class Round extends Xml\Base
     public function getMatches()
     {
         $nodes = $this->getXml()->getElementsByTagName('Match');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\World\League\Season\Match', $this->type);
+        /** @var \PHT\Xml\World\League\Season\Match[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\World\League\Season\Match', $this->type);
+        return $data;
     }
 }

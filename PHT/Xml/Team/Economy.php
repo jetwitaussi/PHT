@@ -15,6 +15,7 @@ namespace PHT\Xml\Team;
 
 use PHT\Xml;
 use PHT\Utils;
+use PHT\Wrapper;
 
 class Economy extends Xml\File
 {

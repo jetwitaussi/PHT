@@ -15,6 +15,7 @@ namespace PHT\Xml\World\League\Season;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Wrapper;
 
 class Senior extends Xml\File
 {
@@ -30,8 +31,7 @@ class Senior extends Xml\File
 
     /**
      * Get senior league
-     *
-     * @param integer $id
+
      * @return \PHT\Xml\World\League\Senior
      */
     public function getSeniorLeague()
@@ -88,6 +88,7 @@ class Senior extends Xml\File
     public function getLastRound()
     {
         foreach (array_reverse($this->getRounds()) as $round) {
+            /** @var \PHT\Xml\World\League\Season\Round $round */
             if ($round->getMatch(Config\Config::$forIndex)->getHomeGoals() !== null) {
                 return $round;
             }
@@ -152,10 +153,10 @@ class Senior extends Xml\File
             if ($matches->getElementsByTagName('HomeGoals')->length) {
                 $homeGoals = $matches->getElementsByTagName('HomeGoals')->item(0)->nodeValue;
                 $awayGoals = $matches->getElementsByTagName('AwayGoals')->item(0)->nodeValue;
-                $tmp[$homeId]['goalsfor'] += $homeGoals;
-                $tmp[$homeId]['goalsagainst'] += $awayGoals;
-                $tmp[$awayId]['goalsfor'] += $awayGoals;
-                $tmp[$awayId]['goalsagainst'] += $homeGoals;
+                $tmp[$homeId]['goalsfor'] += (int)$homeGoals;
+                $tmp[$homeId]['goalsagainst'] += (int)$awayGoals;
+                $tmp[$awayId]['goalsfor'] += (int)$awayGoals;
+                $tmp[$awayId]['goalsagainst'] += (int)$homeGoals;
                 $tmp[$homeId]['played'] ++;
                 $tmp[$awayId]['played'] ++;
                 if ($homeGoals > $awayGoals) {

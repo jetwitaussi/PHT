@@ -117,7 +117,9 @@ class Bids extends Xml\File
             $bid->appendChild($bid->importNode($nodeList->item($i), true));
         }
         $nodes = $bid->getElementsByTagName('BidItem');
-        return new Utils\XmlIterator($nodes, 'Xml\Player\Bid');
+        /** @var \PHT\Xml\Player\Bid[] $data */
+        $data = new Utils\XmlIterator($nodes, 'Xml\Player\Bid');
+        return $data;
     }
 
     /**

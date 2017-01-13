@@ -16,7 +16,7 @@ namespace PHT\Network;
 class Url
 {
     const OAUTH_SERVER = 'https://chpp.hattrick.org';
-    const XML_SERVER = 'http://chpp.hattrick.org';
+    const XML_SERVER = 'https://chpp.hattrick.org';
     const REQUEST_URL = '/oauth/request_token.ashx';
     const AUTH_URL = '/oauth/authorize.aspx';
     const AUTHC_URL = '/oauth/authenticate.aspx';

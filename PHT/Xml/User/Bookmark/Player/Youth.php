@@ -48,6 +48,6 @@ class Youth extends Xml\User\Bookmark\Element
      */
     public function getPlayer($unlockSkills = false, $showScoutCall = true, $showLastMatch = true)
     {
-        return Wrapper\Player\Youth::player($this->getPlayer(), $unlockSkills, $showScoutCall, $showLastMatch);
+        return Wrapper\Player\Youth::player($this->getPlayerId(), $unlockSkills, $showScoutCall, $showLastMatch);
     }
 }

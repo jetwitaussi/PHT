@@ -24,6 +24,7 @@ class Match extends Xml\Base
 
     /**
      * @param \DOMDocument $xml
+     * @param string $type
      */
     public function __construct($xml, $type)
     {

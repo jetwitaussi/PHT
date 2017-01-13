@@ -44,7 +44,7 @@ class Chunk extends Xml\Base
      */
     public function getTeam()
     {
-        return Wrapper\Team\National::team($this->getId());
+        return Wrapper\National::team($this->getId());
     }
 
     /**
@@ -112,8 +112,7 @@ class Chunk extends Xml\Base
     /**
      * Get team players
      *
-     * @param integer $teamId
-     * @return \PHT\Xml\NationalPlayers
+     * @return \PHT\Xml\National\Players
      */
     public function getPlayers()
     {

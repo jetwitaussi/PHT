@@ -22,7 +22,8 @@ class ChppException extends \Exception
 
     /**
      * @param string $message
-     * @param boolean $isXml
+     * @param integer $code
+     * @param \Exception $previous
      */
     public function __construct($message, $code = 0, $previous = null)
     {

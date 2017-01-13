@@ -202,7 +202,9 @@ class Federation extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Language');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\I18n\Language');
+        /** @var \PHT\Xml\I18n\Language[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\I18n\Language');
+        return $data;
     }
 
     /**
@@ -244,7 +246,9 @@ class Federation extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//LoggedInUser');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Chunk');
+        /** @var \PHT\Xml\User\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Chunk');
+        return $data;
     }
 
     /**

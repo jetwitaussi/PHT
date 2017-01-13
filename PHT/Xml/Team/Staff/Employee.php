@@ -123,5 +123,6 @@ class Employee extends Xml\Base
                 }
             }
         }
+        return null;
     }
 }

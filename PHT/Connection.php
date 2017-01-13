@@ -14,6 +14,7 @@
 namespace PHT;
 
 use PHT\Config;
+use PHT\Network;
 
 class Connection extends Config\Base
 {
@@ -86,7 +87,6 @@ class Connection extends Config\Base
      */
     public function isChppDown($wait = 3, $retry = 1)
     {
-        $up = true;
         do {
             $up = Network\Request::pingChppServer($wait * 1000);
         } while (--$retry > 0 && $up === false);

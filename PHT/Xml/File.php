@@ -50,6 +50,7 @@ class File extends Base
     /**
      * Return fetched date of xml file
      *
+     * @param string $format (php date() function format)
      * @return string
      */
     public function getFetchedDate($format = null)

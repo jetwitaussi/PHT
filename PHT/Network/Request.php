@@ -171,15 +171,16 @@ class Request
      * @param string $url
      * @param array $params
      * @param string $token
+     * @param string $method
      * @return string
      */
     public static function buildSignature($url, $params, $token = '', $method = 'GET')
     {
         $parts = array($method, $url, self::buildHttpQuery($params));
-        $parts = implode('&', self::urlencodeRfc3986($parts));
+        $parts = self::urlencodeRfc3986($parts);
         Log\Logger::getInstance()->debug('[OAUTH] Base string: ' . $parts);
         $key_parts = array(Config\Config::$consumerSecret, $token);
-        $key = implode('&', self::urlencodeRfc3986($key_parts));
+        $key = self::urlencodeRfc3986($key_parts);
         $sign = base64_encode(hash_hmac('sha1', $parts, $key, true));
         Log\Logger::getInstance()->debug('[OAUTH] Signature: ' . $sign);
         return $sign;
@@ -198,7 +199,7 @@ class Request
         }
         $keys = self::urlencodeRfc3986(array_keys($params));
         $values = self::urlencodeRfc3986(array_values($params));
-        $newparams = array_combine($keys, $values);
+        $newparams = array_combine(array($keys), array($values));
         uksort($newparams, 'strcmp');
         $pairs = array();
         foreach ($newparams as $parameter => $value) {

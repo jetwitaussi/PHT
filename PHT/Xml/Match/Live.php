@@ -287,7 +287,9 @@ class Live extends Xml\Base
             $type = Config\Config::MATCH_YOUTH;
         }
         $nodeList = $this->getXml()->getElementsByTagName('Substitution');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Substitution', $type);
+        /** @var \PHT\Xml\Match\Lineup\Substitution[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Substitution', $type);
+        return $data;
     }
 
     /**
@@ -322,6 +324,7 @@ class Live extends Xml\Base
             $player->appendChild($player->importNode($nodeList->item($index), true));
             return new Lineup\Player($player, $type);
         }
+        return null;
     }
 
     /**
@@ -337,7 +340,9 @@ class Live extends Xml\Base
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//HomeTeam/StartingLineup/Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        /** @var \PHT\Xml\Match\Lineup\Player[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        return $data;
     }
 
     /**
@@ -372,6 +377,7 @@ class Live extends Xml\Base
             $player->appendChild($player->importNode($nodeList->item($index), true));
             return new Lineup\Player($player, $type);
         }
+        return null;
     }
 
     /**
@@ -387,7 +393,9 @@ class Live extends Xml\Base
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//AwayTeam/StartingLineup/Player');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        /** @var \PHT\Xml\Match\Lineup\Player[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+        return $data;
     }
 
     /**
@@ -412,6 +420,19 @@ class Live extends Xml\Base
     {
         if ($this->getXml()->getElementsByTagName('NextEventMinute')->length) {
             return $this->getXml()->getElementsByTagName('NextEventMinute')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return next event match part
+     *
+     * @return integer
+     */
+    public function getNextEventMatchPart()
+    {
+        if ($this->getXml()->getElementsByTagName('NextEventMatchPart')->length) {
+            return $this->getXml()->getElementsByTagName('NextEventMatchPart')->item(0)->nodeValue;
         }
         return null;
     }

@@ -121,6 +121,8 @@ class History extends Xml\File
             $transfer->appendChild($transfer->importNode($nodeList->item($i), true));
         }
         $nodes = $transfer->getElementsByTagName('Transfer');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\Transfer');
+        /** @var \PHT\Xml\Transfer[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\Transfer');
+        return $data;
     }
 }

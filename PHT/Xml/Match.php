@@ -144,6 +144,16 @@ class Match extends File
     }
 
     /**
+     * Return added minutes number
+     *
+     * @return integer
+     */
+    public function getAddedMinutes()
+    {
+        return $this->getXml()->getElementsByTagName('AddedMinutes')->item(0)->nodeValue;
+    }
+
+    /**
      * Return home team object
      *
      * @return \PHT\Xml\Match\Team
@@ -256,7 +266,9 @@ class Match extends File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Goal');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Goal', $this->type);
+        /** @var \PHT\Xml\Match\Goal[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Goal', $this->type);
+        return $data;
     }
 
     /**
@@ -321,12 +333,15 @@ class Match extends File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Booking');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Card', $this->type);
+        /** @var \PHT\Xml\Match\Card[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Card', $this->type);
+        return $data;
     }
 
     /**
      * Return yellow card object
      *
+     * @param integer $index
      * @return \PHT\Xml\Match\Card
      */
     public function getYellowCard($index)
@@ -357,12 +372,15 @@ class Match extends File
             $card->appendChild($card->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $card->getElementsByTagName('Booking');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Card', $this->type);
+        /** @var \PHT\Xml\Match\Card[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Card', $this->type);
+        return $data;
     }
 
     /**
      * Return red card object
      *
+     * @param integer $index
      * @return \PHT\Xml\Match\Card
      */
     public function getRedCard($index)
@@ -393,7 +411,9 @@ class Match extends File
             $card->appendChild($card->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $card->getElementsByTagName('Booking');
-        return new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Card', $this->type);
+        /** @var \PHT\Xml\Match\Card[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\Match\Card', $this->type);
+        return $data;
     }
 
     /**
@@ -420,6 +440,7 @@ class Match extends File
         if ($nodeList->length) {
             $text = '';
             foreach ($nodeList as $event) {
+                /** @var \DOMElement $event */
                 $event = $event->parentNode;
                 $text .= $event->getElementsByTagName('EventText')->item(0)->nodeValue;
             }
@@ -441,6 +462,7 @@ class Match extends File
         if ($nodeList->length) {
             $text = '';
             foreach ($nodeList as $event) {
+                /** @var \DOMElement $event */
                 $event = $event->parentNode;
                 $text .= $event->getElementsByTagName('EventText')->item(0)->nodeValue;
             }
@@ -540,7 +562,9 @@ class Match extends File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Injury');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Injury', $this->type);
+        /** @var \PHT\Xml\Match\Injury[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Injury', $this->type);
+        return $data;
     }
 
     /**

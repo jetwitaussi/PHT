@@ -15,6 +15,7 @@ namespace PHT\Xml\World;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Utils;
 
 class World extends Xml\File
 {
@@ -102,6 +103,8 @@ class World extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//League');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Country');
+        /** @var \PHT\Xml\World\Country[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Country');
+        return $data;
     }
 }

@@ -17,6 +17,7 @@ use PHT\Xml;
 use PHT\Config;
 use PHT\Network;
 use PHT\Exception;
+use PHT\Utils;
 
 class Senior
 {

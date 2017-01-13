@@ -45,7 +45,6 @@ class Injury extends Xml\Base
     /**
      * Return player
      *
-     * @param boolean $includeMatchInfo
      * @return \PHT\Xml\Player\Senior|\PHT\Xml\Player\Youth
      */
     public function getPlayer()
@@ -86,7 +85,7 @@ class Injury extends Xml\Base
         if ($this->type == Config\Config::MATCH_YOUTH) {
             return Wrapper\Team\Youth::team($this->getTeamId());
         } elseif ($this->type == Config\Config::MATCH_NATIONAL) {
-            return Wrapper\Team\National::team($this->getTeamId());
+            return Wrapper\National::team($this->getTeamId());
         }
         return Wrapper\Team\Senior::team($this->getTeamId());
     }
@@ -109,5 +108,15 @@ class Injury extends Xml\Base
     public function getMinute()
     {
         return $this->getXml()->getElementsByTagName('InjuryMinute')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return match part when injury happened
+     *
+     * @return integer
+     */
+    public function getMatchPart()
+    {
+        return $this->getXml()->getElementsByTagName('MatchPart')->item(0)->nodeValue;
     }
 }

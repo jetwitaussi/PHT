@@ -201,15 +201,16 @@ class Team extends Xml\Base
     }
 
     /**
-     * Return youth team id
+     * Return youth team
      *
-     * @return integer
+     * @return \PHT\Xml\Team\Youth
      */
     public function getYouthTeam()
     {
         if ($this->hasYouthTeam()) {
             return Wrapper\Team\Youth::team($this->getYouthTeamId());
         }
+        return null;
     }
 
     /**
@@ -248,6 +249,7 @@ class Team extends Xml\Base
         if ($this->hasYouthTeam()) {
             return Wrapper\World\League::youth($this->getYouthLeagueId());
         }
+        return null;
     }
 
     /**

@@ -244,7 +244,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Return arena
      *
-     * @return \PHT\Xml\Team\Senior\Arena
+     * @return \PHT\Xml\Team\Arena
      */
     public function getArena()
     {
@@ -291,6 +291,32 @@ class Senior extends Xml\HTSupporter
             return null;
         }
         return $this->getXml()->getElementsByTagName('LeagueName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country id
+     *
+     * @return integer
+     */
+    public function getCountryId()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('CountryID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country name
+     *
+     * @return string
+     */
+    public function getCountryName()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('CountryName')->item(0)->nodeValue;
     }
 
     /**
@@ -590,7 +616,6 @@ class Senior extends Xml\HTSupporter
     /**
      * Get senior league
      *
-     * @param integer $id
      * @return \PHT\Xml\World\League\Senior
      */
     public function getSeniorLeague()
@@ -1062,7 +1087,6 @@ class Senior extends Xml\HTSupporter
     /**
      * Return team transfers history object
      *
-     * @param integer $teamId
      * @return \PHT\Xml\Team\Transfer\History
      */
     public function getTransfersHistory()
@@ -1077,7 +1101,7 @@ class Senior extends Xml\HTSupporter
      * Return team bids object
      *
      * @param integer $onlyType (see \PHT\Config\Config BID_* constants)
-     * @return \PHT\Xml\Team\Bids
+     * @return \PHT\Xml\Team\Transfer\Bids
      */
     public function getBids($onlyType = null)
     {
@@ -1101,7 +1125,6 @@ class Senior extends Xml\HTSupporter
     /**
      * Return team fans object
      *
-     * @param integer $teamId
      * @return \PHT\Xml\Team\Fans
      */
     public function getFans()
@@ -1196,7 +1219,7 @@ class Senior extends Xml\HTSupporter
      * Return challenges, only team belongs to connected user
      *
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challenges
+     * @return \PHT\Xml\Team\Challengeable\Listing
      */
     public function getChallenges($weekendFriendly = false)
     {
@@ -1209,7 +1232,6 @@ class Senior extends Xml\HTSupporter
     /**
      * Challenge team
      *
-     * @param integer $oppenentTeamId
      * @param integer $matchType (see \PHT\Config\Config CHALLENGE_* constants)
      * @param integer $matchPlace (see \PHT\Config\Config CHALLENGE_* constants)
      * @param integer $arenaId (only for neutral arena)
@@ -1240,6 +1262,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Return national team chunk object
      *
+     * @param integer $index
      * @return \PHT\Xml\Team\National\Chunk
      */
     public function getNationalTeam($index)
@@ -1271,7 +1294,9 @@ class Senior extends Xml\HTSupporter
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//NationalTeam");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\National\Chunk');
+        /** @var \PHT\Xml\Team\National\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\National\Chunk');
+        return $data;
     }
 
     /**
@@ -1290,6 +1315,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Return trophy object
      *
+     * @param integer $index
      * @return \PHT\Xml\Team\Trophy
      */
     public function getTrophy($index)
@@ -1321,7 +1347,9 @@ class Senior extends Xml\HTSupporter
         }
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Trophy");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Trophy');
+        /** @var \PHT\Xml\Team\Trophy[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Trophy');
+        return $data;
     }
 
 }

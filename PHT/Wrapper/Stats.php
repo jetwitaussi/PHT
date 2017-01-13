@@ -16,6 +16,7 @@ namespace PHT\Wrapper;
 use PHT\Xml;
 use PHT\Config;
 use PHT\Utils;
+use PHT\Network;
 
 class Stats
 {

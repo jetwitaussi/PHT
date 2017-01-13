@@ -20,7 +20,6 @@ class Avatar extends Base
 {
     /**
      * @param \DOMDocument $xml
-     * @param string $type
      */
     public function __construct($xml)
     {
@@ -51,6 +50,7 @@ class Avatar extends Base
     /**
      * Return avatar layer object
      *
+     * @param integer $index
      * @return \PHT\Xml\Avatar\Layer
      */
     public function getLayer($index)
@@ -76,7 +76,9 @@ class Avatar extends Base
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//Layer");
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Avatar\Layer');
+        /** @var \PHT\Xml\Avatar\Layer[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Avatar\Layer');
+        return $data;
     }
 
     /**

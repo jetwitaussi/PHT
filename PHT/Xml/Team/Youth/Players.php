@@ -60,6 +60,8 @@ class Players extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//YouthPlayer');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Youth');
+        /** @var \PHT\Xml\Player\Youth[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Youth');
+        return $data;
     }
 }

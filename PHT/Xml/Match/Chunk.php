@@ -255,6 +255,7 @@ class Chunk extends Xml\Base
         if ($this->getHomeLeagueId()) {
             return Wrapper\World::country($this->getHomeLeagueId());
         }
+        return null;
     }
 
     /**
@@ -370,6 +371,7 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('CupLevelIndex')->length) {
             return $this->getXml()->getElementsByTagName('CupLevelIndex')->item(0)->nodeValue;
         }
+        return null;
     }
 
     /**
@@ -447,6 +449,7 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('FanMoodAfterMatch')->length) {
             return $this->getXml()->getElementsByTagName('FanMoodAfterMatch')->item(0)->nodeValue;
         }
+        return null;
     }
 
     /**
@@ -485,6 +488,7 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('MatchRound')->length) {
             return $this->getXml()->getElementsByTagName('MatchRound')->item(0)->nodeValue;
         }
+        return null;
     }
 
     /**
@@ -497,6 +501,7 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('Group')->length) {
             return $this->getXml()->getElementsByTagName('Group')->item(0)->nodeValue;
         }
+        return null;
     }
 
     /**
@@ -509,6 +514,7 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('HomeStatement')->length) {
             return $this->getXml()->getElementsByTagName('HomeStatement')->item(0)->nodeValue;
         }
+        return null;
     }
 
     /**
@@ -521,5 +527,6 @@ class Chunk extends Xml\Base
         if ($this->getXml()->getElementsByTagName('AwayStatement')->length) {
             return $this->getXml()->getElementsByTagName('AwayStatement')->item(0)->nodeValue;
         }
+        return null;
     }
 }

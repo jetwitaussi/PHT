@@ -120,13 +120,24 @@ class Country extends Xml\Base
     }
 
     /**
+     * @return boolean
+     */
+    public function isCountry()
+    {
+        return strtolower($this->getXml()->getElementsByTagName('Country')->item(0)->getAttribute('Available')) == 'true';
+    }
+
+    /**
      * Return country id
      *
      * @return integer
      */
     public function getId()
     {
-        return $this->getXml()->getElementsByTagName('CountryID')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('CountryID')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -136,7 +147,23 @@ class Country extends Xml\Base
      */
     public function getName()
     {
-        return $this->getXml()->getElementsByTagName('CountryName')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('CountryName')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return country code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('CountryCode')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -146,7 +173,10 @@ class Country extends Xml\Base
      */
     public function getDateFormat()
     {
-        return $this->getXml()->getElementsByTagName('DateFormat')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('DateFormat')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -156,7 +186,10 @@ class Country extends Xml\Base
      */
     public function getTimeFormat()
     {
-        return $this->getXml()->getElementsByTagName('TimeFormat')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('TimeFormat')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -166,7 +199,10 @@ class Country extends Xml\Base
      */
     public function getCurrencyName()
     {
-        return $this->getXml()->getElementsByTagName('CurrencyName')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('CurrencyName')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -176,7 +212,10 @@ class Country extends Xml\Base
      */
     public function getCurrencyRate()
     {
-        return $this->getXml()->getElementsByTagName('CurrencyRate')->item(0)->nodeValue;
+        if ($this->isCountry()) {
+            return $this->getXml()->getElementsByTagName('CurrencyRate')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -340,7 +379,9 @@ class Country extends Xml\Base
     public function getRegions()
     {
         $nodeList = $this->getXml()->getElementsByTagName('Region');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Region');
+        /** @var \PHT\Xml\World\Region[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Region');
+        return $data;
     }
 
     /**
@@ -380,7 +421,9 @@ class Country extends Xml\Base
     public function getCups()
     {
         $nodeList = $this->getXml()->getElementsByTagName('Cup');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Cup');
+        /** @var \PHT\Xml\World\League\Cup[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Cup');
+        return $data;
     }
 
     /**

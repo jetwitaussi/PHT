@@ -72,6 +72,8 @@ class Listing extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Opponent');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Challengeable\Opponent');
+        /** @var \PHT\Xml\Team\Challengeable\Opponent[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Challengeable\Opponent');
+        return $data;
     }
 }

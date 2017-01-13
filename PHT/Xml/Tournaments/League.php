@@ -79,6 +79,8 @@ class League extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//TournamentLeagueTable');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Group');
+        /** @var \PHT\Xml\Tournaments\Group[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Tournaments\Group');
+        return $data;
     }
 }

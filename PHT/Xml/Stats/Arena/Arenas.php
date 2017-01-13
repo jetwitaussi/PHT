@@ -103,6 +103,8 @@ class Arenas extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//ArenaStat');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Stats\Arena\Arena');
+        /** @var \PHT\Xml\Stats\Arena\Arena[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Stats\Arena\Arena');
+        return $data;
     }
 }

@@ -185,6 +185,8 @@ class Live extends File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Live');
+        /** @var \PHT\Xml\Match\Live[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Live');
+        return $data;
     }
 }

@@ -42,6 +42,16 @@ class Event extends Xml\Base
     }
 
     /**
+     * Return match part when event happened
+     *
+     * @return integer
+     */
+    public function getMatchPart()
+    {
+        return $this->getXml()->getElementsByTagName('MatchPart')->item(0)->nodeValue;
+    }
+
+    /**
      * Return event subject player id raw value
      *
      * @return integer

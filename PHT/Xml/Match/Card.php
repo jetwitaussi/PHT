@@ -85,7 +85,7 @@ class Card extends Xml\Base
         if ($this->type == Config\Config::MATCH_YOUTH) {
             return Wrapper\Team\Youth::team($this->getTeamId());
         } elseif ($this->type == Config\Config::MATCH_NATIONAL) {
-            return Wrapper\Team\National::team($this->getTeamId());
+            return Wrapper\National::team($this->getTeamId());
         }
         return Wrapper\Team\Senior::team($this->getTeamId());
     }
@@ -128,5 +128,15 @@ class Card extends Xml\Base
     public function getMinute()
     {
         return $this->getXml()->getElementsByTagName('BookingMinute')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return match part when booking happened
+     *
+     * @return integer
+     */
+    public function getMatchPart()
+    {
+        return $this->getXml()->getElementsByTagName('MatchPart')->item(0)->nodeValue;
     }
 }

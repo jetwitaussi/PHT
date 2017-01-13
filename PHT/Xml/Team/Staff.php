@@ -66,7 +66,9 @@ class Staff extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//Staff');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Staff\Employee', $this->teamId);
+        /** @var \PHT\Xml\Team\Staff\Employee[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Team\Staff\Employee', $this->teamId);
+        return $data;
     }
 
     /**

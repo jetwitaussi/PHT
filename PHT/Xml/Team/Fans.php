@@ -103,13 +103,15 @@ class Fans extends Xml\File
     /**
      * Return iterator of chunk match objects
      *
-     * @return \PHT\Xml\Match\Chunk
+     * @return \PHT\Xml\Match\Chunk[]
      */
     public function getLastMatches()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//PlayedMatches/Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 
     /**
@@ -146,12 +148,14 @@ class Fans extends Xml\File
     /**
      * Return iterator of chunk match objects
      *
-     * @return \PHT\Xml\Match\Chunk
+     * @return \PHT\Xml\Match\Chunk[]
      */
     public function getNextMatches()
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//UpcomingMatches/Match');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        /** @var \PHT\Xml\Match\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Chunk');
+        return $data;
     }
 }

@@ -790,6 +790,16 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return player number goals in his team
+     *
+     * @return integer
+     */
+    public function getGoalsInTeam()
+    {
+        return $this->getXml()->getElementsByTagName('GoalsCurrentTeam')->item(0)->nodeValue;
+    }
+
+    /**
      * Return national team id if enrolled
      *
      * @return integer

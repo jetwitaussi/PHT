@@ -657,7 +657,7 @@ class Translation extends Xml\File
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//League/LeagueId[.='" . $leagueId . "']");
         if ($nodeList->length) {
-            return trim($nodeList->parentNode->getElementsByTagName("LanguageLeagueName")->item(0)->nodeValue);
+            return trim($nodeList->item(0)->parentNode->getElementsByTagName("LanguageLeagueName")->item(0)->nodeValue);
         }
         return '';
     }
@@ -673,7 +673,7 @@ class Translation extends Xml\File
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query("//League/LeagueId[.='" . $leagueId . "']");
         if ($nodeList->length) {
-            return trim($nodeList->parentNode->getElementsByTagName("LocalLeagueName")->item(0)->nodeValue);
+            return trim($nodeList->item(0)->parentNode->getElementsByTagName("LocalLeagueName")->item(0)->nodeValue);
         }
         return '';
     }

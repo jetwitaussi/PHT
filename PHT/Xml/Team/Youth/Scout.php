@@ -287,5 +287,6 @@ class Scout extends Xml\Base
                 }
             }
         }
+        return null;
     }
 }

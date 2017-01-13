@@ -58,7 +58,7 @@ class History extends Xml\File
      */
     public function getEventNumber()
     {
-        if ($this->isEventsAvailable()) {
+        if ($this->isAvailable()) {
             return $this->getXml()->getElementsByTagName('PlayerEvent')->length;
         }
         return null;
@@ -93,6 +93,8 @@ class History extends Xml\File
     {
         $xpath = new \DOMXPath($this->getXml());
         $nodeList = $xpath->query('//PlayerEvent');
-        return new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Event\History');
+        /** @var \PHT\Xml\Player\Event\History[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Event\History');
+        return $data;
     }
 }
