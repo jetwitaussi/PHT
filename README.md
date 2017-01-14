@@ -106,6 +106,11 @@ try {
     \PHT\Cache\Driver::getInstance()->clear('club');
     // request xml again:
     echo $HT->getClub()->getTeamName();
+    
+    // get HTI team
+    $teamConf = new \PHT\Config\Team();
+    $teamConf->international = true;
+    echo $HT->getSeniorTeam($teamConf)->getName();
 
 } catch(\PHT\Exception\ChppException $e) {
     // chpp request returns xml content

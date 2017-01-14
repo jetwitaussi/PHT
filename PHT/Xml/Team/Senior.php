@@ -20,6 +20,10 @@ use PHT\Config;
 
 class Senior extends Xml\HTSupporter
 {
+    const PRIMARY = 1;
+    const SECONDARY = 2;
+    const INTERNATIONAL = 3;
+
     /**
      *
      * @param string $xml

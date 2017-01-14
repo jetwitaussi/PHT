@@ -60,10 +60,12 @@ class PHT extends Config\Base
             throw new Exception\InvalidArgumentException('Parameter $team should be instanceof \PHT\Config\Team');
         }
 
-        if ($team->primary !== null) {
+        if ($team->primary === true) {
             return $this->getPrimarySeniorTeam($team->userId);
-        } elseif ($team->secondary !== null) {
+        } elseif ($team->secondary === true) {
             return $this->getSecondarySeniorTeam($team->userId);
+        } elseif ($team->international === true) {
+            return $this->getInternationalSeniorTeam($team->userId);
         } else {
             return $this->findSeniorTeam($team->id, $team->userId);
         }
@@ -112,7 +114,7 @@ class PHT extends Config\Base
      */
     protected function findYouthTeam($id = null, $userId = null)
     {
-        if (!is_int($id)) {
+        if ($id === null) {
             $id = $this->findSeniorTeam(null, $userId)->getYouthTeamId();
         }
         return Wrapper\Team\Youth::team($id);
@@ -124,7 +126,7 @@ class PHT extends Config\Base
      */
     protected function getPrimarySeniorTeam($userId = null)
     {
-        return $this->getSpecificSeniorTeam('false', $userId);
+        return $this->getSpecificSeniorTeam(Xml\Team\Senior::PRIMARY, $userId);
     }
 
     /**
@@ -133,28 +135,46 @@ class PHT extends Config\Base
      */
     protected function getSecondarySeniorTeam($userId = null)
     {
-        return $this->getSpecificSeniorTeam('true', $userId);
+        return $this->getSpecificSeniorTeam(Xml\Team\Senior::SECONDARY, $userId);
     }
 
     /**
-     * @param string $boolString set 'false' for primary team or 'true' for secondary team
      * @param integer $userId
      * @return \PHT\Xml\Team\Senior
      */
-    protected function getSpecificSeniorTeam($boolString, $userId = null)
+    protected function getInternationalSeniorTeam($userId = null)
+    {
+        return $this->getSpecificSeniorTeam(Xml\Team\Senior::INTERNATIONAL, $userId);
+    }
+
+    /**
+     * @param integer $type
+     * @param integer $userId
+     * @return \PHT\Xml\Team\Senior
+     */
+    protected function getSpecificSeniorTeam($type, $userId = null)
     {
         $xml = Wrapper\Team\Senior::team(null, $userId);
 
         $doc = new \DOMDocument('1.0', 'UTF-8');
-        $doc->loadXml($xml);
+        $doc->loadXml($xml->getXml(false));
 
         $teams = $doc->getElementsByTagName('Team');
         for ($t = 0; $t < $teams->length; $t++) {
             $txml = new \DOMDocument('1.0', 'UTF-8');
             $txml->appendChild($txml->importNode($teams->item($t), true));
-            if (strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == $boolString) {
-                $doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
+            $isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == 1000;
+            $isPrimary = strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
+            if ($type == Xml\Team\Senior::PRIMARY && $isPrimary) {
+                continue;
             }
+            if ($type == Xml\Team\Senior::SECONDARY && !$isPrimary && !$isHti) {
+                continue;
+            }
+            if ($type == Xml\Team\Senior::INTERNATIONAL && $isHti) {
+                continue;
+            }
+            $doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
         }
         if ($doc->getElementsByTagName('Team')->length) {
             return new Xml\Team\Senior($doc->saveXML());

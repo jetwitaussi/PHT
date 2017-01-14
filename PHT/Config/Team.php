@@ -25,13 +25,19 @@ class Team
      * Set to true to get the user's primary team
      * @var boolean
      */
-    public $primary = null;
+    public $primary = false;
 
     /**
      * Set to true to get the user's secondary team
      * @var boolean
      */
-    public $secondary = null;
+    public $secondary = false;
+
+    /**
+     * Set to true to get the user's HTI team, not used for youth team
+     * @var boolean
+     */
+    public $international = false;
 
     /**
      * Set to id to get user's team, combine with primary or secondary
