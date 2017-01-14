@@ -177,10 +177,10 @@ class Request
     public static function buildSignature($url, $params, $token = '', $method = 'GET')
     {
         $parts = array($method, $url, self::buildHttpQuery($params));
-        $parts = self::urlencodeRfc3986($parts);
+        $parts = implode('&', self::urlencodeRfc3986($parts));
         Log\Logger::getInstance()->debug('[OAUTH] Base string: ' . $parts);
         $key_parts = array(Config\Config::$consumerSecret, $token);
-        $key = self::urlencodeRfc3986($key_parts);
+        $key = implode('&', self::urlencodeRfc3986($key_parts));
         $sign = base64_encode(hash_hmac('sha1', $parts, $key, true));
         Log\Logger::getInstance()->debug('[OAUTH] Signature: ' . $sign);
         return $sign;
@@ -199,7 +199,7 @@ class Request
         }
         $keys = self::urlencodeRfc3986(array_keys($params));
         $values = self::urlencodeRfc3986(array_values($params));
-        $newparams = array_combine(array($keys), array($values));
+        $newparams = array_combine($keys, $values);
         uksort($newparams, 'strcmp');
         $pairs = array();
         foreach ($newparams as $parameter => $value) {
@@ -219,7 +219,7 @@ class Request
      * Urlencode parameters properly for oauth query
      *
      * @param array|string $input
-     * @return string
+     * @return array|string
      */
     public static function urlencodeRfc3986($input)
     {
