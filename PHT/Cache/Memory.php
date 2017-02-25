@@ -83,18 +83,24 @@ class Memory implements CacheInterface
      */
     public function set($key, $data, $ttl = 0)
     {
-        $data = array('data' => $data);
-        if ($ttl > 0) {
-            $data['time'] = time() + $ttl;
-        }
-        $value = gzcompress(serialize($data), 9);
-        $this->data[Config\Config::$cachePrefix . $key] = $value;
         $found = array();
         preg_match('/file=([^&]*)/', $key, $found);
-        if (isset($found[1]) && !in_array($key, $this->file[$found[2]])) {
-            $this->file[$found[1]][] = $key;
+        if (isset($found[1])) {
+            $data = array('data' => $data);
+            if ($ttl > 0) {
+                $data['time'] = time() + $ttl;
+            }
+            $value = gzcompress(serialize($data), 9);
+            $this->data[Config\Config::$cachePrefix . $key] = $value;
+            if (!isset($this->file[$found[1]])) {
+                $this->file[$found[1]] = array();
+            }
+            if (!in_array($key, $this->file[$found[1]])) {
+                $this->file[$found[1]][] = $key;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

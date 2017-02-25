@@ -98,19 +98,24 @@ class Apc implements CacheInterface
      */
     public function set($key, $data, $ttl = 0)
     {
-        $do = apc_store(Config\Config::$cachePrefix . $key, gzcompress($data, 9), $ttl);
-        if ($do) {
-            $found = array();
-            preg_match('/file=([^&]*)/', $key, $found);
-            if (isset($found[1])) {
+        $found = array();
+        preg_match('/file=([^&]*)/', $key, $found);
+        if (isset($found[1])) {
+            $do = apc_store(Config\Config::$cachePrefix . $key, gzcompress($data, 9), $ttl);
+            if ($do) {
                 $value = apc_fetch(Config\Config::$cachePrefix . $this->all);
                 if ($value === false || !isset($value[$found[1]]) || !in_array($key, $value[$found[1]])) {
                     $value[$found[1]][] = $key;
-                    apc_store(Config\Config::$cachePrefix . $this->all, $value);
+                    $do2 = apc_store(Config\Config::$cachePrefix . $this->all, $value);
+                    if (!$do2) {
+                        $this->delete($key);
+                        $do = false;
+                    }
                 }
             }
+            return $do;
         }
-        return $do;
+        return false;
     }
 
 }

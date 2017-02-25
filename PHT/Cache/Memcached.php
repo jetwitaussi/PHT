@@ -111,20 +111,29 @@ class Memcached implements CacheInterface
      */
     public function set($key, $data, $ttl = 0)
     {
-        $key = str_replace(' ', '_', $key);
-        $do = $this->obj->set(sha1($key), $data, $ttl);
-        if ($do) {
-            $found = array();
-            preg_match('/file=([^&]*)/', $key, $found);
-            if (isset($found[1])) {
+        $found = array();
+        preg_match('/file=([^&]*)/', $key, $found);
+        if (isset($found[1])) {
+            $key = str_replace(' ', '_', $key);
+            $sha = sha1($key);
+            $do = $this->obj->set($sha, $data, $ttl);
+            if ($do) {
                 $value = $this->obj->get($this->all);
-                if($value === false || !isset($value[$found[1]]) || !in_array(sha1($key), $value[$found[1]])) {
-                    $value[$found[1]][] = sha1($key);
-                    $this->obj->set($this->all, $value, 0);
+                if ($value === false || !isset($value[$found[1]])) {
+                    $value[$found[1]] = array();
+                }
+                if(!in_array($sha, $value[$found[1]])) {
+                    $value[$found[1]][] = $sha;
+                    $do2 = $this->obj->set($this->all, $value, 0);
+                    if (!$do2) {
+                        $this->delete($key);
+                        $do = false;
+                    }
                 }
             }
+            return $do;
         }
-        return $do;
+        return false;
     }
 
 }

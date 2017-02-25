@@ -24,6 +24,7 @@ class Session implements CacheInterface
     {
         if ((function_exists('session_status') && session_status() == PHP_SESSION_NONE) || session_id() === '') {
             session_start();
+            $_SESSION[Config\Config::$cachePrefix] = array();
         }
     }
 
@@ -77,7 +78,7 @@ class Session implements CacheInterface
      */
     public function purge()
     {
-        unset($_SESSION[Config\Config::$cachePrefix]);
+        $_SESSION[Config\Config::$cachePrefix] = array();
     }
 
     /**
@@ -90,18 +91,24 @@ class Session implements CacheInterface
      */
     public function set($key, $data, $ttl = 0)
     {
-        $data = array('data' => $data);
-        if ($ttl > 0) {
-            $data['time'] = time() + $ttl;
-        }
-        $value = gzcompress(serialize($data), 9);
-        $_SESSION[Config\Config::$cachePrefix][$key] = $value;
         $found = array();
         preg_match('/file=([^&]*)/', $key, $found);
-        if (isset($found[1]) && !in_array($key, $_SESSION[Config\Config::$cachePrefix][$found[1]])) {
-            $_SESSION[Config\Config::$cachePrefix][$found[1]][] = $key;
+        if (isset($found[1])) {
+            $data = array('data' => $data);
+            if ($ttl > 0) {
+                $data['time'] = time() + $ttl;
+            }
+            $value = gzcompress(serialize($data), 9);
+            $_SESSION[Config\Config::$cachePrefix][$key] = $value;
+            if (!isset($_SESSION[Config\Config::$cachePrefix][$found[1]])) {
+                $_SESSION[Config\Config::$cachePrefix][$found[1]] = array();
+            }
+            if (isset($found[1]) && !in_array($key, $_SESSION[Config\Config::$cachePrefix][$found[1]])) {
+                $_SESSION[Config\Config::$cachePrefix][$found[1]][] = $key;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
