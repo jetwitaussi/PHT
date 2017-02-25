@@ -116,7 +116,7 @@ try {
     // chpp request returns xml content
     // but response generate an error
     // maybe wrong data, maybe element not found, ...
-    echo $e->getErrorCode().': '.$e->getErrorMessage();
+    echo $e->getErrorCode().': '.$e->getError();
     // you can also get whole xml response like any other chpp request:
     echo $e->getXml(false);
 
