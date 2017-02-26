@@ -332,11 +332,23 @@ class Chunk extends Xml\Base
     }
 
     /**
-     * Return player number caps in A country team
+     * Return player number caps in NT country team
+     * @deprecated use getNTCaps function instead
      *
      * @return integer
      */
     public function getACaps()
+    {
+        trigger_error(__FUNCTION__.'() function in '.__CLASS__.' is deprecated, use getNTCaps() instead', E_USER_DEPRECATED);
+        return $this->getNTCaps();
+    }
+
+    /**
+     * Return player number caps in NT country team
+     *
+     * @return integer
+     */
+    public function getNTCaps()
     {
         return $this->getXml()->getElementsByTagName('Caps')->item(0)->nodeValue;
     }
