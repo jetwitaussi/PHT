@@ -29,10 +29,10 @@ class Senior
     public static function team($id = null, $userId = null)
     {
         $params = array('file' => 'teamdetails', 'version' => Config\Version::TEAMDETAILS);
-        if (is_int($id)) {
+        if ($id !== null) {
             $params['teamID'] = $id;
         }
-        if (is_int($userId)) {
+        if ($userId !== null) {
             $params['userID'] = $userId;
         }
         $url = Network\Request::buildUrl($params);

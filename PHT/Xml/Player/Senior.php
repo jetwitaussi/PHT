@@ -486,7 +486,7 @@ class Senior extends Xml\HTSupporter
      */
     public function isSkillsAvailable()
     {
-        return $this->getXml()->getElementsByTagName('PlayerSkills')->item(0)->hasChildNodes();
+        return $this->getXml()->getElementsByTagName('PlayerSkills')->item(0)->childNodes->length > 1;
     }
 
     /**
