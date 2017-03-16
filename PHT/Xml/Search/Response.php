@@ -211,6 +211,7 @@ class Response extends Xml\File
         if ($page < 0 || $page >= $this->getTotalPage()) {
             return null;
         }
+        $params = $this->params;
         $params['pageIndex'] = $page;
         return Wrapper\Search::search($params);
     }
