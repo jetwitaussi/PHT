@@ -643,7 +643,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teams[$id]) || $this->teams[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -687,7 +687,7 @@ class CHPPConnection
 	{
 		if(!isset($this->primaryTeam[$userId]) || $this->primaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -841,7 +841,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teamsFlags[$id][$includeDomesticFlags]) || $this->teamsFlags[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4', 'includeFlags'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -893,7 +893,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsUserid[$id][$teamId]) || $this->teamsUserid[$id][$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.2'));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.4'));
 			$this->teamsUserid[$id][$teamId] = new HTTeam($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsUserid[$id][$teamId];
@@ -937,7 +937,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsFlagsUserid[$id][$includeDomesticFlags][$teamId]) || $this->teamsFlagsUserid[$id][$includeDomesticFlags][$teamId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.2', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.4', 'includeFlags'=>'true');
 			if($includeDomesticFlags == true)
 			{
 				$params['includeDomesticFlags'] = 'true';
