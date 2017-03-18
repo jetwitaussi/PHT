@@ -643,7 +643,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teams[$id]) || $this->teams[$id] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -687,7 +687,7 @@ class CHPPConnection
 	{
 		if(!isset($this->primaryTeam[$userId]) || $this->primaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -739,16 +739,45 @@ class CHPPConnection
 	}
 
 	/**
-	 * Returns HTTeam object
+	 * Returns number of teams controlled by user
+	 * 
+	 * @param Integer $userId
+	 * @return Integer
+	 */
+	public function getNumberOfTeams($userId = null)
+	{
+		$params = array('file'=>'teamdetails', 'version'=>'3.4');
+		if($userId !== null)
+		{
+			$params['userID'] = $userId;
+		}
+		$url = $this->buildUrl($params);
+		$xml = $this->fetchUrl($url);
+		if($this->canLog())
+		{
+			$this->log("URL: ".$url);
+		}
+	
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->loadXml($xml);
+	
+		$teams = $doc->getElementsByTagName('Team');
+		$this->nTeams=$teams->length;
+		return $this->nTeams;
+	}
+		
+	/**
+	 * Returns HTTeam object with the user's secondary team (or tertiary if $secIndex is specified)
 	 *
 	 * @param Integer $userId
+	 * @param Integer $secIndex
 	 * @return HTTeam
 	 */
-	public function getSecondaryTeam($userId = null)
+	public function getSecondaryTeam($userId = null, $secIndex=0)
 	{
 		if(!isset($this->secondaryTeam[$userId]) || $this->secondaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4');
 			if($userId !== null)
 			{
 				 $params['userID'] = $userId;
@@ -764,14 +793,16 @@ class CHPPConnection
 			{
 				$txml = new DOMDocument('1.0', 'UTF-8');
 				$txml->appendChild($txml->importNode($teams->item($t), true));
-				if(strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true')
+				if(strtolower($txml->getElementsByTagName('IsPrimaryClub')->item($t)->nodeValue) == 'true')
 				{
 					$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
 				}
 			}
 			if($doc->getElementsByTagName('Team')->length)
 			{
-				$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
+				$resxml = new DOMDocument('1.0', 'UTF-8');
+				$resxml->appendChild($resxml->importNode($teams->item($secIndex), true));
+				$this->secondaryTeam[$userId] = new HTTeam($resxml->saveXML());
 			}
 			else
 			{
@@ -810,7 +841,7 @@ class CHPPConnection
 	{
 		if(!isset($this->teamsFlags[$id][$includeDomesticFlags]) || $this->teamsFlags[$id][$includeDomesticFlags] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.2', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'version'=>'3.4', 'includeFlags'=>'true');
 			if($id !== null)
 			{
 				$params['teamID'] = $id;
@@ -862,7 +893,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsUserid[$id][$teamId]) || $this->teamsUserid[$id][$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.2'));
+			$url = $this->buildUrl(array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.4'));
 			$this->teamsUserid[$id][$teamId] = new HTTeam($this->fetchUrl($url), $teamId);
 		}
 		return $this->teamsUserid[$id][$teamId];
@@ -906,7 +937,7 @@ class CHPPConnection
 		}
 		if(!isset($this->teamsFlagsUserid[$id][$includeDomesticFlags][$teamId]) || $this->teamsFlagsUserid[$id][$includeDomesticFlags][$teamId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.2', 'includeFlags'=>'true');
+			$params = array('file'=>'teamdetails', 'userID'=>$id, 'version'=>'3.4', 'includeFlags'=>'true');
 			if($includeDomesticFlags == true)
 			{
 				$params['includeDomesticFlags'] = 'true';
