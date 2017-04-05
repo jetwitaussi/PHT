@@ -32,10 +32,10 @@ class Senior extends Xml\HTSupporter
     public function __construct($xml, $id = null)
     {
         parent::__construct($xml);
-        if ($this->xml->getElementsByTagName('Team')->length == 2) {
+        if ($this->xml->getElementsByTagName('Team')->length >= 2) {
             $teams = $this->xml->getElementsByTagName('Team');
             if ($id === null) {
-                for ($t = 0; $t < $teams->length; $t++) {
+                for ($t = $teams->length - 1; $t >= 0; $t--) {
                     $txml = new \DOMDocument('1.0', 'UTF-8');
                     $txml->appendChild($txml->importNode($teams->item($t), true));
                     if (strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'false') {
@@ -43,7 +43,7 @@ class Senior extends Xml\HTSupporter
                     }
                 }
             } else {
-                for ($t = 0; $t < $teams->length; $t++) {
+                for ($t = $teams->length - 1; $t >= 0; $t--) {
                     $txml = new \DOMDocument('1.0', 'UTF-8');
                     $txml->appendChild($txml->importNode($teams->item($t), true));
                     if ($txml->getElementsByTagName('TeamID')->item(0)->nodeValue != $id) {
