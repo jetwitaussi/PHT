@@ -154,11 +154,14 @@ class PHT extends Config\Base
      */
     protected function getSpecificSeniorTeam($type, $userId = null)
     {
-        $xml = Wrapper\Team\Senior::team(null, $userId);
-
+		$params = array('file' => 'teamdetails', 'version' => Config\Version::TEAMDETAILS);
+		if ($userId !== null) {
+			$params['userID'] = $userId;
+		}
+		$url = Network\Request::buildUrl($params);
+		$xml = Network\Request::fetchUrl($url);
         $doc = new \DOMDocument('1.0', 'UTF-8');
-        $doc->loadXml($xml->getXml(false));
-
+		$doc->loadXml($xml);
         $teams = $doc->getElementsByTagName('Team');
         for ($t = 0; $t < $teams->length; $t++) {
             $txml = new \DOMDocument('1.0', 'UTF-8');
