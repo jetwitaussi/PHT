@@ -274,7 +274,7 @@ class Orders extends Xml\File
     {
         if ($this->isDataAvailable()) {
             $xpath = new \DOMXPath($this->getXml());
-            return $xpath->query('//Player')->length;
+			return $xpath->query('//Positions/Player')->length;
         }
         return null;
     }
@@ -296,7 +296,7 @@ class Orders extends Xml\File
                 }
                 $index -= Config\Config::$forIndex;
                 $xpath = new \DOMXPath($this->getXml());
-                $nodeList = $xpath->query('//Player');
+				$nodeList = $xpath->query('//Positions/Player');
                 $player = new \DOMDocument('1.0', 'UTF-8');
                 $player->appendChild($player->importNode($nodeList->item($index), true));
                 return new Lineup\Player($player, $type);
@@ -318,13 +318,177 @@ class Orders extends Xml\File
                 $type = Config\Config::MATCH_YOUTH;
             }
             $xpath = new \DOMXPath($this->getXml());
-            $nodeList = $xpath->query('//Player');
+			$nodeList = $xpath->query('//Positions/Player');
             /** @var \PHT\Xml\Match\Lineup\Player[] $data */
             $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
             return $data;
         }
         return null;
     }
+
+	/**
+	 * Return number bench players
+	 *
+	 * @return integer
+	 */
+	public function getBenchPlayerNumber()
+	{
+		if ($this->isDataAvailable()) {
+			$xpath = new \DOMXPath($this->getXml());
+			return $xpath->query('//Bench/Player')->length;
+		}
+		return null;
+	}
+
+	/**
+	 * Return bench player object
+	 *
+	 * @param integer $index
+	 * @return \PHT\Xml\Match\Lineup\Player
+	 */
+	public function getBenchPlayer($index)
+	{
+		if ($this->isDataAvailable()) {
+			$index = round($index);
+			if ($index >= Config\Config::$forIndex && $index < $this->getBenchPlayerNumber() + Config\Config::$forIndex) {
+				$type = Config\Config::MATCH_SENIOR;
+				if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+					$type = Config\Config::MATCH_YOUTH;
+				}
+				$index -= Config\Config::$forIndex;
+				$xpath = new \DOMXPath($this->getXml());
+				$nodeList = $xpath->query('//Bench/Player');
+				$player = new \DOMDocument('1.0', 'UTF-8');
+				$player->appendChild($player->importNode($nodeList->item($index), true));
+				return new Lineup\Player($player, $type);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return iterator of bench player objects
+	 *
+	 * @return \PHT\Xml\Match\Lineup\Player[]
+	 */
+	public function getBenchPlayers()
+	{
+		if ($this->isDataAvailable()) {
+			$type = Config\Config::MATCH_SENIOR;
+			if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+				$type = Config\Config::MATCH_YOUTH;
+			}
+			$xpath = new \DOMXPath($this->getXml());
+			$nodeList = $xpath->query('//Bench/Player');
+			/** @var \PHT\Xml\Match\Lineup\Player[] $data */
+			$data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+			return $data;
+		}
+		return null;
+	}
+
+	/**
+	 * Return number kickers
+	 *
+	 * @return integer
+	 */
+	public function getKickersNumber()
+	{
+		if ($this->isDataAvailable()) {
+			$xpath = new \DOMXPath($this->getXml());
+			return $xpath->query('//Kickers/Player')->length;
+		}
+		return null;
+	}
+
+	/**
+	 * Return kicker player object
+	 *
+	 * @param integer $index
+	 * @return \PHT\Xml\Match\Lineup\Player
+	 */
+	public function getKicker($index)
+	{
+		if ($this->isDataAvailable()) {
+			$index = round($index);
+			if ($index >= Config\Config::$forIndex && $index < $this->getKickersNumber() + Config\Config::$forIndex) {
+				$type = Config\Config::MATCH_SENIOR;
+				if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+					$type = Config\Config::MATCH_YOUTH;
+				}
+				$index -= Config\Config::$forIndex;
+				$xpath = new \DOMXPath($this->getXml());
+				$nodeList = $xpath->query('//Kickers/Player');
+				$player = new \DOMDocument('1.0', 'UTF-8');
+				$player->appendChild($player->importNode($nodeList->item($index), true));
+				return new Lineup\Player($player, $type);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return iterator of kickers player objects
+	 *
+	 * @return \PHT\Xml\Match\Lineup\Player[]
+	 */
+	public function getKickers()
+	{
+		if ($this->isDataAvailable()) {
+			$type = Config\Config::MATCH_SENIOR;
+			if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+				$type = Config\Config::MATCH_YOUTH;
+			}
+			$xpath = new \DOMXPath($this->getXml());
+			$nodeList = $xpath->query('//Kickers/Player');
+			/** @var \PHT\Xml\Match\Lineup\Player[] $data */
+			$data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Match\Lineup\Player', $type);
+			return $data;
+		}
+		return null;
+	}
+
+	/**
+	 * Return set pieces player object
+	 *
+	 * @return \PHT\Xml\Match\Lineup\Player
+	 */
+	public function getSetPieces()
+	{
+		if ($this->isDataAvailable()) {
+			$type = Config\Config::MATCH_SENIOR;
+			if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+				$type = Config\Config::MATCH_YOUTH;
+			}
+			$xpath = new \DOMXPath($this->getXml());
+			$nodeList = $xpath->query('//SetPieces');
+			$player = new \DOMDocument('1.0', 'UTF-8');
+			$player->appendChild($player->importNode($nodeList->item(0), true));
+			return new Lineup\Player($player, $type);
+		}
+		return null;
+	}
+
+	/**
+	 * Return captain player object
+	 *
+	 * @return \PHT\Xml\Match\Lineup\Player
+	 */
+	public function getCaptain()
+	{
+		if ($this->isDataAvailable()) {
+			$type = Config\Config::MATCH_SENIOR;
+			if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
+				$type = Config\Config::MATCH_YOUTH;
+			}
+			$xpath = new \DOMXPath($this->getXml());
+			$nodeList = $xpath->query('//Captain');
+			$player = new \DOMDocument('1.0', 'UTF-8');
+			$player->appendChild($player->importNode($nodeList->item(0), true));
+			return new Lineup\Player($player, $type);
+		}
+		return null;
+	}
 
     /**
      * Return lineup player object
