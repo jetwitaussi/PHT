@@ -532,6 +532,9 @@ class PHT extends Config\Base
         } else {
             throw new Exception\InvalidArgumentException('Parameter $search should have at least one property defined to perform a search');
         }
+	if (isset($search->page)) {
+            $params['pageIndex'] = $search->page;
+        }
 
         return Wrapper\Search::search($params);
     }
