@@ -63,7 +63,7 @@ require_once 'PHT/autoload.php';
 $config = array(
     'CONSUMER_KEY' => 'xxxxxxxxxxxxxx',
     'CONSUMER_SECRET' => 'xxxxxxxxxxxxx',
-    'CACHE' => 'apc',
+    'CACHE' => 'none',
     'LOG_TYPE' => 'file',
     'LOG_LEVEL' => \PHT\Log\Level::DEBUG,
     'LOG_FILE' => __DIR__ . '/pht.log',
@@ -124,6 +124,7 @@ try {
     // chpp request does not return xml
     // so probably html content due to server down or server error
     echo $e->getError();
+}
 ?>
 ```
 ---
