@@ -14,6 +14,8 @@ spl_autoload_register(function ($class) {
     if (strpos($class, 'PHT\\') === 0) {
         $relative_NS = str_replace('PHT\\', '\\', $class);
         $translated_path = str_replace('\\', '/', $relative_NS);
-        require_once __DIR__ . '/' . $translated_path . '.php';
+		if (file_exists(__DIR__ . '/' . $translated_path . '.php')) {
+			require_once __DIR__ . '/' . $translated_path . '.php';
+		}
     }
 });
