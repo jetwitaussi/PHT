@@ -50,7 +50,7 @@ class Chunk extends Xml\Base
     public function isTournament()
     {
         if ($this->getXml()->getElementsByTagName('SourceSystem')->length) {
-            return strtolower($this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue) == Config\Config::MATCH_SENIOR;
+            return strtolower($this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue) == Config\Config::MATCH_TOURNAMENT;
         }
         return false;
     }
