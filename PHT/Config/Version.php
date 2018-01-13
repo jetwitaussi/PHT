@@ -34,7 +34,7 @@ class Version
     const LEAGUEFIXTURES = '1.2';
     const LIVE = '1.9';
     const MANAGERCOMPENDIUM = '1.1';
-    const MATCHDETAILS = '2.9';
+    const MATCHDETAILS = '3.0';
     const MATCHES = '2.8';
     const MATCHESARCHIVE = '1.3';
     const MATCHLINEUP = '2.0';

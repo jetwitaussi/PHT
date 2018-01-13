@@ -87,6 +87,16 @@ class Match extends File
         return $this->getXml()->getElementsByTagName('MatchContextId')->item(0)->nodeValue;
     }
 
+	/**
+	 * Return match rule id
+	 *
+	 * @return integer
+	 */
+	public function getMatchRuleId()
+	{
+		return $this->getXml()->getElementsByTagName('MatchRuleId')->item(0)->nodeValue;
+	}
+
     /**
      * Return match type
      *
