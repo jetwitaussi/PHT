@@ -3,7 +3,7 @@
     "type": "library",
     "description": "PHP Framework for CHPP applications related to Hattrick website",
     "homepage": "https://github.com/jetwitaussi/PHT",
-    "license": "BEER-WARE",
+    "license": "Beerware",
     "require": {
         "php": ">=5.3",
         "ext-curl": "*",
