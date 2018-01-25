@@ -123,9 +123,10 @@ class Request
         $xmlData = curl_exec($curl);
         $endTime = microtime(true);
         $log->debug("[NETWORK] Fetch done in: " . ($endTime - $startTime));
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
         if ($check === true) {
-            self::checkXmlData($xmlData);
+            self::checkXmlData($xmlData, $httpCode);
         }
         if ($cacheKey !== null) {
             $done = Cache\Driver::getInstance()->set($cacheKey, $xmlData, Config\Config::$cacheTtl);
@@ -140,15 +141,16 @@ class Request
 
     /**
      * @param string $xmlData
+     * @param int $httpCode
      * @throws \PHT\Exception\NetworkException
      * @throws \PHT\Exception\ChppException
      */
-    public static function checkXmlData($xmlData)
+    public static function checkXmlData($xmlData, $httpCode = 0)
     {
         $tmpXml = xml_parser_create();
         if (!xml_parse($tmpXml, $xmlData, true)) {
             Log\Logger::getInstance()->critical("[API] Invalid xml: " . $xmlData);
-            throw new Exception\NetworkException($xmlData);
+            throw new Exception\NetworkException($xmlData, $httpCode);
         }
         xml_parser_free($tmpXml);
 
@@ -157,11 +159,11 @@ class Request
         $filename = $tmpXml->getElementsByTagName('FileName');
         if ($filename->length == 0) {
             Log\Logger::getInstance()->critical("[API] CHPP error: " . $xmlData);
-            throw new Exception\ChppException($xmlData);
+            throw new Exception\ChppException($xmlData, $httpCode);
         }
         if ($filename->item(0)->nodeValue == Url::ERROR_FILE) {
             Log\Logger::getInstance()->critical("[API] CHPP Error: " . $xmlData);
-            throw new Exception\ChppException($xmlData);
+            throw new Exception\ChppException($xmlData, $httpCode);
         }
     }
 
