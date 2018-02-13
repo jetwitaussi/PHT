@@ -68,7 +68,8 @@ class Senior extends Xml\File
     public function getRound($id)
     {
         $id = round($id);
-        if ($id >= Config\Config::$forIndex && $id <= 14 + Config\Config::$forIndex) {
+        if ($id >= Config\Config::$forIndex && $id < 14 + Config\Config::$forIndex) {
+            $id += Config\Config::$forIndex - 1;
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query("//MatchRound[.='" . $id . "']");
             $matches = new \DOMDocument('1.0', 'UTF-8');
