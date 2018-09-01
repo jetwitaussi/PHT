@@ -78,6 +78,9 @@ class Youth extends Xml\File
     {
         $id = round($id);
         if ($id >= Config\Config::$forIndex && $id < (($this->getTeamsNumber() - 1) * 2) + Config\Config::$forIndex) {
+			if (!Config\Config::$forIndex) {
+				$id++;
+			}
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query("//MatchRound[.='" . $id . "']");
             $matches = new \DOMDocument('1.0', 'UTF-8');
