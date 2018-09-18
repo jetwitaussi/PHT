@@ -607,7 +607,7 @@ class PHT extends Config\Base
         if ($teamId === null) {
             $teamId = $this->findSeniorTeam()->getYouthTeamId();
         }
-        return Wrapper\Team\Senior::matches($teamId, $showBeforeDate);
+        return Wrapper\Team\Youth::matches($teamId, $showBeforeDate);
     }
 
     /**
