@@ -73,7 +73,7 @@ class Scouts extends Xml\File
     public function getScout($index)
     {
         $index = round($index);
-        if ($index > Config\Config::$forIndex && $index < $this->getScoutNumber() + Config\Config::$forIndex) {
+        if ($index >= Config\Config::$forIndex && $index < $this->getScoutNumber() + Config\Config::$forIndex) {
             $index -= Config\Config::$forIndex;
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//Scout');
