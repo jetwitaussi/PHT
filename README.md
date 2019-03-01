@@ -87,10 +87,10 @@ try {
     // then explore PHT\PHT object, all requests start from there, another example:
     $league = $HT->getSeniorLeague();
     echo $league->getCountry()->getEnglishName(); // chaining with country
-    foreach($league->getLeagueTeams() as $team)
+    foreach($league->getTeams() as $team)
     {
         // chaining with team details
-        echo $team->getPosition().' : '.$team->getName().' ('.$team->getTeam()->getShortTeamName().')<br/>';
+        echo $team->getPosition().' : '.$team->getName().' ('.$team->getTeam()->getShortName().')<br/>';
     }
     
     // you can handle bad argument without going out of main process
