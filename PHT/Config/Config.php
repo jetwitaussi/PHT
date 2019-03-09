@@ -166,6 +166,7 @@ abstract class Config
     const MATCH_SENIOR = 'hattrick';
     const MATCH_TOURNAMENT = 'htointegrated';
     const MATCH_NATIONAL = 'national';
+    const HTI_LEAGUE = 1000;
     const PLAYER_URL = '/Club/Players/Player.aspx?';
     const SENIOR = 'senior';
     const YOUTH = 'youth';

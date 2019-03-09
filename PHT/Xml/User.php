@@ -16,6 +16,7 @@ namespace PHT\Xml;
 use PHT\Config;
 use PHT\Utils;
 use PHT\Wrapper;
+use PHT\Network;
 
 class User extends HTSupporter
 {
@@ -92,11 +93,34 @@ class User extends HTSupporter
     /**
      * Return number of teams
      *
+     * @param string $type
      * @return integer
      */
-    public function getTeamNumber()
+    public function getTeamNumber($type = null)
     {
-        return $this->getXml()->getElementsByTagName('Team')->length;
+        if ($type !== Team\Senior::INTERNATIONAL && $type !== Team\Senior::SECONDARY) {
+            return $this->getXml()->getElementsByTagName('Team')->length;
+        }
+        $params = array('file' => 'teamdetails', 'version' => Config\Version::TEAMDETAILS, 'userID' => $this->getId());
+        $url = Network\Request::buildUrl($params);
+        $xml = Network\Request::fetchUrl($url);
+        $doc = new \DOMDocument('1.0', 'UTF-8');
+        $doc->loadXml($xml);
+        $teams = $doc->getElementsByTagName('Team');
+        $number = 0;
+        for ($t = 0; $t < $teams->length; $t++) {
+            $txml = new \DOMDocument('1.0', 'UTF-8');
+            $txml->appendChild($txml->importNode($teams->item($t), true));
+            $isPrimary = strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
+            if ($isPrimary) {
+                continue;
+            }
+            $isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == Config\Config::HTI_LEAGUE;
+            if (($type == Team\Senior::INTERNATIONAL && $isHti) || ($type == Team\Senior::SECONDARY && !$isHti)) {
+                $number++;
+            }
+        }
+        return $number;
     }
 
     /**

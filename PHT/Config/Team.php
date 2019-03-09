@@ -39,6 +39,13 @@ class Team
      */
     public $international = false;
 
+
+    /**
+     * Set to get the user's nth secondary team or nth HTI team
+     * @var boolean
+     */
+    public $number = 1;
+
     /**
      * Set to id to get user's team, combine with primary or secondary
      * @var integer

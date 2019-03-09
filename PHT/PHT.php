@@ -63,9 +63,9 @@ class PHT extends Config\Base
         if ($team->primary === true) {
             return $this->getPrimarySeniorTeam($team->userId);
         } elseif ($team->secondary === true) {
-            return $this->getSecondarySeniorTeam($team->userId);
+            return $this->getSecondarySeniorTeam($team->userId, $team->number);
         } elseif ($team->international === true) {
-            return $this->getInternationalSeniorTeam($team->userId);
+            return $this->getInternationalSeniorTeam($team->userId, $team->number);
         } else {
             return $this->findSeniorTeam($team->id, $team->userId);
         }
@@ -131,52 +131,66 @@ class PHT extends Config\Base
 
     /**
      * @param integer $userId
+     * @param integer $nth
      * @return \PHT\Xml\Team\Senior
      */
-    protected function getSecondarySeniorTeam($userId = null)
+    protected function getSecondarySeniorTeam($userId = null, $nth = 1)
     {
-        return $this->getSpecificSeniorTeam(Xml\Team\Senior::SECONDARY, $userId);
+        return $this->getSpecificSeniorTeam(Xml\Team\Senior::SECONDARY, $userId, $nth);
     }
 
     /**
      * @param integer $userId
+     * @param integer $nth
      * @return \PHT\Xml\Team\Senior
      */
-    protected function getInternationalSeniorTeam($userId = null)
+    protected function getInternationalSeniorTeam($userId = null, $nth = 1)
     {
-        return $this->getSpecificSeniorTeam(Xml\Team\Senior::INTERNATIONAL, $userId);
+        return $this->getSpecificSeniorTeam(Xml\Team\Senior::INTERNATIONAL, $userId, $nth);
     }
 
     /**
      * @param integer $type
      * @param integer $userId
+     * @param integer $nth
      * @return \PHT\Xml\Team\Senior
      */
-    protected function getSpecificSeniorTeam($type, $userId = null)
+    protected function getSpecificSeniorTeam($type, $userId = null, $nth = 1)
     {
-		$params = array('file' => 'teamdetails', 'version' => Config\Version::TEAMDETAILS);
-		if ($userId !== null) {
-			$params['userID'] = $userId;
-		}
-		$url = Network\Request::buildUrl($params);
-		$xml = Network\Request::fetchUrl($url);
+        $params = array('file' => 'teamdetails', 'version' => Config\Version::TEAMDETAILS);
+        if ($userId !== null) {
+            $params['userID'] = $userId;
+        }
+        $url = Network\Request::buildUrl($params);
+        $xml = Network\Request::fetchUrl($url);
         $doc = new \DOMDocument('1.0', 'UTF-8');
-		$doc->loadXml($xml);
+        $doc->loadXml($xml);
         $teams = $doc->getElementsByTagName('Team');
+        $nthS = $nthI = 0;
+        $remove = array();
         for ($t = 0; $t < $teams->length; $t++) {
             $txml = new \DOMDocument('1.0', 'UTF-8');
             $txml->appendChild($txml->importNode($teams->item($t), true));
-            $isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == 1000;
+            $isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == Config\Config::HTI_LEAGUE;
             $isPrimary = strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
             if ($type == Xml\Team\Senior::PRIMARY && $isPrimary) {
                 continue;
             }
             if ($type == Xml\Team\Senior::SECONDARY && !$isPrimary && !$isHti) {
-                continue;
+                $nthS++;
+                if ($nth == $nthS) {
+                    continue;
+                }
             }
             if ($type == Xml\Team\Senior::INTERNATIONAL && $isHti) {
-                continue;
+                $nthI++;
+                if ($nth == $nthI) {
+                    continue;
+                }
             }
+            $remove[] = $t;
+        }
+        foreach (array_reverse($remove) as $t) {
             $doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
         }
         if ($doc->getElementsByTagName('Team')->length) {
