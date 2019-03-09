@@ -26,7 +26,7 @@ class Version
     const CUPMATCHES = '1.4';
     const CURRENTBIDS = '1.0';
     const ECONOMY = '1.3';
-    const FANS = '1.2';
+    const FANS = '1.3';
     const HOFPLAYERS = '1.1';
     const LADDERDETAILS = '1.0';
     const LADDERLIST = '1.0';
