@@ -171,7 +171,7 @@ abstract class Config
     const YOUTH = 'youth';
     const HOF = 'hof';
     const STAFF = 'staff';
-    const HATTRICK_URL = 'http://www.hattrick.org';
+    const HATTRICK_URL = 'https://www.hattrick.org';
     const HATTRICK_DOMAIN = 'hattrick.org';
     const BID_SELLING = 1;
     const BID_BUYING = 2;

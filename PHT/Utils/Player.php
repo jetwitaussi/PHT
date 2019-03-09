@@ -27,6 +27,6 @@ class Player
         if ($newUrl !== null) {
             return str_replace(Config\Config::PLAYER_URL, $newUrl, $text);
         }
-        return str_replace(Config\Config::PLAYER_URL, 'http://www.hattrick.org/goto.ashx?path=' . urlencode(Config\Config::PLAYER_URL), $text);
+        return str_replace(Config\Config::PLAYER_URL, Config\Config::HATTRICK_URL . '/goto.ashx?path=' . urlencode(Config\Config::PLAYER_URL), $text);
     }
 }
