@@ -15,5 +15,5 @@ namespace PHT\Exception;
 
 class NetworkException extends \Exception
 {
-    
+
 }

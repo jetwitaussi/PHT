@@ -64,7 +64,7 @@ class Memcached implements CacheInterface
      */
     public function delete($key)
     {
-        $key = str_replace(' ', '_', $key);  
+        $key = str_replace(' ', '_', $key);
         return $this->obj->delete(sha1($key), 0);
     }
 
@@ -122,7 +122,7 @@ class Memcached implements CacheInterface
                 if ($value === false || !isset($value[$found[1]])) {
                     $value[$found[1]] = array();
                 }
-                if(!in_array($sha, $value[$found[1]])) {
+                if (!in_array($sha, $value[$found[1]])) {
                     $value[$found[1]][] = $sha;
                     $do2 = $this->obj->set($this->all, $value, 0);
                     if (!$do2) {

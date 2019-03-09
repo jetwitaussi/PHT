@@ -24,6 +24,7 @@ interface CacheInterface
      * @return boolean
      */
     public function set($key, $data, $ttl = 0);
+
     /**
      * Retreive key value
      *
@@ -31,6 +32,7 @@ interface CacheInterface
      * @return string|boolean
      */
     public function get($key);
+
     /**
      * Delete key
      *
@@ -38,12 +40,14 @@ interface CacheInterface
      * @return boolean
      */
     public function delete($key);
+
     /**
      * Delete keys related to xml filename
      *
      * @param string $file
      */
     public function clear($file);
+
     /**
      * Purge all keys
      */

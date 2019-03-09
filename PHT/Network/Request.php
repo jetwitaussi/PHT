@@ -130,7 +130,7 @@ class Request
         }
         if ($cacheKey !== null) {
             $done = Cache\Driver::getInstance()->set($cacheKey, $xmlData, Config\Config::$cacheTtl);
-            if($done) {
+            if ($done) {
                 $log->debug('[CACHE] Save');
             } else {
                 $log->debug('[CACHE] Fail');

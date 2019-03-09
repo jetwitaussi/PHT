@@ -119,7 +119,7 @@ class Listing extends Xml\HTSupporter
             return null;
         }
         $params = $this->params;
-        $params['pageIndex'] ++;
+        $params['pageIndex']++;
         return Wrapper\Federation::search($params);
     }
 
@@ -134,7 +134,7 @@ class Listing extends Xml\HTSupporter
             return null;
         }
         $params = $this->params;
-        $params['pageIndex'] --;
+        $params['pageIndex']--;
         return Wrapper\Federation::search($params);
     }
 

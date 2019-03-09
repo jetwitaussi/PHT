@@ -78,9 +78,9 @@ class Youth extends Xml\File
     {
         $id = round($id);
         if ($id >= Config\Config::$forIndex && $id < (($this->getTeamsNumber() - 1) * 2) + Config\Config::$forIndex) {
-			if (!Config\Config::$forIndex) {
-				$id++;
-			}
+            if (!Config\Config::$forIndex) {
+                $id++;
+            }
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query("//MatchRound[.='" . $id . "']");
             $matches = new \DOMDocument('1.0', 'UTF-8');
@@ -169,21 +169,21 @@ class Youth extends Xml\File
                 $tmp[$homeId]['goalsagainst'] += (int)$awayGoals;
                 $tmp[$awayId]['goalsfor'] += (int)$awayGoals;
                 $tmp[$awayId]['goalsagainst'] += (int)$homeGoals;
-                $tmp[$homeId]['played'] ++;
-                $tmp[$awayId]['played'] ++;
+                $tmp[$homeId]['played']++;
+                $tmp[$awayId]['played']++;
                 if ($homeGoals > $awayGoals) {
-                    $tmp[$homeId]['won'] ++;
+                    $tmp[$homeId]['won']++;
                     $tmp[$homeId]['points'] += 3;
-                    $tmp[$awayId]['lost'] ++;
+                    $tmp[$awayId]['lost']++;
                 } elseif ($homeGoals < $awayGoals) {
-                    $tmp[$awayId]['won'] ++;
+                    $tmp[$awayId]['won']++;
                     $tmp[$awayId]['points'] += 3;
-                    $tmp[$homeId]['lost'] ++;
+                    $tmp[$homeId]['lost']++;
                 } elseif ($homeGoals == $awayGoals) {
-                    $tmp[$awayId]['points'] ++;
-                    $tmp[$homeId]['points'] ++;
-                    $tmp[$homeId]['draw'] ++;
-                    $tmp[$awayId]['draw'] ++;
+                    $tmp[$awayId]['points']++;
+                    $tmp[$homeId]['points']++;
+                    $tmp[$homeId]['draw']++;
+                    $tmp[$awayId]['draw']++;
                 }
             }
         }

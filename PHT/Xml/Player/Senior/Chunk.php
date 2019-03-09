@@ -339,7 +339,7 @@ class Chunk extends Xml\Base
      */
     public function getACaps()
     {
-        trigger_error(__FUNCTION__.'() function in '.__CLASS__.' is deprecated, use getNTCaps() instead', E_USER_DEPRECATED);
+        trigger_error(__FUNCTION__ . '() function in ' . __CLASS__ . ' is deprecated, use getNTCaps() instead', E_USER_DEPRECATED);
         return $this->getNTCaps();
     }
 

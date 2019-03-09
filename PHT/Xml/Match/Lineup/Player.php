@@ -62,11 +62,11 @@ class Player extends Xml\Base
      */
     public function getRole()
     {
-		$tmp = $this->getXml()->getElementsByTagName('RoleID');
-		if ($tmp->length) {
-			return $tmp->item(0)->nodeValue;
-		}
-		return null;
+        $tmp = $this->getXml()->getElementsByTagName('RoleID');
+        if ($tmp->length) {
+            return $tmp->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -76,16 +76,16 @@ class Player extends Xml\Base
      */
     public function getName()
     {
-		$tmp = $this->getXml()->getElementsByTagName('PlayerName');
-		if ($tmp->length) {
-			return $tmp->item(0)->nodeValue;
+        $tmp = $this->getXml()->getElementsByTagName('PlayerName');
+        if ($tmp->length) {
+            return $tmp->item(0)->nodeValue;
         }
         $name = $this->getFirstName();
         if ($this->getNickName() !== null && $this->getNickName() !== '') {
             $name .= ' ' . $this->getNickName();
         }
         $name .= ' ' . $this->getLastName();
-		return strlen(trim($name)) ? $name : null;
+        return strlen(trim($name)) ? $name : null;
     }
 
     /**
@@ -95,9 +95,9 @@ class Player extends Xml\Base
      */
     public function getFirstName()
     {
-		$tmp = $this->getXml()->getElementsByTagName('FirstName');
-		if ($tmp->length) {
-			return $tmp->item(0)->nodeValue;
+        $tmp = $this->getXml()->getElementsByTagName('FirstName');
+        if ($tmp->length) {
+            return $tmp->item(0)->nodeValue;
         }
         return null;
     }
@@ -109,9 +109,9 @@ class Player extends Xml\Base
      */
     public function getLastName()
     {
-		$tmp = $this->getXml()->getElementsByTagName('LastName');
-		if ($tmp->length) {
-			return $tmp->item(0)->nodeValue;
+        $tmp = $this->getXml()->getElementsByTagName('LastName');
+        if ($tmp->length) {
+            return $tmp->item(0)->nodeValue;
         }
         return null;
     }
@@ -123,9 +123,9 @@ class Player extends Xml\Base
      */
     public function getNickName()
     {
-		$tmp = $this->getXml()->getElementsByTagName('NickName');
-		if ($tmp->length) {
-			return $tmp->item(0)->nodeValue;
+        $tmp = $this->getXml()->getElementsByTagName('NickName');
+        if ($tmp->length) {
+            return $tmp->item(0)->nodeValue;
         }
         return null;
     }

@@ -132,7 +132,7 @@ class Response extends Xml\File
             }
         }
         $params = $this->params;
-        $params['pageIndex'] ++;
+        $params['pageIndex']++;
         return Wrapper\Search::market($params);
     }
 
@@ -147,7 +147,7 @@ class Response extends Xml\File
             return null;
         }
         $params = $this->params;
-        $params['pageIndex'] --;
+        $params['pageIndex']--;
         return Wrapper\Search::market($params);
     }
 

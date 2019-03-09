@@ -15,5 +15,5 @@ namespace PHT\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {
-    
+
 }

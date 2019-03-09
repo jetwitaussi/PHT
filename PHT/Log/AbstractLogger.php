@@ -19,7 +19,7 @@ abstract class AbstractLogger implements LoggerInterface
      * Emergency log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function emergency($message, array $context = array())
     {
@@ -30,18 +30,18 @@ abstract class AbstractLogger implements LoggerInterface
      * Alert log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function alert($message, array $context = array())
     {
         $this->log(Level::ALERT, $message, $context);
     }
 
-   /**
+    /**
      * Critical log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function critical($message, array $context = array())
     {
@@ -52,7 +52,7 @@ abstract class AbstractLogger implements LoggerInterface
      * Error log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function error($message, array $context = array())
     {
@@ -63,7 +63,7 @@ abstract class AbstractLogger implements LoggerInterface
      * warning log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function warning($message, array $context = array())
     {
@@ -74,7 +74,7 @@ abstract class AbstractLogger implements LoggerInterface
      * Notice log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function notice($message, array $context = array())
     {
@@ -85,7 +85,7 @@ abstract class AbstractLogger implements LoggerInterface
      * Info log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function info($message, array $context = array())
     {
@@ -96,7 +96,7 @@ abstract class AbstractLogger implements LoggerInterface
      * Ddebug log
      *
      * @param string $message
-     * @param array  $context
+     * @param array $context
      */
     public function debug($message, array $context = array())
     {
