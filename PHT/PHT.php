@@ -88,10 +88,12 @@ class PHT extends Config\Base
             throw new Exception\InvalidArgumentException('Parameter $team should be instanceof \PHT\Config\Team');
         }
 
-        if ($team->primary !== null) {
+        if ($team->primary === true) {
             return $this->getPrimaryYouthTeam($team->userId);
-        } elseif ($team->secondary !== null) {
-            return $this->getSecondaryYouthTeam($team->userId);
+        } elseif ($team->secondary === true) {
+            return $this->getSecondaryYouthTeam($team->userId, $team->number);
+        } elseif ($team->international === true) {
+            return $this->getInternationalYouthTeam($team->userId, $team->number);
         } else {
             return $this->findYouthTeam($team->id, $team->userId);
         }
@@ -205,16 +207,39 @@ class PHT extends Config\Base
      */
     protected function getPrimaryYouthTeam($userId = null)
     {
-        return $this->findYouthTeam($this->getPrimarySeniorTeam($userId)->getYouthTeamId());
+        $team = $this->getPrimarySeniorTeam($userId);
+        if ($team instanceof Xml\Team\Senior) {
+            return $this->findYouthTeam($team->getYouthTeamId());
+        }
+        return null;
     }
 
     /**
      * @param integer $userId
+     * @param integer $nth
      * @return \PHT\Xml\Team\Youth
      */
-    protected function getSecondaryYouthTeam($userId = null)
+    protected function getSecondaryYouthTeam($userId = null, $nth = 1)
     {
-        return $this->findYouthTeam($this->getSecondarySeniorTeam($userId)->getYouthTeamId());
+        $team = $this->getSecondarySeniorTeam($userId, $nth);
+        if ($team instanceof Xml\Team\Senior) {
+            return $this->findYouthTeam($team->getYouthTeamId());
+        }
+        return null;
+    }
+
+    /**
+     * @param integer $userId
+     * @param integer $nth
+     * @return \PHT\Xml\Team\Youth
+     */
+    protected function getInternationalYouthTeam($userId = null, $nth = 1)
+    {
+        $team = $this->getInternationalSeniorTeam($userId, $nth);
+        if ($team instanceof Xml\Team\Senior) {
+            return $this->findYouthTeam($team->getYouthTeamId());
+        }
+        return null;
     }
 
     /**

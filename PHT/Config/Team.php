@@ -47,7 +47,7 @@ class Team
     public $number = 1;
 
     /**
-     * Set to id to get user's team, combine with primary or secondary
+     * Set to get user's team, combine with primary, secondary or international
      * @var integer
      */
     public $userId = null;
