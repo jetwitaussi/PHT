@@ -566,9 +566,10 @@ class Youth extends Xml\File
      */
     public function getLastMatch()
     {
-        if ($this->getXml()->getElementsByTagName('LastMatch')->length) {
+        $node = $this->getXml()->getElementsByTagName('LastMatch')->item(0);
+        if ($node !== null && $node->hasChildNodes()) {
             $match = new \DOMDocument('1.0', 'UTF-8');
-            $match->appendChild($match->importNode($this->getXml()->getElementsByTagName('LastMatch')->item(0), true));
+            $match->appendChild($match->importNode($node, true));
             return new LastMatch($match, Config\Config::MATCH_YOUTH);
         }
         return null;
