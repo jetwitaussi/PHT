@@ -746,7 +746,7 @@ class Orders
         $json["substitutions"] = array();
         $nums = array('One', 'Two', 'Three', 'Four', 'Five');
         foreach ($nums as $i) {
-            $sub = $this->{'substitution' . $i}();
+            $sub = $this->{'substitution' . $i};
             if ($sub === null || !$sub instanceof OrdersSubstitution) {
                 continue;
             }
