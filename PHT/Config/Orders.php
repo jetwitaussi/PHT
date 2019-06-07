@@ -63,9 +63,18 @@ class Orders
     private $leftForwardBehaviour = 0;
     private $substituteGoalkeeper = 0;
     private $substituteDefender = 0;
+    private $substituteWingback = 0;
     private $substituteMidfield = 0;
     private $substituteForward = 0;
     private $substituteWinger = 0;
+    private $substituteExtra = 0;
+    private $substituteExtraGoalkeeper = 0;
+    private $substituteExtraDefender = 0;
+    private $substituteExtraWingback = 0;
+    private $substituteExtraMidfield = 0;
+    private $substituteExtraForward = 0;
+    private $substituteExtraWinger = 0;
+    private $substituteExtraExtra = 0;
     private $captain = 0;
     private $setpieces = 0;
     private $penaltyOne = 0;
@@ -82,11 +91,7 @@ class Orders
     private $tactic = 0;
     private $coachModifier = 0;
     private $speechLevel = 0;
-    private $substitutionOne = null;
-    private $substitutionTwo = null;
-    private $substitutionThree = null;
-    private $substitutionFour = null;
-    private $substitutionFive = null;
+    private $substitutions = array();
 
     /**
      * @param integer $matchId
@@ -295,6 +300,16 @@ class Orders
     }
 
     /**
+     * Define extra goalkeeper substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraGoalkeeper($playerId)
+    {
+        $this->substituteExtraGoalkeeper = $playerId;
+    }
+
+    /**
      * Define defender substitute
      *
      * @param integer $playerId
@@ -302,6 +317,36 @@ class Orders
     public function setSubstituteDefender($playerId)
     {
         $this->substituteDefender = $playerId;
+    }
+
+    /**
+     * Define extra defender substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraDefender($playerId)
+    {
+        $this->substituteExtraDefender = $playerId;
+    }
+
+    /**
+     * Define wing back substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteWingback($playerId)
+    {
+        $this->substituteWingback = $playerId;
+    }
+
+    /**
+     * Define extra wing back substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraWingback($playerId)
+    {
+        $this->substituteExtraWingback = $playerId;
     }
 
     /**
@@ -315,6 +360,16 @@ class Orders
     }
 
     /**
+     * Define extra midfield substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraMidfield($playerId)
+    {
+        $this->substituteExtraMidfield = $playerId;
+    }
+
+    /**
      * Define winger substitute
      *
      * @param integer $playerId
@@ -325,6 +380,16 @@ class Orders
     }
 
     /**
+     * Define extra winger substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraWinger($playerId)
+    {
+        $this->substituteExtraWinger = $playerId;
+    }
+
+    /**
      * Define forward substitute
      *
      * @param integer $playerId
@@ -332,6 +397,16 @@ class Orders
     public function setSubstituteForward($playerId)
     {
         $this->substituteForward = $playerId;
+    }
+
+    /**
+     * Define extra forward substitute
+     *
+     * @param integer $playerId
+     */
+    public function setSubstituteExtraForward($playerId)
+    {
+        $this->substituteExtraForward = $playerId;
     }
 
     /**
@@ -495,53 +570,13 @@ class Orders
     }
 
     /**
-     * Define first substitution
+     * Add a substitution
      *
      * @param \PHT\Config\OrdersSubstitution $substitution
      */
-    public function setSubstitution1($substitution)
+    public function addSubstitution($substitution)
     {
-        $this->substitutionOne = $substitution;
-    }
-
-    /**
-     * Define second substitution
-     *
-     * @param \PHT\Config\OrdersSubstitution $substitution
-     */
-    public function setSubstitution2($substitution)
-    {
-        $this->substitutionTwo = $substitution;
-    }
-
-    /**
-     * Define third substitution
-     *
-     * @param \PHT\Config\OrdersSubstitution $substitution
-     */
-    public function setSubstitution3($substitution)
-    {
-        $this->substitutionThree = $substitution;
-    }
-
-    /**
-     * Define fourth substitution
-     *
-     * @param \PHT\Config\OrdersSubstitution $substitution
-     */
-    public function setSubstitution4($substitution)
-    {
-        $this->substitutionFour = $substitution;
-    }
-
-    /**
-     * Define fifth substitution
-     *
-     * @param \PHT\Config\OrdersSubstitution $substitution
-     */
-    public function setSubstitution5($substitution)
-    {
-        $this->substitutionFive = $substitution;
+        $this->substitutions[] = $substitution;
     }
 
     /**
@@ -645,15 +680,20 @@ class Orders
                 $this->errors[] = "Player " . $id . " used " . $use . " times";
             }
         }
-        $nums = array(1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => 'Five');
-        foreach ($nums as $i => $n) {
-            $sub = $this->{'substitution' . $n};
-            if ($sub !== null && !$sub instanceof OrdersSubstitution) {
+        $bench = array($this->substituteGoalkeeper, $this->substituteDefender, $this->substituteWingback, $this->substituteMidfield, $this->substituteForward, $this->substituteWinger, $this->substituteExtra);
+        foreach ($this->substitutions as $i => $sub) {
+            $sub = $this->{'substitution' . $i};
+            if (!$sub instanceof OrdersSubstitution) {
                 $this->errors[] = "Invalid substitution $i";
-            } elseif ($sub !== null && $sub->orderType == $sub::TYPE_SUBSTITUTION) {
-                if ($sub->playerIn && !in_array($sub->playerIn, array($this->substituteGoalkeeper, $this->substituteDefender, $this->substituteMidfield, $this->substituteForward, $this->substituteWinger))) {
+            } elseif ($sub->orderType == $sub::TYPE_SUBSTITUTION) {
+                if ($sub->playerIn && !in_array($sub->playerIn, $bench)) {
                     $this->errors[] = "Substitution $i set a player which is not substitute : " . $sub->playerIn;
                 }
+            }
+        }
+        foreach (array($this->substituteExtraGoalkeeper, $this->substituteExtraDefender, $this->substituteExtraWingback, $this->substituteExtraMidfield, $this->substituteExtraForward, $this->substituteExtraWinger, $this->substituteExtraExtra) as $extra) {
+            if ($extra !== 0 && !in_array($extra, $bench)) {
+                $this->errors[] = "Extra substitute player $extra is not on the substitute bench";
             }
         }
         return $this->getErrorNumber() > 0;
@@ -717,14 +757,25 @@ class Orders
             array("id" => $this->leftWinger, "behaviour" => $this->leftWingerBehaviour),
             array("id" => $this->rightForward, "behaviour" => $this->rightForwardBehaviour),
             array("id" => $this->centralForward, "behaviour" => $this->centralForwardBehaviour),
-            array("id" => $this->leftForward, "behaviour" => $this->leftForwardBehaviour),
+            array("id" => $this->leftForward, "behaviour" => $this->leftForwardBehaviour)
+        );
+        $json['bench'] = array(
             array("id" => $this->substituteGoalkeeper, "behaviour" => 0),
             array("id" => $this->substituteDefender, "behaviour" => 0),
+            array("id" => $this->substituteWingback, "behaviour" => 0),
             array("id" => $this->substituteMidfield, "behaviour" => 0),
             array("id" => $this->substituteForward, "behaviour" => 0),
             array("id" => $this->substituteWinger, "behaviour" => 0),
-            array("id" => $this->captain, "behaviour" => 0),
-            array("id" => $this->setpieces, "behaviour" => 0),
+            array("id" => $this->substituteExtra, "behaviour" => 0),
+            array("id" => $this->substituteExtraGoalkeeper, "behaviour" => 0),
+            array("id" => $this->substituteExtraDefender, "behaviour" => 0),
+            array("id" => $this->substituteExtraWingback, "behaviour" => 0),
+            array("id" => $this->substituteExtraMidfield, "behaviour" => 0),
+            array("id" => $this->substituteExtraForward, "behaviour" => 0),
+            array("id" => $this->substituteExtraWinger, "behaviour" => 0),
+            array("id" => $this->substituteExtraExtra, "behaviour" => 0)
+        );
+        $json['kickers'] = array(
             array("id" => $this->penaltyOne, "behaviour" => 0),
             array("id" => $this->penaltyTwo, "behaviour" => 0),
             array("id" => $this->penaltyThree, "behaviour" => 0),
@@ -737,6 +788,8 @@ class Orders
             array("id" => $this->penaltyTen, "behaviour" => 0),
             array("id" => $this->penaltyEleven, "behaviour" => 0)
         );
+        $json['captain'] = $this->captain;
+        $json['setPieces'] = $this->setpieces;
         $json["settings"] = array(
             "tactic" => $this->tactic,
             "coachModifier" => $this->coachModifier,
@@ -744,10 +797,8 @@ class Orders
             "newLineup" => ""
         );
         $json["substitutions"] = array();
-        $nums = array('One', 'Two', 'Three', 'Four', 'Five');
-        foreach ($nums as $i) {
-            $sub = $this->{'substitution' . $i};
-            if ($sub === null || !$sub instanceof OrdersSubstitution) {
+        foreach ($this->substitutions as $sub) {
+            if (!$sub instanceof OrdersSubstitution) {
                 continue;
             }
             $json["substitutions"][] = array(
