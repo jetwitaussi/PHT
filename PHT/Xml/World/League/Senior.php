@@ -145,22 +145,12 @@ class Senior extends Xml\File
     }
 
     /**
-     * Return season number
-     *
-     * @return integer
-     */
-    public function getSeason()
-    {
-        return $this->getXml()->getElementsByTagName('Season')->item(0)->nodeValue;
-    }
-
-    /**
      * Get current season details
      *
      * @return \PHT\Xml\World\League\Season\Senior
      */
     public function getCurrentSeason()
     {
-        return Wrapper\World\Season::senior($this->getId(), $this->getSeason());
+        return Wrapper\World\Season::senior($this->getId(), null);
     }
 }
