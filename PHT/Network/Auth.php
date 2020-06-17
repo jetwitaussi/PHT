@@ -106,7 +106,7 @@ class Auth
             'oauth_nonce' => Request::getNonce(),
             'oauth_version' => Request::VERSION,
             'oauth_token' => $token,
-            'oauth_verifier' => $verifier,
+            'oauth_verifier' => str_replace('#_=_', '', $verifier),
         );
         $signature = Request::buildSignature(Url::OAUTH_SERVER . Url::ACCESS_URL, $params, $oauthFirstTokenSecret);
         $params['oauth_signature'] = $signature;
