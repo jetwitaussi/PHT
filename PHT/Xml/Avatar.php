@@ -109,4 +109,27 @@ class Avatar extends Base
         $html .= '</div>';
         return $html;
     }
+
+    /**
+     * Return avatar data as json
+     *
+     * @param boolean $withDomain
+     * @param boolean $withMisc
+     * @return string
+     */
+    public function getJson($withDomain = false, $withMisc = false)
+    {
+        $json = array();
+        foreach ($this->getLayers() as $layer) {
+            if (!$withMisc && $layer->isMiscImage()) {
+                continue;
+            }
+            $img = $layer->getImage();
+            if ($withDomain && strpos($img, Config\Config::HATTRICK_DOMAIN) === false) {
+               $img = Config\Config::HATTRICK_URL . $img;
+            }
+            $json[] = array('u' => $img, 'x' => $layer->getX(), 'y' => $layer->getY());
+        }
+        return \json_encode($json);
+    }
 }

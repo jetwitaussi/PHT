@@ -55,4 +55,14 @@ class Layer extends Xml\Base
     {
         return $this->getXml()->getElementsByTagName('Image')->item(0)->nodeValue;
     }
+
+    /**
+     * Return is the layer is a misc image, if not it's a corpus image
+     *
+     * @return boolean
+     */
+    public function isMiscImage()
+    {
+        return \strpos($this->getImage(), '/misc/') !== false;
+    }
 }

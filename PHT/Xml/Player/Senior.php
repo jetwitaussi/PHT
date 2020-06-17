@@ -99,7 +99,7 @@ class Senior extends Xml\HTSupporter
     /**
      * Return player's team name
      *
-     * @return integer
+     * @return string
      */
     public function getTeamName()
     {
