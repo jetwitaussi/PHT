@@ -27,7 +27,7 @@ class Version
     const CURRENTBIDS = '1.0';
     const ECONOMY = '1.3';
     const FANS = '1.3';
-    const HOFPLAYERS = '1.1';
+    const HOFPLAYERS = '1.2';
     const LADDERDETAILS = '1.0';
     const LADDERLIST = '1.0';
     const LEAGUEDETAILS = '1.5';
