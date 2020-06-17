@@ -366,7 +366,7 @@ class Country extends Xml\Base
             $nodeList = $this->getXml()->getElementsByTagName('Region');
             $region = new \DOMDocument('1.0', 'UTF-8');
             $region->appendChild($region->importNode($nodeList->item($index), true));
-            return new Xml\World\Region($region);
+            return new Xml\World\Region\Chunk($region);
         }
         return null;
     }
@@ -379,8 +379,8 @@ class Country extends Xml\Base
     public function getRegions()
     {
         $nodeList = $this->getXml()->getElementsByTagName('Region');
-        /** @var \PHT\Xml\World\Region[] $data */
-        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Region');
+        /** @var \PHT\Xml\World\Region\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\Region\Chunk');
         return $data;
     }
 
