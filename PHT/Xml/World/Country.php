@@ -356,7 +356,7 @@ class Country extends Xml\Base
      * Return region object
      *
      * @param integer $index
-     * @return \PHT\Xml\World\Region
+     * @return \PHT\Xml\World\Region\Chunk
      */
     public function getRegion($index)
     {
@@ -374,7 +374,7 @@ class Country extends Xml\Base
     /**
      * Return iterator of regions objects
      *
-     * @return \PHT\Xml\World\Region[]
+     * @return \PHT\Xml\World\Region\Chunk[]
      */
     public function getRegions()
     {

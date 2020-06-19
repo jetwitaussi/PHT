@@ -14,8 +14,9 @@
 namespace PHT\Xml\World\Region;
 
 use PHT\Xml;
+use PHT\Wrapper;
 
-class Chunk extends Xml\World\Region
+class Chunk extends Xml\Base
 {
     /**
      * @param \DOMDocument $xml
@@ -24,5 +25,35 @@ class Chunk extends Xml\World\Region
     {
         $this->xmlText = $xml->saveXML();
         $this->xml = $xml;
+    }
+
+    /**
+     * Return region id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->getXml()->getElementsByTagName('RegionID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return region id
+     *
+     * @return integer
+     */
+    public function getName()
+    {
+        return $this->getXml()->getElementsByTagName('RegionName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Get full region details
+     *
+     * @return Xml\World\Region
+     */
+    public function getRegion()
+    {
+        return Wrapper\World::region($this->getId());
     }
 }
