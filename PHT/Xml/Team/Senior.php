@@ -151,6 +151,19 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Does the user have its license manager?
+     *
+     * @return boolean
+     */
+    public function hasManagerLicense()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return strtolower($this->getXml()->getElementsByTagName('HasManagerLicense')->item(0)->nodeValue) == "true";
+    }
+
+    /**
      * Return user icq number
      *
      * @return string
@@ -1251,7 +1264,7 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
-     * Return number of national team coached
+     * Return number of national team involved
      *
      * @return integer
      */

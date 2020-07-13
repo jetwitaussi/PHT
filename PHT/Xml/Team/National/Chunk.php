@@ -58,6 +58,19 @@ class Chunk extends Xml\Base
     }
 
     /**
+     * Return national staff type
+     *
+     * @return integer
+     */
+    public function getStaffType()
+    {
+        if ($this->getXml()->getElementsByTagName('NationalTeamStaffType')->length) {
+            return $this->getXml()->getElementsByTagName('NationalTeamStaffType')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
      * Return national team score rating
      *
      * @return integer
