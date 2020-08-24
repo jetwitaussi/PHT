@@ -231,9 +231,12 @@ class Match extends File
      */
     public function getScore()
     {
-        $home = $this->getXml()->getElementsByTagName('HomeGoals')->item(0)->nodeValue;
-        $away = $this->getXml()->getElementsByTagName('AwayGoals')->item(0)->nodeValue;
-        return $home . '-' . $away;
+        if ($this->getXml()->getElementsByTagName('HomeGoals')->length) {
+            $home = $this->getXml()->getElementsByTagName('HomeGoals')->item(0)->nodeValue;
+            $away = $this->getXml()->getElementsByTagName('AwayGoals')->item(0)->nodeValue;
+            return $home . '-' . $away;
+        }
+        return null;
     }
 
     /**
