@@ -289,4 +289,17 @@ class User extends HTSupporter
         $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\Login');
         return $data;
     }
+
+
+    /**
+     * Return user avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $node = new \DOMDocument('1.0', 'UTF-8');
+        $node->appendChild($node->importNode($this->getXml()->getElementsByTagName('Avatar')->item(0), true));
+        return new Avatar($node);
+    }
 }

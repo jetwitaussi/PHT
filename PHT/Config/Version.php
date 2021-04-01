@@ -33,7 +33,7 @@ class Version
     const LEAGUEDETAILS = '1.5';
     const LEAGUEFIXTURES = '1.2';
     const LIVE = '1.9';
-    const MANAGERCOMPENDIUM = '1.1';
+    const MANAGERCOMPENDIUM = '1.2';
     const MATCHDETAILS = '3.0';
     const MATCHES = '2.8';
     const MATCHESARCHIVE = '1.3';
@@ -43,9 +43,9 @@ class Version
     const NATIONALTEAMDETAILS = '1.9';
     const NATIONALTEAMMATCHES = '1.3';
     const NATIONALTEAMS = '1.5';
-    const PLAYERDETAILS = '2.7';
+    const PLAYERDETAILS = '2.8';
     const PLAYEREVENTS = '1.3';
-    const PLAYERS = '2.3';
+    const PLAYERS = '2.5';
     const REGIONDETAILS = '1.2';
     const SEARCH = '1.2';
     const STAFFAVATARS = '1.0';
@@ -65,7 +65,7 @@ class Version
     const WORLDCUP = '1.1';
     const WORLDDETAILS = '1.8';
     const WORLDLANGUAGES = '1.2';
-    const YOUTHAVATARS = '1.1';
+    const YOUTHAVATARS = '1.2';
     const YOUTHLEAGUEDETAILS = '1.0';
     const YOUTHLEAGUEFIXTURES = '1.0';
     const YOUTHPLAYERLIST = '1.1';

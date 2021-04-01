@@ -98,16 +98,6 @@ class Team extends Xml\Base
     }
 
     /**
-     * Return country
-     *
-     * @return \PHT\Xml\World\Country
-     */
-    public function getCountry()
-    {
-        return Wrapper\World::country($this->getLeagueId());
-    }
-
-    /**
      * Return league name
      *
      * @return string
@@ -115,6 +105,36 @@ class Team extends Xml\Base
     public function getLeagueName()
     {
         return $this->getXml()->getElementsByTagName('LeagueName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country id
+     *
+     * @return integer
+     */
+    public function getCountryId()
+    {
+        return $this->getXml()->getElementsByTagName('CountryId')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country name
+     *
+     * @return string
+     */
+    public function getCountryName()
+    {
+        return $this->getXml()->getElementsByTagName('CountryName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country
+     *
+     * @return \PHT\Xml\World\Country
+     */
+    public function getCountry()
+    {
+        return Wrapper\World::country($this->getLeagueId());
     }
 
     /**

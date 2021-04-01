@@ -800,6 +800,16 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return player number matches in his team
+     *
+     * @return integer
+     */
+    public function getMatchesInTeam()
+    {
+        return $this->getXml()->getElementsByTagName('MatchesCurrentTeam')->item(0)->nodeValue;
+    }
+
+    /**
      * Return national team id if enrolled
      *
      * @return integer
