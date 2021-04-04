@@ -1236,7 +1236,7 @@ class Senior extends Xml\HTSupporter
      * Return challenges, only team belongs to connected user
      *
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challengeable\Listing
+     * @return \PHT\Xml\Team\Challenges
      */
     public function getChallenges($weekendFriendly = false)
     {

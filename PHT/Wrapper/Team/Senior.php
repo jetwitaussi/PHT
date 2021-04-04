@@ -368,7 +368,7 @@ class Senior
     /**
      * @param integer $teamId
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challengeable\Listing
+     * @return \PHT\Xml\Team\Challenges
      */
     public static function challenges($teamId = null, $weekendFriendly = false)
     {
@@ -377,7 +377,7 @@ class Senior
             $params['teamId'] = $teamId;
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Team\Challengeable\Listing(Network\Request::fetchUrl($url));
+        return new Xml\Team\Challenges(Network\Request::fetchUrl($url));
     }
 
     /**

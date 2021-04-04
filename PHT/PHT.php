@@ -1291,7 +1291,7 @@ class PHT extends Config\Base
      *
      * @param integer $teamId
      * @param boolean $weekendFriendly
-     * @return \PHT\Xml\Team\Challengeable\Listing
+     * @return \PHT\Xml\Team\Challenges
      */
     public function getChallenges($teamId = null, $weekendFriendly = false)
     {
