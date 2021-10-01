@@ -16,7 +16,7 @@ namespace PHT\Xml;
 use PHT\Utils;
 use PHT\Config;
 
-class Match extends File
+class HTMatch extends File
 {
     private $type;
 

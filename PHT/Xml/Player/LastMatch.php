@@ -50,14 +50,14 @@ class LastMatch extends Xml\Base
      * Return match
      *
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getMatch($events = true)
     {
         if ($this->type == Config\Config::MATCH_YOUTH) {
-            return Wrapper\Match::youth($this->getId(), $events);
+            return Wrapper\HTMatch::youth($this->getId(), $events);
         }
-        return Wrapper\Match::senior($this->getId(), $events);
+        return Wrapper\HTMatch::senior($this->getId(), $events);
     }
 
     /**

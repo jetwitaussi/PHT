@@ -82,14 +82,14 @@ class Live extends Xml\Base
      * Return match details
      *
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getMatch($events = true)
     {
         if ($this->isYouth()) {
-            return Wrapper\Match::youth($this->getId(), $events);
+            return Wrapper\HTMatch::youth($this->getId(), $events);
         }
-        return Wrapper\Match::senior($this->getId(), $events);
+        return Wrapper\HTMatch::senior($this->getId(), $events);
     }
 
     /**

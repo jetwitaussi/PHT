@@ -46,11 +46,11 @@ class National extends Xml\Base
      * Return match details
      *
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getMatch($events = true)
     {
-        return Wrapper\Match::senior($this->getId(), $events);
+        return Wrapper\HTMatch::senior($this->getId(), $events);
     }
 
     /**

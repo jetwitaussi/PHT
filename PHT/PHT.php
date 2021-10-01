@@ -684,11 +684,11 @@ class PHT extends Config\Base
      *
      * @param integer $matchId
      * @param boolean $matchEvents
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getSeniorMatch($matchId, $matchEvents = true)
     {
-        return Wrapper\Match::senior($matchId, $matchEvents);
+        return Wrapper\HTMatch::senior($matchId, $matchEvents);
     }
 
     /**
@@ -696,11 +696,11 @@ class PHT extends Config\Base
      *
      * @param integer $matchId
      * @param boolean $matchEvents
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getYouthMatch($matchId, $matchEvents = true)
     {
-        return Wrapper\Match::youth($matchId, $matchEvents);
+        return Wrapper\HTMatch::youth($matchId, $matchEvents);
     }
 
     /**
@@ -708,11 +708,11 @@ class PHT extends Config\Base
      *
      * @param integer $matchId
      * @param boolean $matchEvents
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getTournamentMatch($matchId, $matchEvents = true)
     {
-        return Wrapper\Match::tournament($matchId, $matchEvents);
+        return Wrapper\HTMatch::tournament($matchId, $matchEvents);
     }
 
     /**
@@ -724,7 +724,7 @@ class PHT extends Config\Base
      */
     public function getSeniorMatchLineup($matchId = null, $teamId = null)
     {
-        return Wrapper\Match::seniorlineup($matchId, $teamId);
+        return Wrapper\HTMatch::seniorlineup($matchId, $teamId);
     }
 
     /**
@@ -736,7 +736,7 @@ class PHT extends Config\Base
      */
     public function getYouthMatchLineup($matchId = null, $teamId = null)
     {
-        return Wrapper\Match::youthlineup($matchId, $teamId);
+        return Wrapper\HTMatch::youthlineup($matchId, $teamId);
     }
 
     /**
@@ -748,7 +748,7 @@ class PHT extends Config\Base
      */
     public function getTournamentMatchLineup($matchId, $teamId = null)
     {
-        return Wrapper\Match::tournamentlineup($matchId, $teamId);
+        return Wrapper\HTMatch::tournamentlineup($matchId, $teamId);
     }
 
     /**
@@ -760,7 +760,7 @@ class PHT extends Config\Base
      */
     public function getSeniorMatchOrders($matchId, $teamId = null)
     {
-        return Wrapper\Match::seniororders($matchId, $teamId);
+        return Wrapper\HTMatch::seniororders($matchId, $teamId);
     }
 
     /**
@@ -772,7 +772,7 @@ class PHT extends Config\Base
      */
     public function getYouthMatchOrders($matchId, $teamId = null)
     {
-        return Wrapper\Match::youthorders($matchId, $teamId);
+        return Wrapper\HTMatch::youthorders($matchId, $teamId);
     }
 
     /**
@@ -784,7 +784,7 @@ class PHT extends Config\Base
      */
     public function getTournamentMatchOrders($matchId, $teamId = null)
     {
-        return Wrapper\Match::tournamentorders($matchId, $teamId);
+        return Wrapper\HTMatch::tournamentorders($matchId, $teamId);
     }
 
     /**
@@ -797,7 +797,7 @@ class PHT extends Config\Base
      */
     public function setMatchOrders(Config\Orders $orders, $teamId = null)
     {
-        return Wrapper\Match::setorders($orders, $teamId);
+        return Wrapper\HTMatch::setorders($orders, $teamId);
     }
 
     /**
