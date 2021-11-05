@@ -32,7 +32,7 @@ class Version
     const LADDERLIST = '1.0';
     const LEAGUEDETAILS = '1.5';
     const LEAGUEFIXTURES = '1.2';
-    const LIVE = '1.9';
+    const LIVE = '2.1';
     const MANAGERCOMPENDIUM = '1.2';
     const MATCHDETAILS = '3.0';
     const MATCHES = '2.8';

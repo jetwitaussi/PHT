@@ -28,8 +28,11 @@ class Live extends File
 
     /**
      * Update live to get new events
+     *
+     * @param boolean $includeLineup
+     * @param boolean $useLiveEventsAndTexts
      */
-    public function update()
+    public function update($includeLineup = true, $useLiveEventsAndTexts = true)
     {
         $json = array();
         foreach ($this->getMatches() as $match) {
@@ -43,6 +46,12 @@ class Live extends File
             $this->liveJson = array('matches' => $this->mergeLiveJson($this->liveJson['matches'], $json));
         }
         $params = array('file' => 'live', 'actionType' => 'viewNew', 'version' => Config\Version::LIVE, 'lastShownIndexes' => json_encode($this->liveJson));
+        if ($includeLineup === true) {
+            $params['includeStartingLineup'] = 'true';
+        }
+        if ($useLiveEventsAndTexts === true) {
+            $params['useLiveEventsAndTexts'] = 'true';
+        }
         $url = Network\Request::buildUrl($params);
         $xml = Network\Request::fetchUrl($url);
         $this->xmlText = $xml;
@@ -52,10 +61,19 @@ class Live extends File
 
     /**
      * Reload live to get all events
+     *
+     * @param boolean $includeLineup
+     * @param boolean $useLiveEventsAndTexts
      */
-    public function reload()
+    public function reload($includeLineup = true, $useLiveEventsAndTexts = true)
     {
         $params = array('file' => 'live', 'actionType' => 'viewAll', 'version' => Config\Version::LIVE);
+        if ($includeLineup === true) {
+            $params['includeStartingLineup'] = 'true';
+        }
+        if ($useLiveEventsAndTexts === true) {
+            $params['useLiveEventsAndTexts'] = 'true';
+        }
         $url = Network\Request::buildUrl($params);
         $xml = Network\Request::fetchUrl($url);
         $this->xmlText = $xml;
@@ -70,9 +88,10 @@ class Live extends File
      * @param integer $matchId
      * @param string $sourceSystem
      * @param boolean $includeLineup
+     * @param boolean $useLiveEventsAndTexts
      * @return boolean
      */
-    public function addMatch($matchId, $sourceSystem = Config\Config::MATCH_SENIOR, $includeLineup = true)
+    public function addMatch($matchId, $sourceSystem = Config\Config::MATCH_SENIOR, $includeLineup = true, $useLiveEventsAndTexts = true)
     {
         if ($this->getMatchNumber() >= Config\Config::MAX_LIVE_MATCH) {
             return false;
@@ -80,6 +99,9 @@ class Live extends File
         $params = array('file' => 'live', 'actionType' => 'addMatch', 'matchID' => $matchId, 'version' => Config\Version::LIVE, 'sourceSystem' => $sourceSystem);
         if ($includeLineup === true) {
             $params['includeStartingLineup'] = 'true';
+        }
+        if ($useLiveEventsAndTexts === true) {
+            $params['useLiveEventsAndTexts'] = 'true';
         }
         $url = Network\Request::buildUrl($params);
         $xml = Network\Request::fetchUrl($url);
@@ -95,28 +117,33 @@ class Live extends File
      * @param integer $matchId
      * @param string $sourceSystem
      * @param boolean $reload Perform reload after delete, if set to false live is just updated
+     * @param boolean $includeLineup
+     * @param boolean $useLiveEventsAndTexts
      */
-    public function deleteMatch($matchId, $sourceSystem = Config\Config::MATCH_SENIOR, $reload = false)
+    public function deleteMatch($matchId, $sourceSystem = Config\Config::MATCH_SENIOR, $reload = false, $includeLineup = true, $useLiveEventsAndTexts = true)
     {
         $params = array('file' => 'live', 'actionType' => 'deleteMatch', 'matchID' => $matchId, 'version' => Config\Version::LIVE, 'sourceSystem' => $sourceSystem);
         $url = Network\Request::buildUrl($params);
         Network\Request::fetchUrl($url);
         if ($reload) {
-            $this->reload();
+            $this->reload($includeLineup, $useLiveEventsAndTexts);
         } else {
-            $this->update();
+            $this->update($includeLineup, $useLiveEventsAndTexts);
         }
     }
 
     /**
      * Clear live, remove all matches
+     *
+     * @param boolean $includeLineup
+     * @param boolean $useLiveEventsAndTexts
      */
-    public function clear()
+    public function clear($includeLineup = true, $useLiveEventsAndTexts = true)
     {
         $params = array('file' => 'live', 'actionType' => 'clearAll', 'version' => Config\Version::LIVE);
         $url = Network\Request::buildUrl($params);
         Network\Request::fetchUrl($url);
-        $this->reload();
+        $this->reload($includeLineup, $useLiveEventsAndTexts);
     }
 
     /**

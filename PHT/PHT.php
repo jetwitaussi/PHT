@@ -1196,11 +1196,14 @@ class PHT extends Config\Base
      * @param boolean $includeLineup
      * @return \PHT\Xml\Live
      */
-    public function getLive($includeLineup = true)
+    public function getLive($includeLineup = true, $useLiveEventsAndTexts = true)
     {
         $params = array('file' => 'live', 'actionType' => 'viewAll', 'version' => Config\Version::LIVE);
         if ($includeLineup === true) {
             $params['includeStartingLineup'] = 'true';
+        }
+        if ($useLiveEventsAndTexts === true) {
+            $params['useLiveEventsAndTexts'] = 'true';
         }
         $url = Network\Request::buildUrl($params);
         return new Xml\Live(Network\Request::fetchUrl($url));
