@@ -48,6 +48,16 @@ class National extends Xml\Base
     }
 
     /**
+     * Return player cards number
+     *
+     * @return string
+     */
+    public function getCards()
+    {
+        return $this->getXml()->getElementsByTagName('Cards')->item(0)->nodeValue;
+    }
+
+    /**
      * Get full player details
      *
      * @param boolean $includeMatchInfo
