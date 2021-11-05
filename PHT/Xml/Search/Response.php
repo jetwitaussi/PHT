@@ -121,7 +121,7 @@ class Response extends Xml\File
     public function getResult($index)
     {
         $index = round($index);
-        if ($index > Config\Config::$forIndex && $index < $this->getResultNumber() + Config\Config::$forIndex) {
+        if ($index >= Config\Config::$forIndex && $index < $this->getResultNumber() + Config\Config::$forIndex) {
             $index -= Config\Config::$forIndex;
             $xpath = new \DOMXPath($this->getXml());
             $nodeList = $xpath->query('//Result');
