@@ -178,7 +178,7 @@ class Bookmarks extends Xml\File
      * Return bookmark match object
      *
      * @param integer $index
-     * @return \PHT\Xml\User\Bookmark\Match
+     * @return \PHT\Xml\User\Bookmark\HTMatch
      */
     public function getBookmarkSeniorMatch($index)
     {
@@ -189,7 +189,7 @@ class Bookmarks extends Xml\File
             $nodeList = $xpath->query('//BookmarkTypeID[.="' . Config\Config::BOOKMARK_SENIOR_MATCH . '"]');
             $bookmark = new \DOMDocument('1.0', 'UTF-8');
             $bookmark->appendChild($bookmark->importNode($nodeList->item($index)->parentNode, true));
-            return new Bookmark\Match($bookmark);
+            return new Bookmark\HTMatch($bookmark);
         }
         return null;
     }
@@ -197,7 +197,7 @@ class Bookmarks extends Xml\File
     /**
      * Return iterator of bookmark match objects
      *
-     * @return \PHT\Xml\User\Bookmark\Match[]
+     * @return \PHT\Xml\User\Bookmark\HTMatch[]
      */
     public function getBookmarkSeniorMatches()
     {
@@ -208,8 +208,8 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        /** @var \PHT\Xml\User\Bookmark\Match[] $data */
-        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        /** @var \PHT\Xml\User\Bookmark\HTMatch[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\HTMatch');
         return $data;
     }
 
@@ -428,7 +428,7 @@ class Bookmarks extends Xml\File
      * Return bookmark match object
      *
      * @param integer $index
-     * @return \PHT\Xml\User\Bookmark\Match
+     * @return \PHT\Xml\User\Bookmark\HTMatch
      */
     public function getBookmarkYouthMatch($index)
     {
@@ -439,7 +439,7 @@ class Bookmarks extends Xml\File
             $nodeList = $xpath->query('//BookmarkTypeID[.="' . Config\Config::BOOKMARK_YOUTH_MATCH . '"]');
             $bookmark = new \DOMDocument('1.0', 'UTF-8');
             $bookmark->appendChild($bookmark->importNode($nodeList->item($index)->parentNode, true));
-            return new Bookmark\Match($bookmark);
+            return new Bookmark\HTMatch($bookmark);
         }
         return null;
     }
@@ -447,7 +447,7 @@ class Bookmarks extends Xml\File
     /**
      * Return iterator of bookmark match objects
      *
-     * @return \PHT\Xml\User\Bookmark\Match[]
+     * @return \PHT\Xml\User\Bookmark\HTMatch[]
      */
     public function getBookmarkYouthMatches()
     {
@@ -458,8 +458,8 @@ class Bookmarks extends Xml\File
             $bookmark->appendChild($bookmark->importNode($nodeList->item($i)->parentNode, true));
         }
         $nodes = $bookmark->getElementsByTagName('Bookmark');
-        /** @var \PHT\Xml\User\Bookmark\Match[] $data */
-        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\Match');
+        /** @var \PHT\Xml\User\Bookmark\HTMatch[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\User\Bookmark\HTMatch');
         return $data;
     }
 

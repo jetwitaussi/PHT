@@ -18,7 +18,7 @@ use PHT\Config;
 use PHT\Utils;
 use PHT\Wrapper;
 
-class Match extends Xml\User\Bookmark\Element
+class HTMatch extends Xml\User\Bookmark\Element
 {
     /**
      * Return teams names
