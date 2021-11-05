@@ -267,7 +267,7 @@ class Lineup extends Xml\File
     public function getFinalPlayer($index)
     {
         $index = round($index);
-        if ($index >= Config\Config::$forIndex && $index < $this->getStartingPlayerNumber() + Config\Config::$forIndex) {
+        if ($index >= Config\Config::$forIndex && $index < $this->getFinalPlayerNumber() + Config\Config::$forIndex) {
             $type = Config\Config::MATCH_SENIOR;
             if (in_array($this->getMatchType(), array(100, 101, 103, 105, 106))) {
                 $type = Config\Config::MATCH_YOUTH;
