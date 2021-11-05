@@ -88,7 +88,7 @@ class Avatar extends Base
      * @param string $class
      * @return string
      */
-    public function getHtml($css = null, $class = null)
+    public function getHtml($css = null, $class = null, $offsetX = 0, $offsetY = 0)
     {
         $html = '<div style="position:relative; height:155px; width:110px; background: url(' . Config\Config::HATTRICK_URL . $this->getBackground() . '); ';
         if ($css !== null) {
@@ -104,7 +104,7 @@ class Avatar extends Base
             if (strpos($img, Config\Config::HATTRICK_DOMAIN) === false) {
                 $img = Config\Config::HATTRICK_URL . $img;
             }
-            $html .= '<img src="' . $img . '" style="position:absolute; left:' . $layer->getX() . 'px; top:' . $layer->getY() . 'px;"/>';
+            $html .= '<img src="' . $img . '" style="position:absolute; left:' . ($layer->getX()+$offsetX) . 'px; top:' . ($layer->getY()+$offsetY) . 'px;"/>';
         }
         $html .= '</div>';
         return $html;
@@ -117,7 +117,7 @@ class Avatar extends Base
      * @param boolean $withMisc
      * @return string
      */
-    public function getJson($withDomain = false, $withMisc = false)
+    public function getJson($withDomain = false, $withMisc = false, $offsetX = 0, $offsetY = 0)
     {
         $json = array();
         foreach ($this->getLayers() as $layer) {
@@ -128,7 +128,7 @@ class Avatar extends Base
             if ($withDomain && strpos($img, Config\Config::HATTRICK_DOMAIN) === false) {
                $img = Config\Config::HATTRICK_URL . $img;
             }
-            $json[] = array('u' => $img, 'x' => $layer->getX(), 'y' => $layer->getY());
+            $json[] = array('u' => $img, 'x' => $layer->getX()+$offsetX, 'y' => $layer->getY()+$offsetY);
         }
         return \json_encode($json);
     }
