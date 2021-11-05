@@ -49,6 +49,16 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return if league matches already defined
+     *
+     * @return bool
+     */
+    public function hasMatches()
+    {
+        return $this->getXml()->getElementsByTagName('Match')->length > 0;
+    }
+
+    /**
      * Return last played round number
      *
      * @return integer

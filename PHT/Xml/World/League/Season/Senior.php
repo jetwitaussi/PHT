@@ -59,6 +59,16 @@ class Senior extends Xml\File
     }
 
     /**
+     * Return if league matches already defined
+     *
+     * @return bool
+     */
+    public function hasMatches()
+    {
+        return $this->getXml()->getElementsByTagName('Match')->length > 0;
+    }
+
+    /**
      * Get round details
      *
      * @param integer $id
