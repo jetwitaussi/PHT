@@ -42,6 +42,16 @@ class Success extends Xml\Base
      *
      * @return string
      */
+    public function getTitle()
+    {
+        return $this->getXml()->getElementsByTagName('AchievementTitle')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return achievement text
+     *
+     * @return string
+     */
     public function getText()
     {
         return $this->getXml()->getElementsByTagName('AchievementText')->item(0)->nodeValue;

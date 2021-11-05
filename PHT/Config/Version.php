@@ -15,7 +15,7 @@ namespace PHT\Config;
 
 class Version
 {
-    const ACHIEVEMENTS = '1.1';
+    const ACHIEVEMENTS = '1.2';
     const ALLIANCEDETAILS = '1.5';
     const ALLIANCES = '1.4';
     const ARENADETAILS = '1.5';
