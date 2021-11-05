@@ -46,9 +46,14 @@ class Base
         if (isset($config['HT_SUPPORTER'])) {
             Config::$htSupporter = $config['HT_SUPPORTER'];
         }
-        if (isset($config['CACHE']) && in_array($config['CACHE'], array('none', 'session', 'apc', 'memory'))) {
+        if (isset($config['CACHE']) && in_array($config['CACHE'], array('none', 'session', 'apc', 'memory', 'redis'))) {
             $log->debug('[PHT] Use cache: ' . $config['CACHE']);
             Config::$cache = $config['CACHE'];
+        }
+        if (isset($config['CACHE']) && $config['CACHE'] == 'redis' && isset($config['REDIS_SERVER_IP'])) {
+            $log->debug('[PHT] Use cache: ' . $config['CACHE']);
+            Config::$cache = $config['CACHE'];
+            Config::$redisIp = $config['REDIS_SERVER_IP'];
         }
         if (isset($config['CACHE']) && $config['CACHE'] == 'memcached' && isset($config['MEMCACHED_SERVER_IP'])) {
             $log->debug('[PHT] Use cache: ' . $config['CACHE']);
@@ -56,6 +61,7 @@ class Base
             Config::$memcachedIp = $config['MEMCACHED_SERVER_IP'];
         }
         if (isset($config['CACHE']) && $config['CACHE'] == 'memcached' && isset($config['MEMCACHED_SERVER_PORT'])) {
+            $log->debug('[PHT] Use cache: ' . $config['CACHE']);
             Config::$cache = $config['CACHE'];
             Config::$memcachedPort = $config['MEMCACHED_SERVER_PORT'];
         }

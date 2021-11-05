@@ -80,6 +80,13 @@ abstract class Config
     public static $cacheTtl = 3600;
 
     /**
+     * redis server ip
+     *
+     * @var string
+     */
+    public static $redisIp;
+
+    /**
      * memcached server ip
      *
      * @var string

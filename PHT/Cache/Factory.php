@@ -49,6 +49,12 @@ class Factory
                 }
                 return new Memcached();
 
+            case 'redis':
+                if (!extension_loaded('redis')) {
+                    throw new Exception\InvalidArgumentException("Redis extension is not available");
+                }
+                return new Redis();
+
             case 'memory':
                 return new Memory();
 
