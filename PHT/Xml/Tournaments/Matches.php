@@ -28,7 +28,9 @@ class Matches extends Xml\File
 
         $nodes = $this->getXml()->getElementsByTagName('Match');
         for ($i = 0; $i < $nodes->length; $i++) {
-            $nodes->item($i)->appendChild(new \DOMNode('SourceSystem', Config\Config::MATCH_TOURNAMENT));
+            $node = $this->getXml()->createElement('SourceSystem');
+            $node->nodeValue = Config\Config::MATCH_TOURNAMENT;
+            $nodes->item($i)->appendChild($node);
         }
     }
 
