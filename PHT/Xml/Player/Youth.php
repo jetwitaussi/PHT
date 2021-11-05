@@ -61,6 +61,21 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return player full name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        $name = $this->getFirstName() . ' ';
+        if ($this->getNickName() !== null && $this->getNickName() !== '') {
+            $name .= $this->getNickName() . ' ';
+        }
+        $name .= $this->getLastName();
+        return $name;
+    }
+
+    /**
      * Return youth player age
      *
      * @return integer
