@@ -31,6 +31,30 @@ class League extends Xml\File
     }
 
     /**
+     * Return tournament season
+     *
+     * @return integer
+     */
+    public function getSeason()
+    {
+        return $this->getXml()->getElementsByTagName('Season')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return worldcup round (only for worldcup tournament)
+     *
+     * @return integer
+     */
+    public function getWorldCupRound()
+    {
+        $node = $this->getXml()->getElementsByTagName('WorldCupRound');
+        if ($node->length) {
+            return $node->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
      * Return tournament
      *
      * @return \PHT\Xml\Tournaments\Tournament

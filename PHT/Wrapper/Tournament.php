@@ -35,31 +35,46 @@ class Tournament
 
     /**
      * @param integer $tournamentId
+     * @param integer $season
      * @return \PHT\Xml\Tournaments\Tournament
      */
-    public static function tournament($tournamentId)
+    public static function tournament($tournamentId, $season = null)
     {
-        $url = Network\Request::buildUrl(array('file' => 'tournamentdetails', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTDETAILS));
+        $params = array('file' => 'tournamentdetails', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTDETAILS);
+        if ($season !== null) {
+            $params['season'] = $season;
+        }
+        $url = Network\Request::buildUrl($params);
         return new Xml\Tournaments\Tournament(Network\Request::fetchUrl($url));
     }
 
     /**
      * @param integer $tournamentId
+     * @param integer $season
+     * @param integer $worldcupRound (only for worldcup tournament)
      * @return \PHT\Xml\Tournaments\League
      */
-    public static function league($tournamentId)
+    public static function league($tournamentId, $season = null, $worldcupRound = null)
     {
-        $url = Network\Request::buildUrl(array('file' => 'tournamentleaguetables', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTLEAGUETABLES));
+        $params = array('file' => 'tournamentleaguetables', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTLEAGUETABLES);
+        if ($season !== null) {
+            $params['season'] = $season;
+        }
+        if ($worldcupRound !== null) {
+            $params['worldCupRound'] = $worldcupRound;
+        }
+        $url = Network\Request::buildUrl($params);
         return new Xml\Tournaments\League(Network\Request::fetchUrl($url));
     }
 
     /**
      * @param integer $tournamentId
+     * @param integer $season
      * @return \PHT\Xml\Tournaments\Matches
      */
-    public static function matches($tournamentId)
+    public static function matches($tournamentId, $season = null)
     {
-        $url = Network\Request::buildUrl(array('file' => 'tournamentfixtures', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTFIXTURES));
+        $url = Network\Request::buildUrl(array('file' => 'tournamentfixtures', 'tournamentId' => $tournamentId, 'season' => $season, 'version' => Config\Version::TOURNAMENTFIXTURES));
         return new Xml\Tournaments\Matches(Network\Request::fetchUrl($url));
     }
 

@@ -188,11 +188,13 @@ class Tournament extends Xml\File
     /**
      * Return tournament league
      *
+     * @param integer $season
+     * @param integer $worldcupRound (only for worldcup tournament)
      * @return \PHT\Xml\Tournaments\League
      */
-    public function getLeague()
+    public function getLeague($season = null, $worldcupRound = null)
     {
-        return Wrapper\Tournament::league($this->getId());
+        return Wrapper\Tournament::league($this->getId(), $season, $worldcupRound);
     }
 
     /**

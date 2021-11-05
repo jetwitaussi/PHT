@@ -1065,33 +1065,37 @@ class PHT extends Config\Base
      * Return tournament object
      *
      * @param integer $tournamentId
+     * @param integer $season
      * @return \PHT\Xml\Tournaments\Tournament
      */
-    public function getTournament($tournamentId)
+    public function getTournament($tournamentId, $season = null)
     {
-        return Wrapper\Tournament::tournament($tournamentId);
+        return Wrapper\Tournament::tournament($tournamentId, $season);
     }
 
     /**
      * Return tournament league object
      *
      * @param integer $tournamentId
+     * @param integer $season
+     * @param integer $worldcupRound (only for worldcup tournament)
      * @return \PHT\Xml\Tournaments\League
      */
-    public function getTournamentLeague($tournamentId)
+    public function getTournamentLeague($tournamentId, $season = null, $worldcupRound = null)
     {
-        return Wrapper\Tournament::league($tournamentId);
+        return Wrapper\Tournament::league($tournamentId, $season, $worldcupRound);
     }
 
     /**
      * Return tournament matches object
      *
      * @param integer $tournamentId
+     * @param integer $season
      * @return \PHT\Xml\Tournaments\Matches
      */
-    public function getTournamentMatches($tournamentId)
+    public function getTournamentMatches($tournamentId, $season = null)
     {
-        return Wrapper\Tournament::matches($tournamentId);
+        return Wrapper\Tournament::matches($tournamentId, $season);
     }
 
     /**

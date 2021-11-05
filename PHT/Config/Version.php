@@ -54,7 +54,7 @@ class Version
     const TEAMDETAILS = '3.5';
     const TOURNAMENTDETAILS = '1.0';
     const TOURNAMENTFIXTURES = '1.0';
-    const TOURNAMENTLEAGUETABLES = '1.0';
+    const TOURNAMENTLEAGUETABLES = '1.1';
     const TOURNAMENTLIST = '1.0';
     const TRAINING = '2.2';
     const TRAININGEVENTS = '1.3';
