@@ -81,11 +81,11 @@ class Team extends Xml\Base
     public function getLineup()
     {
         if ($this->system == Config\Config::MATCH_YOUTH) {
-            return Wrapper\Match::youthlineup($this->matchId, $this->getId());
+            return Wrapper\HTMatch::youthlineup($this->matchId, $this->getId());
         } elseif ($this->system == Config\Config::MATCH_TOURNAMENT) {
-            return Wrapper\Match::tournamentlineup($this->matchId, $this->getId());
+            return Wrapper\HTMatch::tournamentlineup($this->matchId, $this->getId());
         }
-        return Wrapper\Match::seniorlineup($this->matchId, $this->getId());
+        return Wrapper\HTMatch::seniorlineup($this->matchId, $this->getId());
     }
 
     /**
@@ -96,11 +96,11 @@ class Team extends Xml\Base
     public function getOrders()
     {
         if ($this->system == Config\Config::MATCH_YOUTH) {
-            return Wrapper\Match::youthorders($this->matchId, $this->getId());
+            return Wrapper\HTMatch::youthorders($this->matchId, $this->getId());
         } elseif ($this->system == Config\Config::MATCH_TOURNAMENT) {
-            return Wrapper\Match::tournamentorders($this->matchId, $this->getId());
+            return Wrapper\HTMatch::tournamentorders($this->matchId, $this->getId());
         }
-        return Wrapper\Match::seniororders($this->matchId, $this->getId());
+        return Wrapper\HTMatch::seniororders($this->matchId, $this->getId());
     }
 
     /**
@@ -112,7 +112,7 @@ class Team extends Xml\Base
      */
     public function setOrders(Config\Orders $orders)
     {
-        return Wrapper\Match::setorders($orders, $this->getId());
+        return Wrapper\HTMatch::setorders($orders, $this->getId());
     }
 
     /**

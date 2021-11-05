@@ -18,12 +18,12 @@ use PHT\Config;
 use PHT\Network;
 use PHT\Exception;
 
-class Match
+class HTMatch
 {
     /**
      * @param integer $id
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public static function senior($id, $events = true)
     {
@@ -33,7 +33,7 @@ class Match
     /**
      * @param integer $id
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public static function youth($id, $events = true)
     {
@@ -43,7 +43,7 @@ class Match
     /**
      * @param integer $id
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public static function tournament($id, $events = true)
     {
@@ -54,7 +54,7 @@ class Match
      * @param string $type
      * @param integer $id
      * @param boolean $events
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     private static function match($type, $id, $events)
     {
@@ -63,7 +63,7 @@ class Match
             $params['matchEvents'] = 'true';
         }
         $url = Network\Request::buildUrl($params);
-        return new Xml\Match(Network\Request::fetchUrl($url));
+        return new Xml\HTMatch(Network\Request::fetchUrl($url));
     }
 
     /**

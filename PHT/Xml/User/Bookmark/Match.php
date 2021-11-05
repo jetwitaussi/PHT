@@ -43,14 +43,14 @@ class Match extends Xml\User\Bookmark\Element
     /**
      * Return match
      *
-     * @return \PHT\Xml\Match
+     * @return \PHT\Xml\HTMatch
      */
     public function getMatch()
     {
         if ($this->getType() == Config\Config::BOOKMARK_YOUTH_MATCH) {
-            return Wrapper\Match::youth($this->getMatchId());
+            return Wrapper\HTMatch::youth($this->getMatchId());
         }
-        return Wrapper\Match::senior($this->getMatchId());
+        return Wrapper\HTMatch::senior($this->getMatchId());
     }
 
     /**
