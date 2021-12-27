@@ -95,6 +95,19 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Get team's user
+     *
+     * @return \PHT\Xml\User
+     */
+    public function getUser()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return Wrapper\User::user($this->getUserId());
+    }
+
+    /**
      * Return team user's language id
      *
      * @return integer
