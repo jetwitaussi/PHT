@@ -108,6 +108,6 @@ class Member extends Xml\Base
      */
     public function getShipDate($format = null)
     {
-        return Utils\Date::convert($this->getXml()->getElementsByTagName('MemberShipDate')->item(0)->nodeValue, $format);
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('MembershipDate')->item(0)->nodeValue, $format);
     }
 }
