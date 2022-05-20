@@ -68,7 +68,7 @@ class Youth
      */
     public static function scouts($teamId)
     {
-        $params = array('file' => 'youthteamdetails', 'youthTeamId' => $teamId, 'version' => Config\Version::YOUTHPLAYERLIST, 'showScouts' => 'true');
+        $params = array('file' => 'youthteamdetails', 'youthTeamId' => $teamId, 'version' => Config\Version::YOUTHTEAMDETAILS, 'showScouts' => 'true');
         $url = Network\Request::buildUrl($params);
         return new Xml\Team\Youth\Scouts(Network\Request::fetchUrl($url));
     }
