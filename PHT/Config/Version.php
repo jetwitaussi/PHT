@@ -58,7 +58,7 @@ class Version
     const TOURNAMENTLIST = '1.0';
     const TRAINING = '2.2';
     const TRAININGEVENTS = '1.3';
-    const TRANSFERSEARCH = '1.0';
+    const TRANSFERSEARCH = '1.1';
     const TRANSFERSPLAYER = '1.1';
     const TRANSFERSTEAM = '1.2';
     const TRANSLATIONS = '1.1';

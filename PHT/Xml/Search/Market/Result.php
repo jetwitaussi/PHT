@@ -125,6 +125,17 @@ class Result extends Xml\Base
     }
 
     /**
+     * Return player salary, in currency if specify
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getSalary($countryCurrency = null)
+    {
+        return Utils\Money::convert($this->getXml()->getElementsByTagName('Salary')->item(0)->nodeValue, $countryCurrency);
+    }
+
+    /**
      * Return deadline date
      *
      * @param string $format (php date() function format)
