@@ -687,6 +687,32 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return if it's possible to challenge the team for a mid week friendly match
+     *
+     * @return integer
+     */
+    public function isPossibleToChallengeMidweek()
+    {
+        if ($this->isDeleted()) {
+            return false;
+        }
+        return strtolower($this->getXml()->getElementsByTagName('PossibleToChallengeMidweek')->item(0)->nodeValue) == 'true';
+    }
+
+    /**
+     * Return if it's possible to challenge the team for a weekend friendly match
+     *
+     * @return integer
+     */
+    public function isPossibleToChallengeWeekend()
+    {
+        if ($this->isDeleted()) {
+            return false;
+        }
+        return strtolower($this->getXml()->getElementsByTagName('PossibleToChallengeWeekend')->item(0)->nodeValue) == 'true';
+    }
+
+    /**
      * Return number of consecutive victories
      *
      * @return integer

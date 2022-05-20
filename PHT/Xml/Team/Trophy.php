@@ -68,6 +68,46 @@ class Trophy extends Xml\Base
     }
 
     /**
+     * Return competition id, league id or tournament id
+     *
+     * @return string
+     */
+    public function getCompetitionId()
+    {
+        return $this->getXml()->getElementsByTagName('LeagueLevelUnitId')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return cup league level
+     *
+     * @return integer
+     */
+    public function getCupLeagueLevel()
+    {
+        return $this->getXml()->getElementsByTagName('CupLeagueLevel')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return cup level, empty if not a cup trophy
+     *
+     * @return integer
+     */
+    public function getCupLevel()
+    {
+        return $this->getXml()->getElementsByTagName('CupLevel')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return cup level index if match type is cup, 0 otherwise
+     *
+     * @return integer
+     */
+    public function getCupLevelIndex()
+    {
+        return $this->getXml()->getElementsByTagName('CupLevelIndex')->item(0)->nodeValue;
+    }
+
+    /**
      * Return gained date
      *
      * @param string $format (php date() function format)
