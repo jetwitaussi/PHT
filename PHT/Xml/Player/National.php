@@ -58,6 +58,16 @@ class National extends Xml\Base
     }
 
     /**
+     * Return player specialty
+     *
+     * @return integer
+     */
+    public function getSpecialty()
+    {
+        return $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+    }
+
+    /**
      * Get full player details
      *
      * @param boolean $includeMatchInfo
@@ -66,5 +76,17 @@ class National extends Xml\Base
     public function getPlayer($includeMatchInfo = true)
     {
         return Wrapper\Player\Senior::player($this->getId(), $includeMatchInfo);
+    }
+
+    /**
+     * Return user avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $node = new \DOMDocument('1.0', 'UTF-8');
+        $node->appendChild($node->importNode($this->getXml()->getElementsByTagName('Avatar')->item(0), true));
+        return new Xml\Avatar($node);
     }
 }
