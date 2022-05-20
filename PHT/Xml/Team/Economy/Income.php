@@ -87,16 +87,6 @@ class Income extends Xml\Base
     }
 
     /**
-     * Return temporary income
-     *
-     * @return integer
-     */
-    public function getTemporary()
-    {
-        return Utils\Money::convert($this->getXml()->getElementsByTagName($this->state . 'IncomeTemporary')->item(0)->nodeValue, $this->money);
-    }
-
-    /**
      * Return total income
      *
      * @return integer

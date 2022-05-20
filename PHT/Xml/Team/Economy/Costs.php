@@ -87,16 +87,6 @@ class Costs extends Xml\Base
     }
 
     /**
-     * Return temporary cost
-     *
-     * @return integer
-     */
-    public function getTemporary()
-    {
-        return Utils\Money::convert($this->getXml()->getElementsByTagName($this->state . 'CostsTemporary')->item(0)->nodeValue, $this->money);
-    }
-
-    /**
      * Return staff cost
      *
      * @return integer

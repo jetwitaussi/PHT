@@ -25,7 +25,7 @@ class Version
     const CLUB = '1.5';
     const CUPMATCHES = '1.4';
     const CURRENTBIDS = '1.0';
-    const ECONOMY = '1.3';
+    const ECONOMY = '1.4';
     const FANS = '1.3';
     const HOFPLAYERS = '1.2';
     const LADDERDETAILS = '1.0';
