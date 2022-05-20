@@ -112,6 +112,32 @@ class Listing extends Xml\File
     }
 
     /**
+     * Return league id
+     *
+     * @return integer
+     */
+    public function getYouthLeagueId()
+    {
+        if ($this->isYouth()) {
+            return $this->getXml()->getElementsByTagName('LeagueID')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return youth league
+     *
+     * @return \PHT\Xml\World\League\Youth
+     */
+    public function getYouthLeague()
+    {
+        if ($this->isYouth()) {
+            return Wrapper\World\League::youth($this->getYouthLeagueId());
+        }
+        return null;
+    }
+
+    /**
      * Return senior league id
      *
      * @return integer
