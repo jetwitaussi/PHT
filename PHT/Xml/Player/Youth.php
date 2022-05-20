@@ -173,6 +173,36 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return player native country name
+     *
+     * @return integer
+     */
+    public function getNativeCountryName()
+    {
+        return $this->getXml()->getElementsByTagName('NativeCountryName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return native country details
+     *
+     * @return \PHT\Xml\World\Country
+     */
+    public function getNativeCountry()
+    {
+        return Wrapper\World::country($this->getNativeCountryId());
+    }
+
+    /**
+     * Return player native country id
+     *
+     * @return integer
+     */
+    public function getNativeCountryId()
+    {
+        return $this->getXml()->getElementsByTagName('NativeCountryID')->item(0)->nodeValue;
+    }
+
+    /**
      * Return cards number
      *
      * @return integer
