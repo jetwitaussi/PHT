@@ -30,7 +30,7 @@ class Version
     const HOFPLAYERS = '1.2';
     const LADDERDETAILS = '1.0';
     const LADDERLIST = '1.0';
-    const LEAGUEDETAILS = '1.5';
+    const LEAGUEDETAILS = '1.6';
     const LEAGUEFIXTURES = '1.2';
     const LIVE = '2.1';
     const MANAGERCOMPENDIUM = '1.2';

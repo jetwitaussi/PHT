@@ -61,6 +61,16 @@ class Senior extends Xml\File
     }
 
     /**
+     * Return league rank
+     *
+     * @return integer
+     */
+    public function getRank()
+    {
+        return $this->getXml()->getElementsByTagName('Rank')->item(0)->nodeValue;
+    }
+
+    /**
      * Return league id
      *
      * @return integer
