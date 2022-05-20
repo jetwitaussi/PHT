@@ -250,6 +250,56 @@ class Team extends Xml\Base
     }
 
     /**
+     * Return number of chances on left side
+     *
+     * @return integer
+     */
+    public function getChancesNumberLeftSide()
+    {
+        return $this->getXml()->getElementsByTagName('NrOfChancesLeft')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return number of chances in the middle
+     *
+     * @return integer
+     */
+    public function getChancesNumberCenter()
+    {
+        return $this->getXml()->getElementsByTagName('NrOfChancesCenter')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return number of chances on right side
+     *
+     * @return integer
+     */
+    public function getChancesNumberRightSide()
+    {
+        return $this->getXml()->getElementsByTagName('NrOfChancesRight')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return number of chances of special events
+     *
+     * @return integer
+     */
+    public function getChancesNumberSpecialEvents()
+    {
+        return $this->getXml()->getElementsByTagName('NrOfChancesSpecialEvents')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return number of chances of not in others categories
+     *
+     * @return integer
+     */
+    public function getChancesNumberOther()
+    {
+        return $this->getXml()->getElementsByTagName('NrOfChancesOther')->item(0)->nodeValue;
+    }
+
+    /**
      * Return HatStats note
      *
      * @return integer
