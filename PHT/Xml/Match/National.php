@@ -75,7 +75,7 @@ class National extends Xml\Base
     }
 
     /**
-     * Return home type name
+     * Return home team name
      *
      * @return string
      */
@@ -85,23 +85,27 @@ class National extends Xml\Base
     }
 
     /**
-     * Return home national team
+     * Return home team id
      *
-     * @return \PHT\Xml\Team\National\Chunk
+     * @return string
      */
-    public function getHomeTeam()
+    public function getHomeTeamId()
     {
-        $teams = Wrapper\National::teams($this->u);
-        foreach ($teams->getTeams() as $team) {
-            if ($team->getName() == $this->getHomeTeamName()) {
-                return $team;
-            }
-        }
-        return null;
+        return $this->getXml()->getElementsByTagName('HomeTeamId')->item(0)->nodeValue;
     }
 
     /**
-     * Return away type name
+     * Return home national team
+     *
+     * @return \PHT\Xml\Team\National
+     */
+    public function getHomeTeam()
+    {
+        return Wrapper\National::team($this->getHomeTeamId());
+    }
+
+    /**
+     * Return away team name
      *
      * @return string
      */
@@ -111,19 +115,23 @@ class National extends Xml\Base
     }
 
     /**
+     * Return away team id
+     *
+     * @return string
+     */
+    public function getAwayTeamId()
+    {
+        return $this->getXml()->getElementsByTagName('AwayTeamId')->item(0)->nodeValue;
+    }
+
+    /**
      * Return away national team
      *
-     * @return \PHT\Xml\Team\National\Chunk
+     * @return \PHT\Xml\Team\National
      */
     public function getAwayTeam()
     {
-        $teams = Wrapper\National::teams($this->u);
-        foreach ($teams->getTeams() as $team) {
-            if ($team->getName() == $this->getAwayTeamName()) {
-                return $team;
-            }
-        }
-        return null;
+        return Wrapper\National::team($this->getAwayTeamId());
     }
 
     /**
