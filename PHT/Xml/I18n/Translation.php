@@ -138,6 +138,16 @@ class Translation extends Xml\File
     }
 
     /**
+     * Return form skill name
+     *
+     * @return string
+     */
+    public function getSkillNameForm()
+    {
+        return $this->getSkillName('Form');
+    }
+
+    /**
      * Return skill name
      *
      * @param string $type
@@ -420,6 +430,36 @@ class Translation extends Xml\File
     public function getRatingSectorsLeftAttack()
     {
         return $this->getRatingSectors('LeftAttack');
+    }
+
+    /**
+     * Return indirect set pieces rating sector name
+     *
+     * @return string
+     */
+    public function getRatingSectorsIndirectSetPieces()
+    {
+        return $this->getRatingSectors('Indirect set pieces');
+    }
+
+    /**
+     * Return defense rating sector name
+     *
+     * @return string
+     */
+    public function getRatingSectorsDefense()
+    {
+        return $this->getRatingSectors('Defense');
+    }
+
+    /**
+     * Return attack rating sector name
+     *
+     * @return string
+     */
+    public function getRatingSectorsAttack()
+    {
+        return $this->getRatingSectors('Attack');
     }
 
     /**

@@ -61,7 +61,7 @@ class Version
     const TRANSFERSEARCH = '1.1';
     const TRANSFERSPLAYER = '1.1';
     const TRANSFERSTEAM = '1.2';
-    const TRANSLATIONS = '1.1';
+    const TRANSLATIONS = '1.2';
     const WORLDCUP = '1.1';
     const WORLDDETAILS = '1.9';
     const WORLDLANGUAGES = '1.2';
