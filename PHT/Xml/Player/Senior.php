@@ -108,6 +108,38 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return player's mother team id
+     *
+     * @return integer
+     */
+    public function getMotherTeamId()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//MotherClub/TeamID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player's mother team
+     *
+     * @return \PHT\Xml\Team\Senior
+     */
+    public function getMotherTeam()
+    {
+        return Wrapper\Team\Senior::team($this->getMotherTeamId());
+    }
+
+    /**
+     * Return player's mother team name
+     *
+     * @return string
+     */
+    public function getMotherTeamName()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//MotherClub/TeamName')->item(0)->nodeValue;
+    }
+
+    /**
      * Return player avatar
      *
      * @return \PHT\Xml\Avatar
