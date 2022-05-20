@@ -70,5 +70,5 @@ class Version
     const YOUTHLEAGUEFIXTURES = '1.0';
     const YOUTHPLAYERLIST = '1.2';
     const YOUTHPLAYERDETAILS = '1.2';
-    const YOUTHTEAMDETAILS = '1.1';
+    const YOUTHTEAMDETAILS = '1.2';
 }
