@@ -120,6 +120,26 @@ class Country extends Xml\Base
     }
 
     /**
+     * Return language id
+     *
+     * @return integer
+     */
+    public function getLanguageId()
+    {
+        return $this->getXml()->getElementsByTagName('LanguageId')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return language name
+     *
+     * @return string
+     */
+    public function getLanguageName()
+    {
+        return $this->getXml()->getElementsByTagName('LanguageName')->item(0)->nodeValue;
+    }
+
+    /**
      * @return boolean
      */
     public function isCountry()

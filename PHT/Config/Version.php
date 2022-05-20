@@ -63,7 +63,7 @@ class Version
     const TRANSFERSTEAM = '1.2';
     const TRANSLATIONS = '1.1';
     const WORLDCUP = '1.1';
-    const WORLDDETAILS = '1.8';
+    const WORLDDETAILS = '1.9';
     const WORLDLANGUAGES = '1.2';
     const YOUTHAVATARS = '1.2';
     const YOUTHLEAGUEDETAILS = '1.0';
