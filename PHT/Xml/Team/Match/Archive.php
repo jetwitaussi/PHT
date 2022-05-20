@@ -20,32 +20,6 @@ use PHT\Utils;
 class Archive extends Xml\File
 {
     /**
-     * Create an instance
-     *
-     * @param string $xml
-     */
-    public function __construct($xml)
-    {
-        parent::__construct($xml);
-
-        if ($this->getXml()->getElementsByTagName('SourceSystem')->length) {
-            return;
-        }
-
-        if ($this->isYouth()) {
-            $ss = Config\Config::MATCH_YOUTH;
-        } else {
-            $ss = Config\Config::MATCH_SENIOR;
-        }
-
-        $nodeList = $this->getXml()->getElementsByTagName('Match');
-        for ($i = 0; $i < $nodeList->length; $i++) {
-            $n = $nodeList->item($i);
-            $n->appendChild(new \DOMElement('SourceSystem', $ss));
-        }
-    }
-
-    /**
      * Return team id
      *
      * @return integer

@@ -30,6 +30,19 @@ class Chunk extends Xml\Base
     }
 
     /**
+     * Return match source system
+     *
+     * @return string
+     */
+    public function getSourceSystem()
+    {
+        if ($this->getXml()->getElementsByTagName('SourceSystem')->length) {
+            return $this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
      * Return if it's youth match
      *
      * @return boolean
@@ -66,6 +79,19 @@ class Chunk extends Xml\Base
             return $this->getXml()->getElementsByTagName('MatchId')->item(0)->nodeValue;
         }
         return $this->getXml()->getElementsByTagName('MatchID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return match rule id
+     *
+     * @return string
+     */
+    public function MatchRuleId()
+    {
+        if ($this->getXml()->getElementsByTagName('MatchRuleId')->length) {
+            return $this->getXml()->getElementsByTagName('MatchRuleId')->item(0)->nodeValue;
+        }
+        return null;
     }
 
     /**
@@ -349,7 +375,7 @@ class Chunk extends Xml\Base
     }
 
     /**
-     * Return cup level if match type is cup, 0 otherwise
+     * Return cup level if match type is cup
      *
      * @return integer
      */
@@ -362,7 +388,7 @@ class Chunk extends Xml\Base
     }
 
     /**
-     * Return cup level index if match type is cup, 0 otherwise
+     * Return cup level index if match type is cup
      *
      * @return integer
      */
@@ -370,6 +396,19 @@ class Chunk extends Xml\Base
     {
         if ($this->getXml()->getElementsByTagName('CupLevelIndex')->length) {
             return $this->getXml()->getElementsByTagName('CupLevelIndex')->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return cup id if match type is cup
+     *
+     * @return integer
+     */
+    public function getCupId()
+    {
+        if ($this->getXml()->getElementsByTagName('CupId')->length) {
+            return $this->getXml()->getElementsByTagName('CupId')->item(0)->nodeValue;
         }
         return null;
     }
