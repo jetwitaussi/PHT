@@ -28,13 +28,13 @@ class Prediction extends Xml\File
     }
 
     /**
-     * Return if match is youth
+     * Return match source system
      *
-     * @return boolean
+     * @return string
      */
-    public function isYouth()
+    public function getSourceSystem()
     {
-        return strtolower($this->getXml()->getElementsByTagName('IsYouth')->item(0)->nodeValue) == 'true';
+        return $this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue;
     }
 
     /**
