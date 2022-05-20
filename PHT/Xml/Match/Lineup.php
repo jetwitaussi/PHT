@@ -47,6 +47,16 @@ class Lineup extends Xml\File
     }
 
     /**
+     * Return match source system
+     *
+     * @return string
+     */
+    public function getSourceSystem()
+    {
+        return $this->getXml()->getElementsByTagName('SourceSystem')->item(0)->nodeValue;
+    }
+
+    /**
      * Return home team id
      *
      * @return integer
