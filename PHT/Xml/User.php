@@ -164,7 +164,8 @@ class User extends HTSupporter
      */
     public function getNationalTeamNumber()
     {
-        return $this->getXml()->getElementsByTagName('NationalTeam')->length;
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query("//NationalTeamCoach/NationalTeam")->length;
     }
 
     /**
@@ -179,7 +180,7 @@ class User extends HTSupporter
         if ($index >= Config\Config::$forIndex && $index < $this->getNationalTeamNumber() + Config\Config::$forIndex) {
             $index -= Config\Config::$forIndex;
             $xpath = new \DOMXPath($this->getXml());
-            $nodeList = $xpath->query('//NationalTeam');
+            $nodeList = $xpath->query('//NationalTeamCoach/NationalTeam');
             $team = new \DOMDocument('1.0', 'UTF-8');
             $team->appendChild($team->importNode($nodeList->item($index), true));
             return new Compendium\National($team);
@@ -195,7 +196,52 @@ class User extends HTSupporter
     public function getNationalTeams()
     {
         $xpath = new \DOMXPath($this->getXml());
-        $nodeList = $xpath->query('//NationalTeam');
+        $nodeList = $xpath->query('//NationalTeamCoach/NationalTeam');
+        /** @var \PHT\Xml\Compendium\National[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\National');
+        return $data;
+    }
+
+    /**
+     * Return number of national team assistant
+     *
+     * @return integer
+     */
+    public function getNationalTeamsAssistantNumber()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query("//NationalTeamAssistant/NationalTeam")->length;
+    }
+
+    /**
+     * Return compendium national team assistant object
+     *
+     * @param integer $index
+     * @return \PHT\Xml\Compendium\National
+     */
+    public function getNationalTeamsAssistant($index)
+    {
+        $index = round($index);
+        if ($index >= Config\Config::$forIndex && $index < $this->getNationalTeamsAssistantNumber() + Config\Config::$forIndex) {
+            $index -= Config\Config::$forIndex;
+            $xpath = new \DOMXPath($this->getXml());
+            $nodeList = $xpath->query('//NationalTeamAssistant/NationalTeam');
+            $team = new \DOMDocument('1.0', 'UTF-8');
+            $team->appendChild($team->importNode($nodeList->item($index), true));
+            return new Compendium\National($team);
+        }
+        return null;
+    }
+
+    /**
+     * Return iterator of compendium national team assistant objects
+     *
+     * @return \PHT\Xml\Compendium\National[]
+     */
+    public function getNationalTeamsAssistants()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//NationalTeamAssistant/NationalTeam');
         /** @var \PHT\Xml\Compendium\National[] $data */
         $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Compendium\National');
         return $data;

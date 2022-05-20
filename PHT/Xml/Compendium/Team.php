@@ -108,6 +108,16 @@ class Team extends Xml\Base
     }
 
     /**
+     * Return league season
+     *
+     * @return integer
+     */
+    public function getSeason()
+    {
+        return $this->getXml()->getElementsByTagName('Season')->item(0)->nodeValue;
+    }
+
+    /**
      * Return country id
      *
      * @return integer
