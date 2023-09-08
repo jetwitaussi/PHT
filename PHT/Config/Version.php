@@ -43,9 +43,9 @@ class Version
     const NATIONALTEAMDETAILS = '1.9';
     const NATIONALTEAMMATCHES = '1.4';
     const NATIONALTEAMS = '1.5';
-    const PLAYERDETAILS = '2.9';
+    const PLAYERDETAILS = '3.0';
     const PLAYEREVENTS = '1.3';
-    const PLAYERS = '2.5';
+    const PLAYERS = '2.6';
     const REGIONDETAILS = '1.2';
     const SEARCH = '1.2';
     const STAFFAVATARS = '1.1';

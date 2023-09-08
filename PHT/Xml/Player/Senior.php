@@ -663,6 +663,19 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return trainer
+     *
+     * @return Xml\Team\Staff\Trainer
+     */
+    public function getTrainer()
+    {
+        if ($this->isTrainer()) {
+            return Wrapper\Team\Senior::staff($this->getTeamId())->getTrainer();
+        }
+        return null;
+    }
+
+    /**
      * Return player trainer type
      *
      * @return integer
@@ -676,14 +689,14 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
-     * Return player trainer skill
+     * Return player trainer skill level
      *
      * @return integer
      */
     public function getTrainerSkill()
     {
         if ($this->isTrainer()) {
-            return $this->getXml()->getElementsByTagName('TrainerSkill')->item(0)->nodeValue;
+            return $this->getXml()->getElementsByTagName('TrainerSkillLevel')->item(0)->nodeValue;
         }
         return null;
     }

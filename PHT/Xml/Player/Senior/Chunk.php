@@ -452,14 +452,14 @@ class Chunk extends Xml\Base
     }
 
     /**
-     * Return player trainer skill
+     * Return player trainer skill level
      *
      * @return integer
      */
     public function getTrainerSkill()
     {
         if ($this->isTrainer()) {
-            return $this->getXml()->getElementsByTagName('TrainerSkill')->item(0)->nodeValue;
+            return $this->getXml()->getElementsByTagName('TrainerSkillLevel')->item(0)->nodeValue;
         }
         return null;
     }
