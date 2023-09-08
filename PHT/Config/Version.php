@@ -48,8 +48,8 @@ class Version
     const PLAYERS = '2.5';
     const REGIONDETAILS = '1.2';
     const SEARCH = '1.2';
-    const STAFFAVATARS = '1.0';
-    const STAFFLIST = '1.1';
+    const STAFFAVATARS = '1.1';
+    const STAFFLIST = '1.2';
     const SUPPORTERS = '1.0';
     const TEAMDETAILS = '3.6';
     const TOURNAMENTDETAILS = '1.0';

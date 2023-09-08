@@ -70,7 +70,9 @@ class Avatars extends Xml\File
      */
     public function getAvatarNumber()
     {
-        if ($this->type == Config\Config::STAFF) {
+        if ($this->type == Config\Config::TRAINER) {
+            return $this->getXml()->getElementsByTagName('Trainer')->length;
+        } elseif ($this->type == Config\Config::STAFF) {
             return $this->getXml()->getElementsByTagName('Staff')->length;
         } elseif ($this->type == Config\Config::YOUTH) {
             return $this->getXml()->getElementsByTagName('YouthPlayer')->length;
@@ -82,14 +84,16 @@ class Avatars extends Xml\File
      * Return avatar object
      *
      * @param integer $index
-     * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar
+     * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar|\PHT\Xml\Team\Staff\TrainerAvatar
      */
     public function getAvatar($index)
     {
         $index = round($index);
         if ($index >= Config\Config::$forIndex && $index < $this->getAvatarNumber() + Config\Config::$forIndex) {
             $tag = 'Player';
-            if ($this->type == Config\Config::STAFF) {
+            if ($this->type == Config\Config::TRAINER) {
+                $tag = 'Trainer';
+            } elseif ($this->type == Config\Config::STAFF) {
                 $tag = 'Staff';
             } elseif ($this->type == Config\Config::YOUTH) {
                 $tag = 'YouthPlayer';
@@ -99,7 +103,9 @@ class Avatars extends Xml\File
             $nodeList = $xpath->query("//" . $tag);
             $node = new \DOMDocument('1.0', 'UTF-8');
             $node->appendChild($node->importNode($nodeList->item($index), true));
-            if ($this->type == Config\Config::STAFF) {
+            if ($this->type == Config\Config::TRAINER) {
+                return new Xml\Team\Staff\TrainerAvatar($node);
+            } elseif ($this->type == Config\Config::STAFF) {
                 return new Xml\Team\Staff\Avatar($node, array('type' => $this->type, 'team' => $this->getTeamId()));
             }
             return new Xml\Player\Avatar($node, array('type' => $this->type, 'team' => $this->getTeamId()));
@@ -116,7 +122,10 @@ class Avatars extends Xml\File
     {
         $tag = 'Player';
         $ns = '\PHT\Xml\Player\Avatar';
-        if ($this->type == Config\Config::STAFF) {
+        if ($this->type == Config\Config::TRAINER) {
+            $tag = 'Trainer';
+            $ns = '\PHT\Xml\Team\Staff\TrainerAvatar';
+        } elseif ($this->type == Config\Config::STAFF) {
             $tag = 'Staff';
             $ns = '\PHT\Xml\Team\Staff\Avatar';
         } elseif ($this->type == Config\Config::YOUTH) {
@@ -133,12 +142,14 @@ class Avatars extends Xml\File
      * Return avatar object
      *
      * @param integer $id
-     * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar
+     * @return \PHT\Xml\Player\Avatar|\PHT\Xml\Team\Staff\Avatar|\PHT\Xml\Team\Staff\TrainerAvatar
      */
     public function getAvatarById($id)
     {
         $tag = 'PlayerID';
-        if ($this->type == Config\Config::STAFF) {
+        if ($this->type == Config\Config::TRAINER) {
+            $tag = 'TrainerId';
+        } elseif ($this->type == Config\Config::STAFF) {
             $tag = 'StaffId';
         } elseif ($this->type == Config\Config::YOUTH) {
             $tag = 'YouthPlayerID';
@@ -148,10 +159,29 @@ class Avatars extends Xml\File
         if ($nodeList->length) {
             $node = new \DOMDocument('1.0', 'UTF-8');
             $node->appendChild($node->importNode($nodeList->item(0)->parentNode, true));
-            if ($this->type == Config\Config::STAFF) {
+            if ($this->type == Config\Config::TRAINER) {
+                return new Xml\Team\Staff\TrainerAvatar($node);
+            } elseif ($this->type == Config\Config::STAFF) {
                 return new Xml\Team\Staff\Avatar($node, array('type' => $this->type, 'team' => $this->getTeamId()));
             }
             return new Xml\Player\Avatar($node, array('type' => $this->type, 'team' => $this->getTeamId()));
+        }
+        return null;
+    }
+
+    /**
+     * Return trainer avatar
+     *
+     * @return \PHT\Xml\Team\Staff\TrainerAvatar
+     */
+    public function getTrainerAvatar()
+    {
+        if ($this->type == Config\Config::STAFF || $this->type == Config\Config::TRAINER) {
+            $xpath = new \DOMXPath($this->getXml());
+            $nodeList = $xpath->query("//Trainer");
+            $node = new \DOMDocument('1.0', 'UTF-8');
+            $node->appendChild($node->importNode($nodeList->item(0), true));
+            return new Xml\Team\Staff\TrainerAvatar($node);
         }
         return null;
     }

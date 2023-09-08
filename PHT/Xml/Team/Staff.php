@@ -28,6 +28,20 @@ class Staff extends Xml\File
     }
 
     /**
+     * Return team trainer
+     *
+     * @return Xml\Team\Staff\Trainer
+     */
+    public function getTrainer()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//Trainer');
+        $trainer = new \DOMDocument('1.0', 'UTF-8');
+        $trainer->appendChild($trainer->importNode($nodeList->item(0), true));
+        return new Xml\Team\Staff\Trainer($trainer, $this->teamId);
+    }
+
+    /**
      * Return number of employees
      *
      * @return integer

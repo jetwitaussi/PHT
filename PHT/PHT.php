@@ -874,6 +874,17 @@ class PHT extends Config\Base
     }
 
     /**
+     * Return senior team trainer avatar
+     *
+     * @param integer $teamId
+     * @return \PHT\Xml\Team\Staff\TrainerAvatar
+     */
+    public function getTrainerAvatar($teamId = null)
+    {
+        return Wrapper\Team\Senior::traineravatar($teamId);
+    }
+
+    /**
      * Return senior team transfers history object
      *
      * @param integer $teamId
@@ -954,6 +965,15 @@ class PHT extends Config\Base
     public function getStaff($teamId = null)
     {
         return Wrapper\Team\Senior::staff($teamId);
+    }
+
+    /**
+     * @param integer $teamId
+     * @return \PHT\Xml\Team\Staff\Trainer
+     */
+    public function getTrainer($teamId = null)
+    {
+        return $this->getStaff($teamId)->getTrainer();
     }
 
     /**

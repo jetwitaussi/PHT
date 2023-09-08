@@ -278,6 +278,21 @@ class Senior
 
     /**
      * @param integer $teamId
+     * @return \PHT\Xml\Team\Staff\TrainerAvatar
+     */
+    public static function traineravatar($teamId = null)
+    {
+        $params = array('file' => 'staffavatars', 'version' => Config\Version::STAFFAVATARS);
+        if ($teamId !== null) {
+            $params['teamId'] = $teamId;
+        }
+        $url = Network\Request::buildUrl($params);
+        $staff = new Xml\Team\Avatars(Network\Request::fetchUrl($url), Config\Config::TRAINER, $teamId);
+        return $staff->getTrainerAvatar();
+    }
+
+    /**
+     * @param integer $teamId
      * @param integer $page
      * @return \PHT\Xml\Team\Transfer\History
      */
