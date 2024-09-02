@@ -70,6 +70,26 @@ class Arena extends Xml\File
     }
 
     /**
+     * Return arena image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->getXml()->getElementsByTagName('ArenaImage')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return arena image fallback
+     *
+     * @return string
+     */
+    public function getImageFallback()
+    {
+        return $this->getXml()->getElementsByTagName('ArenaFallbackImage')->item(0)->nodeValue;
+    }
+
+    /**
      * Return arena league id
      *
      * @return integer

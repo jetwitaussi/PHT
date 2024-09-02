@@ -18,7 +18,7 @@ class Version
     const ACHIEVEMENTS = '1.2';
     const ALLIANCEDETAILS = '1.5';
     const ALLIANCES = '1.4';
-    const ARENADETAILS = '1.5';
+    const ARENADETAILS = '1.7';
     const AVATARS = '1.1';
     const BOOKMARKS = '1.0';
     const CHALLENGES = '1.6';
