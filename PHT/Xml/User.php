@@ -91,6 +91,26 @@ class User extends HTSupporter
     }
 
     /**
+     * Return currency name
+     *
+     * @return string
+     */
+    public function getCurrencyName()
+    {
+        return $this->getXml()->getElementsByTagName('CurrencyName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return currency rate
+     *
+     * @return integer
+     */
+    public function getCurrencyRate()
+    {
+        return $this->getXml()->getElementsByTagName('CurrencyRate')->item(0)->nodeValue;
+    }
+
+    /**
      * Return number of teams
      *
      * @param string $type
