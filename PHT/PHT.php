@@ -348,6 +348,17 @@ class PHT extends Config\Base
     }
 
     /**
+     * Get structure of a league
+     *
+     * @param integer $leagueId
+     * @return \PHT\Xml\World\LeagueStructure
+     */
+    public function getLeagueStructure($leagueId = null)
+    {
+        return Wrapper\World::leaguestructure($leagueId);
+    }
+
+    /**
      * Get i18n object to get languages
      *
      * @return \PHT\Xml\I18n

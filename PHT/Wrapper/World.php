@@ -89,4 +89,18 @@ class World
         $url = Network\Request::buildUrl($params);
         return new Xml\World\Cup(Network\Request::fetchUrl($url));
     }
+
+    /**
+     * @param integer $leagueId
+     * @return \PHT\Xml\World\LeagueStructure
+     */
+    public static function leaguestructure($leagueId = null)
+    {
+        $params = array('file' => 'leaguelevels', 'version' => Config\Version::LEAGUELEVELS);
+        if ($leagueId !== null) {
+            $params['leagueID'] = $leagueId;
+        }
+        $url = Network\Request::buildUrl($params);
+        return new Xml\World\LeagueStructure(Network\Request::fetchUrl($url));
+    }
 }
