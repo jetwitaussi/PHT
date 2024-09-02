@@ -44,6 +44,19 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return user id
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('UserId')->item(0)->nodeValue;
+    }
+
+    /**
      * Return youth team name
      *
      * @return string
