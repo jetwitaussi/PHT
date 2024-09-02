@@ -73,6 +73,26 @@ class Trainer extends Xml\Base
     }
 
     /**
+     * Return country id
+     *
+     * @return integer
+     */
+    public function getCountryId()
+    {
+        return $this->getXml()->getElementsByTagName('CountryID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return country
+     *
+     * @return \PHT\Xml\World\Country
+     */
+    public function getCountry()
+    {
+        return Wrapper\World::country(null, $this->getCountryId());
+    }
+
+    /**
      * Return trainer contract date
      *
      * @param string $format (php date() function format)
