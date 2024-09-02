@@ -25,7 +25,7 @@ class League
      */
     public static function youth($id)
     {
-        $url = Network\Request::buildUrl(array('file' => 'youthleaguedetails', 'youthleagueid' => $id, 'version' => Config\Version::YOUTHTEAMDETAILS));
+        $url = Network\Request::buildUrl(array('file' => 'youthleaguedetails', 'youthleagueid' => $id, 'version' => Config\Version::YOUTHLEAGUEDETAILS));
         return new Xml\World\League\Youth(Network\Request::fetchUrl($url));
     }
 
