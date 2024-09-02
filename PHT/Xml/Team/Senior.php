@@ -412,6 +412,26 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return trainer
+     *
+     * @return \PHT\Xml\Team\Staff\Trainer
+     */
+    public function getTrainer()
+    {
+        return $this->getStaff()->getTrainer();
+    }
+
+    /**
+     * Return trainer avatar
+     *
+     * @return \PHT\Xml\Team\Staff\TrainerAvatar
+     */
+    public function getTrainerAvatar()
+    {
+        return $this->getTrainer()->getAvatar();
+    }
+
+    /**
      * Return home page url
      *
      * @return string
