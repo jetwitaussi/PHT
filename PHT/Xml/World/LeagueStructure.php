@@ -86,9 +86,14 @@ class LeagueStructure extends Xml\File
     public function getLevels()
     {
         $xpath = new \DOMXPath($this->getXml());
-        $nodeList = $xpath->query('//Staff');
+        $nodeList = $xpath->query('//LeagueLevel');
+        $levels = new \DOMDocument('1.0', 'UTF-8');
+        for ($i = 0; $i < $nodeList->length; $i++) {
+            $levels->appendChild($levels->importNode($nodeList->item($i)->parentNode, true));
+        }
+        $nodes = $levels->getElementsByTagName('LeagueLevelItem');
         /** @var \PHT\Xml\World\League\Level[] $data */
-        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\World\League\Level');
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\World\League\Level');
         return $data;
     }
 }
