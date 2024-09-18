@@ -52,7 +52,7 @@ class Version
     const STAFFAVATARS = '1.1';
     const STAFFLIST = '1.2';
     const SUPPORTERS = '1.0';
-    const TEAMDETAILS = '3.6';
+    const TEAMDETAILS = '3.7';
     const TOURNAMENTDETAILS = '1.0';
     const TOURNAMENTFIXTURES = '1.0';
     const TOURNAMENTLEAGUETABLES = '1.1';

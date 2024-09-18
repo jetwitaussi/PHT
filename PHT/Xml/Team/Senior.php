@@ -942,6 +942,19 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return if team is deactivated
+     *
+     * @return boolean
+     */
+    public function isDeactivated()
+    {
+        if ($this->isDeleted()) {
+            return true;
+        }
+        return strtolower($this->getXml()->getElementsByTagName('IsDeactivated')->item(0)->nodeValue) == 'true';
+    }
+
+    /**
      * Return if team is primary team
      *
      * @return boolean
