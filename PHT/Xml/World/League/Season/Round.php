@@ -47,7 +47,7 @@ class Round extends Xml\Base
      * Get round match object
      *
      * @param integer $index
-     * @return \PHT\Xml\World\League\Season\Match
+     * @return \PHT\Xml\World\League\Season\HTMatch
      */
     public function getMatch($index)
     {
@@ -56,7 +56,7 @@ class Round extends Xml\Base
             $index -= Config\Config::$forIndex;
             $match = new \DOMDocument('1.0', 'UTF-8');
             $match->appendChild($match->importNode($this->getXml()->getElementsByTagName('Match')->item($index), true));
-            return new Xml\World\League\Season\Match($match, $this->type);
+            return new Xml\World\League\Season\HTMatch($match, $this->type);
         }
         return null;
     }
@@ -64,13 +64,13 @@ class Round extends Xml\Base
     /**
      * Return iterator of round match objects
      *
-     * @return \PHT\Xml\World\League\Season\Match[]
+     * @return \PHT\Xml\World\League\Season\HTMatch[]
      */
     public function getMatches()
     {
         $nodes = $this->getXml()->getElementsByTagName('Match');
-        /** @var \PHT\Xml\World\League\Season\Match[] $data */
-        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\World\League\Season\Match', $this->type);
+        /** @var \PHT\Xml\World\League\Season\HTMatch[] $data */
+        $data = new Utils\XmlIterator($nodes, '\PHT\Xml\World\League\Season\HTMatch', $this->type);
         return $data;
     }
 }

@@ -18,7 +18,7 @@ use PHT\Wrapper;
 use PHT\Utils;
 use PHT\Config;
 
-class Match extends Xml\Base
+class HTMatch extends Xml\Base
 {
     private $type;
 
