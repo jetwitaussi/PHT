@@ -323,6 +323,26 @@ class Chunk extends Xml\Base
     }
 
     /**
+     * Return player number assists in his team
+     *
+     * @return integer
+     */
+    public function getAssistsInTeam()
+    {
+        return $this->getXml()->getElementsByTagName('AssistsCurrentTeam')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player number assists in his career
+     *
+     * @return integer
+     */
+    public function getAssistsInCareer()
+    {
+        return $this->getXml()->getElementsByTagName('CareerAssists')->item(0)->nodeValue;
+    }
+
+    /**
      * Return player number matches in his team
      *
      * @return integer
