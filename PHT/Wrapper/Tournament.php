@@ -70,11 +70,19 @@ class Tournament
     /**
      * @param integer $tournamentId
      * @param integer $season
+     * @param integer $round
      * @return \PHT\Xml\Tournaments\Matches
      */
-    public static function matches($tournamentId, $season = null)
+    public static function matches($tournamentId, $season = null, $round = null)
     {
-        $url = Network\Request::buildUrl(array('file' => 'tournamentfixtures', 'tournamentId' => $tournamentId, 'season' => $season, 'version' => Config\Version::TOURNAMENTFIXTURES));
+        $params = array('file' => 'tournamentfixtures', 'tournamentId' => $tournamentId, 'version' => Config\Version::TOURNAMENTFIXTURES);
+        if ($season !== null) {
+            $params['season'] = $season;
+        }
+        if ($round !== null) {
+            $params['matchRound'] = $round;
+        }
+        $url = Network\Request::buildUrl($params);
         return new Xml\Tournaments\Matches(Network\Request::fetchUrl($url));
     }
 
