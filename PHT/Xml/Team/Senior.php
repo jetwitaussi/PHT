@@ -108,6 +108,45 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return team gender
+     *
+     * @return integer
+     */
+    public function getGenderId()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('GenderID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if team is a male team
+     *
+     * @return boolean
+     */
+    public function isMale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getGenderId() == 1;
+    }
+
+    /**
+     * Return if team is a female team
+     *
+     * @return boolean
+     */
+    public function isFemale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getGenderId() == 2;
+    }
+
+    /**
      * Return team user's language id
      *
      * @return integer

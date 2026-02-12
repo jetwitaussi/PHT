@@ -76,6 +76,36 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return player gender
+     *
+     * @return integer
+     */
+    public function getGenderId()
+    {
+        return $this->getXml()->getElementsByTagName('GenderID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if player is male
+     *
+     * @return boolean
+     */
+    public function isMale()
+    {
+        return $this->getGenderId() == 1;
+    }
+
+    /**
+     * Return if player is female
+     *
+     * @return boolean
+     */
+    public function isFemale()
+    {
+        return $this->getGenderId() == 2;
+    }
+
+    /**
      * Return youth player age
      *
      * @return integer

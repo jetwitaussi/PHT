@@ -50,6 +50,36 @@ class Country extends Xml\Base
     }
 
     /**
+     * Return league system
+     *
+     * @return integer
+     */
+    public function getLeagueSystemID()
+    {
+        return $this->getXml()->getElementsByTagName('LeagueSystemID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if league is a male league
+     *
+     * @return boolean
+     */
+    public function isLeagueMale()
+    {
+        return $this->getLeagueSystemID() == 1;
+    }
+
+    /**
+     * Return if league is a female league
+     *
+     * @return boolean
+     */
+    public function isLeagueFemale()
+    {
+        return $this->getLeagueSystemID() == 2;
+    }
+
+    /**
      * Return current season number
      *
      * @return integer
@@ -310,6 +340,61 @@ class Country extends Xml\Base
     public function getSeriesMatchDate($format = null)
     {
         return Utils\Date::convert($this->getXml()->getElementsByTagName('SeriesMatchDate')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return upcoming daily update sequence 1
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getSequence1Date($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Sequence1')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return upcoming daily update sequence 2
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getSequence2Date($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Sequence2')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return upcoming daily update sequence 3
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getSequence3Date($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Sequence3')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return upcoming daily update sequence 5
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getSequence5Date($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Sequence5')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return upcoming daily update sequence 7 with confidence
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getSequence7Date($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('Sequence7')->item(0)->nodeValue, $format);
     }
 
     /**

@@ -34,7 +34,7 @@ class Version
     const LEAGUEFIXTURES = '1.2';
     const LEAGUELEVELS = '1.0';
     const LIVE = '2.3';
-    const MANAGERCOMPENDIUM = '1.5';
+    const MANAGERCOMPENDIUM = '1.6';
     const MATCHDETAILS = '3.1';
     const MATCHES = '2.9';
     const MATCHESARCHIVE = '1.5';
@@ -44,15 +44,15 @@ class Version
     const NATIONALTEAMDETAILS = '1.9';
     const NATIONALTEAMMATCHES = '1.4';
     const NATIONALTEAMS = '1.5';
-    const PLAYERDETAILS = '3.1';
+    const PLAYERDETAILS = '3.2';
     const PLAYEREVENTS = '1.3';
-    const PLAYERS = '2.7';
+    const PLAYERS = '2.8';
     const REGIONDETAILS = '1.2';
     const SEARCH = '1.2';
     const STAFFAVATARS = '1.1';
     const STAFFLIST = '1.2';
     const SUPPORTERS = '1.0';
-    const TEAMDETAILS = '3.7';
+    const TEAMDETAILS = '3.8';
     const TOURNAMENTDETAILS = '1.0';
     const TOURNAMENTFIXTURES = '1.1';
     const TOURNAMENTLEAGUETABLES = '1.1';
@@ -64,12 +64,12 @@ class Version
     const TRANSFERSTEAM = '1.2';
     const TRANSLATIONS = '1.2';
     const WORLDCUP = '1.1';
-    const WORLDDETAILS = '1.9';
+    const WORLDDETAILS = '2.0';
     const WORLDLANGUAGES = '1.2';
     const YOUTHAVATARS = '1.2';
     const YOUTHLEAGUEDETAILS = '1.0';
     const YOUTHLEAGUEFIXTURES = '1.0';
-    const YOUTHPLAYERLIST = '1.2';
-    const YOUTHPLAYERDETAILS = '1.2';
-    const YOUTHTEAMDETAILS = '1.2';
+    const YOUTHPLAYERLIST = '1.3';
+    const YOUTHPLAYERDETAILS = '1.3';
+    const YOUTHTEAMDETAILS = '1.3';
 }
