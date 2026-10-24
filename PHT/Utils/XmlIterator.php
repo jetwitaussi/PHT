@@ -55,6 +55,7 @@ class XmlIterator implements \Iterator
     /**
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $node = new \DOMDocument('1.0', 'UTF-8');
@@ -68,16 +69,19 @@ class XmlIterator implements \Iterator
     /**
      * @return integer
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->item;
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->item++;
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->item = 0;
@@ -86,6 +90,7 @@ class XmlIterator implements \Iterator
     /**
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->item < $this->nodes->length;

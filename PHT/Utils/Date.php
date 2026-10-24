@@ -27,7 +27,7 @@ class Date
         if ($format === null) {
             return $date;
         }
-        return date($format, strtotime($date));
+        return date($format, strtotime((string)$date));
     }
 
     /**

@@ -73,9 +73,9 @@ class Request
         $log = Log\Logger::getInstance();
         $cacheKey = null;
         $infos = parse_url($url);
-        if ($infos['path'] == Url::CHPP_URL && !count($postParams)) {
+        if (isset($infos['path']) && $infos['path'] == Url::CHPP_URL && !count($postParams)) {
             $params = array();
-            parse_str($infos['query'], $params);
+            parse_str((string)$infos['query'], $params);
             $params = array_diff_key($params, array('oauth_consumer_key' => '', 'oauth_signature_method' => '', 'oauth_timestamp' => '', 'oauth_nonce' => '', 'oauth_version' => '', 'oauth_signature' => ''));
             $key = array();
             foreach ($params as $k => $v) {
@@ -228,7 +228,7 @@ class Request
         if (is_array($input)) {
             return array_map(array(__CLASS__, 'urlencodeRfc3986'), $input);
         }
-        return str_replace('+', ' ', str_replace('%7E', '~', rawurlencode($input)));
+        return str_replace('+', ' ', str_replace('%7E', '~', rawurlencode((string)$input)));
     }
 
     /**

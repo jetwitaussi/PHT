@@ -119,7 +119,10 @@ class Memcached implements CacheInterface
             $do = $this->obj->set($sha, $data, $ttl);
             if ($do) {
                 $value = $this->obj->get($this->all);
-                if ($value === false || !isset($value[$found[1]])) {
+                if ($value === false) {
+                    $value = array();
+                }
+                if (!isset($value[$found[1]])) {
                     $value[$found[1]] = array();
                 }
                 if (!in_array($sha, $value[$found[1]])) {

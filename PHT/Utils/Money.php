@@ -385,10 +385,10 @@ class Money
      */
     public static function convert($amount, $country)
     {
-        if ($country !== null) {
-            return round($amount / $country);
+        if (!$country) {
+            return $amount;
         }
-        return $amount;
+        return round($amount / $country);
     }
 
     /**
@@ -400,6 +400,9 @@ class Money
      */
     public static function toSEK($amount, $country)
     {
+        if (!$country) {
+            return $amount;
+        }
         return floor($amount * $country);
     }
 

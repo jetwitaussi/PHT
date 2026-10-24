@@ -47,10 +47,10 @@ class PHT extends Config\Base
      * Get data of user's senior team by default or of teamId if given
      *
      * @param \PHT\Config\Team $team
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function getSeniorTeam(Config\Team $team = null)
+    public function getSeniorTeam($team = null)
     {
         if ($team === null) {
             return $this->findSeniorTeam();
@@ -75,10 +75,10 @@ class PHT extends Config\Base
      * Get data of user's youth team by default or of teamId if given
      *
      * @param \PHT\Config\Team $team
-     * @return \PHT\Xml\Team\Youth
+     * @return \PHT\Xml\Team\Youth | null 
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public function getYouthTeam(Config\Team $team = null)
+    public function getYouthTeam($team = null)
     {
         if ($team === null) {
             return $this->findYouthTeam();
@@ -102,7 +102,7 @@ class PHT extends Config\Base
     /**
      * @param integer $id
      * @param integer $userId
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      */
     protected function findSeniorTeam($id = null, $userId = null)
     {
@@ -112,7 +112,7 @@ class PHT extends Config\Base
     /**
      * @param integer $id
      * @param integer $userId
-     * @return \PHT\Xml\Team\Youth
+     * @return \PHT\Xml\Team\Youth | null 
      */
     protected function findYouthTeam($id = null, $userId = null)
     {
@@ -124,7 +124,7 @@ class PHT extends Config\Base
 
     /**
      * @param integer $userId
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      */
     protected function getPrimarySeniorTeam($userId = null)
     {
@@ -134,7 +134,7 @@ class PHT extends Config\Base
     /**
      * @param integer $userId
      * @param integer $nth
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      */
     protected function getSecondarySeniorTeam($userId = null, $nth = 1)
     {
@@ -144,7 +144,7 @@ class PHT extends Config\Base
     /**
      * @param integer $userId
      * @param integer $nth
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      */
     protected function getInternationalSeniorTeam($userId = null, $nth = 1)
     {
@@ -155,7 +155,7 @@ class PHT extends Config\Base
      * @param integer $type
      * @param integer $userId
      * @param integer $nth
-     * @return \PHT\Xml\Team\Senior
+     * @return \PHT\Xml\Team\Senior | null 
      */
     protected function getSpecificSeniorTeam($type, $userId = null, $nth = 1)
     {
@@ -203,7 +203,7 @@ class PHT extends Config\Base
 
     /**
      * @param integer $userId
-     * @return \PHT\Xml\Team\Youth
+     * @return \PHT\Xml\Team\Youth | null 
      */
     protected function getPrimaryYouthTeam($userId = null)
     {
@@ -217,7 +217,7 @@ class PHT extends Config\Base
     /**
      * @param integer $userId
      * @param integer $nth
-     * @return \PHT\Xml\Team\Youth
+     * @return \PHT\Xml\Team\Youth | null 
      */
     protected function getSecondaryYouthTeam($userId = null, $nth = 1)
     {
@@ -231,7 +231,7 @@ class PHT extends Config\Base
     /**
      * @param integer $userId
      * @param integer $nth
-     * @return \PHT\Xml\Team\Youth
+     * @return \PHT\Xml\Team\Youth | null 
      */
     protected function getInternationalYouthTeam($userId = null, $nth = 1)
     {

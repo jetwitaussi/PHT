@@ -675,14 +675,15 @@ class Orders
             $this->errors[] = "Invalid coach modifier: " . $this->coachModifier . ". Value must be between -10 and 10";
         }
         if (count($team) != count(array_unique($team))) {
-            $count = array_filter(array_count_values($team), create_function('$e', 'return $e>1;'));
+            $count = array_filter(array_count_values($team), function ($e) {
+                return $e > 1;
+            });
             foreach ($count as $id => $use) {
                 $this->errors[] = "Player " . $id . " used " . $use . " times";
             }
         }
         $bench = array($this->substituteGoalkeeper, $this->substituteDefender, $this->substituteWingback, $this->substituteMidfield, $this->substituteForward, $this->substituteWinger, $this->substituteExtra);
         foreach ($this->substitutions as $i => $sub) {
-            $sub = $this->{'substitution' . $i};
             if (!$sub instanceof OrdersSubstitution) {
                 $this->errors[] = "Invalid substitution $i";
             } elseif ($sub->orderType == $sub::TYPE_SUBSTITUTION) {

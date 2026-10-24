@@ -66,7 +66,7 @@ class Auth
         $result = explode('&', $return);
         foreach ($result as $val) {
             $t = explode('=', $val);
-            ${$t[0]} = urldecode($t[1]);
+            ${$t[0]} = urldecode((string)$t[1]);
         }
 
         if (!isset($oauth_token) || !isset($oauth_token_secret)) {

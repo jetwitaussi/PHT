@@ -29,8 +29,8 @@ class Factory
         switch ($type) {
 
             case 'apc':
-                if (strtolower(ini_get('apc.enabled')) != 'on') {
-                    throw new Exception\InvalidArgumentException("APC cache is not available");
+                if (!function_exists('apcu_fetch') && !function_exists('apc_fetch')) {
+                    throw new Exception\InvalidArgumentException("APC(u) cache is not available");
                 }
                 return new Apc();
 
