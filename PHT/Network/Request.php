@@ -124,7 +124,7 @@ class Request
         $endTime = microtime(true);
         $log->debug("[NETWORK] Fetch done in: " . ($endTime - $startTime));
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
+        unset($curl);
         if ($check === true) {
             self::checkXmlData($xmlData, $httpCode);
         }
@@ -152,7 +152,7 @@ class Request
             Log\Logger::getInstance()->critical("[API] Invalid xml: " . $xmlData);
             throw new Exception\NetworkException($xmlData, $httpCode);
         }
-        xml_parser_free($tmpXml);
+        unset($tmpXml);
 
         $tmpXml = new \DOMDocument('1.0', 'UTF-8');
         $tmpXml->loadXML($xmlData);
@@ -279,7 +279,7 @@ class Request
         $endTime = microtime(true);
         $log->debug("[NETWORK] Fetch done in: " . ($endTime - $startTime));
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
+        unset($curl);
         $online = (int)$code === 200;
         if (!$online) {
             $log->critical('[NETWORK] CHPP server seems down (' . $code . ')');
