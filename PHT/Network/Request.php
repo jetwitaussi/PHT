@@ -152,7 +152,9 @@ class Request
             Log\Logger::getInstance()->critical("[API] Invalid xml: " . $xmlData);
             throw new Exception\NetworkException($xmlData, $httpCode);
         }
-        unset($tmpXml);
+        if (PHP_VERSION_ID < 80000) {
+            xml_parser_free($tmpXml);
+        }
 
         $tmpXml = new \DOMDocument('1.0', 'UTF-8');
         $tmpXml->loadXML($xmlData);
