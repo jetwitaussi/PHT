@@ -148,11 +148,12 @@ class Request
     public static function checkXmlData($xmlData, $httpCode = 0)
     {
         $tmpXml = xml_parser_create();
-        if (!xml_parse($tmpXml, $xmlData, true)) {
+        $parsed = xml_parse($tmpXml, $xmlData, true);
+        xml_parser_free($tmpXml);
+        if (!$parsed) {
             Log\Logger::getInstance()->critical("[API] Invalid xml: " . $xmlData);
             throw new Exception\NetworkException($xmlData, $httpCode);
         }
-        xml_parser_free($tmpXml);
 
         $tmpXml = new \DOMDocument('1.0', 'UTF-8');
         $tmpXml->loadXML($xmlData);
