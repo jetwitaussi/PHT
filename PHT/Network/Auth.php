@@ -61,18 +61,15 @@ class Auth
         uksort($params, 'strcmp');
         $log->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::REQUEST_URL, $params);
-        $oauth_token = $oauth_token_secret = null;
-        $return = Request::fetchUrl($url, false);
-        $result = explode('&', $return);
-        foreach ($result as $val) {
-            $t = explode('=', $val);
-            ${$t[0]} = urldecode((string)$t[1]);
-        }
+        $tokens = self::parseTokens(Request::fetchUrl($url, false));
 
-        if (!isset($oauth_token) || !isset($oauth_token_secret)) {
+        if (!isset($tokens['oauth_token']) || !isset($tokens['oauth_token_secret'])) {
             $log->error('[OAUTH] No request token received');
             return false;
         }
+
+        $oauth_token = $tokens['oauth_token'];
+        $oauth_token_secret = $tokens['oauth_token_secret'];
 
         $url = Url::OAUTH_SERVER . $authPage . '?oauth_token=' . urlencode($oauth_token);
         if ($scope !== null) {
@@ -88,6 +85,24 @@ class Auth
         $conf->url = $url;
 
         return $conf;
+    }
+
+    /**
+     * Split an oauth token response into its parameters
+     *
+     * @param string $body
+     * @return array
+     */
+    private static function parseTokens($body)
+    {
+        $tokens = array();
+        foreach (explode('&', (string)$body) as $pair) {
+            $parts = explode('=', $pair, 2);
+            if (isset($parts[1])) {
+                $tokens[$parts[0]] = urldecode($parts[1]);
+            }
+        }
+        return $tokens;
     }
 
     /**
@@ -113,18 +128,15 @@ class Auth
         uksort($params, 'strcmp');
         $log->debug("[NETWORK] Query params:", $params);
         $url = Request::buildOauthUrl(Url::OAUTH_SERVER . Url::ACCESS_URL, $params);
-        $oauth_token = $oauth_token_secret = null;
-        $return = Request::fetchUrl($url, false);
-        $result = explode('&', $return);
-        foreach ($result as $val) {
-            $t = explode('=', $val);
-            ${$t[0]} = urldecode($t[1]);
-        }
+        $tokens = self::parseTokens(Request::fetchUrl($url, false));
 
-        if (!isset($oauth_token) || !isset($oauth_token_secret)) {
+        if (!isset($tokens['oauth_token']) || !isset($tokens['oauth_token_secret'])) {
             $log->error('[OAUTH] No access token received');
             return false;
         }
+
+        $oauth_token = $tokens['oauth_token'];
+        $oauth_token_secret = $tokens['oauth_token_secret'];
 
         $log->debug('[OAUTH] Access token: ' . $oauth_token);
         $log->debug('[OAUTH] Access token secret: ' . $oauth_token_secret);
