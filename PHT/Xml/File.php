@@ -55,13 +55,14 @@ class File extends Base
      */
     public function getFetchedDate($format = null)
     {
-        if (!isset($this->fetchedDate[$format]) || $this->fetchedDate[$format] === null) {
-            $this->fetchedDate[$format] = $this->getXml()->getElementsByTagName('FetchedDate')->item(0)->nodeValue;
+        $key = $format === null ? '' : $format;
+        if (!isset($this->fetchedDate[$key]) || $this->fetchedDate[$key] === null) {
+            $this->fetchedDate[$key] = $this->getXml()->getElementsByTagName('FetchedDate')->item(0)->nodeValue;
             if ($format !== null) {
-                $this->fetchedDate[$format] = Utils\Date::convert($this->fetchedDate[$format], $format);
+                $this->fetchedDate[$key] = Utils\Date::convert($this->fetchedDate[$key], $format);
             }
         }
-        return $this->fetchedDate[$format];
+        return $this->fetchedDate[$key];
     }
 
     /**

@@ -51,7 +51,8 @@ class Federation
             $url = Network\Request::buildUrl(array('file' => 'alliancedetails', 'actionType' => 'members', 'allianceID' => $federationId, 'version' => Config\Version::ALLIANCEDETAILS));
             return new Xml\Federations\Members(Network\Request::fetchUrl($url));
         } else {
-            $letter = ord(strtoupper($onlyLetter));
+            $onlyLetter = (string)$onlyLetter;
+            $letter = $onlyLetter === '' ? 0 : ord(strtoupper($onlyLetter[0]));
             if ($letter < 65 || $letter > 90) {
                 $letter = 0;
             }
