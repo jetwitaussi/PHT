@@ -1,0 +1,106 @@
+<?php
+/**
+ * PHT
+ *
+ * @author Telesphore
+ * @link https://github.com/jetwitaussi/PHT
+ * @version 3.0
+ * @license "THE BEER-WARE LICENSE" (Revision 42):
+ *          Telesphore wrote this file.  As long as you retain this notice you
+ *          can do whatever you want with this stuff. If we meet some day, and you think
+ *          this stuff is worth it, you can buy me a beer in return.
+ */
+
+namespace PHT\Xml\Player;
+
+use PHT\Xml;
+use PHT\Wrapper;
+
+class Prospect extends Xml\Base
+{
+    /**
+     * @param \DOMDocument $xml
+     */
+    public function __construct($xml)
+    {
+        $this->xmlText = $xml->saveXML();
+        $this->xml = $xml;
+    }
+
+    /**
+     * Return player id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->getXml()->getElementsByTagName('PlayerID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getXml()->getElementsByTagName('PlayerName')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return category set by national team staff, 0 if no category is set
+     *
+     * @return integer
+     */
+    public function getCategoryId()
+    {
+        return $this->getXml()->getElementsByTagName('PlayerCategoryId')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return player specialty
+     *
+     * @return integer
+     */
+    public function getSpecialty()
+    {
+        return $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return senior player object
+     *
+     * @param boolean $includeMatchInfo
+     * @return \PHT\Xml\Player\Senior
+     */
+    public function getPlayer($includeMatchInfo = true)
+    {
+        return Wrapper\Player\Senior::player($this->getId(), $includeMatchInfo);
+    }
+
+    /**
+     * Return player detailed statistics, match by match
+     *
+     * @return \PHT\Xml\Player\Stats
+     */
+    public function getStats()
+    {
+        return Wrapper\Player\Senior::stats($this->getId());
+    }
+
+    /**
+     * Return player avatar
+     *
+     * @return \PHT\Xml\Avatar
+     */
+    public function getAvatar()
+    {
+        $node = $this->getXml()->getElementsByTagName('Avatar')->item(0);
+        if ($node === null) {
+            return null;
+        }
+        $avatar = new \DOMDocument('1.0', 'UTF-8');
+        $avatar->appendChild($avatar->importNode($node, true));
+        return new Xml\Avatar($avatar);
+    }
+}

@@ -121,4 +121,14 @@ class Senior
         $url = Network\Request::buildUrl(array('file' => 'playerevents', 'playerID' => $playerId, 'version' => Config\Version::PLAYEREVENTS));
         return new Xml\Player\History(Network\Request::fetchUrl($url));
     }
+
+    /**
+     * @param integer $playerId
+     * @return \PHT\Xml\Player\Stats
+     */
+    public static function stats($playerId)
+    {
+        $url = Network\Request::buildUrl(array('file' => 'playerstats', 'playerID' => $playerId, 'version' => Config\Version::PLAYERSTATS));
+        return new Xml\Player\Stats(Network\Request::fetchUrl($url));
+    }
 }

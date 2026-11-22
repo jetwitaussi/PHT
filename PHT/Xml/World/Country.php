@@ -80,6 +80,87 @@ class Country extends Xml\Base
     }
 
     /**
+     * Return if league is open for additional clubs owned by users from another league
+     *
+     * @return boolean
+     */
+    public function isOpenForForeignOwners()
+    {
+        $node = $this->getXml()->getElementsByTagName('TotalTeams')->item(0);
+        return $node !== null && $node->nodeValue !== '';
+    }
+
+    /**
+     * Return number of teams in league's divisions, used to compute foreign owners limit,
+     * null if league is not open for additional clubs
+     *
+     * @return integer
+     */
+    public function getTotalTeams()
+    {
+        if (!$this->isOpenForForeignOwners()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('TotalTeams')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return number of teams in league owned by users from another league, including pending applications,
+     * null if league is not open for additional clubs
+     *
+     * @return integer
+     */
+    public function getForeignOwnersNumber()
+    {
+        if (!$this->isOpenForForeignOwners()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('NumberOfForeignOwners')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return highest share of total teams, in percent, that users from another league can own,
+     * null if league is not open for additional clubs
+     *
+     * @return integer
+     */
+    public function getForeignOwnersMaxPercentage()
+    {
+        if (!$this->isOpenForForeignOwners()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('MaxPercentageOfForeignOwners')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return maximum number of teams that users from another league can own,
+     * null if league is not open for additional clubs
+     *
+     * @return integer
+     */
+    public function getForeignOwnersMaxNumber()
+    {
+        if (!$this->isOpenForForeignOwners()) {
+            return null;
+        }
+        return (int)ceil($this->getTotalTeams() * $this->getForeignOwnersMaxPercentage() / 100);
+    }
+
+    /**
+     * Return number of teams that users from another league can still own,
+     * null if league is not open for additional clubs
+     *
+     * @return integer
+     */
+    public function getForeignOwnersAvailablePlaces()
+    {
+        if (!$this->isOpenForForeignOwners()) {
+            return null;
+        }
+        return max(0, $this->getForeignOwnersMaxNumber() - $this->getForeignOwnersNumber());
+    }
+
+    /**
      * Return current season number
      *
      * @return integer

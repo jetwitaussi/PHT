@@ -216,6 +216,81 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return currency name chosen by user in his preferences,
+     * only available when team belongs to connected user
+     *
+     * @return string
+     */
+    public function getUserCurrencyName()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        $node = $this->getXml()->getElementsByTagName('CurrencyName')->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return currency rate, relative to SEK, of currency chosen by user in his preferences,
+     * only available when team belongs to connected user
+     *
+     * @return float
+     */
+    public function getUserCurrencyRate()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        $node = $this->getXml()->getElementsByTagName('CurrencyRate')->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return league system of team (1: male, 2: female)
+     *
+     * @return integer
+     */
+    public function getLeagueSystemId()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('LeagueSystemID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if team plays in male league system
+     *
+     * @return boolean
+     */
+    public function isLeagueMale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getLeagueSystemId() == 1;
+    }
+
+    /**
+     * Return if team plays in female league system
+     *
+     * @return boolean
+     */
+    public function isLeagueFemale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getLeagueSystemId() == 2;
+    }
+
+    /**
      * Return user icq number
      *
      * @return string
@@ -1167,6 +1242,33 @@ class Senior extends Xml\HTSupporter
     }
 
     /**
+     * Return training changes history since a date, requires Gold supporter
+     *
+     * @param string $fromDate (format should be : yyyy-mm-dd or yyyy-mm-dd hh:mm:ss - If not specified : 16 weeks before today)
+     * @return \PHT\Xml\Team\Senior\Training\History
+     */
+    public function getTrainingHistory($fromDate = null)
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return Wrapper\Team\Senior::traininghistory($this->getId(), $fromDate);
+    }
+
+    /**
+     * Return club history: seasons results and trophies since current owner took over the team
+     *
+     * @return \PHT\Xml\Team\History
+     */
+    public function getHistory()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return Wrapper\Team\Senior::history($this->getId());
+    }
+
+    /**
      * Set team training
      *
      * @param integer $type (see \PHT\Config\Config TRAINING_* constants)
@@ -1186,14 +1288,15 @@ class Senior extends Xml\HTSupporter
      * Get team matches
      *
      * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
+     * @param boolean $includeHTO include HTO matches (tournaments, ladders and single matches)
      * @return \PHT\Xml\Team\Match\Listing
      */
-    public function getMatches($showBeforeDate = null)
+    public function getMatches($showBeforeDate = null, $includeHTO = false)
     {
         if ($this->isDeleted()) {
             return null;
         }
-        return Wrapper\Team\Senior::matches($this->getId(), $showBeforeDate);
+        return Wrapper\Team\Senior::matches($this->getId(), $showBeforeDate, $includeHTO);
     }
 
     /**

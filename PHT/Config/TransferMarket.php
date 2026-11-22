@@ -51,6 +51,10 @@ class TransferMarket
     private $tsiMax = null;
     private $priceMin = null;
     private $priceMax = null;
+    private $salaryMin = null;
+    private $salaryMax = null;
+    private $transferCompareAvgMin = null;
+    private $transferCompareAvgMax = null;
     private $pageSize = null;
     private $pageIndex = null;
 
@@ -230,6 +234,52 @@ class TransferMarket
     }
 
     /**
+     * Set min weekly salary (base salary, without the extra 20% for foreign players)
+     *
+     * @param integer $salary
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     */
+    public function setMinSalary($salary, $countryCurrency = Utils\Money::SVERIGE)
+    {
+        $this->salaryMin = Utils\Money::toSEK($salary, $countryCurrency);
+    }
+
+    /**
+     * Set max weekly salary (base salary, without the extra 20% for foreign players)
+     *
+     * @param integer $salary
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     */
+    public function setMaxSalary($salary, $countryCurrency = Utils\Money::SVERIGE)
+    {
+        $this->salaryMax = Utils\Money::toSEK($salary, $countryCurrency);
+    }
+
+    /**
+     * Set min transfer estimate (estimate saved when player was put on the market),
+     * players without estimate are excluded
+     *
+     * @param integer $amount
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     */
+    public function setMinTransferCompareAverage($amount, $countryCurrency = Utils\Money::SVERIGE)
+    {
+        $this->transferCompareAvgMin = Utils\Money::toSEK($amount, $countryCurrency);
+    }
+
+    /**
+     * Set max transfer estimate (estimate saved when player was put on the market),
+     * players without estimate are included
+     *
+     * @param integer $amount
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     */
+    public function setMaxTransferCompareAverage($amount, $countryCurrency = Utils\Money::SVERIGE)
+    {
+        $this->transferCompareAvgMax = Utils\Money::toSEK($amount, $countryCurrency);
+    }
+
+    /**
      * Set result page size
      *
      * @param integer $size
@@ -395,6 +445,62 @@ class TransferMarket
             return Utils\Money::convert($this->priceMax, $countryCurrency);
         }
         return $this->priceMax;
+    }
+
+    /**
+     * Returns min salary
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getMinSalary($countryCurrency = null)
+    {
+        if ($countryCurrency !== null) {
+            return Utils\Money::convert($this->salaryMin, $countryCurrency);
+        }
+        return $this->salaryMin;
+    }
+
+    /**
+     * Returns max salary
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getMaxSalary($countryCurrency = null)
+    {
+        if ($countryCurrency !== null) {
+            return Utils\Money::convert($this->salaryMax, $countryCurrency);
+        }
+        return $this->salaryMax;
+    }
+
+    /**
+     * Returns min transfer estimate
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getMinTransferCompareAverage($countryCurrency = null)
+    {
+        if ($countryCurrency !== null) {
+            return Utils\Money::convert($this->transferCompareAvgMin, $countryCurrency);
+        }
+        return $this->transferCompareAvgMin;
+    }
+
+    /**
+     * Returns max transfer estimate
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getMaxTransferCompareAverage($countryCurrency = null)
+    {
+        if ($countryCurrency !== null) {
+            return Utils\Money::convert($this->transferCompareAvgMax, $countryCurrency);
+        }
+        return $this->transferCompareAvgMax;
     }
 
     /**

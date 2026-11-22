@@ -19,6 +19,10 @@ use PHT\Wrapper;
 
 class Substitution extends Xml\Base
 {
+    const ORDER_SUBSTITUTION = 1;
+    const ORDER_SWAP = 3;
+    const ORDER_BEHAVIOUR = 4;
+
     private $type;
 
     /**
@@ -111,6 +115,36 @@ class Substitution extends Xml\Base
     public function getOrderType()
     {
         return $this->getXml()->getElementsByTagName('OrderType')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if order is a player substitution
+     *
+     * @return boolean
+     */
+    public function isSubstitution()
+    {
+        return $this->getOrderType() == self::ORDER_SUBSTITUTION;
+    }
+
+    /**
+     * Return if order is a player swap
+     *
+     * @return boolean
+     */
+    public function isSwap()
+    {
+        return $this->getOrderType() == self::ORDER_SWAP;
+    }
+
+    /**
+     * Return if order is a behaviour change without substitution
+     *
+     * @return boolean
+     */
+    public function isBehaviourChange()
+    {
+        return $this->getOrderType() == self::ORDER_BEHAVIOUR;
     }
 
     /**

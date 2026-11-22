@@ -25,7 +25,7 @@ class Employee extends Xml\Base
      * @param \DOMDocument $xml
      * @param integer $teamId
      */
-    public function __construct($xml, $teamId)
+    public function __construct($xml, $teamId = null)
     {
         $this->xmlText = $xml->saveXML();
         $this->xml = $xml;
@@ -81,6 +81,18 @@ class Employee extends Xml\Base
     public function getHiredDate($format = null)
     {
         return Utils\Date::convert($this->getXml()->getElementsByTagName('HiredDate')->item(0)->nodeValue, $format);
+    }
+
+    /**
+     * Return date when current contract ends, a new contract starts on this date if automatic renewal is on,
+     * otherwise employee leaves the club
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getContractExpiresDate($format = null)
+    {
+        return Utils\Date::convert($this->getXml()->getElementsByTagName('ContractExpires')->item(0)->nodeValue, $format);
     }
 
     /**

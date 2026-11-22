@@ -379,6 +379,74 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return id of user who owns the youth team
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        $node = $this->getXml()->getElementsByTagName('UserId')->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return user who owns the youth team
+     *
+     * @return \PHT\Xml\User
+     */
+    public function getUser()
+    {
+        if ($this->getUserId() === null) {
+            return null;
+        }
+        return Wrapper\User::user($this->getUserId());
+    }
+
+    /**
+     * Return number of coach training reports, only for own youth players and if club has Gold supporter
+     *
+     * @return integer
+     */
+    public function getTrainingReportNumber()
+    {
+        return $this->getXml()->getElementsByTagName('TrainingReport')->length;
+    }
+
+    /**
+     * Return coach training report, newest first
+     *
+     * @param integer $index
+     * @return \PHT\Xml\Player\Youth\TrainingReport
+     */
+    public function getTrainingReport($index)
+    {
+        $index = round($index);
+        if ($index >= Config\Config::$forIndex && $index < $this->getTrainingReportNumber() + Config\Config::$forIndex) {
+            $index -= Config\Config::$forIndex;
+            $report = new \DOMDocument('1.0', 'UTF-8');
+            $report->appendChild($report->importNode($this->getXml()->getElementsByTagName('TrainingReport')->item($index), true));
+            return new Youth\TrainingReport($report);
+        }
+        return null;
+    }
+
+    /**
+     * Return iterator of coach training reports, newest first
+     *
+     * @return \PHT\Xml\Player\Youth\TrainingReport[]
+     */
+    public function getTrainingReports()
+    {
+        $nodeList = $this->getXml()->getElementsByTagName('TrainingReport');
+        /** @var \PHT\Xml\Player\Youth\TrainingReport[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Youth\TrainingReport');
+        return $data;
+    }
+
+    /**
      * Return senior team
      *
      * @return \PHT\Xml\Team\Senior

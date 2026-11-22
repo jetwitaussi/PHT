@@ -44,6 +44,13 @@ class Federation
     public $user;
 
     /**
+     * Request federations of another user
+     *
+     * @var integer
+     */
+    public $userId;
+
+    /**
      * Request federations for a language (0 = all languages)
      *
      * @var integer

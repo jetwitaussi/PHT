@@ -137,6 +137,42 @@ class Senior
 
     /**
      * @param integer $teamId
+     * @return \PHT\Xml\Team\History
+     */
+    public static function history($teamId = null)
+    {
+        $params = array('file' => 'teamhistory', 'version' => Config\Version::TEAMHISTORY);
+        if ($teamId !== null) {
+            $params['teamId'] = $teamId;
+        }
+        $url = Network\Request::buildUrl($params);
+        return new Xml\Team\History(Network\Request::fetchUrl($url));
+    }
+
+    /**
+     * @param integer $teamId
+     * @param string $fromDate (format should be : yyyy-mm-dd or yyyy-mm-dd hh:mm:ss - If not specified : 16 weeks before today)
+     * @return \PHT\Xml\Team\Senior\Training\History
+     * @throws \PHT\Exception\InvalidArgumentException
+     */
+    public static function traininghistory($teamId = null, $fromDate = null)
+    {
+        if ($fromDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2}:[0-9]{2})?$/', $fromDate)) {
+            throw new Exception\InvalidArgumentException('Parameter $fromDate must have format yyyy-mm-dd or yyyy-mm-dd hh:mm:ss');
+        }
+        $params = array('file' => 'training', 'actionType' => 'history', 'version' => Config\Version::TRAINING);
+        if ($teamId !== null) {
+            $params['teamId'] = $teamId;
+        }
+        if ($fromDate !== null) {
+            $params['fromDate'] = $fromDate;
+        }
+        $url = Network\Request::buildUrl($params);
+        return new Xml\Team\Senior\Training\History(Network\Request::fetchUrl($url));
+    }
+
+    /**
+     * @param integer $teamId
      * @param integer $type
      * @param integer $intensity
      * @param integer $stamina
@@ -165,10 +201,11 @@ class Senior
     /**
      * @param integer $teamId
      * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If not specified : returned matches are from now minus 28 days to now plus 28 days)
+     * @param boolean $includeHTO include HTO matches (tournaments, ladders and single matches)
      * @return \PHT\Xml\Team\Match\Listing
      * @throws \PHT\Exception\InvalidArgumentException
      */
-    public static function matches($teamId = null, $showBeforeDate = null)
+    public static function matches($teamId = null, $showBeforeDate = null, $includeHTO = false)
     {
         if ($showBeforeDate !== null && !preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $showBeforeDate)) {
             throw new Exception\InvalidArgumentException('Parameter $showBeforeDate must have format yyyy-mm-dd');
@@ -176,6 +213,9 @@ class Senior
         $params = array('file' => 'matches', 'version' => Config\Version::MATCHES);
         if ($showBeforeDate !== null) {
             $params['lastMatchDate'] = $showBeforeDate;
+        }
+        if ($includeHTO == true) {
+            $params['includeHTO'] = 'true';
         }
         if ($teamId !== null) {
             $params['teamID'] = $teamId;

@@ -50,6 +50,21 @@ class National
     }
 
     /**
+     * @param integer $teamId
+     * @param integer $categoryId
+     * @return \PHT\Xml\National\Prospects
+     */
+    public static function prospects($teamId, $categoryId = null)
+    {
+        $params = array('file' => 'nationalprospectplayers', 'teamID' => $teamId, 'version' => Config\Version::NATIONALPROSPECTPLAYERS);
+        if ($categoryId !== null) {
+            $params['playerCategoryId'] = $categoryId;
+        }
+        $url = Network\Request::buildUrl($params);
+        return new Xml\National\Prospects(Network\Request::fetchUrl($url));
+    }
+
+    /**
      * @param boolean $u20
      * @return \PHT\Xml\National\Matches
      */

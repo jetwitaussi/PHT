@@ -15,6 +15,7 @@ namespace PHT\Xml\Team;
 
 use PHT\Xml;
 use PHT\Utils;
+use PHT\Wrapper;
 
 class Trophy extends Xml\Base
 {
@@ -126,5 +127,44 @@ class Trophy extends Xml\Base
     public function getImageUrl()
     {
         return $this->getXml()->getElementsByTagName('ImageUrl')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return senior league (series), only for series titles
+     *
+     * @return \PHT\Xml\World\League\Senior
+     */
+    public function getSeniorLeague()
+    {
+        if ($this->getType() == Xml\Player\Trophy::SERIES_WIN && $this->getCompetitionId() > 0) {
+            return Wrapper\World\League::senior($this->getCompetitionId());
+        }
+        return null;
+    }
+
+    /**
+     * Return senior league season of trophy, only for series titles
+     *
+     * @return \PHT\Xml\World\League\Season\Senior
+     */
+    public function getSeniorLeagueSeason()
+    {
+        if ($this->getType() == Xml\Player\Trophy::SERIES_WIN && $this->getCompetitionId() > 0) {
+            return Wrapper\World\Season::senior($this->getCompetitionId(), $this->getSeason());
+        }
+        return null;
+    }
+
+    /**
+     * Return cup, only for cup titles
+     *
+     * @return \PHT\Xml\World\Cup
+     */
+    public function getCup()
+    {
+        if ($this->getType() == Xml\Player\Trophy::CUP_WIN && $this->getCompetitionId() > 0) {
+            return Wrapper\World::cup($this->getCompetitionId(), null, $this->getSeason());
+        }
+        return null;
     }
 }

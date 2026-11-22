@@ -51,6 +51,16 @@ class Chunk extends Xml\Base
     }
 
     /**
+     * Return player detailed statistics, match by match
+     *
+     * @return \PHT\Xml\Player\Stats
+     */
+    public function getStats()
+    {
+        return Wrapper\Player\Senior::stats($this->getId());
+    }
+
+    /**
      * Return player first name
      *
      * @return string

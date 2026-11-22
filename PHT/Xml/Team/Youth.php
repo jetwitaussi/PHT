@@ -122,6 +122,58 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return league system of team (1: male, 2: female)
+     *
+     * @return integer
+     */
+    public function getLeagueSystemId()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getXml()->getElementsByTagName('LeagueSystemID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if team plays in male league system
+     *
+     * @return boolean
+     */
+    public function isLeagueMale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getLeagueSystemId() == 1;
+    }
+
+    /**
+     * Return if team plays in female league system
+     *
+     * @return boolean
+     */
+    public function isLeagueFemale()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return $this->getLeagueSystemId() == 2;
+    }
+
+    /**
+     * Return if youth team is currently playing a match
+     *
+     * @return boolean
+     */
+    public function isPlayingMatch()
+    {
+        if ($this->isDeleted()) {
+            return null;
+        }
+        return strtolower($this->getXml()->getElementsByTagName('IsPlayingMatch')->item(0)->nodeValue) == "true";
+    }
+
+    /**
      * Return creation date
      *
      * @param string $format (php date() function format)

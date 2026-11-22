@@ -113,6 +113,10 @@ class Supporters extends File
      */
     public function getCurrentPage()
     {
+        $node = $this->getXml()->getElementsByTagName('PageIndex')->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
         return $this->params['pageIndex'];
     }
 
@@ -123,6 +127,10 @@ class Supporters extends File
      */
     public function getTotalPage()
     {
+        $node = $this->getXml()->getElementsByTagName('Pages')->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
         return ceil($this->getTotalSupporter() / max(1, $this->params['pageSize']));
     }
 

@@ -16,6 +16,7 @@ namespace PHT\Xml\Team\Senior;
 use PHT\Xml;
 use PHT\Utils;
 use PHT\Config;
+use PHT\Wrapper;
 
 class Training extends Xml\HTSupporter
 {
@@ -291,5 +292,27 @@ class Training extends Xml\HTSupporter
     public function getLastTrainingStaminaTrainingPart()
     {
         return $this->getXml()->getElementsByTagName('LastTrainingStaminaTrainingPart')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return team id
+     *
+     * @return integer
+     */
+    public function getTeamId()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//Team/TeamID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return training changes history since a date, requires Gold supporter
+     *
+     * @param string $fromDate (format should be : yyyy-mm-dd or yyyy-mm-dd hh:mm:ss - If not specified : 16 weeks before today)
+     * @return \PHT\Xml\Team\Senior\Training\History
+     */
+    public function getHistory($fromDate = null)
+    {
+        return Wrapper\Team\Senior::traininghistory($this->getTeamId(), $fromDate);
     }
 }

@@ -976,4 +976,115 @@ class Senior extends Xml\HTSupporter
     {
         return Wrapper\Player\Senior::history($this->getId());
     }
+
+    /**
+     * Return player detailed statistics, match by match
+     *
+     * @return \PHT\Xml\Player\Stats
+     */
+    public function getStats()
+    {
+        return Wrapper\Player\Senior::stats($this->getId());
+    }
+
+    /**
+     * Return transfer estimate shown on player page, only available when skills are shown
+     *
+     * @param integer $countryCurrency (Constant taken from \PHT\Utils\Money class)
+     * @return integer
+     */
+    public function getTransferCompareAverage($countryCurrency = null)
+    {
+        $node = $this->getXml()->getElementsByTagName('TransferCompareAverage')->item(0);
+        if ($node !== null && $node->nodeValue !== '') {
+            return Utils\Money::convert($node->nodeValue, $countryCurrency);
+        }
+        return null;
+    }
+
+    /**
+     * Return date of last transfer estimate update
+     *
+     * @param string $format (php date() function format)
+     * @return string
+     */
+    public function getTransferCompareAverageDate($format = null)
+    {
+        $node = $this->getXml()->getElementsByTagName('TransferCompareAverageDate')->item(0);
+        if ($node !== null && $node->nodeValue !== '') {
+            return Utils\Date::convert($node->nodeValue, $format);
+        }
+        return null;
+    }
+
+    /**
+     * Return if player has a known family relation
+     *
+     * @return boolean
+     */
+    public function hasFamilyRelation()
+    {
+        $node = $this->getXml()->getElementsByTagName('FamilyRelation')->item(0);
+        return $node !== null && $this->getXml()->getElementsByTagName('RelatedPlayerSourceId')->length > 0;
+    }
+
+    /**
+     * Return player family relation, a player has at most one relation
+     *
+     * @return \PHT\Xml\Player\FamilyRelation
+     */
+    public function getFamilyRelation()
+    {
+        if (!$this->hasFamilyRelation()) {
+            return null;
+        }
+        $relation = new \DOMDocument('1.0', 'UTF-8');
+        $relation->appendChild($relation->importNode($this->getXml()->getElementsByTagName('FamilyRelation')->item(0), true));
+        return new FamilyRelation($relation);
+    }
+
+    /**
+     * Return number of player trophies, only available if player's club has Gold supporter
+     *
+     * @return integer
+     */
+    public function getTrophyNumber()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//TrophyList/Trophy')->length;
+    }
+
+    /**
+     * Return player trophy
+     *
+     * @param integer $index
+     * @return \PHT\Xml\Player\Trophy
+     */
+    public function getTrophy($index)
+    {
+        $index = round($index);
+        if ($index >= Config\Config::$forIndex && $index < $this->getTrophyNumber() + Config\Config::$forIndex) {
+            $index -= Config\Config::$forIndex;
+            $xpath = new \DOMXPath($this->getXml());
+            $nodeList = $xpath->query('//TrophyList/Trophy');
+            $trophy = new \DOMDocument('1.0', 'UTF-8');
+            $trophy->appendChild($trophy->importNode($nodeList->item($index), true));
+            return new Trophy($trophy);
+        }
+        return null;
+    }
+
+    /**
+     * Return iterator of player trophies
+     *
+     * @return \PHT\Xml\Player\Trophy[]
+     */
+    public function getTrophies()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//TrophyList/Trophy');
+        /** @var \PHT\Xml\Player\Trophy[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\Player\Trophy');
+        return $data;
+    }
 }

@@ -51,6 +51,36 @@ class Youth extends Xml\File
     }
 
     /**
+     * Return league system (1: male, 2: female)
+     *
+     * @return integer
+     */
+    public function getLeagueSystemId()
+    {
+        return $this->getXml()->getElementsByTagName('LeagueSystemID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if league is a male league
+     *
+     * @return boolean
+     */
+    public function isLeagueMale()
+    {
+        return $this->getLeagueSystemId() == 1;
+    }
+
+    /**
+     * Return if league is a female league
+     *
+     * @return boolean
+     */
+    public function isLeagueFemale()
+    {
+        return $this->getLeagueSystemId() == 2;
+    }
+
+    /**
      * Return number of teams
      *
      * @return integer

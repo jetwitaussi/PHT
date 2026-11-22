@@ -225,6 +225,32 @@ class HTMatch extends File
     }
 
     /**
+     * Return if match has simulated replays statistics available
+     *
+     * @return boolean
+     */
+    public function hasExpectedResult()
+    {
+        $node = $this->getXml()->getElementsByTagName('ExpectedResult')->item(0);
+        return $node !== null && $node->hasChildNodes();
+    }
+
+    /**
+     * Return simulated replays statistics, only for finished matches and if user could see it on the site
+     *
+     * @return \PHT\Xml\Match\ExpectedResult
+     */
+    public function getExpectedResult()
+    {
+        if (!$this->hasExpectedResult()) {
+            return null;
+        }
+        $result = new \DOMDocument('1.0', 'UTF-8');
+        $result->appendChild($result->importNode($this->getXml()->getElementsByTagName('ExpectedResult')->item(0), true));
+        return new Match\ExpectedResult($result);
+    }
+
+    /**
      * Return match score
      *
      * @return string

@@ -79,6 +79,16 @@ class National extends Xml\Base
     }
 
     /**
+     * Return player detailed statistics, match by match
+     *
+     * @return \PHT\Xml\Player\Stats
+     */
+    public function getStats()
+    {
+        return Wrapper\Player\Senior::stats($this->getId());
+    }
+
+    /**
      * Return user avatar
      *
      * @return \PHT\Xml\Avatar

@@ -111,6 +111,16 @@ class User extends HTSupporter
     }
 
     /**
+     * Does the user have completed the manager license?
+     *
+     * @return boolean
+     */
+    public function hasManagerLicense()
+    {
+        return strtolower($this->getXml()->getElementsByTagName('HasManagerLicense')->item(0)->nodeValue) == "true";
+    }
+
+    /**
      * Return number of teams
      *
      * @param string $type
@@ -297,7 +307,7 @@ class User extends HTSupporter
      */
     public function getFederations()
     {
-        return Wrapper\Federation::search(array('searchType' => 5));
+        return Wrapper\Federation::search(array('searchType' => 5, 'userId' => $this->getId()));
     }
 
     /**

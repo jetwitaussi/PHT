@@ -409,4 +409,31 @@ class Team extends Xml\Base
         }
         return null;
     }
+
+    /**
+     * Return if team can see simulated replays of match,
+     * null if information is not available (match not finished, not user's own or mentored team, youth match)
+     *
+     * @return boolean
+     */
+    public function hasReplay()
+    {
+        if ($this->getXml()->getElementsByTagName('HasReplay')->length) {
+            return strtolower($this->getXml()->getElementsByTagName('HasReplay')->item(0)->nodeValue) == "true";
+        }
+        return null;
+    }
+
+    /**
+     * Return number of simulated replays team can see (0, 20 or 100), null if information is not available
+     *
+     * @return integer
+     */
+    public function getReplayNumber()
+    {
+        if ($this->getXml()->getElementsByTagName('NrOfReplays')->length) {
+            return $this->getXml()->getElementsByTagName('NrOfReplays')->item(0)->nodeValue;
+        }
+        return null;
+    }
 }

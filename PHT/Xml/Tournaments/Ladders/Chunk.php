@@ -25,7 +25,7 @@ class Chunk extends Xml\Base
      * @param \DOMDocument $xml
      * @param integer $teamId
      */
-    public function __construct($xml, $teamId)
+    public function __construct($xml, $teamId = null)
     {
         $this->xmlText = $xml->saveXML();
         $this->xml = $xml;

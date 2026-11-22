@@ -15,6 +15,7 @@ namespace PHT\Xml\Team;
 
 use PHT\Xml;
 use PHT\Config;
+use PHT\Utils;
 use PHT\Wrapper;
 
 class National extends Xml\File
@@ -57,6 +58,107 @@ class National extends Xml\File
     public function getCoachUserName()
     {
         return $this->getXml()->getElementsByTagName('NationalCoachLoginname')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return coach user
+     *
+     * @return \PHT\Xml\User
+     */
+    public function getCoach()
+    {
+        if (!$this->getCoachUserId()) {
+            return null;
+        }
+        return Wrapper\User::user($this->getCoachUserId());
+    }
+
+    /**
+     * Return assistant coach user id, null if team has no assistant coach
+     *
+     * @return integer
+     */
+    public function getAssistantCoachUserId()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//AssistantCoach/UserID');
+        if ($nodeList->length) {
+            return $nodeList->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return assistant coach user name, null if team has no assistant coach
+     *
+     * @return string
+     */
+    public function getAssistantCoachUserName()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//AssistantCoach/Loginname');
+        if ($nodeList->length) {
+            return $nodeList->item(0)->nodeValue;
+        }
+        return null;
+    }
+
+    /**
+     * Return assistant coach user, null if team has no assistant coach
+     *
+     * @return \PHT\Xml\User
+     */
+    public function getAssistantCoach()
+    {
+        if ($this->getAssistantCoachUserId() === null) {
+            return null;
+        }
+        return Wrapper\User::user($this->getAssistantCoachUserId());
+    }
+
+    /**
+     * Return number of scouts
+     *
+     * @return integer
+     */
+    public function getScoutNumber()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        return $xpath->query('//Scouts/Scout')->length;
+    }
+
+    /**
+     * Return scout object
+     *
+     * @param integer $index
+     * @return \PHT\Xml\User\Chunk
+     */
+    public function getScout($index)
+    {
+        $index = round($index);
+        if ($index >= Config\Config::$forIndex && $index < $this->getScoutNumber() + Config\Config::$forIndex) {
+            $index -= Config\Config::$forIndex;
+            $xpath = new \DOMXPath($this->getXml());
+            $nodeList = $xpath->query('//Scouts/Scout');
+            $scout = new \DOMDocument('1.0', 'UTF-8');
+            $scout->appendChild($scout->importNode($nodeList->item($index), true));
+            return new Xml\User\Chunk($scout);
+        }
+        return null;
+    }
+
+    /**
+     * Return iterator of scout objects
+     *
+     * @return \PHT\Xml\User\Chunk[]
+     */
+    public function getScouts()
+    {
+        $xpath = new \DOMXPath($this->getXml());
+        $nodeList = $xpath->query('//Scouts/Scout');
+        /** @var \PHT\Xml\User\Chunk[] $data */
+        $data = new Utils\XmlIterator($nodeList, '\PHT\Xml\User\Chunk');
+        return $data;
     }
 
     /**
@@ -317,6 +419,17 @@ class National extends Xml\File
     public function getPlayers()
     {
         return Wrapper\National::players($this->getId());
+    }
+
+    /**
+     * Return national team prospect players
+     *
+     * @param integer $categoryId only list players of this category, 0 for players without category
+     * @return \PHT\Xml\National\Prospects
+     */
+    public function getProspectPlayers($categoryId = null)
+    {
+        return Wrapper\National::prospects($this->getId(), $categoryId);
     }
 
     /**

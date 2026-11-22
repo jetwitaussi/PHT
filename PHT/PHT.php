@@ -456,6 +456,17 @@ class PHT extends Config\Base
     }
 
     /**
+     * Return senior player detailed statistics, match by match
+     *
+     * @param integer $playerId
+     * @return \PHT\Xml\Player\Stats
+     */
+    public function getSeniorPlayerStats($playerId)
+    {
+        return Wrapper\Player\Senior::stats($playerId);
+    }
+
+    /**
      * Get youth team players
      *
      * @param integer $teamId
@@ -527,6 +538,30 @@ class PHT extends Config\Base
     public function getTraining($teamId = null)
     {
         return Wrapper\Team\Senior::training($teamId);
+    }
+
+    /**
+     * Return training changes history of a senior team since a date,
+     * requires Gold supporter, team must be one of user's teams or a mentored team
+     *
+     * @param integer $teamId
+     * @param string $fromDate (format should be : yyyy-mm-dd or yyyy-mm-dd hh:mm:ss - If not specified : 16 weeks before today)
+     * @return \PHT\Xml\Team\Senior\Training\History
+     */
+    public function getTrainingHistory($teamId = null, $fromDate = null)
+    {
+        return Wrapper\Team\Senior::traininghistory($teamId, $fromDate);
+    }
+
+    /**
+     * Return club history: seasons results and trophies since current owner took over the team
+     *
+     * @param integer $teamId
+     * @return \PHT\Xml\Team\History
+     */
+    public function getTeamHistory($teamId = null)
+    {
+        return Wrapper\Team\Senior::history($teamId);
     }
 
     /**
@@ -623,6 +658,18 @@ class PHT extends Config\Base
     }
 
     /**
+     * Return national team prospect players
+     *
+     * @param integer $teamId
+     * @param integer $categoryId only list players of this category, 0 for players without category
+     * @return \PHT\Xml\National\Prospects
+     */
+    public function getNationalProspectPlayers($teamId, $categoryId = null)
+    {
+        return Wrapper\National::prospects($teamId, $categoryId);
+    }
+
+    /**
      * Get nt/u20 matches list
      *
      * @param boolean $u20
@@ -638,11 +685,12 @@ class PHT extends Config\Base
      *
      * @param integer $teamId
      * @param string $showBeforeDate (format should be : yyyy-mm-dd  - If no specify : returned matches are from now + 28 days)
+     * @param boolean $includeHTO include HTO matches (tournaments, ladders and single matches)
      * @return \PHT\Xml\Team\Match\Listing
      */
-    public function getSeniorMatches($teamId = null, $showBeforeDate = null)
+    public function getSeniorMatches($teamId = null, $showBeforeDate = null, $includeHTO = false)
     {
-        return Wrapper\Team\Senior::matches($teamId, $showBeforeDate);
+        return Wrapper\Team\Senior::matches($teamId, $showBeforeDate, $includeHTO);
     }
 
     /**
@@ -1039,8 +1087,11 @@ class PHT extends Config\Base
             $params = array('searchFor' => $federation->abbreviation, 'searchType' => 2, 'searchLanguageID' => $federation->language, 'pageIndex' => $federation->page);
         } elseif (isset($federation->description)) {
             $params = array('searchFor' => $federation->description, 'searchType' => 3, 'searchLanguageID' => $federation->language, 'pageIndex' => $federation->page);
-        } elseif (isset($federation->user)) {
+        } elseif (isset($federation->user) || isset($federation->userId)) {
             $params = array('searchType' => 5);
+            if (isset($federation->userId)) {
+                $params['userId'] = $federation->userId;
+            }
         } else {
             throw new Exception\InvalidArgumentException('You must define a least one search criteria (name, description, abbreviation, user) into $federation parameter');
         }
@@ -1313,6 +1364,18 @@ class PHT extends Config\Base
         }
         if ($criteria->getMaxPrice() !== null) {
             $params['priceMax'] = $criteria->getMaxPrice();
+        }
+        if ($criteria->getMinSalary() !== null) {
+            $params['salaryMin'] = $criteria->getMinSalary();
+        }
+        if ($criteria->getMaxSalary() !== null) {
+            $params['salaryMax'] = $criteria->getMaxSalary();
+        }
+        if ($criteria->getMinTransferCompareAverage() !== null) {
+            $params['transferCompareAvgMin'] = $criteria->getMinTransferCompareAverage();
+        }
+        if ($criteria->getMaxTransferCompareAverage() !== null) {
+            $params['transferCompareAvgMax'] = $criteria->getMaxTransferCompareAverage();
         }
         if ($criteria->getSize() !== null) {
             $params['pageSize'] = $criteria->getSize();

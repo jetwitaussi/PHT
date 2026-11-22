@@ -15,6 +15,7 @@ namespace PHT\Xml\Player;
 
 use PHT\Xml;
 use PHT\Utils;
+use PHT\Config;
 use PHT\Wrapper;
 
 class Hof extends Xml\Base
@@ -148,6 +149,83 @@ class Hof extends Xml\Base
     public function getHofAge()
     {
         return $this->getXml()->getElementsByTagName('HofAge')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return total number of matches played for the club, only if team has Gold supporter
+     *
+     * @return integer
+     */
+    public function getMatchesInClub()
+    {
+        return $this->getGoldValue('MatchesInClub');
+    }
+
+    /**
+     * Return best rating, in stars, player got in a match for the club, only if team has Gold supporter
+     *
+     * @return float
+     */
+    public function getBestPerformance()
+    {
+        return $this->getGoldValue('BestPerformanceValue');
+    }
+
+    /**
+     * Return number of times player was named training match hero, only if team has Gold supporter
+     *
+     * @return integer
+     */
+    public function getTrainingMatchHeroNumber()
+    {
+        return $this->getGoldValue('NoOfTimesTrainingMatchHero');
+    }
+
+    /**
+     * Return number of days player stayed with the club without being sold, only if team has Gold supporter
+     *
+     * @return integer
+     */
+    public function getFaithfulToClubDays()
+    {
+        return $this->getGoldValue('FaithfulToTheClub');
+    }
+
+    /**
+     * Return number of seasons player stayed with the club without being sold, only if team has Gold supporter
+     *
+     * @return float
+     */
+    public function getFaithfulToClubSeasons()
+    {
+        $days = $this->getFaithfulToClubDays();
+        if ($days === null) {
+            return null;
+        }
+        return round($days / Config\Config::DAYS_IN_YEAR, 2);
+    }
+
+    /**
+     * Return number of clean sheets kept by player for the club, only if team has Gold supporter
+     *
+     * @return integer
+     */
+    public function getCleanSheetNumber()
+    {
+        return $this->getGoldValue('NoOfCleanSheet');
+    }
+
+    /**
+     * @param string $tag
+     * @return string
+     */
+    private function getGoldValue($tag)
+    {
+        $node = $this->getXml()->getElementsByTagName($tag)->item(0);
+        if ($node !== null) {
+            return $node->nodeValue;
+        }
+        return null;
     }
 
     /**

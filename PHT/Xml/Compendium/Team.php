@@ -78,6 +78,36 @@ class Team extends Xml\Base
     }
 
     /**
+     * Return league system of team (1: male, 2: female)
+     *
+     * @return integer
+     */
+    public function getLeagueSystemId()
+    {
+        return $this->getXml()->getElementsByTagName('LeagueSystemID')->item(0)->nodeValue;
+    }
+
+    /**
+     * Return if team plays in male league system
+     *
+     * @return boolean
+     */
+    public function isLeagueMale()
+    {
+        return $this->getLeagueSystemId() == 1;
+    }
+
+    /**
+     * Return if team plays in female league system
+     *
+     * @return boolean
+     */
+    public function isLeagueFemale()
+    {
+        return $this->getLeagueSystemId() == 2;
+    }
+
+    /**
      * Return senior team
      *
      * @return \PHT\Xml\Team\Senior
@@ -85,6 +115,16 @@ class Team extends Xml\Base
     public function getSeniorTeam()
     {
         return Wrapper\Team\Senior::team($this->getId());
+    }
+
+    /**
+     * Return club history: seasons results and trophies since current owner took over the team
+     *
+     * @return \PHT\Xml\Team\History
+     */
+    public function getHistory()
+    {
+        return Wrapper\Team\Senior::history($this->getId());
     }
 
     /**
